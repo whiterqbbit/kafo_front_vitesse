@@ -1,17 +1,15 @@
 <script setup lang="ts">
 defineOptions({
-  name: 'IndexPage',
+  name: 'LandingPage',
 })
-const user = useUserStore()
-const name = $ref(user.savedName)
+// const user = useUserStore()
+// const name = $ref(user.savedName)
 
 const router = useRouter()
 const go = () => {
   if (name)
     router.push(`/hi/${encodeURIComponent(name)}`)
 }
-
-const { t } = useI18n()
 </script>
 
 <template>
@@ -25,7 +23,7 @@ const { t } = useI18n()
       </a>
     </p>
     <p>
-      <em text-sm opacity-75>{{ t('intro.desc') }}</em>
+      <em text-sm opacity-75>intro.desc</em>
     </p>
 
     <div py-4 />
@@ -36,21 +34,16 @@ const { t } = useI18n()
       autocomplete="false"
       @keydown.enter="go"
     />
-    <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
+    <label class="hidden" for="input">intro.whats-your-name</label>
 
     <div>
       <button
-        btn m-3 text-sm
+        m-3 text-sm btn
         :disabled="!name"
         @click="go"
       >
-        {{ t('button.go') }}
+        button.go
       </button>
     </div>
   </div>
 </template>
-
-<route lang="yaml">
-meta:
-  layout: home
-</route>

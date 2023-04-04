@@ -22,5 +22,7 @@ useHead({
 </script>
 
 <template>
-  <RouterView />
+  <main class="px-4 dark:text-gray-200" py-10 text-center text-gray-700>
+    <RouterView />
+  </main>
 </template>

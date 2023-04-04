@@ -20,7 +20,6 @@
       "vue/ref-macros",
       "vite-plugin-pages/client",
       "vite-plugin-vue-component-preview/client",
-      "vite-plugin-vue-layouts/client",
       "vite-plugin-pwa/client",
       "unplugin-vue-macros/macros-global"
     ],
