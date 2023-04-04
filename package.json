@@ -75,6 +75,10 @@
     "pre-commit": "pnpm lint-staged"
   },
   "lint-staged": {
+    "*.{ts,vue}": [
+      "eslint --fix",
+      "pnpm typecheck"
+    ],
     "*": "eslint --fix"
   }
 }
