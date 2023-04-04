@@ -1,3 +1,6 @@
 {
-  "extends": "@antfu"
+  "rules": {
+    "no-console": "warn"
+  },
+  "extends": ["@antfu", "@unocss/eslint-config"]
 }
