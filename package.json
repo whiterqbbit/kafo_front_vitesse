@@ -64,7 +64,6 @@
     "vite-plugin-pwa": "^0.14.6",
     "vite-plugin-vue-component-preview": "^1.1.5",
     "vite-plugin-vue-inspector": "^3.4.0",
-    "vite-plugin-vue-layouts": "^0.8.0",
     "vite-plugin-vue-markdown": "^0.22.4",
     "vite-plugin-webfont-dl": "^3.6.4",
     "vite-ssg": "^0.22.1",
