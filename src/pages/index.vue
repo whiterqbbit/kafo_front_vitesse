@@ -1,15 +1,15 @@
 <script setup lang="ts">
-defineOptions({
-  name: 'LandingPage',
-})
+// defineOptions({
+//   name: 'IndexPage',
+// })
 // const user = useUserStore()
 // const name = $ref(user.savedName)
 
-const router = useRouter()
-const go = () => {
-  if (name)
-    router.push(`/hi/${encodeURIComponent(name)}`)
-}
+// const router = useRouter()
+// const go = () => {
+//   if (name)
+//     router.push(`/hi/${encodeURIComponent(name)}`)
+// }
 </script>
 
 <template>
@@ -29,18 +29,14 @@ const go = () => {
     <div py-4 />
 
     <TheInput
-      v-model="name"
       placeholder="What's your name?"
       autocomplete="false"
-      @keydown.enter="go"
     />
     <label class="hidden" for="input">intro.whats-your-name</label>
 
     <div>
       <button
         m-3 text-sm btn
-        :disabled="!name"
-        @click="go"
       >
         button.go
       </button>
