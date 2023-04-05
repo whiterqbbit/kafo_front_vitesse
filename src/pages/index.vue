@@ -1,45 +1,28 @@
 <script setup lang="ts">
-// defineOptions({
-//   name: 'IndexPage',
-// })
-// const user = useUserStore()
-// const name = $ref(user.savedName)
-
-// const router = useRouter()
-// const go = () => {
-//   if (name)
-//     router.push(`/hi/${encodeURIComponent(name)}`)
-// }
 </script>
 
 <template>
-  <div>
-    <div text-4xl>
-      <div i-carbon-campsite inline-block />
+  <div h-35px w-full flex flex-row bg-cafe-500 md:h-50px>
+    <div m-auto place-self-center bg-cafe-600 font-title text-white container>
+      HEADER
     </div>
-    <p>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
-        Vitesse
-      </a>
-    </p>
-    <p>
-      <em text-sm opacity-75>intro.desc</em>
-    </p>
-
-    <div py-4 />
-
-    <TheInput
-      placeholder="What's your name?"
-      autocomplete="false"
-    />
-    <label class="hidden" for="input">intro.whats-your-name</label>
-
-    <div>
-      <button
-        m-3 text-sm btn
-      >
-        button.go
-      </button>
+  </div>
+  <div id="main_container" h-screen--35px flex flex-col bg-green-300 md:h-screen--50px md:flex-row-reverse>
+    <div md="w-full" h-full flex items-center justify-center bg-red-100 font-title>
+      <div class="text-center">
+        MAP
+      </div>
+    </div>
+    <div w-full flex overflow-auto bg-blue-200 font-title md="max-w-600px">
+      <div absolute bottom-50px h-60 w-70 overflow-auto bg-blue-100 font-title md:hidden class="left-1/2 -translate-x-1/2">
+        LISTE MOBILE
+      </div>
+      <div hidden w-full overflow-auto bg-blue-100 font-title md="block">
+        LISTE DESKTOP
+      </div>
+    </div>
+    <div block h-35px w-full bg-eggplant-300 font-title text-white md="hidden">
+      FOOTER
     </div>
   </div>
 </template>

@@ -8,21 +8,21 @@ useHead({
     { name: 'description', content: 'Opinionated Vite Starter Template' },
     {
       name: 'theme-color',
-      content: computed(() => isDark.value ? '#00aba9' : '#ffffff'),
+      content: '#00aba9',
     },
   ],
   link: [
     {
       rel: 'icon',
-      type: 'image/svg+xml',
-      href: computed(() => preferredDark.value ? '/favicon-dark.svg' : '/favicon.svg'),
+      type: 'image/png',
+      href: '/favicon.png',
     },
   ],
 })
 </script>
 
 <template>
-  <main class="px-4 dark:text-gray-200" py-10 text-center text-gray-700>
+  <main h-screen bg-fuchsia>
     <RouterView />
   </main>
 </template>
