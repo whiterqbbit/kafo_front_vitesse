@@ -12,5 +12,8 @@
     "*.css": "postcss"
   },
   "editor.formatOnSave": false,
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "volar.enable": true,
+  "volar.takeover.vscode-typescript": true,
+  "volar.useWorkspaceTsdk": true
 }
