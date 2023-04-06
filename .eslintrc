@@ -1,6 +1,12 @@
 {
   "rules": {
-    "no-console": "warn"
+    "no-console": "warn",
+    "vue/component-tags-order": [
+      "error",
+      {
+        "order": [["template", "script"], "style"]
+      }
+    ]
   },
   "extends": ["@antfu", "@unocss/eslint-config"]
 }

@@ -14,6 +14,7 @@ export default defineConfig({
     ['btn', 'px-4 py-1 rounded inline-block bg-teal-700 text-white cursor-pointer hover:bg-teal-800 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
     ['icon-btn', 'inline-block cursor-pointer select-none opacity-90 transition duration-200 ease-in-out hover:opacity-100 hover:text-teal-600'],
     ['font-title', 'text-3xl font-black text-center text-cyan-800'],
+    ['icon-box', 'flex flex-col items-center justify-center text-sm'],
   ],
   theme: {
     height: {

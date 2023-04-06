@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import logo from '@/assets/img/logo/kafo_logo_light.png'
-</script>
-
 <template>
   <header h-35px w-full flex flex-row place-items-center justify-between bg-cafe-500 md:h-50px>
     <RouterLink icon-btn to="/" title="home">
@@ -23,3 +19,7 @@ import logo from '@/assets/img/logo/kafo_logo_light.png'
     </div>
   </header>
 </template>
+
+<script setup lang="ts">
+import logo from '@/assets/img/logo/kafo_logo_light.png'
+</script>
