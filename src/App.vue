@@ -22,7 +22,8 @@ useHead({
 </script>
 
 <template>
-  <main h-screen bg-fuchsia>
-    <RouterView />
+  <TheHeader />
+  <main bg-fuchsia>
+    <RouterView h-screen />
   </main>
 </template>
