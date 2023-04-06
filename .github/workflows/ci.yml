@@ -71,7 +71,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: |
-            ~/.cache
+            @/.cache
           key: cypress-cache-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
 
       - uses: pnpm/action-setup@v2

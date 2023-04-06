@@ -24,7 +24,7 @@
       "unplugin-vue-macros/macros-global"
     ],
     "paths": {
-      "~/*": ["src/*"]
+      "@/*": ["./src/*", "./dist/*"]
     }
   },
   "vueCompilerOptions": {
