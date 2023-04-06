@@ -36,9 +36,12 @@ devDependencies:
   '@antfu/eslint-config':
     specifier: ^0.37.0
     version: 0.37.0(eslint@8.37.0)(typescript@4.9.5)
-  '@iconify-json/carbon':
-    specifier: ^1.1.16
-    version: 1.1.16
+  '@iconify-json/ci':
+    specifier: ^1.1.9
+    version: 1.1.9
+  '@iconify-json/ph':
+    specifier: ^1.1.5
+    version: 1.1.5
   '@intlify/unplugin-vue-i18n':
     specifier: ^0.10.0
     version: 0.10.0(rollup@2.79.1)(vue-i18n@9.2.2)
@@ -1784,8 +1787,14 @@ packages:
   /@humanwhocodes/object-schema@1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
 
-  /@iconify-json/carbon@1.1.16:
-    resolution: {integrity: sha512-AD8bcnRSGA0WfcGEass2FbA0sagrUzrpFx5WchuDy3uf7yKBWumdypdQK121DH321fQDl5+zZQ26T6gC9knwUQ==}
+  /@iconify-json/ci@1.1.9:
+    resolution: {integrity: sha512-ZMz5YTH7vz3PEM6j1v2GCxKsfjCtNYenyOS/c4xk2tBHPCUtUuSQvgnqO4INTOMb7dERHV5VLziXFChhcfn02A==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/ph@1.1.5:
+    resolution: {integrity: sha512-iLXq3nohfGge22gL2tZmQ2WHBKkKkIbGWrkuyC8arckS4PWaONyh4A+uDPtSek9QbYDvi9AE2+NxWkNZhANotA==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true

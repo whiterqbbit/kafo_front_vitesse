@@ -18,8 +18,8 @@
         LISTE DESKTOP
       </div>
     </div>
-    <div block h-35px w-full bg-pink-200 font-title text-white md="hidden">
-      FOOTER
+    <div h-35px font-title text-cafe-700 md="hidden">
+      <TheFooter />
     </div>
   </div>
 </template>
