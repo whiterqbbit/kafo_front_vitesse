@@ -4,7 +4,7 @@
   "packageManager": "pnpm@7.30.3",
   "scripts": {
     "build": "vite-ssg build",
-    "dev": "vite --port 4000",
+    "dev": "vite --port 3333",
     "lint": "eslint .",
     "preview": "vite preview",
     "preview-https": "serve dist",
@@ -20,6 +20,7 @@
   "dependencies": {
     "@unocss/eslint-config": "^0.50.6",
     "@unocss/reset": "^0.50.6",
+    "@vue-macros/reactivity-transform": "^0.3.2",
     "@vueuse/core": "^9.13.0",
     "@vueuse/head": "^1.1.23",
     "nprogress": "^0.2.0",
