@@ -5,13 +5,13 @@
         MAP
       </div>
     </div>
+    <StoreTester class="absolute h-1/2 w-90" />
     <div w-full flex overflow-auto bg-blue-200 font-title md="max-w-600px">
       <div
         absolute bottom-50px h-80 w-70 overflow-auto bg-blue-100 font-title md:hidden
         class="left-1/2 -translate-x-1/2"
       >
         LISTE MOBILE
-        <StoreTester />
       </div>
       <div hidden w-full overflow-auto bg-blue-100 font-title md="block">
         LISTE DESKTOP

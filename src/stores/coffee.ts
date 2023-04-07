@@ -1,23 +1,20 @@
-import { acceptHMRUpdate, defineStore } from 'pinia'
+import { defineStore } from 'pinia'
+import type { Cafe } from './xano.d'
 
-const apiUrl = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/coffee`
+const xano_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/coffee`
 
 export const use_coffee_store = defineStore('coffee', () => {
-  const name_coffee = ref('original')
-  const coffee_db = ref({})
-  const api_call_loading = ref(false)
-  const api_call_error = ref<string | null>(null)
-  function change_name_coffee(new_name: string) {
-    console.log(`changing name to${new_name}`)
-    name_coffee.value = `${new_name}tuvoi`
-  }
+  const coffee_db: Ref<Cafe[] | null> = ref(null)
+  const coffee_db_loading = ref(false)
+  const coffee_db_error = ref<string>('')
 
   async function fetch_coffee_db() {
-    api_call_loading.value = true
-    api_call_error.value = null
+    coffee_db.value = null
+    coffee_db_loading.value = true
+    coffee_db_error.value = ''
 
     try {
-      const response = await fetch(apiUrl)
+      const response = await fetch(xano_url)
       if (!response.ok)
         throw new Error(`Error ${response.status}: ${response.statusText}`)
 
@@ -26,15 +23,12 @@ export const use_coffee_store = defineStore('coffee', () => {
       console.log('data', data)
     }
     catch (error: any) {
-      api_call_error.value = error.message
+      coffee_db_error.value = error.message
     }
     finally {
-      api_call_loading.value = false
+      coffee_db_loading.value = false
     }
   }
 
-  return { name_coffee, change_name_coffee, fetch_coffee_db, coffee_db, api_call_loading, api_call_error }
+  return { fetch_coffee_db, coffee_db, coffee_db_loading, coffee_db_error }
 })
-
-if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot))

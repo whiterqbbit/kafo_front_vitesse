@@ -1,4 +1,7 @@
 <script setup lang="ts">
+const coffee_store = use_coffee_store()
+coffee_store.fetch_coffee_db()
+
 // https://github.com/vueuse/head
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the html results with vite-ssg
