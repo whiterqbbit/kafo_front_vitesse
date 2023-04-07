@@ -20,7 +20,6 @@ export const use_coffee_store = defineStore('coffee', () => {
 
       const data = await response.json()
       coffee_db.value = data
-      console.log('data', data)
     }
     catch (error: any) {
       coffee_db_error.value = error.message

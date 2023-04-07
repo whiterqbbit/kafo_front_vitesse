@@ -14,7 +14,7 @@
         LISTE MOBILE
       </div>
       <div hidden w-full overflow-auto bg-blue-100 font-title md="block">
-        LISTE DESKTOP
+        <DesktopList />
       </div>
     </div>
     <div h-56px md="hidden">
