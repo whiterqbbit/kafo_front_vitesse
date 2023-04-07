@@ -22,6 +22,12 @@ dependencies:
   pinia:
     specifier: ^2.0.33
     version: 2.0.33(typescript@4.9.5)(vue@3.2.47)
+  primeicons:
+    specifier: ^6.0.1
+    version: 6.0.1
+  primevue:
+    specifier: ^3.26.1
+    version: 3.26.1(primeicons@6.0.1)(vue@3.2.47)
   vue:
     specifier: ^3.2.47
     version: 3.2.47
@@ -129,9 +135,6 @@ devDependencies:
   vite-plugin-pwa:
     specifier: ^0.14.6
     version: 0.14.6(vite@4.2.1)(workbox-build@6.5.4)(workbox-window@6.5.4)
-  vite-plugin-vue-component-preview:
-    specifier: ^1.1.5
-    version: 1.1.5(rollup@2.79.1)(vite@4.2.1)(vue@3.2.47)
   vite-plugin-vue-inspector:
     specifier: ^3.4.0
     version: 3.4.0(vite@4.2.1)
@@ -6849,13 +6852,6 @@ packages:
       sourcemap-codec: 1.4.8
     dev: true
 
-  /magic-string@0.27.0:
-    resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
-    engines: {node: '>=12'}
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.4.14
-    dev: true
-
   /magic-string@0.30.0:
     resolution: {integrity: sha512-LA+31JYDJLs82r2ScLrlz1GjSgu66ZV518eyWT+S8VhyQn/JL0u9MeBOvQMGYiPk1DBiSN9DDMOcXvigJZaViQ==}
     engines: {node: '>=12'}
@@ -7760,6 +7756,20 @@ packages:
       ansi-styles: 5.2.0
       react-is: 17.0.2
     dev: true
+
+  /primeicons@6.0.1:
+    resolution: {integrity: sha512-KDeO94CbWI4pKsPnYpA1FPjo79EsY9I+M8ywoPBSf9XMXoe/0crjbUK7jcQEDHuc0ZMRIZsxH3TYLv4TUtHmAA==}
+    dev: false
+
+  /primevue@3.26.1(primeicons@6.0.1)(vue@3.2.47):
+    resolution: {integrity: sha512-I10mYyKMl0GF0KfIZK+psCpifzE6vTW8lvlgB8ukmYghKUmU1Ii879OgD7a8xWM8ijoEaO4mYZ18XXVpQ3xScw==}
+    peerDependencies:
+      primeicons: ^5.0.0 || ^6.0.0
+      vue: ^3.0.0
+    dependencies:
+      primeicons: 6.0.1
+      vue: 3.2.47
+    dev: false
 
   /proc-log@2.0.1:
     resolution: {integrity: sha512-Kcmo2FhfDTXdcbfDH76N7uBYHINxc/8GW7UAVuVP9I+Va3uHSerrnKV6dLooga/gh7GlgzuCCr/eoldnL1muGw==}
@@ -9382,20 +9392,6 @@ packages:
       workbox-window: 6.5.4
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /vite-plugin-vue-component-preview@1.1.5(rollup@2.79.1)(vite@4.2.1)(vue@3.2.47):
-    resolution: {integrity: sha512-5aSYDIM/e+JG4d3Rpgr6kS3zdD2fKmpYKs3BSuSyVZwcCY2XMRJj3GVCl4eM4UWqsLT2/z7T6Xpe8QADEJIiJg==}
-    peerDependencies:
-      vue: '>=3.0.0'
-    dependencies:
-      '@volar/vue-language-core': 1.2.0
-      magic-string: 0.27.0
-      vite-plugin-vue-markdown: 0.22.4(rollup@2.79.1)(vite@4.2.1)
-      vue: 3.2.47
-    transitivePeerDependencies:
-      - rollup
-      - vite
     dev: true
 
   /vite-plugin-vue-inspector@3.4.0(vite@4.2.1):
