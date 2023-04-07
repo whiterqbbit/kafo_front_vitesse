@@ -1,17 +1,16 @@
 <script setup lang="ts">
-const coffee_store = use_coffee_store()
-coffee_store.fetch_coffee_db()
+use_coffee_store().fetch_coffee_db()
 
 // https://github.com/vueuse/head
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the html results with vite-ssg
 useHead({
-  title: 'Vitesse',
+  title: '[Alpha] Kafo | Coworking partout, solitude nulle part',
   meta: [
-    { name: 'description', content: 'Opinionated Vite Starter Template' },
+    { name: 'description', content: 'Ca va, ca vient' },
     {
       name: 'theme-color',
-      content: '#00aba9',
+      content: '#815a4f',
     },
   ],
   link: [
