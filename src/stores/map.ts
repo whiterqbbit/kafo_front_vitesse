@@ -1,7 +1,17 @@
-import { Icon, map, marker, tileLayer } from 'leaflet'
 import { defineStore } from 'pinia'
 import markerIcon from '@/assets/img/geoloc/marker_6.png'
 
+let leaflet: Promise<Leaflet> | undefined
+
+if (typeof window !== 'undefined')
+  leaflet = import('leaflet').then(module => module)
+
+interface Leaflet {
+  map: typeof import('leaflet')['map']
+  tileLayer: typeof import('leaflet')['tileLayer']
+  Icon: typeof import('leaflet')['Icon']
+  marker: typeof import('leaflet')['marker']
+}
 interface MarkerData {
   coordinates: [number, number]
   popupDescription: string
@@ -27,7 +37,10 @@ export const kafomapStore = defineStore('kafomapstore', {
   },
   // déplacer les .on() dans les composants car les actions ne sont pas là pour ça (à voir si ça marche)
   actions: {
-    addMap(id: string, viewLngLat: [number, number], zoom: number) {
+    async addMap(id: string, viewLngLat: [number, number], zoom: number) {
+      if (!leaflet)
+        return
+      const { map } = await leaflet
       this.map = map(id)
         .on('load', () => {
           this.mapIsLoaded = true
@@ -41,7 +54,10 @@ export const kafomapStore = defineStore('kafomapstore', {
         })
         .setView(viewLngLat, zoom)
     },
-    addTileLayer(mapUrl: string, maxZoom: number, attribution: string) {
+    async addTileLayer(mapUrl: string, maxZoom: number, attribution: string) {
+      if (!leaflet)
+        return
+      const { tileLayer } = await leaflet
       tileLayer(mapUrl, {
         maxZoom,
         attribution,
@@ -51,7 +67,10 @@ export const kafomapStore = defineStore('kafomapstore', {
           this.tileLayerIsLoaded = true
         })
     },
-    addMarker(lngLat: [number, number], popupDescription: string) {
+    async addMarker(lngLat: [number, number], popupDescription: string) {
+      if (!leaflet)
+        return
+      const { Icon, marker } = await leaflet
       const customIcon = new Icon({
         iconUrl: markerIcon,
         iconSize: [20, 32],
@@ -75,8 +94,12 @@ export const kafomapStore = defineStore('kafomapstore', {
         popupDescription,
       } as unknown as MarkerData)
     },
-    removeMap() {
+    async removeMap() {
+      if (!leaflet)
+        return
+      const { map } = await leaflet
       this.map.remove()
     },
   },
+
 })
