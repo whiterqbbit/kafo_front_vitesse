@@ -1,5 +1,5 @@
 <script setup lang="ts">
-use_coffee_store().fetch_coffee_db()
+use_coffee_store().fetch_db()
 
 // https://github.com/vueuse/head
 // you can use this to manipulate the document head in any components,

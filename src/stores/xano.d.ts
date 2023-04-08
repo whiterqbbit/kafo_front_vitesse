@@ -48,7 +48,7 @@ export type PlaceType =
 	| 'Hôtel'
 
 export interface Cafe {
-	id?: number
+	id: number
 	nom: string
 	tags: CafeTag[]
 	type?: PlaceType
@@ -108,6 +108,7 @@ export interface Cafe {
 	public_phone?: string
 	distance?: string
 	color?: string
+	is_open: boolean
 }
 
 export interface Club {

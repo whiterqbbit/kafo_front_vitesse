@@ -9,10 +9,13 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CoffeeModal: typeof import('./components/CoffeeModal.vue')['default']
     DesktopList: typeof import('./components/DesktopList.vue')['default']
+    MapMarker: typeof import('./components/MapMarker.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TheFooter: typeof import('./components/TheFooter.vue')['default']
     TheHeader: typeof import('./components/TheHeader.vue')['default']
+    TheMap: typeof import('./components/TheMap.vue')['default']
   }
 }

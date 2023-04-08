@@ -13,6 +13,7 @@ export default defineConfig({
     ['btn', 'px-4 py-1 rounded inline-block bg-teal-700 text-white cursor-pointer hover:bg-teal-800 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
     ['font-title', 'text-3xl font-black text-center text-cyan-800'],
     ['trans-grass-700', 'opacity-90 transition duration-200 ease-in-out hover:opacity-100 hover:text-grass-900'],
+    ['tag', 'px-2 py-1 rounded-full inline-block bg-cafe-500 text-cafe-100 text-xs font-bold tracking-wider'],
   ],
   theme: {
     height: {
@@ -28,7 +29,7 @@ export default defineConfig({
         500: '#815a4f',
         400: '#e3ba9f',
         300: '#f5dac8',
-        200: '#fdeee2',
+        200: '#h',
         100: '#fff7f2',
       },
       grass: {
