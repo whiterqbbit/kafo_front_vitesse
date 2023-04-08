@@ -12,7 +12,6 @@ declare module '@vue/runtime-core' {
     DesktopList: typeof import('./components/DesktopList.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    StoreTester: typeof import('./components/StoreTester.vue')['default']
     TheFooter: typeof import('./components/TheFooter.vue')['default']
     TheHeader: typeof import('./components/TheHeader.vue')['default']
   }
