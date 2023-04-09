@@ -6,8 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import Button from 'primevue/button'
-
 const coffee_store = use_coffee_store()
 function close_modal() {
   coffee_store.selected_id = null

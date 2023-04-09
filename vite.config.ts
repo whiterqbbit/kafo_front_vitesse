@@ -12,6 +12,7 @@ import Inspector from 'vite-plugin-vue-inspector'
 import Unocss from 'unocss/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
 import WebfontDownload from 'vite-plugin-webfont-dl'
+import { PrimeVueResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineConfig({
   resolve: {
@@ -58,6 +59,9 @@ export default defineConfig({
       extensions: ['vue'],
       include: [/\.vue$/, /\.vue\?vue/],
       dts: 'src/components.d.ts',
+      resolvers: [
+        PrimeVueResolver(),
+      ],
     }),
 
     // https://github.com/antfu/unocss

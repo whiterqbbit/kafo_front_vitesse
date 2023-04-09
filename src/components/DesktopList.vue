@@ -52,9 +52,9 @@
 </template>
 
 <script setup lang="ts">
-import Galleria from 'primevue/galleria'
 import subway_icon from '@/assets/img/icons/metro_tantative.png'
 import spinner from '@/assets/img/spinner.gif'
+
 const coffee_store = use_coffee_store()
 
 function select_coffee(id: number) {

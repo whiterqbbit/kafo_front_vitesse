@@ -9,8 +9,10 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Button: typeof import('primevue/button')['default']
     CoffeeModal: typeof import('./components/CoffeeModal.vue')['default']
     DesktopList: typeof import('./components/DesktopList.vue')['default']
+    Galleria: typeof import('primevue/galleria')['default']
     MapMarker: typeof import('./components/MapMarker.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
