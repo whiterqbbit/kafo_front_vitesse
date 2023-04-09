@@ -94,12 +94,5 @@ export const kafomapStore = defineStore('kafomapstore', {
         popupDescription,
       } as unknown as MarkerData)
     },
-    async removeMap() {
-      if (!leaflet)
-        return
-      const { map } = await leaflet
-      this.map.remove()
-    },
   },
-
 })
