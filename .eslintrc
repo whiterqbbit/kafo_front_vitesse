@@ -6,7 +6,8 @@
       {
         "order": [["template", "script"], "style"]
       }
-    ]
+    ],
+    "vue/valid-attribute-name": "off"
   },
   "extends": ["@antfu", "@unocss/eslint-config"]
 }
