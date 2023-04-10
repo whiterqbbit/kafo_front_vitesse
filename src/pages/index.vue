@@ -1,5 +1,8 @@
 <template>
   <div id="main_container" h-screen--35px flex flex-col bg-green-300 md="h-screen--50px flex-row-reverse">
+    <div v-if="display.login_modal" class="fixed left-0 top-0 z-50 h-full w-full bg-cafe-400 bg-opacity-50">
+      <LoginModal class="absolute left-1/4 top-1/6 h-1/4 w-1/2" />
+    </div>
     <div md="w-full" h-full flex items-center justify-center bg-red-100 font-title>
       <div class="h-full w-full text-center">
         <TheMap z-10 />

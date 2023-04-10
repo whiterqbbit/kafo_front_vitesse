@@ -112,6 +112,7 @@ export interface Cafe {
 }
 
 export interface Club {
+	id?: number
 	nom: string
 	user_id?: [number]
 	private?: boolean
@@ -119,4 +120,30 @@ export interface Club {
 	pic?: string
 	display_pic_in_clubs?: boolean
 	display_name_in_clubs?: boolean
+	premium: boolean
+}
+
+export interface User {
+	is_auth?: boolean
+	bio?: string
+	clubs?: Array<Club>
+	domaine?: string
+	email?: string
+	family_name?: string
+	first_name?: string
+	highlighted_pins?: Array<number>
+	highlighted_users?: Array<number>
+	id?: number | null
+	incognito?: boolean | null
+	is_inboarded?: boolean | null
+	job_title?: string
+	open_to_afterwork?: boolean | null
+	open_to_lunch?: boolean | null
+	open_to_pause?: boolean | null
+	pic_medium?: string
+	pic_small?: string
+	pic_xsmall?: string
+	role?: string
+	type?: string
+	token?: string
 }

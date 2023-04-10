@@ -1,34 +1,154 @@
-import { acceptHMRUpdate, defineStore } from 'pinia'
+import { defineStore } from 'pinia'
+import type { Club, User } from './xano.d'
 
-export const useUserStore = defineStore('user', () => {
-  /**
-   * Current name of the user.
-   */
-  const savedName = ref('')
-  const previousNames = ref(new Set<string>())
+const xano_login_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/login`
+const xano_me_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/me`
 
-  const usedNames = computed(() => Array.from(previousNames.value))
-  const otherNames = computed(() => usedNames.value.filter(name => name !== savedName.value))
+export const use_user_store = defineStore('user', () => {
+  const is_auth = ref(false)
+  const bio = ref<string | null>(null)
+  const clubs = ref<Array<Club>>([])
+  const domaine = ref('')
+  const email = ref('')
+  const family_name = ref('')
+  const first_name = ref('')
+  const highlighted_pins = ref<Array<number>>([])
+  const highlighted_users = ref<Array<number>>([])
+  const id = ref<number | null >(null)
+  const incognito = ref<boolean | null >(null)
+  const is_inboarded = ref<boolean | null >(null)
+  const job_title = ref('')
+  const open_to_afterwork = ref<boolean | null >(null)
+  const open_to_lunch = ref<boolean | null >(null)
+  const open_to_pause = ref<boolean | null >(null)
+  const pic_medium = ref('')
+  const pic_small = ref('')
+  const pic_xsmall = ref('')
+  const role = ref('')
+  const type = ref('')
+  const token = ref('')
 
-  /**
-   * Changes the current name of the user and saves the one that was used
-   * before.
-   *
-   * @param name - new name to set
-   */
-  function setNewName(name: string) {
-    if (savedName.value)
-      previousNames.value.add(savedName.value)
+  async function login(email: string, password: string): Promise<void> {
+    try {
+      const response = await fetch(xano_login_url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          {
+            email,
+            password,
+          },
+        ),
+      })
 
-    savedName.value = name
+      if (!response.ok)
+        throw new Error(`HTTP error ${response.status}`)
+
+      const data = await response.json()
+      console.log('Login response', data)
+      token.value = data.authToken
+      console.log('Login done')
+
+      me() // Call get_me() after a successful login
+    }
+    catch (error) {
+      console.error('Error during login:', error)
+    }
   }
 
+  function logout(): void {
+    is_auth.value = false
+    bio.value = ''
+    clubs.value = []
+    domaine.value = ''
+    email.value = ''
+    family_name.value = ''
+    first_name.value = ''
+    highlighted_pins.value = []
+    highlighted_users.value = []
+    id.value = null
+    incognito.value = null
+    is_inboarded.value = null
+    job_title.value = ''
+    open_to_afterwork.value = null
+    open_to_lunch.value = null
+    open_to_pause.value = null
+    pic_medium.value = ''
+    pic_small.value = ''
+    pic_xsmall.value = ''
+    role.value = ''
+    type.value = ''
+    token.value = ''
+  }
+
+  async function me(): Promise<void> {
+    try {
+      const response = await fetch(xano_me_url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token.value}`,
+        },
+      })
+      const data: User = await response.json()
+
+      is_auth.value = true
+      bio.value = data.bio ?? ''
+      clubs.value = data.clubs ?? []
+      domaine.value = data.domaine ?? ''
+      email.value = data.email ?? ''
+      family_name.value = data.family_name ?? ''
+      first_name.value = data.first_name ?? ''
+      highlighted_pins.value = data.highlighted_pins ?? []
+      highlighted_users.value = data.highlighted_users ?? []
+      id.value = data.id ?? null
+      incognito.value = data.incognito ?? false
+      is_inboarded.value = data.is_inboarded ?? false
+      job_title.value = data.job_title ?? ''
+      open_to_afterwork.value = data.open_to_afterwork ?? false
+      open_to_lunch.value = data.open_to_lunch ?? false
+      open_to_pause.value = data.open_to_pause ?? false
+      pic_medium.value = data.pic_medium ?? ''
+      pic_small.value = data.pic_small ?? ''
+      pic_xsmall.value = data.pic_xsmall ?? ''
+      role.value = data.role ?? ''
+      type.value = data.type ?? ''
+    }
+    catch (error) {
+      console.error(error)
+    }
+  }
   return {
-    setNewName,
-    otherNames,
-    savedName,
+    is_auth,
+    bio,
+    clubs,
+    domaine,
+    email,
+    family_name,
+    first_name,
+    highlighted_pins,
+    highlighted_users,
+    id,
+    incognito,
+    is_inboarded,
+    job_title,
+    open_to_afterwork,
+    open_to_lunch,
+    open_to_pause,
+    pic_medium,
+    pic_small,
+    pic_xsmall,
+    role,
+    type,
+    token,
+    login,
+    logout,
+    me,
   }
-})
+},
+)
 
-if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot))
+// if (import.meta.hot)
+//   import.meta.hot.accept(acceptHMRUpdate(use_user_store, import.meta.hot))

@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     CoffeeModal: typeof import('./components/CoffeeModal.vue')['default']
     DesktopList: typeof import('./components/DesktopList.vue')['default']
     Galleria: typeof import('primevue/galleria')['default']
+    LoginModal: typeof import('./components/LoginModal.vue')['default']
     MapMarker: typeof import('./components/MapMarker.vue')['default']
     MobileList: typeof import('./components/MobileList.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

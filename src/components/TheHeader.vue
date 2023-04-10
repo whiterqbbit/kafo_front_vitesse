@@ -14,7 +14,7 @@
         About
       </RouterLink>
     </nav>
-    <div btn>
+    <div btn @click="toggle_login">
       Login
     </div>
   </header>
@@ -22,4 +22,8 @@
 
 <script setup lang="ts">
 import logo from '@/assets/img/logo/kafo_logo_light.png'
+
+function toggle_login() {
+  display.login_modal = !display.login_modal
+}
 </script>
