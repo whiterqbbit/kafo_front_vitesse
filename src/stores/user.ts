@@ -60,7 +60,24 @@ export const use_user_store = defineStore('user', () => {
     }
   }
 
-  const redirect_uri = 'http://localhost:3333'
+  const env = import.meta.env.VITE_ENV
+  let redirect_uri: string
+
+  switch (env) {
+    case 'development':
+      redirect_uri = import.meta.env.VITE_REDIR_DEV
+      break
+    case 'staging':
+      redirect_uri = import.meta.env.VITE_REDIR_STAGING
+      break
+    case 'production':
+      redirect_uri = import.meta.env.VITE_REDIR_PROD
+      break
+    default:
+      console.error('Unknown environment:', env)
+      break
+  }
+
   async function linkedin_init() {
     try {
       const response = await fetch(`${xano_linkedin_init_url}?redirect_uri=${encodeURIComponent(redirect_uri)}`, {
