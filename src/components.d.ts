@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     DesktopList: typeof import('./components/DesktopList.vue')['default']
     Galleria: typeof import('primevue/galleria')['default']
     MapMarker: typeof import('./components/MapMarker.vue')['default']
+    MobileList: typeof import('./components/MobileList.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TheFooter: typeof import('./components/TheFooter.vue')['default']

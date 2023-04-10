@@ -12,12 +12,10 @@
       </div>
     </div>
     <div w-full flex overflow-auto bg-blue-200 font-title md="max-w-600px">
-      <div
-        absolute bottom-50px z-20 h-80 w-70 overflow-auto bg-blue-100 font-title md:hidden
+      <MobileList
+        absolute bottom-0 z-20 h-80 w-full overflow-auto font-title md:hidden
         class="left-1/2 -translate-x-1/2"
-      >
-        LISTE MOBILE
-      </div>
+      />
       <div hidden w-full overflow-auto bg-cafe-100 md="block">
         <div v-show="!display.selected_modal">
           <DesktopList />
