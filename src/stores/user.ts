@@ -3,6 +3,8 @@ import type { Club, User } from './xano.d'
 
 const xano_login_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/login`
 const xano_me_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/me`
+const xano_linkedin_init_url = `${import.meta.env.VITE_XANO_API_URL}/api:UpsZVD6L/oauth/linkedin/init`
+const xano_linkedin_continue_url = `${import.meta.env.VITE_XANO_API_URL}/api:UpsZVD6L/oauth/linkedin/continue`
 
 export const use_user_store = defineStore('user', () => {
   const is_auth = ref(false)
@@ -55,6 +57,48 @@ export const use_user_store = defineStore('user', () => {
     }
     catch (error) {
       console.error('Error during login:', error)
+    }
+  }
+
+  const redirect_uri = 'http://localhost:3333'
+  async function linkedin_init() {
+    try {
+      const response = await fetch(`${xano_linkedin_init_url}?redirect_uri=${encodeURIComponent(redirect_uri)}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      if (!response.ok)
+        throw new Error(`HTTP error ${response.status}`)
+      const data = await response.json()
+      console.log('Linkedin init response', data)
+      return data
+    }
+    catch (error) {
+      console.error('Error during linkedin init:', error)
+    }
+  }
+
+  async function linkedin_continue(code: string | null): Promise<void> {
+    try {
+      const response = await fetch(`${xano_linkedin_continue_url}?code=${code}&redirect_uri=${redirect_uri}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      if (!response.ok)
+        throw new Error(`HTTP error ${response.status}`)
+      const data = await response.json()
+      console.log('Linkedin continue response', data)
+      token.value = data.authToken
+      console.log('Login done')
+
+      me() // Call get_me() after a successful login
+    }
+    catch (error) {
+      console.error('Error during linkedin continue:', error)
     }
   }
 
@@ -143,6 +187,8 @@ export const use_user_store = defineStore('user', () => {
     role,
     type,
     token,
+    linkedin_init,
+    linkedin_continue,
     login,
     logout,
     me,

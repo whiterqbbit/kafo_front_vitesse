@@ -1,5 +1,14 @@
 <script setup lang="ts">
+import { use_user_store } from '@/stores/user'
+const user = use_user_store()
+
 use_coffee_store().fetch_db()
+
+onBeforeMount(() => {
+  const urlParams = new URLSearchParams(window.location.search)
+  if (urlParams.get('code') !== null)
+    user.linkedin_continue(urlParams.get('code'))
+})
 
 // https://github.com/vueuse/head
 // you can use this to manipulate the document head in any components,

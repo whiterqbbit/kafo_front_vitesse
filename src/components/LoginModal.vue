@@ -18,17 +18,29 @@
       </button>
     </div>
     <Button class="fixed right-4 top-4" icon="pi pi-times" severity="danger" text raised rounded aria-label="Close" @click="close_modal" />
+    <div h-20 bg-pink-200 p-4>
+      LINKEDIN
+      <button btn @click="linkedin_login">
+        Login with LinkedIn
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { use_user_store } from '@/stores/user'
 
+const user = use_user_store()
+
 function close_modal() {
   display.login_modal = false
 }
 
-const user = use_user_store()
+async function linkedin_login() {
+  const link = await user.linkedin_init()
+  window.open(link, '_blank')
+  close_modal()
+}
 
 const form = ref({
   username: '',
