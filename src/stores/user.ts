@@ -1,10 +1,12 @@
 import { defineStore } from 'pinia'
+import { useCookies } from '@vueuse/integrations/useCookies'
 import type { Club, User } from './xano.d'
 
 const xano_login_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/login`
 const xano_me_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/me`
 const xano_linkedin_init_url = `${import.meta.env.VITE_XANO_API_URL}/api:UpsZVD6L/oauth/linkedin/init`
 const xano_linkedin_continue_url = `${import.meta.env.VITE_XANO_API_URL}/api:UpsZVD6L/oauth/linkedin/continue`
+const cookies = useCookies(['user'])
 
 export const use_user_store = defineStore('user', () => {
   const is_auth = ref(false)
@@ -146,6 +148,7 @@ export const use_user_store = defineStore('user', () => {
         },
       })
       const data: User = await response.json()
+      cookies.set('user', data)
 
       is_auth.value = true
       bio.value = data.bio ?? ''

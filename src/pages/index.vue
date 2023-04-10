@@ -35,7 +35,9 @@
 </template>
 
 <script setup lang="ts">
+import { useGeolocation } from '@vueuse/core'
 import { use_coffee_store } from '@/stores/coffee'
 
+const { coords, locatedAt, error, resume, pause } = useGeolocation()
 const coffee_db = computed(() => use_coffee_store().db)
 </script>
