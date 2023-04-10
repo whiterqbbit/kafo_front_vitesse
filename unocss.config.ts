@@ -30,7 +30,7 @@ export default defineConfig({
         500: '#815a4f',
         400: '#e3ba9f',
         300: '#f5dac8',
-        200: '#h',
+        200: '#fdeee2',
         100: '#fff7f2',
       },
       grass: {
