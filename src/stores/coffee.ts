@@ -6,7 +6,7 @@ const xano_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/coffee`
 export const use_coffee_store = defineStore('coffee', () => {
   const db: Ref<Cafe[] | null> = ref(null)
   const db_loading = ref(false)
-  const db_error = ref<string>('')
+  const db_error = ref<string | null>(null)
   const selected_id = ref<number | null>(null)
 
   const selected = computed(() => db.value?.find(cafe => cafe.id === selected_id.value) ?? null)
@@ -14,7 +14,7 @@ export const use_coffee_store = defineStore('coffee', () => {
   async function fetch_db() {
     db.value = null
     db_loading.value = true
-    db_error.value = ''
+    db_error.value = null
 
     try {
       const response = await fetch(xano_url)

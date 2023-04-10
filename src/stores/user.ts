@@ -49,11 +49,8 @@ export const use_user_store = defineStore('user', () => {
         throw new Error(`HTTP error ${response.status}`)
 
       const data = await response.json()
-      console.log('Login response', data)
       token.value = data.authToken
-      console.log('Login done')
-
-      me() // Call get_me() after a successful login
+      me()
     }
     catch (error) {
       console.error('Error during login:', error)
@@ -61,8 +58,8 @@ export const use_user_store = defineStore('user', () => {
   }
 
   const env = import.meta.env.VITE_ENV
-  let redirect_uri: string
 
+  let redirect_uri: string
   switch (env) {
     case 'development':
       redirect_uri = import.meta.env.VITE_REDIR_DEV
@@ -77,7 +74,6 @@ export const use_user_store = defineStore('user', () => {
       console.error('Unknown environment:', env)
       break
   }
-
   async function linkedin_init() {
     try {
       const response = await fetch(`${xano_linkedin_init_url}?redirect_uri=${encodeURIComponent(redirect_uri)}`, {
@@ -89,7 +85,6 @@ export const use_user_store = defineStore('user', () => {
       if (!response.ok)
         throw new Error(`HTTP error ${response.status}`)
       const data = await response.json()
-      console.log('Linkedin init response', data)
       return data
     }
     catch (error) {
@@ -108,11 +103,8 @@ export const use_user_store = defineStore('user', () => {
       if (!response.ok)
         throw new Error(`HTTP error ${response.status}`)
       const data = await response.json()
-      console.log('Linkedin continue response', data)
       token.value = data.authToken
-      console.log('Login done')
-
-      me() // Call get_me() after a successful login
+      me()
     }
     catch (error) {
       console.error('Error during linkedin continue:', error)
