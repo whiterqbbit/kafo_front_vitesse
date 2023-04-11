@@ -10,8 +10,8 @@
       <RouterLink to="/contact" title="contact">
         Contact
       </RouterLink>
-      <RouterLink to="/about" title="about">
-        About
+      <RouterLink to="/a-propos" title="a-propos">
+        A Propos
       </RouterLink>
     </nav>
     <div v-if="!user.is_auth" btn @click="toggle_login">
