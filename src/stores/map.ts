@@ -1,11 +1,6 @@
 import { defineStore } from 'pinia'
 import markerIcon from '@/assets/img/geoloc/marker_6.png'
 
-let leaflet: Promise<Leaflet> | undefined
-
-if (typeof window !== 'undefined')
-  leaflet = import('leaflet').then(module => module)
-
 interface Leaflet {
   map: typeof import('leaflet')['map']
   tileLayer: typeof import('leaflet')['tileLayer']
@@ -17,82 +12,84 @@ interface MarkerData {
   popupDescription: string
 }
 
-export const kafomapStore = defineStore('kafomapstore', {
-  state: () => ({
-    map: {} as any,
-    markers: [] as MarkerData[],
-    bounds: {} as any,
-    markersOnMap: [] as MarkerData[],
-    mapIsLoaded: false,
-    tileLayerIsLoaded: false,
-    markerIsLoaded: false,
-    markerIsClick: false,
-  }),
-  getters: {
-    getBounds: state => () => state.bounds,
-    getPinsOnMap: state => () => {
-      if (state.bounds)
-        return state.markers.filter(marker => state.bounds.contains(marker.coordinates))
-    },
-  },
-  // déplacer les .on() dans les composants car les actions ne sont pas là pour ça (à voir si ça marche)
-  actions: {
-    async addMap(id: string, viewLngLat: [number, number], zoom: number) {
-      if (!leaflet)
-        return
-      const { map } = await leaflet
-      this.map = map(id)
-        .on('load', () => {
-          this.mapIsLoaded = true
-        })
-        .on('move', () => {
-          if (this.markerIsLoaded === true) {
-            this.bounds = this.map.getBounds()
-            if (this.markers.length)
-              this.markersOnMap = this.markers.filter(marker => this.map.getBounds().contains(marker.coordinates))
-          }
-        })
-        .setView(viewLngLat, zoom)
-    },
-    async addTileLayer(mapUrl: string, maxZoom: number, attribution: string) {
-      if (!leaflet)
-        return
-      const { tileLayer } = await leaflet
-      tileLayer(mapUrl, {
-        maxZoom,
-        attribution,
+let leaflet: Promise<Leaflet> | undefined
+
+if (typeof window !== 'undefined')
+  leaflet = import('leaflet').then(module => module)
+
+export const kafomapStore = defineStore('kafomapstore', () => {
+  const map_leaf: any = ref({})
+  const markers: Ref<MarkerData[]> = ref([])
+  const bounds: any = ref({})
+  const markersOnMap: Ref<MarkerData[]> = ref([])
+  const mapIsLoaded = ref(false)
+  const tileLayerIsLoaded = ref(false)
+  const markerIsLoaded = ref(false)
+  const markerIsClick = ref(false)
+
+  const getPinsOnMap = computed(() => {
+    if (bounds.value)
+      return markers.value.filter(marker => bounds.value.contains(marker.coordinates))
+  })
+
+  async function addMap(id: string, viewLngLat: [number, number], zoom: number) {
+    if (!leaflet)
+      return
+    const { map } = await leaflet
+    map_leaf.value = map(id)
+      .on('load', () => {
+        mapIsLoaded.value = true
       })
-        .addTo(this.map)
-        .on('load', () => {
-          this.tileLayerIsLoaded = true
-        })
-    },
-    async addMarker(lngLat: [number, number], popupDescription: string) {
-      if (!leaflet)
-        return
-      const { Icon, marker } = await leaflet
-      const customIcon = new Icon({
-        iconUrl: markerIcon,
-        iconSize: [20, 32],
-        iconAnchor: [20, 32],
-        popupAnchor: [0, -32],
+      .on('move', () => {
+        if (markerIsLoaded.value === true) {
+          bounds.value = map_leaf.value.getBounds()
+          if (markers.value.length)
+            markersOnMap.value = markers.value.filter(marker => map_leaf.value.getBounds().contains(marker.coordinates))
+        }
       })
+      .setView(viewLngLat, zoom)
+  }
 
-      marker(lngLat, { icon: customIcon })
-        .addTo(this.map)
-        .bindPopup(popupDescription)
-        .on('click', () => {
-          this.markerIsClick = true
-        })
+  async function addTileLayer(mapUrl: string, maxZoom: number, attribution: string) {
+    if (!leaflet)
+      return
+    const { tileLayer } = await leaflet
+    tileLayer(mapUrl, {
+      maxZoom,
+      attribution,
+    })
+      .addTo(map_leaf.value)
+      .on('load', () => {
+        tileLayerIsLoaded.value = true
+      })
+  }
 
-      this.markerIsLoaded = true
-      this.bounds = this.map.getBounds()
+  async function addMarker(lngLat: [number, number], popupDescription: string) {
+    if (!leaflet)
+      return
+    const { Icon, marker } = await leaflet
+    const customIcon = new Icon({
+      iconUrl: markerIcon,
+      iconSize: [20, 32],
+      iconAnchor: [20, 32],
+      popupAnchor: [0, -32],
+    })
 
-      // add marker on store
-      this.markers.push({
-        coordinates: lngLat,
-        popupDescription,
-      } as unknown as MarkerData)
-    },
-  },
+    marker(lngLat, { icon: customIcon })
+      .addTo(map_leaf.value)
+      .bindPopup(popupDescription)
+      .on('click', () => {
+        markerIsClick.value = true
+      })
+    markerIsLoaded.value = true
+    bounds.value = map_leaf.value.getBounds()
+
+    // add marker on store
+    markers.value.push({
+      coordinates: lngLat,
+      popupDescription,
+    } as unknown as MarkerData)
+  }
+
+  return { map_leaf, markers, bounds, markersOnMap, mapIsLoaded, tileLayerIsLoaded, markerIsLoaded, markerIsClick, getPinsOnMap, addMap, addTileLayer, addMarker }
 })

@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Button: typeof import('primevue/button')['default']
     CoffeeModal: typeof import('./components/CoffeeModal.vue')['default']
+    DebugModal: typeof import('./components/DebugModal.vue')['default']
     DesktopList: typeof import('./components/DesktopList.vue')['default']
     Galleria: typeof import('primevue/galleria')['default']
     LoginModal: typeof import('./components/LoginModal.vue')['default']
