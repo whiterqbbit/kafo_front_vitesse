@@ -3,16 +3,18 @@
     <div v-if="display.login_modal" class="fixed left-0 top-0 z-50 h-full w-full bg-cafe-400 bg-opacity-50">
       <LoginModal class="absolute left-1/4 top-1/6 h-1/4 w-1/2" />
     </div>
-    <div v-if="display.debug_modal" class="fixed left-0 top-0 z-50 h-full w-full bg-cafe-400 bg-opacity-50" @click="display.debug_modal = !display.debug_modal">
-      <DebugModal class="absolute left-1/12 top-1/12 h-3/4 w-3/4" />
+    <div
+      v-if="display.debug_modal" class="fixed left-0 top-0 z-50 h-full w-full bg-cafe-400 bg-opacity-50"
+      @click="display.debug_modal = !display.debug_modal"
+    >
+      <DebugModal class="absolute left-1/12 top-1/12 h-3/4 w-3/4" :props="coffee_db" />
     </div>
     <div md="w-full" h-full flex items-center justify-center bg-red-100 font-title>
-      <div class="h-full w-full text-center">
+      <div class="relative h-full w-full">
         <TheMap z-10 />
+        <SearchBar class="fixed left-1/2 top-1/8 z-20 w-[528px]" />
         <MapMarker
-          v-for="coffee in coffee_db"
-          :key="coffee.id"
-          :lng-lat="coffee.location.data"
+          v-for="coffee in coffee_db" :key="coffee.id" :lng-lat="coffee.location.data"
           :popup-description="coffee.desc"
         />
       </div>
@@ -38,9 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { useGeolocation } from '@vueuse/core'
 import { use_coffee_store } from '@/stores/coffee'
 
-const { coords, locatedAt, error, resume, pause } = useGeolocation()
 const coffee_db = computed(() => use_coffee_store().db)
 </script>

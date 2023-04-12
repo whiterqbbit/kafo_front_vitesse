@@ -7,7 +7,12 @@
         "order": [["template", "script"], "style"]
       }
     ],
-    "vue/valid-attribute-name": "off"
+    "vue/valid-attribute-name": "off",
+    "@typescript-eslint/brace-style": [
+      "error",
+      "1tbs",
+      { "allowSingleLine": true }
+    ]
   },
   "extends": ["@antfu", "@unocss/eslint-config"]
 }
