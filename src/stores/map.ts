@@ -101,7 +101,6 @@ export const use_map_store = defineStore('use_map_store', () => {
   async function locate_user() {
     const { coords, resume } = useGeolocation()
     resume()
-    console.log('1', coords.value)
     if (!coords.value || !coords.value.latitude || !coords.value.longitude)
       return
 
@@ -116,13 +115,11 @@ export const use_map_store = defineStore('use_map_store', () => {
       popupAnchor: [0, -32],
     })
 
-    console.log('2', coords.value)
     map_leaf.value.locate({ setView: true, maxZoom: 16 })
 
     map_leaf.value.on('locationfound', (event: any) => {
       const { latitude, longitude } = event.latlng
       const lngLat: simple_coords = [latitude, longitude]
-      console.log('3', lngLat)
       marker(lngLat, { icon: customIcon })
         .addTo(map_leaf.value)
         .bindPopup('C\'est vous !')
@@ -142,7 +139,6 @@ export const use_map_store = defineStore('use_map_store', () => {
     // use Place Autocomplete
     // Define the URL and API key
     const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${query}&types=geocode&language=fr&key=${import.meta.env.VITE_GOOGLE_API_KEY}`
-    console.log(url)
     // Function to fetch data from Google Places API
     async function fetchGooglePlacesAutocomplete() {
       try {
@@ -152,7 +148,6 @@ export const use_map_store = defineStore('use_map_store', () => {
           throw new Error(`HTTP error! Status: ${response.status}`)
 
         const data = await response.json()
-        console.log(data)
       } catch (error) {
         console.error(error)
       }
