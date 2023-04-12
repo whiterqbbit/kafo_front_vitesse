@@ -23,11 +23,9 @@ export const use_coffee_store = defineStore('coffee', () => {
 
       const data = await response.json()
       db.value = data
-    }
-    catch (error: any) {
+    } catch (error: any) {
       db_error.value = error.message
-    }
-    finally {
+    } finally {
       db_loading.value = false
     }
   }
