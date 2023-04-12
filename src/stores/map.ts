@@ -137,5 +137,30 @@ export const use_map_store = defineStore('use_map_store', () => {
     })
   }
 
-  return { map_leaf, markers, bounds, markersOnMap, mapIsLoaded, tileLayerIsLoaded, markerIsLoaded, markerIsClick, getPinsOnMap, addMap, addTileLayer, addMarker, locate_user, user_coords }
+  // ne fonctionne pas en l'état, 403
+  async function search(query: string) {
+    // use Place Autocomplete
+    // Define the URL and API key
+    const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${query}&types=geocode&language=fr&key=${import.meta.env.VITE_GOOGLE_API_KEY}`
+    console.log(url)
+    // Function to fetch data from Google Places API
+    async function fetchGooglePlacesAutocomplete() {
+      try {
+        const response = await fetch(url)
+
+        if (!response.ok)
+          throw new Error(`HTTP error! Status: ${response.status}`)
+
+        const data = await response.json()
+        console.log(data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    // Call the function
+    fetchGooglePlacesAutocomplete()
+  }
+
+  return { map_leaf, markers, bounds, markersOnMap, mapIsLoaded, tileLayerIsLoaded, markerIsLoaded, markerIsClick, getPinsOnMap, addMap, addTileLayer, addMarker, locate_user, search, user_coords }
 })
