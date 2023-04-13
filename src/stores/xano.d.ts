@@ -109,6 +109,11 @@ export interface Cafe {
 	distance?: string
 	color?: string
 	is_open: boolean
+	attendance?: number
+	attendees?: {
+		id: number
+		url: string
+	}[]
 }
 
 export interface Club {
