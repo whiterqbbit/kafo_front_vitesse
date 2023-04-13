@@ -11,6 +11,7 @@
 
 <script setup lang="ts">
 import Flicking from '@egjs/vue3-flicking'
+
 const coffee_store = use_coffee_store()
 </script>
 
