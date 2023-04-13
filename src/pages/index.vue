@@ -1,4 +1,5 @@
 <template>
+  <pre v-if="display.cookie_modal" h-fit w-full>{{ cookies.getAll() }}</pre>
   <div id="main_container" h-screen--35px flex flex-col bg-green-300 md="h-screen--50px flex-row-reverse">
     <div v-if="display.login_modal" class="fixed left-0 top-0 z-50 h-full w-full bg-cafe-400 bg-opacity-50">
       <LoginModal class="absolute left-1/4 top-1/6 h-1/4 w-1/2" />
@@ -19,7 +20,7 @@
         />
       </div>
     </div>
-    <div w-full flex overflow-auto bg-blue-200 font-title md="max-w-600px">
+    <div w-142 flex overflow-auto bg-blue-200 font-title md="max-w-600px">
       <MobileList
         absolute bottom-0 z-20 h-80 w-full overflow-auto font-title md:hidden
         class="left-1/2 -translate-x-1/2"
@@ -40,7 +41,10 @@
 </template>
 
 <script setup lang="ts">
+import { useCookies } from '@vueuse/integrations/useCookies'
 import { use_coffee_store } from '@/stores/coffee'
+
+const cookies = useCookies(['user'])
 
 const coffee_db = computed(() => use_coffee_store().db)
 </script>
