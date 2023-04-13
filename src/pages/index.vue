@@ -12,7 +12,7 @@
     </div>
     <div md="w-full" h-full flex items-center justify-center bg-red-100 font-title>
       <div class="relative h-full w-full">
-        <TheMap z-10 />
+        <TheMap class="z-10" />
         <SearchBar class="fixed left-1/2 top-1/8 z-20 w-[528px]" />
         <MapMarker
           v-for="coffee in coffee_db" :key="coffee.id" :lng-lat="coffee.location.data"
@@ -22,8 +22,7 @@
     </div>
     <div w-142 flex overflow-auto bg-blue-200 font-title md="max-w-600px">
       <MobileList
-        absolute bottom-0 z-20 h-80 w-full overflow-auto font-title md:hidden
-        class="left-1/2 -translate-x-1/2"
+        class="absolute bottom-0 left-1/2 z-20 h-80 w-full overflow-auto font-title md:hidden -translate-x-1/2"
       />
       <div hidden w-full overflow-auto bg-cafe-100 md="block">
         <div v-show="!display.selected_modal">
@@ -35,7 +34,7 @@
       </div>
     </div>
     <div fixed bottom-0 z-50 h-56px w-full md="hidden">
-      <TheFooter h-full rounded-t-xl />
+      <TheFooter class="h-full rounded-t-xl" />
     </div>
   </div>
 </template>

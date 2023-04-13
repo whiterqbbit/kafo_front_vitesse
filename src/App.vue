@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { use_user_store } from '@/stores/user'
+
 const user = use_user_store()
 use_coffee_store().fetch_db()
 
@@ -33,6 +34,6 @@ useHead({
 <template>
   <TheHeader />
   <main bg-fuchsia>
-    <RouterView h-screen />
+    <RouterView class="h-screen" />
   </main>
 </template>
