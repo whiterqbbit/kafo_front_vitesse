@@ -4,6 +4,9 @@
       <img :src="logo" alt="logo" class="h-9 pl-4 md:h-12">
     </RouterLink>
     <nav flex gap-5 font-black text-white>
+      <InputSwitch v-model="preferences.debug_mode">
+        Offline
+      </InputSwitch>
       <button @click="display.debug_modal = !display.debug_modal">
         Debug
       </button>
