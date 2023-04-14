@@ -3,4 +3,5 @@ export const display = reactive({
   login_modal: false,
   debug_modal: false,
   cookie_modal: false,
+  filter_modal: true,
 })

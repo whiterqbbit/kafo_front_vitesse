@@ -10,23 +10,22 @@
       <div v-for="coffee in coffee_db.slice(0, 20)" :key="coffee.id" class="overflow-hidden">
         <div class="relative mx-2 my-1 h-126 flex flex-col cursor-pointer rounded-xl bg-cafe-100 btn-press" @click="select_coffee(coffee.id)">
           <div>
-            <div v-if="coffee.is_open" class="absolute left-66 top-3 z-10 inline-block rounded-full bg-grass-500 px-2 py-1 text-sm font-bold tracking-wider text-cafe-100 text-white">
+            <div v-if="coffee.is_open" class="absolute right-4 top-3 z-10 inline-block rounded-full bg-grass-500 px-2 py-1 text-lg font-bold tracking-wider text-white">
               Ouvert
             </div>
             <Galleria
               :value="coffee.aws_miniatures"
               :num-visible="3"
               :circular="true"
-              container-style="width: 340px; max-width: 340px; overflow: hidden;"
+              container-style="width: 400px; max-width: 400px; overflow: hidden;"
               :show-item-navigators="true"
               :show-thumbnails="false"
             >
               <template #item="slotProps">
                 <img
                   :src="slotProps.item.url"
-                  class="rounded-xl"
+                  class="block h-300px w-full rounded-xl object-cover"
                   :alt="coffee.nom"
-                  style="width: 100%; height: 260px; display: block; object-fit: cover;"
                 >
               </template>
             </Galleria>

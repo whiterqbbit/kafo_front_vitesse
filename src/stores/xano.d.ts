@@ -126,6 +126,7 @@ export interface Club {
 	display_pic_in_clubs?: boolean
 	display_name_in_clubs?: boolean
 	premium: boolean
+	type: 'roles' | 'domain' | 'user' | 'tech'
 }
 
 export interface User {

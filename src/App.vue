@@ -3,6 +3,7 @@ import { use_user_store } from '@/stores/user'
 
 const user = use_user_store()
 use_coffee_store().fetch_db()
+use_club_store().fetch_db()
 
 onBeforeMount(() => {
   const urlParams = new URLSearchParams(window.location.search)
