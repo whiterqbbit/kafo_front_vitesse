@@ -47,8 +47,7 @@ export const use_user_store = defineStore('user', () => {
         ),
       })
 
-      if (!response.ok)
-        throw new Error(`HTTP error ${response.status}`)
+      if (!response.ok) throw new Error(`HTTP error ${response.status}`)
 
       const data = await response.json()
       token.value = data.authToken
@@ -83,8 +82,7 @@ export const use_user_store = defineStore('user', () => {
           'Content-Type': 'application/json',
         },
       })
-      if (!response.ok)
-        throw new Error(`HTTP error ${response.status}`)
+      if (!response.ok) throw new Error(`HTTP error ${response.status}`)
       const data = await response.json()
       return data
     } catch (error) {
@@ -100,8 +98,7 @@ export const use_user_store = defineStore('user', () => {
           'Content-Type': 'application/json',
         },
       })
-      if (!response.ok)
-        throw new Error(`HTTP error ${response.status}`)
+      if (!response.ok) throw new Error(`HTTP error ${response.status}`)
       const data = await response.json()
       token.value = data.authToken
       me()

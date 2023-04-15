@@ -19,8 +19,7 @@ interface MarkerData {
 
 let leaflet: Promise<Leaflet> | undefined
 
-if (typeof window !== 'undefined')
-  leaflet = import('leaflet').then(module => module)
+if (typeof window !== 'undefined') leaflet = import('leaflet').then(module => module)
 
 export const use_map_store = defineStore('use_map_store', () => {
   const map_leaf: any = ref({})
@@ -34,13 +33,11 @@ export const use_map_store = defineStore('use_map_store', () => {
   const user_coords: any = ref()
 
   const getPinsOnMap = computed(() => {
-    if (bounds.value)
-      return markers.value.filter(marker => bounds.value.contains(marker.coordinates))
+    if (bounds.value) return markers.value.filter(marker => bounds.value.contains(marker.coordinates))
   })
 
   async function addMap(id: string, viewLngLat: simple_coords, zoom: number) {
-    if (!leaflet)
-      return
+    if (!leaflet) return
     const { map } = await leaflet
     map_leaf.value = map(id)
       .on('load', () => {
@@ -49,16 +46,14 @@ export const use_map_store = defineStore('use_map_store', () => {
       .on('move', () => {
         if (markerIsLoaded.value === true) {
           bounds.value = map_leaf.value.getBounds()
-          if (markers.value.length)
-            markersOnMap.value = markers.value.filter(marker => map_leaf.value.getBounds().contains(marker.coordinates))
+          if (markers.value.length) markersOnMap.value = markers.value.filter(marker => map_leaf.value.getBounds().contains(marker.coordinates))
         }
       })
       .setView(viewLngLat, zoom)
   }
 
   async function addTileLayer(mapUrl: string, maxZoom: number, attribution: string) {
-    if (!leaflet)
-      return
+    if (!leaflet) return
     const { tileLayer } = await leaflet
     tileLayer(mapUrl, {
       maxZoom,
@@ -71,8 +66,7 @@ export const use_map_store = defineStore('use_map_store', () => {
   }
 
   async function addMarker(lngLat: simple_coords, popupDescription: string) {
-    if (!leaflet)
-      return
+    if (!leaflet) return
     const { Icon, marker } = await leaflet
     const customIcon = new Icon({
       iconUrl: marker_icon,
@@ -101,11 +95,9 @@ export const use_map_store = defineStore('use_map_store', () => {
   async function locate_user() {
     const { coords, resume } = useGeolocation()
     resume()
-    if (!coords.value || !coords.value.latitude || !coords.value.longitude)
-      return
+    if (!coords.value || !coords.value.latitude || !coords.value.longitude) return
 
-    if (!leaflet)
-      return
+    if (!leaflet) return
     const { Icon, marker } = await leaflet
 
     const customIcon = new Icon({
@@ -144,8 +136,7 @@ export const use_map_store = defineStore('use_map_store', () => {
       try {
         const response = await fetch(url)
 
-        if (!response.ok)
-          throw new Error(`HTTP error! Status: ${response.status}`)
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`)
 
         const data = await response.json()
       } catch (error) {
