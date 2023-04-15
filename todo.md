@@ -1,21 +1,16 @@
-[] design responsive layout
-    [] mobile footer
-    [] responsive header        
-[] import leaflet from prev
 [] import fonts
+[] location 
+    [] https://github.com/domoritz/leaflet-locatecontrol
+[] barre de recherche
+    [] mapbox vs google
 [] seo
 [] aria
-[] linkedin sso
+[] search bar
+[] IndexedDb
+[] Segment + June
 
 ## Questions Pierre
-- responsiveness : faut-il faire différents composants pour ordi / mobile
-                   est-ce que faire un v-if sur un composant et viable en terme de perf ? 
-                   est-ce tree shaked par la pwa ?
-                   est-ce que faire des routes spéciales portables est mieux que faire une version responsive de la meme page.
-                   conseils généraux responsiveness
-                   extensions, plugins, tips
 
-
-vif mobile plugin / lib
+vif > DETECT mobile plugin / lib
 excalidraw
 keep alive vue

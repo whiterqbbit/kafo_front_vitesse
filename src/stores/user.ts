@@ -53,8 +53,7 @@ export const use_user_store = defineStore('user', () => {
       const data = await response.json()
       token.value = data.authToken
       me()
-    }
-    catch (error) {
+    } catch (error) {
       console.error('Error during login:', error)
     }
   }
@@ -88,8 +87,7 @@ export const use_user_store = defineStore('user', () => {
         throw new Error(`HTTP error ${response.status}`)
       const data = await response.json()
       return data
-    }
-    catch (error) {
+    } catch (error) {
       console.error('Error during linkedin init:', error)
     }
   }
@@ -107,8 +105,7 @@ export const use_user_store = defineStore('user', () => {
       const data = await response.json()
       token.value = data.authToken
       me()
-    }
-    catch (error) {
+    } catch (error) {
       console.error('Error during linkedin continue:', error)
     }
   }
@@ -171,8 +168,7 @@ export const use_user_store = defineStore('user', () => {
       pic_xsmall.value = data.pic_xsmall ?? ''
       role.value = data.role ?? ''
       type.value = data.type ?? ''
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error)
     }
   }

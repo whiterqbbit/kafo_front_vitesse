@@ -1,15 +1,15 @@
 import { defineStore } from 'pinia'
-import type { Cafe } from './xano.d'
+import type { Club } from './xano.d'
 
-const xano_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/coffee`
+const xano_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/club`
 
-export const use_coffee_store = defineStore('coffee', () => {
-  const db: Ref<Cafe[] | null> = ref(null)
+export const use_club_store = defineStore('club', () => {
+  const db: Ref<Club[] | null> = ref(null)
   const db_loading = ref(false)
   const db_error = ref<string | null>(null)
   const selected_id = ref<number | null>(null)
 
-  const selected = computed(() => db.value?.find(cafe => cafe.id === selected_id.value) ?? null)
+  const selected = computed(() => db.value?.find(club => club.id === selected_id.value) ?? null)
 
   async function fetch_db() {
     db.value = null

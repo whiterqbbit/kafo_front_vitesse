@@ -1,16 +1,18 @@
 <script lang="ts" setup>
-import { kafomapStore } from '@/stores/map'
+import { use_map_store } from '@/stores/map'
+
 import 'leaflet/dist/leaflet.css'
 
 const token = import.meta.env.VITE_MAPBOX_TOKEN
 const map_provider = import.meta.env.VITE_MAPBOX_PROVIDER
 const map_url = `${map_provider}?access_token=${token}`
 
-const kafoMap = kafomapStore()
+const map_store = use_map_store()
 
 onMounted(() => {
-  kafoMap.addMap('kmap', [48.863726, 2.34292], 12)
-  kafoMap.addTileLayer(map_url, 21, 'metro-KAFO-dodo')
+  map_store.addMap('kmap', [48.863726, 2.34292], 12)
+  map_store.addTileLayer(map_url, 21, 'Kafo')
+  map_store.locate_user()
 })
 </script>
 

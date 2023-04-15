@@ -1,5 +1,9 @@
 import { defineStore } from 'pinia'
-import markerIcon from '@/assets/img/geoloc/marker_6.png'
+import { useGeolocation } from '@vueuse/core'
+import marker_icon from '@/assets/img/geoloc/marker_6.png'
+import user_icon_url from '@/assets/img/geoloc/user.png'
+
+type simple_coords = [number, number]
 
 interface Leaflet {
   map: typeof import('leaflet')['map']
@@ -7,8 +11,9 @@ interface Leaflet {
   Icon: typeof import('leaflet')['Icon']
   marker: typeof import('leaflet')['marker']
 }
+
 interface MarkerData {
-  coordinates: [number, number]
+  coordinates: simple_coords
   popupDescription: string
 }
 
@@ -17,7 +22,7 @@ let leaflet: Promise<Leaflet> | undefined
 if (typeof window !== 'undefined')
   leaflet = import('leaflet').then(module => module)
 
-export const kafomapStore = defineStore('kafomapstore', () => {
+export const use_map_store = defineStore('use_map_store', () => {
   const map_leaf: any = ref({})
   const markers: Ref<MarkerData[]> = ref([])
   const bounds: any = ref({})
@@ -26,13 +31,14 @@ export const kafomapStore = defineStore('kafomapstore', () => {
   const tileLayerIsLoaded = ref(false)
   const markerIsLoaded = ref(false)
   const markerIsClick = ref(false)
+  const user_coords: any = ref()
 
   const getPinsOnMap = computed(() => {
     if (bounds.value)
       return markers.value.filter(marker => bounds.value.contains(marker.coordinates))
   })
 
-  async function addMap(id: string, viewLngLat: [number, number], zoom: number) {
+  async function addMap(id: string, viewLngLat: simple_coords, zoom: number) {
     if (!leaflet)
       return
     const { map } = await leaflet
@@ -64,12 +70,12 @@ export const kafomapStore = defineStore('kafomapstore', () => {
       })
   }
 
-  async function addMarker(lngLat: [number, number], popupDescription: string) {
+  async function addMarker(lngLat: simple_coords, popupDescription: string) {
     if (!leaflet)
       return
     const { Icon, marker } = await leaflet
     const customIcon = new Icon({
-      iconUrl: markerIcon,
+      iconUrl: marker_icon,
       iconSize: [20, 32],
       iconAnchor: [20, 32],
       popupAnchor: [0, -32],
@@ -91,5 +97,65 @@ export const kafomapStore = defineStore('kafomapstore', () => {
     } as unknown as MarkerData)
   }
 
-  return { map_leaf, markers, bounds, markersOnMap, mapIsLoaded, tileLayerIsLoaded, markerIsLoaded, markerIsClick, getPinsOnMap, addMap, addTileLayer, addMarker }
+  // ne fait que centrer la carte sur l'utilisateur en l'état
+  async function locate_user() {
+    const { coords, resume } = useGeolocation()
+    resume()
+    if (!coords.value || !coords.value.latitude || !coords.value.longitude)
+      return
+
+    if (!leaflet)
+      return
+    const { Icon, marker } = await leaflet
+
+    const customIcon = new Icon({
+      iconUrl: user_icon_url,
+      iconSize: [20, 32],
+      iconAnchor: [20, 32],
+      popupAnchor: [0, -32],
+    })
+
+    map_leaf.value.locate({ setView: true, maxZoom: 16 })
+
+    map_leaf.value.on('locationfound', (event: any) => {
+      const { latitude, longitude } = event.latlng
+      const lngLat: simple_coords = [latitude, longitude]
+      marker(lngLat, { icon: customIcon })
+        .addTo(map_leaf.value)
+        .bindPopup('C\'est vous !')
+        .on('click', () => {
+          markerIsClick.value = true
+        })
+      markerIsLoaded.value = true
+    })
+
+    map_leaf.value.on('locationerror', (error: any) => {
+      console.error('Error getting user location:', error)
+    })
+  }
+
+  // ne fonctionne pas en l'état, 403
+  async function search(query: string) {
+    // use Place Autocomplete
+    // Define the URL and API key
+    const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${query}&types=geocode&language=fr&key=${import.meta.env.VITE_GOOGLE_API_KEY}`
+    // Function to fetch data from Google Places API
+    async function fetchGooglePlacesAutocomplete() {
+      try {
+        const response = await fetch(url)
+
+        if (!response.ok)
+          throw new Error(`HTTP error! Status: ${response.status}`)
+
+        const data = await response.json()
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    // Call the function
+    fetchGooglePlacesAutocomplete()
+  }
+
+  return { map_leaf, markers, bounds, markersOnMap, mapIsLoaded, tileLayerIsLoaded, markerIsLoaded, markerIsClick, getPinsOnMap, addMap, addTileLayer, addMarker, locate_user, search, user_coords }
 })
