@@ -47,7 +47,6 @@ useHead({
 </script>
 
 <template>
-  <TheHeader />
   <main bg-fuchsia>
     <RouterView class="h-screen" />
   </main>
