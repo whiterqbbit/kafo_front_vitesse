@@ -13,8 +13,18 @@ export default defineConfig({
     ['btn', 'px-4 py-1 rounded inline-block bg-teal-700 text-white cursor-pointer hover:bg-teal-800 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
     ['font-title', 'text-3xl font-black text-center text-cyan-800'],
     ['trans-grass-700', 'opacity-90 transition duration-200 ease-in-out hover:opacity-100 hover:text-grass-900'],
-    ['tag', 'px-2 py-1 rounded-full inline-block bg-cafe-500 text-cafe-100 text-xs font-bold tracking-wider'],
+    ['tag', 'px-2 rounded-full inline-block bg-cafe-500 text-cafe-100 text-xs font-bold tracking-wider'],
     ['btn-press', 'hover:translate-x-2px hover:translate-y-2px hover:transition hover:shadow-none shadow-[3px_3px_0px_-0px_rgba(80,59,52,1)] '],
+  ],
+  rules: [
+    ['text-xs', { 'font-size': '0.75rem' }],
+    ['text-sm', { 'font-size': '0.875rem' }],
+    ['text-base', { 'font-size': '1rem' }],
+    ['text-lg', { 'font-size': '1.125rem' }],
+    ['text-xl', { 'font-size': '1.25rem' }],
+    ['text-2xl', { 'font-size': '1.5rem' }],
+    ['text-3xl', { 'font-size': '1.875rem' }],
+    ['text-4xl', { 'font-size': '2.25rem' }],
   ],
   theme: {
     height: {
