@@ -13,11 +13,10 @@ onBeforeMount(() => {
 
   const isMobileWidth: MediaQueryList = window.matchMedia('(max-width: 768px)')
 
-  isMobileWidth.addEventListener('change', handleWidthChange)
-  handleWidthChange(new MediaQueryListEvent('change', { matches: isMobileWidth.matches }))
+  isMobileWidth.addEventListener('change', event => handleWidthChange(event.target as MediaQueryList))
+  handleWidthChange(isMobileWidth) // Call the function initially to set the correct state
 
-  function handleWidthChange(event: MediaQueryListEvent) {
-    const mediaQueryList = event.target as MediaQueryList
+  function handleWidthChange(mediaQueryList: MediaQueryList) {
     if (mediaQueryList.matches) {
       preferences.is_mobile = true
     } else {
