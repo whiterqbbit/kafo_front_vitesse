@@ -7,8 +7,23 @@ use_club_store().fetch_db()
 
 onBeforeMount(() => {
   const urlParams = new URLSearchParams(window.location.search)
-  if (urlParams.get('code') !== null)
+  if (urlParams.get('code') !== null) {
     user.linkedin_continue(urlParams.get('code'))
+  }
+
+  const isMobileWidth: MediaQueryList = window.matchMedia('(max-width: 768px)')
+
+  isMobileWidth.addEventListener('change', handleWidthChange)
+  handleWidthChange(new MediaQueryListEvent('change', { matches: isMobileWidth.matches }))
+
+  function handleWidthChange(event: MediaQueryListEvent) {
+    const mediaQueryList = event.target as MediaQueryList
+    if (mediaQueryList.matches) {
+      preferences.is_mobile = true
+    } else {
+      preferences.is_mobile = false
+    }
+  }
 })
 // https://github.com/vueuse/head
 // you can use this to manipulate the document head in any components,
