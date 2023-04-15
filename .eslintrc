@@ -12,7 +12,8 @@
       "error",
       "1tbs",
       { "allowSingleLine": true }
-    ]
+    ],
+    "curly": ["error", "all"]
   },
   "extends": ["@antfu", "@unocss/eslint-config"]
 }
