@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     Button: typeof import('primevue/button')['default']
     CoffeeModal: typeof import('./components/CoffeeModal.vue')['default']
     DebugModal: typeof import('./components/DebugModal.vue')['default']
+    DesktopHeader: typeof import('./components/DesktopHeader.vue')['default']
     DesktopList: typeof import('./components/DesktopList.vue')['default']
     FilterModal: typeof import('./components/FilterModal.vue')['default']
     Galleria: typeof import('primevue/galleria')['default']
@@ -19,6 +20,7 @@ declare module '@vue/runtime-core' {
     InputText: typeof import('primevue/inputtext')['default']
     LoginModal: typeof import('./components/LoginModal.vue')['default']
     MapMarker: typeof import('./components/MapMarker.vue')['default']
+    MobileHeader: typeof import('./components/MobileHeader.vue')['default']
     MobileList: typeof import('./components/MobileList.vue')['default']
     MultiSelect: typeof import('primevue/multiselect')['default']
     RadioButton: typeof import('primevue/radiobutton')['default']
@@ -26,7 +28,6 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SearchBar: typeof import('./components/SearchBar.vue')['default']
     TheFooter: typeof import('./components/TheFooter.vue')['default']
-    TheHeader: typeof import('./components/TheHeader.vue')['default']
     TheMap: typeof import('./components/TheMap.vue')['default']
   }
 }
