@@ -17,7 +17,7 @@
         />
       </div>
     </div>
-    <div w-full flex overflow-auto bg-blue-200 font-title md="max-w-600px">
+    <div w-full flex overflow-auto bg-blue-200 font-title md="w-full min-w-600px max-w-800px">
       <MobileList
         absolute bottom-0 z-20 h-80 w-full overflow-auto font-title md:hidden
         class="left-1/2 -translate-x-1/2"
@@ -25,9 +25,6 @@
       <div hidden w-full overflow-auto bg-cafe-100 md="block">
         <div v-show="!display.selected_modal">
           <DesktopList />
-        </div>
-        <div v-show="display.selected_modal">
-          <CoffeeModal />
         </div>
       </div>
     </div>
