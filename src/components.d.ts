@@ -19,6 +19,7 @@ declare module '@vue/runtime-core' {
     InputText: typeof import('primevue/inputtext')['default']
     LoginModal: typeof import('./components/LoginModal.vue')['default']
     MapMarker: typeof import('./components/MapMarker.vue')['default']
+    MobileHeader: typeof import('./components/MobileHeader.vue')['default']
     MobileList: typeof import('./components/MobileList.vue')['default']
     MultiSelect: typeof import('primevue/multiselect')['default']
     RadioButton: typeof import('primevue/radiobutton')['default']
