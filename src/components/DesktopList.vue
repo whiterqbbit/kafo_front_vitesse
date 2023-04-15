@@ -10,7 +10,7 @@
       <div v-for="coffee in coffee_db.slice(0, 20)" :key="coffee.id" class="overflow-hidden">
         <div class="relative mx-2 my-1 h-126 flex flex-col cursor-pointer rounded-xl bg-cafe-100 btn-press" @click="select_coffee(coffee.id)">
           <div>
-            <div v-if="coffee.is_open" class="absolute right-4 top-3 z-10 inline-block rounded-full bg-grass-500 px-2 py-1 text-lg font-bold tracking-wider text-white">
+            <div v-if="coffee.is_open" class="absolute right-4 top-3 z-10 inline-block rounded-full bg-grass-500 px-2 py-1 font-bold tracking-wider text-white text-lg">
               Ouvert
             </div>
             <Galleria
@@ -22,44 +22,50 @@
               :show-thumbnails="false"
             >
               <template #item="slotProps">
-                <img
-                  :src="slotProps.item.url"
-                  class="block h-300px w-full rounded-xl object-cover"
-                  :alt="coffee.nom"
-                >
+                <RouterLink :to="`coffee/${coffee.id}`">
+                  <img
+                    :src="slotProps.item.url"
+                    class="block h-300px w-full rounded-xl object-cover"
+                    :alt="coffee.nom"
+                    style="width: 100%; max-height: 12rem; display: block; object-fit: cover;"
+                    @click="select_coffee(coffee.id)"
+                  >
+                </RouterLink>
               </template>
             </Galleria>
           </div>
-          <div flex flex-col gap-2 p-2 text-left>
-            <div flex justify-between text-2xl>
-              <div class="font-extrabold">
-                {{ coffee.nom }}
+          <RouterLink :to="`coffee/${coffee.id}`">
+            <div flex flex-col gap-2 p-2 text-left @click="select_coffee(coffee.id)">
+              <div flex justify-between text-2xl>
+                <div class="font-extrabold">
+                  {{ coffee.nom }}
+                </div>
+                <div>
+                  {{ establishment_type(coffee.tags) }}
+                </div>
               </div>
-              <div>
-                {{ establishment_type(coffee.tags) }}
+              <div class="flex gap-2 text-lg">
+                <img :src="subway_icon" class="h-6">
+                {{ coffee.metro }}
               </div>
-            </div>
-            <div class="flex gap-2 text-lg">
-              <img :src="subway_icon" class="h-6">
-              {{ coffee.metro }}
-            </div>
-            <div id="tag_icons" flex gap-2>
-              <div v-if="coffee.tags.includes('Studieux')" i-ci-volume-off class="icon-btn" />
-              <div v-else-if="coffee.tags.includes('Calme')" i-ci-volume-min class="icon-btn" />
-              <div v-else-if="coffee.tags.includes('Animé')" i-ci-volume-max class="icon-btn" />
-              <div v-if="coffee.tags.includes('Wifi')" i-ci-wifi-high class="icon-btn" />
-              <div v-else i-ci-wifi-off class="icon-btn" />
-              <div v-if="coffee.tags.includes('Prises')" i-ic-round-power-off class="icon-btn" />
-              <div v-else i-ic-round-power class="icon-btn" />
-            </div>
-          </div>
-          <div v-if="coffee.attendance" id="attendance">
-            <div class="flex px-2">
-              <div v-for="attendee in coffee.attendees" :key="attendee.id" class="attendee-img h-12 w-12 rounded-full bg-cafe-100">
-                <img :src="attendee.url" class="h-full w-full rounded-full object-cover">
+              <div id="tag_icons" flex gap-2>
+                <div v-if="coffee.tags.includes('Studieux')" i-ci-volume-off class="icon-btn" />
+                <div v-else-if="coffee.tags.includes('Calme')" i-ci-volume-min class="icon-btn" />
+                <div v-else-if="coffee.tags.includes('Animé')" i-ci-volume-max class="icon-btn" />
+                <div v-if="coffee.tags.includes('Wifi')" i-ci-wifi-high class="icon-btn" />
+                <div v-else i-ci-wifi-off class="icon-btn" />
+                <div v-if="coffee.tags.includes('Prises')" i-ic-round-power-off class="icon-btn" />
+                <div v-else i-ic-round-power class="icon-btn" />
               </div>
             </div>
-          </div>
+            <div v-if="coffee.attendance" id="attendance">
+              <div class="flex px-2">
+                <div v-for="attendee in coffee.attendees" :key="attendee.id" class="attendee-img h-12 w-12 rounded-full bg-cafe-100">
+                  <img :src="attendee.url" class="h-full w-full rounded-full object-cover">
+                </div>
+              </div>
+            </div>
+          </RouterLink>
         </div>
       </div>
     </div>
@@ -74,7 +80,6 @@ const coffee_store = use_coffee_store()
 const coffee_db = computed(() => coffee_store.db)
 function select_coffee(id: number) {
   coffee_store.selected_id = id
-  display.selected_modal = true
 }
 
 const establishment_type = computed(() => {
