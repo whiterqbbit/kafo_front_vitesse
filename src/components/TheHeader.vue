@@ -1,19 +1,25 @@
 <template>
   <header h-35px w-full flex flex-row place-items-center justify-between bg-cafe-500 md:h-50px>
-    <!-- <RouterLink icon-btn to="/" title="home">
+    <RouterLink class="icon-btn" to="/">
       <img :src="logo" alt="logo" class="h-9 pl-4 md:h-12">
-    </RouterLink> -->
-    <button @click="display.debug_modal = !display.debug_modal">
-      <img :src="logo" alt="logo" class="h-9 pl-4 md:h-12">
-    </button>
+    </RouterLink>
     <nav flex gap-5 font-black text-white>
-      <RouterLink to="/FAQ" title="FAQ">
+      <InputSwitch v-model="preferences.debug_mode">
+        Offline
+      </InputSwitch>
+      <button @click="display.debug_modal = !display.debug_modal">
+        Debug
+      </button>
+      <button @click="display.cookie_modal = !display.cookie_modal">
+        Cookies
+      </button>
+      <RouterLink to="/FAQ">
         FAQ
       </RouterLink>
-      <RouterLink to="/contact" title="contact">
+      <RouterLink to="/contact">
         Contact
       </RouterLink>
-      <RouterLink to="/a-propos" title="a-propos">
+      <RouterLink to="/a-propos">
         A Propos
       </RouterLink>
     </nav>

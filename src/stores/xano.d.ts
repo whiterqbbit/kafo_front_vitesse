@@ -109,6 +109,11 @@ export interface Cafe {
 	distance?: string
 	color?: string
 	is_open: boolean
+	attendance?: number
+	attendees?: {
+		id: number
+		url: string
+	}[]
 }
 
 export interface Club {
@@ -121,6 +126,7 @@ export interface Club {
 	display_pic_in_clubs?: boolean
 	display_name_in_clubs?: boolean
 	premium: boolean
+	type: 'roles' | 'domain' | 'user' | 'tech'
 }
 
 export interface User {

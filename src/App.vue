@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { useCookies } from '@vueuse/integrations/useCookies'
 import { use_user_store } from '@/stores/user'
-const user = use_user_store()
 
+const user = use_user_store()
 use_coffee_store().fetch_db()
-const cookies = useCookies(['user'])
-const display_cookies = ref(false)
+use_club_store().fetch_db()
 
 onBeforeMount(() => {
   const urlParams = new URLSearchParams(window.location.search)
@@ -37,12 +35,6 @@ useHead({
 <template>
   <TheHeader />
   <main bg-fuchsia>
-    <div>
-      <button @click="display_cookies = !display_cookies">
-        {{ display_cookies ? 'hide' : 'display' }} cookies
-      </button>
-      <pre v-if="display_cookies">{{ cookies.getAll() }}</pre>
-    </div>
-    <RouterView h-screen />
+    <RouterView class="h-screen" />
   </main>
 </template>

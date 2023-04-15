@@ -6,7 +6,7 @@
     >
     <span class="p-input-icon-left w-full">
       <i class="pi pi-search" />
-      <InputText v-model="query" placeholder="Rechercher un lieu ou une adresse" w-full />
+      <InputText v-model="query" placeholder="Rechercher un lieu ou une adresse" class="w-full" />
     </span>
   </div>
 </template>
