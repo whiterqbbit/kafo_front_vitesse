@@ -18,8 +18,7 @@ export const use_coffee_store = defineStore('coffee', () => {
 
     try {
       const response = await fetch(xano_url)
-      if (!response.ok)
-        throw new Error(`Error ${response.status}: ${response.statusText}`)
+      if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}`)
 
       const data = await response.json()
       db.value = data

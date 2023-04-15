@@ -13,7 +13,8 @@
       "1tbs",
       { "allowSingleLine": true }
     ],
-    "curly": ["error", "all"]
+    "curly": ["error", "multi-line"],
+    "antfu/if-newline": "off"
   },
   "extends": ["@antfu", "@unocss/eslint-config"]
 }

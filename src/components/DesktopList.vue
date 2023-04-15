@@ -98,8 +98,7 @@ const establishment_type = computed(() => {
 
   return (tags: any) => {
     for (const single_tag of tagsList) {
-      if (tags.includes(single_tag))
-        return single_tag
+      if (tags.includes(single_tag)) return single_tag
     }
     return ''
   }
