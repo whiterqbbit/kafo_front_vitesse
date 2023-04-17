@@ -6,29 +6,22 @@
       </div>
 
       <div id="title_group" class="px-5 md:order-first">
-        <div id="title" class="font-black text-3xl">
+        <div id="title" class="font-black text-4xl">
           {{ selected_coffee?.nom }}
         </div>
 
-        <div
-          id="subtitle"
-          class="flex flex-col font-bold md:flex-row md:justify-between"
-        >
+        <div id="subtitle" class="flex flex-col font-bold md:flex-row md:justify-between">
           <div v-if="selected_coffee?.attendance !== 0" id="attendance">
             {{ selected_coffee?.attendance }} personnes y sont en ce moment
           </div>
           <div id="eta" class="">
-            les minutes
+            es minutes
           </div>
         </div>
       </div>
     </div>
 
-    <div
-      v-if="!preferences.is_mobile"
-      id="tags"
-      class="wrap flex flex-row flex-wrap gap-2"
-    >
+    <div v-if="!preferences.is_mobile" id="tags" class="wrap flex flex-row flex-wrap gap-2">
       <div id="tag1" class="services">
         tag1
       </div>
@@ -46,8 +39,7 @@
       </div>
       <!-- foutre un vfor -->
     </div>
-
-    <div id="main" class="flex flex-col gap-6 px-5 md:flex-row">
+    <div id="main" class="md:justify_around flex flex-col gap-6 px-5 md:flex-row">
       <div id="lefty" class="max-w-2xl flex flex-col gap-6">
         <div id="description" class="flex flex-col gap-6">
           <div class="flex flex-col gap-2">
@@ -105,7 +97,10 @@
                 Métro : {{ selected_coffee?.metro }}
               </div>
             </div>
-            <div id="google_map_link" class="h-20 flex flex-row place-items-center rounded-3xl bg-grass-500 p-3 font-bold text-cafe-100">
+            <div
+              id="google_map_link"
+              class="h-20 flex flex-row place-items-center rounded-3xl bg-grass-500 p-3 font-bold text-cafe-100"
+            >
               <div>
                 Y aller !
               </div>
@@ -114,14 +109,13 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div id="righty" class="">
-      <div id="events" class="">
-        events
-      </div>
-      <div id="chat" class="">
-        chat
+      <div id="righty" class="">
+        <div id="events" class="">
+          events
+        </div>
+        <div id="chat" class="">
+          chat
+        </div>
       </div>
     </div>
   </div>
@@ -139,6 +133,6 @@ const selected_coffee = computed(() => coffee_store.selected)
 
 <style scoped>
 .services {
-  @apply flex  w-32
+  @apply flex w-32
 }
 </style>

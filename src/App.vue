@@ -48,7 +48,7 @@ useHead({
 
 <template>
   <TheHeader />
-  <main bg-fuchsia>
+  <main class="bg-cafe-100">
     <RouterView class="h-screen" />
   </main>
 </template>
