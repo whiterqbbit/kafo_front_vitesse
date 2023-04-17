@@ -1,5 +1,19 @@
 <template>
-  <div class="flex flex-col gap-6 container">
+  <div class="z-100 flex flex-col gap-6 container">
+    <div v-if="preferences.is_mobile" id="floating_CTA" class="absolute bottom-3 w-[95%] flex flex-row place-self-center justify-between rounded-xl bg-cafe-200 p-2 text-center shadow-lg">
+      <div class="flex flex-col">
+        <div>En ce moment</div>
+        <div v-if="selected_coffee?.attendance !== 0">
+          {{ selected_coffee?.attendance }}
+        </div>
+      </div>
+      <!-- <div v-for="person in next_event.user_id" key="person.id">
+        les gens dans le prochain event
+      </div> -->
+      <div class="font-extra-bold text-cafe-100i rounded-xl bg-grass-500 p-4">
+        Rejoindre
+      </div>
+    </div>
     <div id="carousel_and_titles" class="flex flex-col gap-6">
       <div class="h-100 bg-red-500 text-left text-3xl">
         carousel
@@ -39,7 +53,7 @@
       </div>
       <!-- foutre un vfor -->
     </div>
-    <div id="main" class="md:justify_around flex flex-col gap-6 px-5 md:flex-row">
+    <div id="main" class="flex flex-col gap-6 px-5 md:flex-row md:justify-between">
       <div id="lefty" class="max-w-2xl flex flex-col gap-6">
         <div id="description" class="flex flex-col gap-6">
           <div class="flex flex-col gap-2">
@@ -109,7 +123,7 @@
           </div>
         </div>
       </div>
-      <div id="righty" class="">
+      <div id="righty" class="flex flex-col">
         <div id="events" class="">
           events
         </div>
@@ -125,6 +139,8 @@
 const props = defineProps({
   id: Number,
 })
+
+// get the selected coffee from the store
 const selected_coffee_id = Number(props.id)
 const coffee_store = use_coffee_store()
 coffee_store.selected_id = selected_coffee_id
