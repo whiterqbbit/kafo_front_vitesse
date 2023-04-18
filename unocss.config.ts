@@ -14,6 +14,7 @@ export default defineConfig({
     ['font-title', 'text-3xl font-bold text-center text-cafe-700'],
     ['trans-grass-700', 'opacity-90 transition duration-200 ease-in-out hover:opacity-100 hover:text-grass-900'],
     ['tag', 'px-2 rounded-full inline-block bg-cafe-500 text-cafe-100 text-xs font-bold tracking-wider'],
+    ['container', 'md:bg-cafe-100 md:mx-auto md:px-4 md:py-8 md:max-w-7xl'],
     ['btn-press', 'hover:translate-x-4px hover:transition hover:duration-75 duration-75 shadow-md'],
   ],
   rules: [
