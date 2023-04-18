@@ -15,7 +15,7 @@ export default defineConfig({
     ['trans-grass-700', 'opacity-90 transition duration-200 ease-in-out hover:opacity-100 hover:text-grass-900'],
     ['tag', 'px-2 rounded-full inline-block bg-cafe-500 text-cafe-100 text-xs font-bold tracking-wider'],
     ['btn-press', 'hover:translate-x-2px hover:translate-y-2px hover:transition hover:shadow-none shadow-[3px_3px_0px_-0px_rgba(80,59,52,1)] '],
-    ['container', 'md:bg-cafe-100 md:mx-auto md:px-4 md:py-8 md:max-w-7xl'],
+    ['container', 'md:bg-cafe-100 md:mx-auto md:px-4 md:max-w-7xl'],
   ],
   rules: [
     ['text-xs', { 'font-size': '0.75rem' }],

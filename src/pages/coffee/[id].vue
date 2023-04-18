@@ -1,6 +1,6 @@
 <template>
   <div class="z-100 flex flex-col gap-6 container">
-    <div v-if="preferences.is_mobile" id="floating_CTA" class="absolute bottom-3 w-[95%] flex flex-row place-self-center justify-between rounded-xl bg-cafe-200 p-2 text-center shadow-lg">
+    <div id="floating_CTA" class="fixed bottom-3 hidden w-[95%] flex-row place-self-center justify-between rounded-xl bg-cafe-200 p-2 text-center shadow-lg">
       <div class="flex flex-col">
         <div>En ce moment</div>
         <div v-if="selected_coffee?.attendance !== 0">
@@ -14,44 +14,45 @@
         Rejoindre
       </div>
     </div>
-    <div id="carousel_and_titles" class="flex flex-col gap-6">
-      <div class="h-100 bg-red-500 text-left text-3xl">
-        carousel
+    <div class="text-left text-3xl">
+      <Galleria
+        :value="selected_coffee?.aws_pics"
+        :num-visible="3"
+        :show-thumbnails="false"
+        :show-item-navigators="true"
+        :circular="true"
+      >
+        <template #item="slotProps">
+          <img
+            :src="slotProps.item.url"
+            class="h-500px w-full rounded-b-2xl object-cover"
+
+            :alt="selected_coffee?.nom"
+            style="width: 100%; display: block"
+          >
+        </template>
+      </Galleria>
+    </div>
+
+    <div id="title_group" class="px-5">
+      <div id="title" class="font-black text-4xl">
+        {{ selected_coffee?.nom }}
       </div>
 
-      <div id="title_group" class="px-5 md:order-first">
-        <div id="title" class="font-black text-4xl">
-          {{ selected_coffee?.nom }}
+      <div id="subtitle" class="flex flex-col font-bold md:flex-row md:justify-between">
+        <div v-if="selected_coffee?.attendance !== 0" id="attendance">
+          {{ selected_coffee?.attendance }} personnes y sont en ce moment
         </div>
-
-        <div id="subtitle" class="flex flex-col font-bold md:flex-row md:justify-between">
-          <div v-if="selected_coffee?.attendance !== 0" id="attendance">
-            {{ selected_coffee?.attendance }} personnes y sont en ce moment
-          </div>
-          <div id="eta" class="">
-            es minutes
-          </div>
+        <div id="eta" class="">
+          Les minutes
         </div>
       </div>
     </div>
 
-    <div v-if="!preferences.is_mobile" id="tags" class="wrap flex flex-row flex-wrap gap-2">
-      <div id="tag1" class="services">
-        tag1
+    <div v-if="!preferences.is_mobile" id="tags" class="wrap flex flex-row flex-wrap gap-2 px-5">
+      <div v-for="tag in filtered_tags" :key="tag" class="services">
+        {{ tag }}
       </div>
-      <div id="tag2" class="services">
-        tag2
-      </div>
-      <div id="tag3" class="services">
-        tag3
-      </div>
-      <div id="tag4" class="services">
-        tag4
-      </div>
-      <div id="tag5" class="services">
-        tag5
-      </div>
-      <!-- foutre un vfor -->
     </div>
     <div id="main" class="flex flex-col gap-6 px-5 md:flex-row md:justify-between">
       <div id="lefty" class="max-w-2xl flex flex-col gap-6">
@@ -84,20 +85,8 @@
               Service et spécificités :
             </div>
             <div class="flex flex-row flex-wrap gap-2">
-              <div id="tag1" class="services">
-                tag1
-              </div>
-              <div id="tag2" class="services">
-                tag2
-              </div>
-              <div id="tag3" class="services">
-                tag3
-              </div>
-              <div id="tag4" class="services">
-                tag4
-              </div>
-              <div id="tag5" class="services">
-                tag5
+              <div v-for="tag in filtered_tags" :key="tag" class="services">
+                {{ tag }}
               </div>
             </div>
           </div>
@@ -137,7 +126,7 @@
 
 <script setup lang="ts">
 const props = defineProps({
-  id: Number,
+  id: String,
 })
 
 // get the selected coffee from the store
@@ -145,10 +134,11 @@ const selected_coffee_id = Number(props.id)
 const coffee_store = use_coffee_store()
 coffee_store.selected_id = selected_coffee_id
 const selected_coffee = computed(() => coffee_store.selected)
+const filtered_tags = selected_coffee?.value?.tags?.filter(tag => !['Calme', 'Studieux', 'Animé', 'Bar', 'Brasserie', 'Restaurant', 'Coworking', 'Tiers lieu', 'Autre lieu'].includes(tag))
 </script>
 
 <style scoped>
 .services {
-  @apply flex w-32
+  @apply flex place-content-center bg-cafe-300 rounded-xl p-x-3
 }
 </style>
