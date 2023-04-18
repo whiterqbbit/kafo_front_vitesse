@@ -14,8 +14,9 @@
         Rejoindre
       </div>
     </div>
-    <div class="text-left text-3xl">
-      <Galleria
+    <div class="overflow-hidden text-left text-3xl">
+      <!-- <Galleria
+        v-if="preferences.is_mobile"
         :value="selected_coffee?.aws_pics"
         :num-visible="3"
         :show-thumbnails="false"
@@ -25,13 +26,18 @@
         <template #item="slotProps">
           <img
             :src="slotProps.item.url"
-            class="h-500px w-full rounded-b-2xl object-cover"
+            class="h-300px w-full rounded-b-2xl object-cover"
 
             :alt="selected_coffee?.nom"
             style="width: 100%; display: block"
           >
         </template>
-      </Galleria>
+      </Galleria> -->
+      <Flicking :options="{ renderOnlyVisible: false, horizontal: true, circular: true, autoResize: false }">
+        <div v-for="pic in selected_coffee?.aws_pics" :key="pic.url" class="object-cover">
+          <img :src="pic.url" class="h-100 object-cover">
+        </div>
+      </Flicking>
     </div>
 
     <div id="title_group" class="px-5">
@@ -125,6 +131,8 @@
 </template>
 
 <script setup lang="ts">
+import Flicking from '@egjs/vue3-flicking'
+
 const props = defineProps({
   id: String,
 })
