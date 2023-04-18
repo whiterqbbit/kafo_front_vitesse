@@ -27,9 +27,9 @@
       class="absolute bottom-0 left-1/2 z-20 h-80 w-full font-title -translate-x-1/2"
     />
     <div v-else class="h-full">
-      <div class="flex flex-row overflow-hidden bg-blue-200 font-title">
-        <FilterModal v-show="display.filter_modal" class="w-120" />
-        <DesktopList class="h-screen--50px w-4/6 overflow-auto" />
+      <div class="flex flex-row overflow-hidden bg-[#faf7f7] font-title">
+        <FilterModal v-show="display.filter_modal" class="w-150" />
+        <DesktopList class="h-screen--50px w-120 overflow-auto" />
       </div>
     </div>
     <TheFooter

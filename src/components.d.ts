@@ -10,6 +10,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Button: typeof import('primevue/button')['default']
+    Checkbox: typeof import('primevue/checkbox')['default']
     CoffeeModal: typeof import('./components/CoffeeModal.vue')['default']
     DebugModal: typeof import('./components/DebugModal.vue')['default']
     DesktopHeader: typeof import('./components/DesktopHeader.vue')['default']
