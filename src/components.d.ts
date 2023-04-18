@@ -10,8 +10,10 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Button: typeof import('primevue/button')['default']
+    Checkbox: typeof import('primevue/checkbox')['default']
     CoffeeModal: typeof import('./components/CoffeeModal.vue')['default']
     DebugModal: typeof import('./components/DebugModal.vue')['default']
+    DesktopHeader: typeof import('./components/DesktopHeader.vue')['default']
     DesktopList: typeof import('./components/DesktopList.vue')['default']
     FilterModal: typeof import('./components/FilterModal.vue')['default']
     Galleria: typeof import('primevue/galleria')['default']
@@ -27,7 +29,6 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SearchBar: typeof import('./components/SearchBar.vue')['default']
     TheFooter: typeof import('./components/TheFooter.vue')['default']
-    TheHeader: typeof import('./components/TheHeader.vue')['default']
     TheMap: typeof import('./components/TheMap.vue')['default']
   }
 }

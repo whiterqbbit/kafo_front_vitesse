@@ -11,11 +11,11 @@ import {
 export default defineConfig({
   shortcuts: [
     ['btn', 'px-4 py-1 rounded inline-block bg-teal-700 text-white cursor-pointer hover:bg-teal-800 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
-    ['font-title', 'text-3xl font-black text-center text-cyan-800'],
+    ['font-title', 'text-3xl font-bold text-center text-cafe-700'],
     ['trans-grass-700', 'opacity-90 transition duration-200 ease-in-out hover:opacity-100 hover:text-grass-900'],
     ['tag', 'px-2 rounded-full inline-block bg-cafe-500 text-cafe-100 text-xs font-bold tracking-wider'],
-    ['btn-press', 'hover:translate-x-2px hover:translate-y-2px hover:transition hover:shadow-none shadow-[3px_3px_0px_-0px_rgba(80,59,52,1)] '],
-    ['container', 'md:bg-cafe-100 md:mx-auto md:px-4 md:max-w-7xl'],
+    ['container', 'md:bg-cafe-100 md:mx-auto md:px-4 md:py-8 md:max-w-7xl'],
+    ['btn-press', 'hover:translate-x-4px hover:transition hover:duration-75 duration-75 shadow-md'],
   ],
   rules: [
     ['text-xs', { 'font-size': '0.75rem' }],
@@ -43,6 +43,7 @@ export default defineConfig({
         300: '#f5dac8',
         200: '#fdeee2',
         100: '#fff7f2',
+        50: '#fff9f9',
       },
       grass: {
         900: '#2e4744',
@@ -77,7 +78,7 @@ export default defineConfig({
     }),
     presetWebFonts({
       fonts: {
-        sans: 'DM Sans',
+        sans: 'Poppins',
         serif: 'DM Serif Display',
         mono: 'DM Mono',
       },

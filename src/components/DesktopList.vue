@@ -8,7 +8,7 @@
     </div>
     <div v-else-if="coffee_db">
       <div v-for="coffee in coffee_db.slice(0, 20)" :key="coffee.id" class="overflow-hidden">
-        <div class="relative mx-2 my-1 h-126 flex flex-col cursor-pointer rounded-xl bg-cafe-100 btn-press" @click="select_coffee(coffee.id)">
+        <div class="relative mx-3 my-2 h-96 flex flex-col cursor-pointer rounded-xl bg-white btn-press" @click="select_coffee(coffee.id)">
           <div>
             <div v-if="coffee.is_open" class="absolute right-4 top-3 z-10 inline-block rounded-full bg-grass-500 px-2 py-1 font-bold tracking-wider text-white text-lg">
               Ouvert

@@ -1,5 +1,7 @@
 <template>
   <pre v-if="display.cookie_modal" h-fit w-full>{{ cookies.getAll() }}</pre>
+  <DesktopHeader v-if="!preferences.is_mobile" />
+  <MobileHeader v-else />
   <div id="main_container" class="relative h-screen--35px flex flex-col bg-green-300 md:h-screen--50px md:flex-row-reverse">
     <div v-if="display.login_modal" class="fixed left-0 top-0 z-50 h-full w-full bg-cafe-400 bg-opacity-50">
       <LoginModal class="absolute left-1/4 top-1/6 h-1/4 w-1/2" />
@@ -21,17 +23,19 @@
       </div>
     </div>
     <MobileList
-      class="absolute bottom-0 left-1/2 z-20 h-80 w-full font-title md:hidden -translate-x-1/2"
+      v-if="preferences.is_mobile"
+      class="absolute bottom-0 left-1/2 z-20 h-80 w-full font-title -translate-x-1/2"
     />
-    <div class="hidden h-full md:block">
-      <div class="flex flex-row overflow-hidden bg-blue-200 font-title">
-        <FilterModal v-show="display.filter_modal" class="w-120" />
-        <DesktopList class="h-screen--50px w-4/6 overflow-auto" />
+    <div v-else class="h-full">
+      <div class="flex flex-row overflow-hidden bg-[#faf7f7] font-title">
+        <FilterModal v-show="display.filter_modal" class="w-150" />
+        <DesktopList class="h-screen--50px w-120 overflow-auto" />
       </div>
     </div>
-    <div fixed bottom-0 z-50 h-56px w-full md="hidden">
-      <TheFooter class="h-full rounded-t-xl" />
-    </div>
+    <TheFooter
+      v-if="preferences.is_mobile"
+      class="fixed bottom-0 z-50 h-56px w-full rounded-t-xl"
+    />
   </div>
 </template>
 
