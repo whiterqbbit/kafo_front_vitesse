@@ -5,8 +5,7 @@
         <a class="font-bold text-4xl">Filtres</a>
       </div>
       <div class="flex gap-4">
-        <!-- <Button label="Réinitialiser" text p-button-sm class="w-fit" @click="filters.reset()" /> -->
-        <input id="init" value="Réinitialiser" type="button" class="h-fit w-fit place-self-center border border-opacity-0 rounded-3xl px-4 py-1 font-normal text-gray-400 transition text-base hover:(border border-cafe-700 rounded-2xl text-cafe-700)">
+        <input id="init" value="Réinitialiser" type="button" class="btn-light" @click="filters.reset()">
         <div class="h-fit flex place-items-center place-self-center rounded-full bg-white p-1 shadow-md" @click="display.filter_modal = false">
           <button i-ci-chevron-left-duo />
         </div>
@@ -18,7 +17,7 @@
           Tarification
           <div class="filter-container-inner">
             <div class="w-1/3 flex gap-2">
-              <Checkbox v-model="filters.pricing_free" class="mt-3px" :binary="true" />
+              <Checkbox v-model="filters.pricing_free" class="mt-2px" :binary="true" />
               <div class="flex flex-col">
                 <label for="filter-coworking">Gratuit</label>
                 <div class="description">
@@ -27,7 +26,7 @@
               </div>
             </div>
             <div class="w-1/3 flex gap-2">
-              <Checkbox v-model="filters.pricing_coffee" class="mt-3px" :binary="true" />
+              <Checkbox v-model="filters.pricing_coffee" class="mt-2px" :binary="true" />
               <div class="flex flex-col">
                 <label for="filter-coworking">A la conso</label>
                 <div class="description">
@@ -36,7 +35,7 @@
               </div>
             </div>
             <div class="w-1/3 flex gap-2">
-              <Checkbox v-model="filters.pricing_hourly" class="mt-3px" :binary="true" />
+              <Checkbox v-model="filters.pricing_hourly" class="mt-2px" :binary="true" />
               <div class="flex flex-col">
                 <label for="filter-coworking">A l'heure</label>
                 <div class="description">
@@ -85,11 +84,10 @@
         <div class="filter-container flex">
           Fréquentation
           <div class="filter-container-inner flex-col">
-            <div class="bullet">
+            <!-- <div class="bullet">
               <Checkbox v-model="filters.not_empty" class="mt-1px" :binary="true" />
-              <!-- <input id="filter_not_empty" v-model="filters.not_empty" type="checkbox"> -->
               <label for="filter_not_empty">N'est pas vide</label>
-            </div>
+            </div> -->
             <MultiSelect
               v-model="filters.clubs_domain" :options="club_db_domain" filter display="chip" option-label="nom" placeholder="Filtrer par domaine"
               class="w-full md:w-20rem"
@@ -129,9 +127,9 @@
         </div>
       </section>
       <section>
-        <div id="misc_filters" class="filter-container justify between flex flex-col">
+        <div id="misc_filters" class="filter-container flex flex-col">
           Autres
-          <div class="filter-container-inner">
+          <div class="filter-container-inner justify-around">
             <div class="flex flex-col gap-1">
               <div class="bullet">
                 <Checkbox v-model="filters.our_picks" class="mt-3px" :binary="true" />
