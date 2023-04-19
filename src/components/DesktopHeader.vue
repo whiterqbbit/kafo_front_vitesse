@@ -4,7 +4,7 @@
       <img :src="logo" alt="logo" class="h-9 pl-4 md:h-12">
     </RouterLink>
     <nav flex gap-5 font-black text-white>
-      <InputSwitch v-model="preferences.debug_mode">
+      <!-- <InputSwitch v-model="preferences.debug_mode">
         Offline
       </InputSwitch>
       <button @click="display.debug_modal = !display.debug_modal">
@@ -12,7 +12,7 @@
       </button>
       <button @click="display.cookie_modal = !display.cookie_modal">
         Cookies
-      </button>
+      </button> -->
       <RouterLink to="/FAQ">
         FAQ
       </RouterLink>
@@ -23,14 +23,16 @@
         A Propos
       </RouterLink>
     </nav>
-    <div v-if="!user.is_auth" btn @click="display.login_modal = !display.login_modal">
-      Login
-    </div>
-    <div v-else flex>
-      <img :src="user.pic_xsmall" alt="avatar" class="h-12 w-12 border border-cafe-100 rounded-full">
-      <button btn @click="user.logout">
-        Logout
-      </button>
+    <div class="mb-2 h-13 flex gap-2 p-2">
+      <div v-if="!user.is_auth" btn @click="display.login_modal = !display.login_modal">
+        Login
+      </div>
+      <div v-else flex>
+        <img :src="user.pic_xsmall" alt="avatar" class="h-10 w-10 border border-cafe-100 rounded-full">
+        <!-- <button btn @click="user.logout">
+          Logout
+        </button> -->
+      </div>
     </div>
   </header>
 </template>
