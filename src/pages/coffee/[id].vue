@@ -15,42 +15,33 @@
       </div>
     </div>
     <div class="overflow-hidden text-left text-3xl">
-      <!-- <Galleria
-        v-if="preferences.is_mobile"
-        :value="selected_coffee?.aws_pics"
-        :num-visible="3"
-        :show-thumbnails="false"
-        :show-item-navigators="true"
-        :circular="true"
-      >
-        <template #item="slotProps">
-          <img
-            :src="slotProps.item.url"
-            class="h-300px w-full rounded-b-2xl object-cover"
-
-            :alt="selected_coffee?.nom"
-            style="width: 100%; display: block"
-          >
-        </template>
-      </Galleria> -->
-      <Flicking :options="{ renderOnlyVisible: false, horizontal: true, circular: true, autoResize: false }">
-        <div v-for="pic in selected_coffee?.aws_pics" :key="pic.url" class="object-cover">
-          <img :src="pic.url" class="h-100 object-cover">
+      <Flicking v-if="preferences.is_mobile" class="flicking-container" :options="flickingOptions">
+        <div
+          v-for="pic in (selected_coffee ? selected_coffee.aws_pics : [])"
+          :key="pic.url"
+          class="flicking-panel"
+        >
+          <img :src="pic.url" class="h-100 w-full object-cover">
         </div>
       </Flicking>
     </div>
 
-    <div id="title_group" class="px-5">
-      <div id="title" class="font-black text-4xl">
+    <div id="title_group" class="flex flex-col gap-5">
+      <div id="title" class="px-5 font-black text-4xl">
         {{ selected_coffee?.nom }}
       </div>
 
-      <div id="subtitle" class="flex flex-col font-bold md:flex-row md:justify-between">
+      <div id="subtitle" class="flex flex-col px-5 font-bold md:flex-row md:justify-between">
         <div v-if="selected_coffee?.attendance !== 0" id="attendance">
-          {{ selected_coffee?.attendance }} personnes y sont en ce moment
-        </div>
-        <div id="eta" class="">
-          Les minutes
+          <div class="flex flex-row items-center gap-2">
+            <div class="ml-2 flex">
+              <img v-for="pic in selected_coffee?.attendees" :key="pic.url" :src="pic.url" class="aspect-square h-8 rounded-3xl object-cover -ml-2">
+            </div>
+            {{ selected_coffee?.attendance }} personnes y sont en ce moment
+          </div>
+          <div id="eta">
+            Les minutes
+          </div>
         </div>
       </div>
     </div>
@@ -64,21 +55,21 @@
       <div id="lefty" class="max-w-2xl flex flex-col gap-6">
         <div id="description" class="flex flex-col gap-6">
           <div class="flex flex-col gap-2">
-            <div class="flex flex-row gap-2">
-              <div class="font-bold">
+            <div class="flex flex-col">
+              <div class="font-bold text-lg">
                 Ambiance :
               </div>
               <div> {{ selected_coffee?.tags.find(services => ['Studieux', 'Calme', 'Animé'].includes(services)) }}</div>
             </div>
 
-            <div v-if="selected_coffee?.desc" class="flex flex-col gap-2">
+            <div v-if="selected_coffee?.desc" class="flex flex-col gap-2 text-lg">
               <div class="font-bold">
                 A propos :
               </div>
               <div> {{ selected_coffee?.desc }}</div>
             </div>
 
-            <div v-if="selected_coffee?.acces_wifi" class="flex flex-row gap-2">
+            <div v-if="selected_coffee?.acces_wifi" class="flex flex-row gap-2 text-lg">
               <div class="font-bold">
                 Wifi :
               </div>
@@ -86,7 +77,7 @@
             </div>
           </div>
 
-          <div v-if="preferences.is_mobile" id="tags" class="wrap flex flex-col flex-wrap gap-2">
+          <div v-if="preferences.is_mobile" id="tags" class="wrap flex flex-col flex-wrap gap-2 text-lg">
             <div class="font-bold">
               Service et spécificités :
             </div>
@@ -97,13 +88,14 @@
             </div>
           </div>
 
-          <div v-if="selected_coffee?.adresse" id="location_container" class="flex flex-row place-items-center">
+          <div v-if="selected_coffee?.adresse" id="location_container" class="flex flex-row items-center justify-between text-lg">
             <div class="flex flex-col">
               <div id="address" class="">
                 {{ selected_coffee?.adresse }}
               </div>
-              <div v-if="selected_coffee?.metro" class="">
-                Métro : {{ selected_coffee?.metro }}
+              <div v-if="selected_coffee?.metro" class="flex items-center gap-2">
+                <img :src="subway_icon" class="h-6 w-6">
+                {{ selected_coffee?.metro }}
               </div>
             </div>
             <div
@@ -132,6 +124,7 @@
 
 <script setup lang="ts">
 import Flicking from '@egjs/vue3-flicking'
+import subway_icon from '@/assets/img/icons/metro_tantative.png'
 
 const props = defineProps({
   id: String,
@@ -143,10 +136,31 @@ const coffee_store = use_coffee_store()
 coffee_store.selected_id = selected_coffee_id
 const selected_coffee = computed(() => coffee_store.selected)
 const filtered_tags = selected_coffee?.value?.tags?.filter(tag => !['Calme', 'Studieux', 'Animé', 'Bar', 'Brasserie', 'Restaurant', 'Coworking', 'Tiers lieu', 'Autre lieu'].includes(tag))
+const flickingOptions = {
+  renderOnlyVisible: false,
+  horizontal: true,
+  circular: true,
+  autoResize: false,
+  gap: 0,
+}
 </script>
 
 <style scoped>
 .services {
   @apply flex place-content-center bg-cafe-300 rounded-xl p-x-3
+}
+.flicking-container {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  @apply m-0
+}
+
+.flicking-panel {
+  flex: none;
+  width: 100%;
+  height: 100%;
+  @apply p-0
 }
 </style>
