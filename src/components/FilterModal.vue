@@ -1,11 +1,15 @@
 <template>
   <div id="main_container" class="p-4 text-2xl">
     <div id="top-bar" class="mb-2 flex justify-between">
-      <div class="rounded-2xl px-4">
-        <a class="font-bold text-4xl"> Filtres</a>
+      <div class="flex gap-4 rounded-2xl px-4">
+        <a class="font-bold text-4xl">Filtres</a>
       </div>
-      <div class="h-fit flex place-items-center place-self-center rounded-full bg-white p-1 shadow-md" @click="display.filter_modal = false">
-        <button i-ci-chevron-left-duo />
+      <div class="flex gap-4">
+        <!-- <Button label="Réinitialiser" text p-button-sm class="w-fit" @click="filters.reset()" /> -->
+        <input id="init" value="Réinitialiser" type="button" class="h-fit w-fit place-self-center border border-opacity-0 rounded-3xl px-4 py-1 font-normal text-gray-400 transition text-base hover:(border border-cafe-700 rounded-2xl text-cafe-700)">
+        <div class="h-fit flex place-items-center place-self-center rounded-full bg-white p-1 shadow-md" @click="display.filter_modal = false">
+          <button i-ci-chevron-left-duo />
+        </div>
       </div>
     </div>
     <div id="filter_container" class="flex flex-col gap-4 text-left">
@@ -155,7 +159,6 @@
           </div>
         </div>
       </section>
-      <Button label="Réinitialiser" class="w-44" @click="filters.reset()" />
       <div>
         {{ filters }}
       </div>
