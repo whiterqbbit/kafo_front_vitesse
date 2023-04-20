@@ -1,5 +1,5 @@
 <template>
-  <div class="z-100 flex flex-col gap-6 container">
+  <div class="flex flex-col gap-6 container">
     <div id="floating_CTA" class="fixed bottom-3 hidden w-[95%] flex-row place-self-center justify-between rounded-xl bg-cafe-200 p-2 text-center shadow-lg">
       <div class="flex flex-col">
         <div>En ce moment</div>
@@ -17,23 +17,22 @@
     <div class="overflow-hidden text-left text-3xl">
       <Flicking v-if="preferences.is_mobile" class="flicking-container" :options="flickingOptions">
         <div
-          v-for="pic in (selected_coffee_pics)"
+          v-for="pic in (selected_coffee?.aws_pics)"
           :key="pic.url"
           class="flicking-panel"
         >
           <img :src="pic.url" class="h-100 w-full object-cover">
         </div>
       </Flicking>
-      <div id="my-gallery" class="pswp-gallery">
+      <div v-else id="desktop_gallery" class="pswp-gallery">
         <div v-for="pic in (selected_coffee_pics)" :key="pic.url">
           <a
-            v-if="pic.dimensions"
             :href="pic.url"
-            :data-pswp-width="pic.dimensions.width"
-            :data-pswp-height="pic.dimensions.height"
+            :data-pswp-width="1000"
+            :data-pswp-height="1000"
             target=""
           >
-            <img :src="pic.url" alt="">
+            <img id="miniature" :src="pic.url" alt="">
           </a>
         </div>
       </div>
@@ -59,7 +58,7 @@
       </div>
     </div>
 
-    <div v-if="!preferences.is_mobile" id="tags" class="wrap flex flex-row flex-wrap gap-2 px-5">
+    <div v-if="!preferences.is_mobile" id="desktop_tags" class="wrap flex flex-row flex-wrap gap-2 px-5">
       <div v-for="tag in filtered_tags" :key="tag" class="services">
         {{ tag }}
       </div>
@@ -72,25 +71,23 @@
               <div class="font-bold text-lg">
                 Ambiance :
               </div>
-              <div> {{ selected_coffee?.tags.find(services => ['Studieux', 'Calme', 'Animé'].includes(services)) }}</div>
+              <div>{{ selected_coffee?.tags.find(services => ['Studieux', 'Calme', 'Animé'].includes(services)) }}</div>
             </div>
 
             <div v-if="selected_coffee?.desc" class="flex flex-col gap-2 text-lg">
-              <div class="font-bold">
-                A propos :
-              </div>
-              <div> {{ selected_coffee?.desc }}</div>
+              <span class="font-bold">A propos :</span>
+              <div>{{ selected_coffee?.desc }}</div>
             </div>
 
             <div v-if="selected_coffee?.acces_wifi" class="flex flex-row gap-2 text-lg">
               <div class="font-bold">
                 Wifi :
               </div>
-              <div> {{ selected_coffee?.acces_wifi }}</div>
+              <div>{{ selected_coffee?.acces_wifi }}</div>
             </div>
           </div>
 
-          <div v-if="preferences.is_mobile" id="tags" class="wrap flex flex-col flex-wrap gap-2 text-lg">
+          <div v-if="preferences.is_mobile" id="mobile_tags" class="wrap flex flex-col flex-wrap gap-2 text-lg">
             <div class="font-bold">
               Service et spécificités :
             </div>
@@ -172,7 +169,7 @@ async function getImageDimensions(url: string): Promise<{ width: number; height:
 }
 // initialisation de la galery swipephoto
 const lightbox = new PhotoSwipeLightbox({
-  gallery: '#my-gallery',
+  gallery: '#desktop_gallery',
   children: 'a',
   pswpModule: () => import('photoswipe'),
 })
@@ -183,8 +180,9 @@ onMounted(async () => {
   if (selected_coffee.value?.aws_pics) {
     const updatedPics = await Promise.all(selected_coffee.value.aws_pics.map(async (pic) => {
       try {
-        const dimensions = await getImageDimensions(pic.url)
-        return { ...pic, dimensions }
+        // const dimensions = await getImageDimensions(pic.url)
+        // ON VA METTRE LES DIMENSIONS EN DUR DS LA DB ET CA VA CHANGER DES CHOSES LOL
+        return { ...pic }
       } catch (error) {
         console.error('Error getting image dimensions:', error)
         return pic
