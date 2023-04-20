@@ -4,7 +4,7 @@
       <img :src="logo" alt="logo" class="h-9 pl-4 md:h-12">
     </RouterLink>
     <nav flex gap-5 font-black text-white>
-      <InputSwitch v-model="preferences.debug_mode">
+      <InputSwitch v-model="preferences.offline_mode" @click="use_coffee_store().fetch_db()">
         Offline
       </InputSwitch>
       <button @click="display.debug_modal = !display.debug_modal">
