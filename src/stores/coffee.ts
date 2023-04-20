@@ -17,11 +17,17 @@ export const use_coffee_store = defineStore('coffee', () => {
     db_error.value = null
 
     try {
-      const response = await fetch(xano_url)
-      if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}`)
+      if (preferences.offline_mode) {
+        const { default: db_json } = await import('@/utils/db.json')
+        const db_parsed = db_json as unknown
+        db.value = db_parsed as Cafe[]
+      } else {
+        const response = await fetch(xano_url)
+        if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}`)
 
-      const data = await response.json()
-      db.value = data
+        const data = await response.json()
+        db.value = data
+      }
     } catch (error: any) {
       db_error.value = error.message
     } finally {
