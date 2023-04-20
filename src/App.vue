@@ -47,8 +47,7 @@ useHead({
 </script>
 
 <template>
-  <TheHeader />
-  <main class="bg-cafe-100">
+  <main class="bg-cafe-50">
     <RouterView class="h-screen" />
   </main>
 </template>
