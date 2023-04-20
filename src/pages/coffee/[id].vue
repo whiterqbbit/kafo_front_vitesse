@@ -10,20 +10,33 @@
       <!-- <div v-for="person in next_event.user_id" key="person.id">
         les gens dans le prochain event
       </div> -->
-      <div class="font-extra-bold text-cafe-100i rounded-xl bg-grass-500 p-4">
+      <div class="font-extra-bold rounded-xl bg-grass-500 p-4 text-cafe-100">
         Rejoindre
       </div>
     </div>
     <div class="overflow-hidden text-left text-3xl">
       <Flicking v-if="preferences.is_mobile" class="flicking-container" :options="flickingOptions">
         <div
-          v-for="pic in (selected_coffee ? selected_coffee.aws_pics : [])"
+          v-for="pic in (selected_coffee_pics)"
           :key="pic.url"
           class="flicking-panel"
         >
           <img :src="pic.url" class="h-100 w-full object-cover">
         </div>
       </Flicking>
+      <div id="my-gallery" class="pswp-gallery">
+        <div v-for="pic in (selected_coffee_pics)" :key="pic.url">
+          <a
+            v-if="pic.dimensions"
+            :href="pic.url"
+            :data-pswp-width="pic.dimensions.width"
+            :data-pswp-height="pic.dimensions.height"
+            target=""
+          >
+            <img :src="pic.url" alt="">
+          </a>
+        </div>
+      </div>
     </div>
 
     <div id="title_group" class="flex flex-col gap-5">
@@ -124,12 +137,14 @@
 
 <script setup lang="ts">
 import Flicking from '@egjs/vue3-flicking'
+import PhotoSwipeLightbox from 'photoswipe/lightbox'
+import type { AwsPics } from '@/stores/xano.d'
 import subway_icon from '@/assets/img/icons/metro_tantative.png'
+import 'photoswipe/style.css'
 
 const props = defineProps({
   id: String,
 })
-
 // get the selected coffee from the store
 const selected_coffee_id = Number(props.id)
 const coffee_store = use_coffee_store()
@@ -140,9 +155,45 @@ const flickingOptions = {
   renderOnlyVisible: false,
   horizontal: true,
   circular: true,
-  autoResize: false,
+  autoResize: true,
   gap: 0,
 }
+async function getImageDimensions(url: string): Promise<{ width: number; height: number }> {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => {
+      resolve({ width: img.width, height: img.height })
+    }
+    img.onerror = (error) => {
+      reject(error)
+    }
+    img.src = url
+  })
+}
+// initialisation de la galery swipephoto
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#my-gallery',
+  children: 'a',
+  pswpModule: () => import('photoswipe'),
+})
+
+const selected_coffee_pics = ref<AwsPics[]>([])
+
+onMounted(async () => {
+  if (selected_coffee.value?.aws_pics) {
+    const updatedPics = await Promise.all(selected_coffee.value.aws_pics.map(async (pic) => {
+      try {
+        const dimensions = await getImageDimensions(pic.url)
+        return { ...pic, dimensions }
+      } catch (error) {
+        console.error('Error getting image dimensions:', error)
+        return pic
+      }
+    }))
+    selected_coffee_pics.value = updatedPics
+  }
+  lightbox.init()
+})
 </script>
 
 <style scoped>
@@ -163,4 +214,7 @@ const flickingOptions = {
   height: 100%;
   @apply p-0
 }
+
+@import 'photoswipe/dist/photoswipe.css';
+@import 'photoswipe/dist/default-skin/default-skin.css';
 </style>

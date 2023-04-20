@@ -25,9 +25,15 @@ dependencies:
   leaflet:
     specifier: ^1.9.3
     version: 1.9.3
+  lightbox:
+    specifier: link:@types/photoswipe/lightbox
+    version: link:@types/photoswipe/lightbox
   nprogress:
     specifier: ^0.2.0
     version: 0.2.0
+  photoswipe:
+    specifier: ^5.3.7
+    version: 5.3.7
   pinia:
     specifier: ^2.0.34
     version: 2.0.34(typescript@4.9.5)(vue@3.2.47)
@@ -78,6 +84,9 @@ devDependencies:
   '@types/nprogress':
     specifier: ^0.2.0
     version: 0.2.0
+  '@types/photoswipe':
+    specifier: ^4.1.2
+    version: 4.1.2
   '@unocss/preset-attributify':
     specifier: ^0.50.8
     version: 0.50.8
@@ -2395,6 +2404,10 @@ packages:
 
   /@types/nprogress@0.2.0:
     resolution: {integrity: sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A==}
+    dev: true
+
+  /@types/photoswipe@4.1.2:
+    resolution: {integrity: sha512-HA9TtCAQKToldgxRiyJ1DbsElg/cQV/SQ8COVjqIqghjy60Zxfh78E1WiFotthquqkS86nz13Za9wEbToe0svQ==}
     dev: true
 
   /@types/resolve@1.17.1:
@@ -7690,6 +7703,11 @@ packages:
   /performance-now@2.1.0:
     resolution: {integrity: sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==}
     dev: true
+
+  /photoswipe@5.3.7:
+    resolution: {integrity: sha512-zsyLsTTLFrj0XR1m4/hO7qNooboFKUrDy+Zt5i2d6qjFPAtBjzaj/Xtydso4uxzcXpcqbTmyxDibb3BcSISseg==}
+    engines: {node: '>= 0.12.0'}
+    dev: false
 
   /picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}

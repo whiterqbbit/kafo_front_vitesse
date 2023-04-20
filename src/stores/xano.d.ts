@@ -47,6 +47,14 @@ export type PlaceType =
 	| 'Tiers lieu'
 	| 'Hôtel'
 
+export interface AwsPics {
+	url: string
+	dimensions?: {
+		width: number
+		height: number
+	}
+}
+
 export interface Cafe {
 	id: number
 	nom: string
@@ -73,12 +81,8 @@ export interface Cafe {
 	nom_contact?: string
 	email?: string
 	telephone?: string
-	aws_miniatures: {
-		url: string
-	}[]
-	aws_pics: {
-		url: string
-	}[]
+	aws_miniatures:AwsPics[]
+	aws_pics: AwsPics[]
 	created_at?: Date
 	etage_isole?: boolean
 	legit: boolean
