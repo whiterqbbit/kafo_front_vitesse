@@ -22,6 +22,9 @@ dependencies:
   '@vueuse/integrations':
     specifier: ^9.13.0
     version: 9.13.0(nprogress@0.2.0)(universal-cookie@4.0.4)(vue@3.2.47)
+  crypto-js:
+    specifier: ^4.1.1
+    version: 4.1.1
   leaflet:
     specifier: ^1.9.3
     version: 1.9.3
@@ -63,6 +66,9 @@ devDependencies:
   '@iconify-json/ci':
     specifier: ^1.1.9
     version: 1.1.9
+  '@iconify-json/fa6-solid':
+    specifier: ^1.1.13
+    version: 1.1.13
   '@iconify-json/ic':
     specifier: ^1.1.13
     version: 1.1.13
@@ -1874,6 +1880,12 @@ packages:
 
   /@iconify-json/ci@1.1.9:
     resolution: {integrity: sha512-ZMz5YTH7vz3PEM6j1v2GCxKsfjCtNYenyOS/c4xk2tBHPCUtUuSQvgnqO4INTOMb7dERHV5VLziXFChhcfn02A==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/fa6-solid@1.1.13:
+    resolution: {integrity: sha512-4rpV5lqeerkL3PBuoIYFKtOWjEIcv2q9g+lai0jSTlgzmF/hcxkozXzhhGtEjQhYqAIPR01wxlHFIhwhLN2O9w==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
@@ -4303,6 +4315,10 @@ packages:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+
+  /crypto-js@4.1.1:
+    resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
+    dev: false
 
   /crypto-random-string@2.0.0:
     resolution: {integrity: sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==}

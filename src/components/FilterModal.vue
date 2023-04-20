@@ -19,27 +19,27 @@
             <div class="w-1/3 flex gap-2">
               <Checkbox v-model="filters.pricing_free" class="mt-2px" :binary="true" />
               <div class="flex flex-col">
-                <label for="filter-coworking">Gratuit</label>
+                <label for="filter-coworking" class="cursor-pointer" @click="filters.pricing_free = !filters.pricing_free">Gratuit</label>
                 <div class="description">
-                  si c pa magik ca
+                  Accès libre et illimité
                 </div>
               </div>
             </div>
             <div class="w-1/3 flex gap-2">
               <Checkbox v-model="filters.pricing_coffee" class="mt-2px" :binary="true" />
               <div class="flex flex-col">
-                <label for="filter-coworking">A la conso</label>
+                <label for="filter-coworking" class="cursor-pointer" @click="filters.pricing_coffee = !filters.pricing_coffee">A la conso</label>
                 <div class="description">
-                  Vous ne payez que ce que vous consommez !
+                  Il suffit d'un café pour travailler !
                 </div>
               </div>
             </div>
             <div class="w-1/3 flex gap-2">
               <Checkbox v-model="filters.pricing_hourly" class="mt-2px" :binary="true" />
               <div class="flex flex-col">
-                <label for="filter-coworking">A l'heure</label>
+                <label for="filter-coworking" class="cursor-pointer" @click="filters.pricing_hourly = !filters.pricing_hourly">A l'heure</label>
                 <div class="description">
-                  Vous payez un prix fixe par heure, consommation comprise
+                  Prix fixe par heure, consommation comprise
                 </div>
               </div>
             </div>
@@ -53,27 +53,27 @@
             <div class="w-1/3 flex gap-2">
               <Checkbox v-model="filters.noise_level_silent" class="mt-3px" :binary="true" />
               <div class="flex flex-col">
-                <label for="filter-coworking">Studieux</label>
+                <label for="filter-coworking" class="cursor-pointer" @click="filters.noise_level_silent = !filters.noise_level_silent">Studieux</label>
                 <div class="description">
-                  Atmosphère silencieuse, comme une bibliothèque.
+                  Silence garanti, pour un travail efficace
                 </div>
               </div>
             </div>
             <div class="w-1/3 flex gap-2">
               <Checkbox v-model="filters.noise_level_calm" class="mt-3px" :binary="true" />
               <div class="flex flex-col">
-                <label for="filter-coworking">Calme</label>
+                <label for="filter-coworking" class="cursor-pointer" @click="filters.noise_level_calm = !filters.noise_level_calm">Calme</label>
                 <div class="description">
-                  Niveau sonore contenu, bavardages et calls discrets autorisés.
+                  Niveau sonore contenu, bavardages et calls discrets autorisés
                 </div>
               </div>
             </div>
             <div class="w-1/3 flex gap-2">
               <Checkbox v-model="filters.noise_level_lively" class="mt-3px" :binary="true" />
               <div class="flex flex-col">
-                <label for="filter-coworking">Animé</label>
+                <label for="filter-coworking" class="cursor-pointer" @click="filters.noise_level_lively = !filters.noise_level_lively">Animé</label>
                 <div class="description">
-                  Tout ce qui est plus fort !
+                  Tout ce qui est plus fort yo
                 </div>
               </div>
             </div>
@@ -92,36 +92,39 @@
               v-model="filters.clubs_domain" :options="club_db_domain" filter display="chip" option-label="nom" placeholder="Filtrer par domaine"
               class="w-full md:w-20rem"
             />
-            <!-- <MultiSelect
+            <MultiSelect
               v-model="filters.clubs_roles" :options="club_db_roles" filter display="chip" option-label="nom" placeholder="Filtrer par rôle"
               class="w-full md:w-20rem"
             />
             <MultiSelect
               v-model="filters.clubs_tech" :options="club_db_tech" filter display="chip" option-label="nom" placeholder="Filtrer par techno"
               class="w-full md:w-20rem"
-            /> -->
+            />
           </div>
         </div>
       </section>
       <section>
         <div id="distance_filter" class="filter-container">
-          Proximité
+          <div class="flex justify-between">
+            Près de vous
+            <input id="init" value="Se localiser" type="button" class="btn-light" @click="filters.reset()">
+          </div>
           <div class="mt-1 flex justify-around py-2 text-xl">
             <div class="bullet">
-              <RadioButton v-model="filters.max_distance" input-id="filter_distance_none" :value="null" />
-              <label for="filter_distance_none">Tous</label>
+              <RadioButton v-model="filters.max_distance" input-id="filter_distance_none" :value="-1" />
+              <label for="filter_distance_none" class="cursor-pointer" @click="filters.max_distance = -1">Partout</label>
             </div>
             <div class="bullet">
               <RadioButton v-model="filters.max_distance" input-id="filter_distance_1km" :value="1" />
-              <label for="filter_distance_1km">1km</label>
+              <label for="filter_distance_1km" class="cursor-pointer" @click="filters.max_distance = 1">1km</label>
             </div>
             <div class="bullet">
               <RadioButton v-model="filters.max_distance" input-id="filter_distance_2km" :value="2" />
-              <label for="filter_distance_2km">2km</label>
+              <label for="filter_distance_2km" class="cursor-pointer" @click="filters.max_distance = 2">2km</label>
             </div>
             <div class="bullet">
               <RadioButton v-model="filters.max_distance" input-id="filter_distance_5km" :value="5" />
-              <label for="filter_distance_5km">5km</label>
+              <label for="filter_distance_5km" class="cursor-pointer" @click="filters.max_distance = 5">5km</label>
             </div>
           </div>
         </div>
@@ -133,11 +136,11 @@
             <div class="flex flex-col gap-1">
               <div class="bullet">
                 <Checkbox v-model="filters.our_picks" class="mt-3px" :binary="true" />
-                <label for="filter_our_picks">Nos coups de coeurs</label>
+                <label class="cursor-pointer" for="filter_our_picks" @click="filters.our_picks = !filters.our_picks">Nos coups de coeurs</label>
               </div>
               <div class="bullet">
                 <Checkbox v-model="filters.wifi" class="mt-3px" :binary="true" />
-                <label for="filter_wifi">Wifi</label>
+                <label class="cursor-pointer" for="filter_wifi" @click="filters.wifi = !filters.wifi">Wifi</label>
               </div>
               <div class="bullet">
                 <Checkbox v-model="filters.power" class="mt-3px" :binary="true" />
@@ -147,11 +150,11 @@
             <div class="flex flex-col gap-1">
               <div class="bullet">
                 <Checkbox v-model="filters.open_now" class="mt-3px" :binary="true" />
-                <label for="filter_open">Ouvert actuellement</label>
+                <label class="cursor-pointer" for="filter_open" @click="filters.open_now = !filters.open_now">Ouvert actuellement</label>
               </div>
               <div class="bullet">
                 <Checkbox v-model="filters.limit_to_map" class="mt-3px" :binary="true" />
-                <label for="filter_limit_to_map">Limiter à la carte</label>
+                <label class="cursor-pointer" for="filter_limit_to_map" @click="filters.limit_to_map = !filters.limit_to_map">Limiter à la carte</label>
               </div>
             </div>
           </div>
