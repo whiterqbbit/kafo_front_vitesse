@@ -28,7 +28,12 @@
     />
     <div v-else class="h-full">
       <div class="flex flex-row overflow-hidden bg-[#faf7f7] font-title">
-        <FilterModal v-show="display.filter_modal" class="w-150" />
+        <FilterModal v-if="display.filter_modal" class="w-150" />
+        <div v-else class="ml-2 mt-4 w-16 place-items-center p-1">
+          <div class="h-fit flex place-items-center place-self-center rounded-xl bg-white p-2 shadow-md" @click="display.filter_modal = true">
+            <button i-fa6-solid-sliders />
+          </div>
+        </div>
         <DesktopList class="h-screen--50px w-120 overflow-auto" />
       </div>
     </div>

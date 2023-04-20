@@ -2,8 +2,8 @@ import type { Club } from '@/stores/xano.d'
 
 export const filters = reactive({
   limit_to_map: false,
-  pricing_free: false,
-  pricing_coffee: false,
+  pricing_free: true,
+  pricing_coffee: true,
   pricing_hourly: false,
   coworking: false,
   coffee_shop: false,
@@ -31,6 +31,9 @@ export const filters = reactive({
     this.noise_level_silent = false
     this.noise_level_calm = false
     this.noise_level_lively = false
+    this.pricing_free = true
+    this.pricing_coffee = true
+    this.pricing_hourly = false
     this.open_now = true
     this.wifi = true
     this.power = true
