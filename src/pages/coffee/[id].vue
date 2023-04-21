@@ -195,6 +195,9 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+@import 'photoswipe/dist/photoswipe.css';
+@import 'photoswipe/dist/default-skin/default-skin.css';
+
 .services {
   @apply flex place-content-center bg-cafe-300 rounded-xl p-x-3
 }
@@ -212,7 +215,4 @@ onMounted(async () => {
   height: 100%;
   @apply p-0
 }
-
-@import 'photoswipe/dist/photoswipe.css';
-@import 'photoswipe/dist/default-skin/default-skin.css';
 </style>
