@@ -10,11 +10,11 @@ import {
 
 export default defineConfig({
   shortcuts: [
-    ['btn', 'px-4 py-1 rounded inline-block bg-grass-500 text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
+    ['btn', 'px-4 py-1 rounded-xl inline-block bg-grass-500 place-content-center text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
     ['font-title', 'text-3xl font-bold text-center text-cafe-700'],
     ['trans-grass-700', 'opacity-90 transition duration-200 ease-in-out hover:opacity-100 hover:text-grass-900'],
     ['tag', 'px-2 rounded-full inline-block bg-cafe-500 text-cafe-100 text-xs font-bold tracking-wider'],
-    ['container', 'md:bg-cafe-100 md:mx-auto md:px-4 md:py-8 md:max-w-7xl'],
+    ['container', 'bg-cafe-50 md:mx-auto md:px-4 md:py-8 max-w-7xl'],
     ['btn-press', 'hover:translate-x-4px hover:transition hover:duration-75 duration-75 shadow-md'],
     ['btn-light', 'px-4 cursor-pointer py-1 h-fit w-fit place-self-center rounded-xl font-normal text-base text-gray-400 transition hover:(rounded-xl text-cafe-700 bg-opacity-25 bg-stone-200)'],
   ],
