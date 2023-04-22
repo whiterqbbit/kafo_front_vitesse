@@ -21,19 +21,72 @@
           :key="pic.url"
           class="flicking-panel"
         >
-          <img :src="pic.url" class="h-100 w-full object-cover">
+          <img :src="pic.url" class="h-full w-full object-cover">
         </div>
       </Flicking>
-      <div v-else id="desktop_gallery" class="pswp-gallery">
-        <div v-for="pic in (selected_coffee_pics)" :key="pic.url">
+
+      <div v-else id="desktop_gallery" class="pswp-gallery h-150 flex gap-2 overflow-hidden rounded-2xl">
+        <!-- left image -->
+        <div v-if="selected_coffee?.aws_pics[0]" id="img1" class="w-100%">
           <a
-            :href="pic.url"
+            :href="selected_coffee?.aws_pics[0].url"
             :data-pswp-width="1000"
             :data-pswp-height="1000"
             target=""
           >
-            <img id="miniature" :src="pic.url" alt="">
+            <img id="miniature" :src="selected_coffee?.aws_pics[0].url" class="h-full w-100% object-cover" alt="">
           </a>
+        </div>
+
+        <!-- right block -->
+        <div v-if="selected_coffee?.aws_pics[1]" class="h-full w-100% flex flex-col gap-2">
+          <!-- top row -->
+          <div class="h-1/2 w-100% flex flex flex-row gap-2 object-cover">
+            <div class="w-100%">
+              <a
+                :href="selected_coffee?.aws_pics[1].url"
+                :data-pswp-width="1000"
+                :data-pswp-height="1000"
+                target=""
+              >
+                <img id="miniature" :src="selected_coffee?.aws_pics[1].url" class="h-full w-100% object-cover" alt="">
+              </a>
+            </div>
+            <div v-if="selected_coffee?.aws_pics[3]" class="w-100%">
+              <a
+                :href="selected_coffee?.aws_pics[3].url"
+                :data-pswp-width="1000"
+                :data-pswp-height="1000"
+                target=""
+              >
+                <img id="miniature" :src="selected_coffee?.aws_pics[3].url" class="h-full w-100% object-cover" alt="">
+              </a>
+            </div>
+          </div>
+
+          <!-- bottom row -->
+          <div v-if="selected_coffee?.aws_pics[2]" class="h-1/2 w-100% flex flex-row gap-2 object-cover">
+            <div class="w-100%">
+              <a
+                :href="selected_coffee?.aws_pics[2].url"
+                :data-pswp-width="1000"
+                :data-pswp-height="1000"
+                target=""
+              >
+                <img id="miniature" :src="selected_coffee?.aws_pics[2].url" class="h-full w-100% object-cover" alt="">
+              </a>
+            </div>
+            <div v-if="selected_coffee?.aws_pics[4]" class="w-100%">
+              <a
+                :href="selected_coffee?.aws_pics[4].url"
+                :data-pswp-width="1000"
+                :data-pswp-height="1000"
+                target=""
+              >
+                <img id="miniature" :src="selected_coffee?.aws_pics[4].url" class="h-full w-100% object-cover" alt="">
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -120,6 +173,7 @@
           </div>
         </div>
       </div>
+
       <div id="righty" class="flex flex-col">
         <div id="events" class="">
           events
@@ -176,7 +230,7 @@ const lightbox = new PhotoSwipeLightbox({
 
 const selected_coffee_pics = ref<AwsPics[]>([])
 
-onMounted(async () => {
+async function initializeGallery() {
   if (selected_coffee.value?.aws_pics) {
     const updatedPics = await Promise.all(selected_coffee.value.aws_pics.map(async (pic) => {
       try {
@@ -191,7 +245,11 @@ onMounted(async () => {
     selected_coffee_pics.value = updatedPics
   }
   lightbox.init()
-})
+}
+
+watch(() => selected_coffee.value?.aws_pics, () => {
+  initializeGallery()
+}, { immediate: true })
 </script>
 
 <style scoped>
