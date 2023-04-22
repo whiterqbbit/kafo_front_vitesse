@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap flex justify-between" :class="props.tags.length < 5 ? 'md:max-w-1/2' : ''">
+  <div class="wrap flex justify-between" :class="props.tags.length < 7 ? 'md:max-w-1/2' : ''">
     <!-- prix -->
     <div v-if="props.tags.includes('Gratuit')" class="tag_group">
       <img :src="svg_gratuit">
@@ -133,23 +133,23 @@
 </template>
 
 <script lang="ts" setup>
-import svg_payant from '@/assets/svg/MaterialSymbolsAttachMoneyRounded.svg'
-import svg_gratuit from '@/assets/svg/MaterialSymbolsMoneyOffRounded.svg'
-import svg_coffee from '@/assets/svg/MaterialSymbolsCoffee.svg'
-import svg_studieux from '@/assets/svg/TablerVolumeOff.svg'
-import svg_calme from '@/assets/svg/TablerVolume2.svg'
-import svg_anime from '@/assets/svg/TablerVolume.svg'
-import svg_wifi from '@/assets/svg/MaterialSymbolsWifiRounded.svg'
-import svg_wifi_no from '@/assets/svg/MaterialSymbolsWifiOffRounded.svg'
-import svg_plug from '@/assets/svg/MaterialSymbolsPowerPlugRounded.svg'
-import svg_plug_no from '@/assets/svg/MaterialSymbolsPowerPlugOffRounded.svg'
-import svg_fav from '@/assets/svg/MaterialSymbolsFavorite.svg'
-import svg_alcool from '@/assets/svg/MdiGlassCocktail.svg'
-import svg_cheap from '@/assets/svg/MdiPiggyBank.svg'
-import svg_tea from '@/assets/svg/MdiTea.svg'
-import svg_upstairs from '@/assets/svg/MakiHome.svg'
-import svg_partner from '@/assets/svg/MdiHandshake.svg'
-import svg_meal from '@/assets/svg/IconParkSolidKnifeFork.svg'
+import svg_payant from '@/assets/svg/icon/MaterialSymbolsAttachMoneyRounded.svg'
+import svg_gratuit from '@/assets/svg/icon/MaterialSymbolsMoneyOffRounded.svg'
+import svg_coffee from '@/assets/svg/icon/MaterialSymbolsCoffee.svg'
+import svg_studieux from '@/assets/svg/icon/TablerVolumeOff.svg'
+import svg_calme from '@/assets/svg/icon/TablerVolume2.svg'
+import svg_anime from '@/assets/svg/icon/TablerVolume.svg'
+import svg_wifi from '@/assets/svg/icon/MaterialSymbolsWifiRounded.svg'
+import svg_wifi_no from '@/assets/svg/icon/MaterialSymbolsWifiOffRounded.svg'
+import svg_plug from '@/assets/svg/icon/MaterialSymbolsPowerPlugRounded.svg'
+import svg_plug_no from '@/assets/svg/icon/MaterialSymbolsPowerPlugOffRounded.svg'
+import svg_fav from '@/assets/svg/icon/MaterialSymbolsFavorite.svg'
+import svg_alcool from '@/assets/svg/icon/MdiGlassCocktail.svg'
+import svg_cheap from '@/assets/svg/icon/MdiPiggyBank.svg'
+import svg_tea from '@/assets/svg/icon/MdiTea.svg'
+import svg_upstairs from '@/assets/svg/icon/MakiHome.svg'
+import svg_partner from '@/assets/svg/icon/MdiHandshake.svg'
+import svg_meal from '@/assets/svg/icon/IconParkSolidKnifeFork.svg'
 
 const props = defineProps({
   tags: { type: Object, required: true },
