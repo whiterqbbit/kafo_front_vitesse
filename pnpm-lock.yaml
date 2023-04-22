@@ -49,9 +49,6 @@ dependencies:
   universal-cookie:
     specifier: ^4.0.4
     version: 4.0.4
-  useCookies:
-    specifier: link:@vueuse/integrations/useCookies
-    version: link:@vueuse/integrations/useCookies
   vue:
     specifier: ^3.2.47
     version: 3.2.47
