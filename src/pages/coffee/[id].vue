@@ -125,7 +125,7 @@
 
     <div id="main" class="flex flex-col gap-6 md:flex-row md:justify-between">
       <div id="lefty" class="max-w-2xl flex flex-col gap-6 md:w-1/2">
-        <div v-if="!preferences.is_mobile" class="flex flex-col font-normal">
+        <!-- <div v-if="!preferences.is_mobile" class="flex flex-col font-normal">
           <div id="address" class="">
             {{ selected_coffee?.adresse }}
           </div>
@@ -133,7 +133,7 @@
             <img :src="subway_icon" class="h-6 w-6">
             {{ selected_coffee?.metro }}
           </div>
-        </div>
+        </div> -->
         <div id="description" class="flex flex-col gap-6">
           <div class="flex flex-col gap-2">
             <div v-if="selected_coffee?.desc" class="flex flex-col gap-2 text-lg">
