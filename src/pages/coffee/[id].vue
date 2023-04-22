@@ -15,17 +15,28 @@
       </div>
     </div>
     <div class="overflow-hidden text-left text-3xl">
-      <Flicking v-if="preferences.is_mobile" class="flicking-container" :options="flickingOptions">
+      <Flicking v-if="preferences.is_mobile && selected_coffee?.aws_pics" class="flicking-container" :options="flickingOptions">
         <div
           v-for="pic in (selected_coffee?.aws_pics)"
-          :key="pic.url"
+          :key="pic"
           class="flicking-panel"
         >
           <img :src="pic.url" class="h-full w-full object-cover">
         </div>
       </Flicking>
 
-      <div v-else id="desktop_gallery" class="pswp-gallery h-150 flex gap-2 overflow-hidden rounded-2xl">
+      <div v-else id="desktop_gallery" class="pswp-gallery relative h-150 flex gap-2 overflow-hidden rounded-2xl">
+        <!-- button more images -->
+        <div v-if="selected_coffee?.aws_pics?.length > 5" class="absolute bottom-10 right-10 rounded-xl bg-cafe-100 px-3 py-1 text-cafe-600 shadow-xl text-base">
+          <a
+            :href="selected_coffee?.aws_pics[0].url"
+            :data-pswp-width="1000"
+            :data-pswp-height="1000"
+            target=""
+          >Afficher toutes les photos
+          </a>
+        </div>
+
         <!-- left image -->
         <div v-if="selected_coffee?.aws_pics[0]" id="img1" class="w-100%">
           <a
@@ -41,7 +52,7 @@
         <!-- right block -->
         <div v-if="selected_coffee?.aws_pics[1]" class="h-full w-100% flex flex-col gap-2">
           <!-- top row -->
-          <div class="h-1/2 w-100% flex flex flex-row gap-2 object-cover">
+          <div class="h-1/2 w-100% flex flex flex-row gap-2 object-cover" :class="selected_coffee?.aws_pics[2] ? 'h-1/2' : 'h-full'">
             <div class="w-100%">
               <a
                 :href="selected_coffee?.aws_pics[1].url"
@@ -91,12 +102,12 @@
       </div>
     </div>
 
-    <div id="title_group" class="flex flex-col gap-5">
-      <div id="title" class="px-5 font-black text-4xl">
+    <div id="title_group" class="flex flex-col gap-3">
+      <div id="title" class="font-black text-4xl">
         {{ selected_coffee?.nom }}
       </div>
 
-      <div id="subtitle" class="flex flex-col px-5 font-bold md:flex-row md:justify-between">
+      <div id="subtitle" class="flex flex-col font-bold md:flex-row md:justify-between">
         <div v-if="selected_coffee?.attendance !== 0" id="attendance">
           <div class="flex flex-row items-center gap-2">
             <div class="ml-2 flex">
@@ -110,46 +121,34 @@
         </div>
       </div>
     </div>
+    <IconedTags v-if="selected_coffee && !preferences.is_mobile" :tags="selected_coffee?.tags" />
 
-    <div v-if="!preferences.is_mobile" id="desktop_tags" class="wrap flex flex-row flex-wrap gap-2 px-5">
-      <div v-for="tag in filtered_tags" :key="tag" class="services">
-        {{ tag }}
-      </div>
-    </div>
-    <div id="main" class="flex flex-col gap-6 px-5 md:flex-row md:justify-between">
-      <div id="lefty" class="max-w-2xl flex flex-col gap-6">
+    <div id="main" class="flex flex-col gap-6 md:flex-row md:justify-between">
+      <div id="lefty" class="max-w-2xl flex flex-col gap-6 md:w-1/2">
+        <div v-if="!preferences.is_mobile" class="flex flex-col font-normal">
+          <div id="address" class="">
+            {{ selected_coffee?.adresse }}
+          </div>
+          <div v-if="selected_coffee?.metro" class="flex items-center gap-2">
+            <img :src="subway_icon" class="h-6 w-6">
+            {{ selected_coffee?.metro }}
+          </div>
+        </div>
         <div id="description" class="flex flex-col gap-6">
           <div class="flex flex-col gap-2">
-            <div class="flex flex-col">
-              <div class="font-bold text-lg">
-                Ambiance :
-              </div>
-              <div>{{ selected_coffee?.tags.find(services => ['Studieux', 'Calme', 'Animé'].includes(services)) }}</div>
-            </div>
-
             <div v-if="selected_coffee?.desc" class="flex flex-col gap-2 text-lg">
-              <span class="font-bold">A propos :</span>
+              <!-- <span class="font-bold">A propos :</span> -->
               <div>{{ selected_coffee?.desc }}</div>
             </div>
 
-            <div v-if="selected_coffee?.acces_wifi" class="flex flex-row gap-2 text-lg">
+            <div v-if="selected_coffee?.acces_wifi" class="flex flex-col gap-2 text-lg">
               <div class="font-bold">
-                Wifi :
+                Acces wifi :
               </div>
               <div>{{ selected_coffee?.acces_wifi }}</div>
             </div>
           </div>
-
-          <div v-if="preferences.is_mobile" id="mobile_tags" class="wrap flex flex-col flex-wrap gap-2 text-lg">
-            <div class="font-bold">
-              Service et spécificités :
-            </div>
-            <div class="flex flex-row flex-wrap gap-2">
-              <div v-for="tag in filtered_tags" :key="tag" class="services">
-                {{ tag }}
-              </div>
-            </div>
-          </div>
+          <IconedTags v-if="selected_coffee && preferences.is_mobile" :tags="selected_coffee?.tags" />
 
           <div v-if="selected_coffee?.adresse" id="location_container" class="flex flex-row items-center justify-between text-lg">
             <div class="flex flex-col">
@@ -163,22 +162,24 @@
             </div>
             <div
               id="google_map_link"
-              class="h-20 flex flex-row place-items-center rounded-3xl bg-grass-500 p-3 font-bold text-cafe-100"
+              class="flex flex-row place-items-center gap-2 rounded-3xl bg-grass-500 px-4 py-2 font-bold text-cafe-100"
             >
-              <div>
+              <div class="text-xl">
                 Y aller !
               </div>
-              <img src="https://img.icons8.com/ios/50/000000/forward.png">
+              <img class="h-10" :src="direction">
             </div>
           </div>
         </div>
       </div>
 
-      <div id="righty" class="flex flex-col">
-        <div id="events" class="">
+      <div id="righty" class="w-1/2 flex flex-col place-content-center place-items-center rounded-3xl bg-cafe-200 p-6 text-cafe-600 text-2xl">
+        Ici, c'est en travaux !
+        <img src="http://www.animated-gifs.fr/category_website/under-construction-fr/16072049.gif" class="h-50">
+        <div id="events" class="hidden">
           events
         </div>
-        <div id="chat" class="">
+        <div id="chat" class="hidden">
           chat
         </div>
       </div>
@@ -189,8 +190,8 @@
 <script setup lang="ts">
 import Flicking from '@egjs/vue3-flicking'
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
-import type { AwsPics } from '@/stores/xano.d'
 import subway_icon from '@/assets/img/icons/metro_tantative.png'
+import direction from '@/assets/img/direction.png'
 import 'photoswipe/style.css'
 
 const props = defineProps({
@@ -201,7 +202,6 @@ const selected_coffee_id = Number(props.id)
 const coffee_store = use_coffee_store()
 coffee_store.selected_id = selected_coffee_id
 const selected_coffee = computed(() => coffee_store.selected)
-const filtered_tags = selected_coffee?.value?.tags?.filter(tag => !['Calme', 'Studieux', 'Animé', 'Bar', 'Brasserie', 'Restaurant', 'Coworking', 'Tiers lieu', 'Autre lieu'].includes(tag))
 const flickingOptions = {
   renderOnlyVisible: false,
   horizontal: true,
@@ -209,26 +209,13 @@ const flickingOptions = {
   autoResize: true,
   gap: 0,
 }
-async function getImageDimensions(url: string): Promise<{ width: number; height: number }> {
-  return new Promise((resolve, reject) => {
-    const img = new Image()
-    img.onload = () => {
-      resolve({ width: img.width, height: img.height })
-    }
-    img.onerror = (error) => {
-      reject(error)
-    }
-    img.src = url
-  })
-}
+
 // initialisation de la galery swipephoto
 const lightbox = new PhotoSwipeLightbox({
   gallery: '#desktop_gallery',
   children: 'a',
   pswpModule: () => import('photoswipe'),
 })
-
-const selected_coffee_pics = ref<AwsPics[]>([])
 
 async function initializeGallery() {
   if (selected_coffee.value?.aws_pics) {
@@ -258,6 +245,7 @@ watch(() => selected_coffee.value?.aws_pics, () => {
 .services {
   @apply flex place-content-center bg-cafe-300 rounded-xl p-x-3
 }
+
 .flicking-container {
   display: flex;
   overflow: hidden;

@@ -17,6 +17,7 @@ declare module '@vue/runtime-core' {
     DesktopList: typeof import('./components/DesktopList.vue')['default']
     FilterModal: typeof import('./components/FilterModal.vue')['default']
     Galleria: typeof import('primevue/galleria')['default']
+    IconedTags: typeof import('./components/IconedTags.vue')['default']
     InputSwitch: typeof import('primevue/inputswitch')['default']
     InputText: typeof import('primevue/inputtext')['default']
     LoginModal: typeof import('./components/LoginModal.vue')['default']
