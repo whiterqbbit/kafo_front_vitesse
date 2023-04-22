@@ -18,7 +18,7 @@
       <Flicking v-if="preferences.is_mobile && selected_coffee?.aws_pics" class="flicking-container" :options="flickingOptions">
         <div
           v-for="pic in (selected_coffee?.aws_pics)"
-          :key="pic"
+          :key="pic.url"
           class="flicking-panel"
         >
           <img :src="pic.url" class="h-full w-full object-cover">
@@ -27,7 +27,7 @@
 
       <div v-else id="desktop_gallery" class="pswp-gallery relative h-150 flex gap-2 overflow-hidden rounded-2xl">
         <!-- button more images -->
-        <div v-if="selected_coffee?.aws_pics?.length > 5" class="absolute bottom-10 right-10 rounded-xl bg-cafe-100 px-3 py-1 text-cafe-600 shadow-xl text-base">
+        <div v-if="selected_coffee && selected_coffee?.aws_pics?.length > 5" class="absolute bottom-10 right-10 rounded-xl bg-cafe-100 px-3 py-1 text-cafe-600 shadow-xl text-base">
           <a
             :href="selected_coffee?.aws_pics[0].url"
             :data-pswp-width="1000"
@@ -219,19 +219,8 @@ const lightbox = new PhotoSwipeLightbox({
 
 async function initializeGallery() {
   if (selected_coffee.value?.aws_pics) {
-    const updatedPics = await Promise.all(selected_coffee.value.aws_pics.map(async (pic) => {
-      try {
-        // const dimensions = await getImageDimensions(pic.url)
-        // ON VA METTRE LES DIMENSIONS EN DUR DS LA DB ET CA VA CHANGER DES CHOSES LOL
-        return { ...pic }
-      } catch (error) {
-        console.error('Error getting image dimensions:', error)
-        return pic
-      }
-    }))
-    selected_coffee_pics.value = updatedPics
+    lightbox.init()
   }
-  lightbox.init()
 }
 
 watch(() => selected_coffee.value?.aws_pics, () => {
