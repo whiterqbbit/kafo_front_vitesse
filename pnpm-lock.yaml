@@ -28,9 +28,6 @@ dependencies:
   leaflet:
     specifier: ^1.9.3
     version: 1.9.3
-  lightbox:
-    specifier: link:@types/photoswipe/lightbox
-    version: link:@types/photoswipe/lightbox
   nprogress:
     specifier: ^0.2.0
     version: 0.2.0
