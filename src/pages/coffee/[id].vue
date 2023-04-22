@@ -121,7 +121,7 @@
         </div>
       </div>
     </div>
-    <IconedTags v-if="selected_coffee && !preferences.is_mobile" :tags="selected_coffee?.tags" />
+    <TagsIcon v-if="selected_coffee && !preferences.is_mobile" :tags="selected_coffee?.tags" />
 
     <div id="main" class="flex flex-col gap-6 md:flex-row md:justify-between">
       <div id="lefty" class="max-w-2xl flex flex-col gap-6 md:w-1/2">
