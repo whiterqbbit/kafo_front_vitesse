@@ -47,9 +47,7 @@ useHead({
 </script>
 
 <template>
-  <main class="bg-cafe-50">
-    <DesktopHeader v-if="!preferences.is_mobile" />
-    <MobileHeader v-else />
+  <main bg-cafe-50 text-cafe-600>
     <RouterView class="h-screen" />
   </main>
 </template>

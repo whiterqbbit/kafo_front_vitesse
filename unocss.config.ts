@@ -10,12 +10,12 @@ import {
 
 export default defineConfig({
   shortcuts: [
-    ['btn', 'px-4 py-1 rounded inline-block bg-grass-500 text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
+    ['btn', 'px-4 py-1 rounded-xl inline-block bg-grass-500 place-content-center text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
     ['font-title', 'text-3xl font-bold text-center text-cafe-700'],
     ['trans-grass-700', 'opacity-90 transition duration-200 ease-in-out hover:opacity-100 hover:text-grass-900'],
     ['tag', 'px-2 rounded-full inline-block bg-cafe-500 text-cafe-100 text-xs font-bold tracking-wider'],
-    ['container', 'md:mx-auto md:px-4 md:py-8 md:max-w-7xl'],
-    ['btn-press', 'hover:translate-x-4px hover:transition hover:duration-75 duration-75 shadow-md'],
+    ['container', 'bg-cafe-50 mx-auto px-4 py-4 md:py-8 max-w-7xl'],
+    ['btn-press', 'hover:translate-x-4px hover:transition hover:duration-75 shadow-md'],
     ['btn-light', 'px-4 cursor-pointer py-1 h-fit w-fit place-self-center rounded-xl font-normal text-base text-gray-400 transition hover:(rounded-xl text-cafe-700 bg-opacity-25 bg-stone-200)'],
   ],
   rules: [
@@ -27,6 +27,7 @@ export default defineConfig({
     ['text-2xl', { 'font-size': '1.5rem' }],
     ['text-3xl', { 'font-size': '1.875rem' }],
     ['text-4xl', { 'font-size': '2.25rem' }],
+    ['text-5xl', { 'font-size': '3.25rem' }],
   ],
   theme: {
     height: {
@@ -35,10 +36,10 @@ export default defineConfig({
     },
     colors: {
       cafe: {
-        900: '#1f1612',
-        800: '#261b17',
-        700: '#3b2a25',
-        600: '#503b34',
+        900: '#261b17',
+        800: '#3b2a25',
+        700: '#503b34',
+        600: '#694b42',
         500: '#815a4f',
         400: '#e3ba9f',
         300: '#f5dac8',
@@ -80,8 +81,6 @@ export default defineConfig({
     presetWebFonts({
       fonts: {
         sans: 'Poppins',
-        serif: 'DM Serif Display',
-        mono: 'DM Mono',
       },
     }),
   ],
