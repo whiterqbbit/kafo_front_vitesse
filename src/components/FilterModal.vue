@@ -161,7 +161,7 @@
         </div>
       </section>
       <div>
-        {{ filters }}
+        <!-- {{ filters }} -->
       </div>
     </div>
   </div>

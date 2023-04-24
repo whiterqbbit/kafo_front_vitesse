@@ -1,4 +1,6 @@
 <template>
+  <DesktopHeader v-if="!preferences.is_mobile" />
+  <MobileHeader v-else />
   <pre v-if="display.cookie_modal" h-fit w-full>{{ cookies.getAll() }}</pre>
   <div id="main_container" class="relative h-screen--35px flex flex-col bg-green-300 md:h-screen--50px md:flex-row-reverse">
     <div v-if="display.login_modal" class="fixed left-0 top-0 z-50 h-full w-full bg-cafe-400 bg-opacity-50">
@@ -29,7 +31,7 @@
         <FilterModal v-if="display.filter_modal" class="w-150" />
         <div v-else class="ml-2 mt-4 w-16 place-items-center p-1">
           <div class="h-fit flex place-items-center place-self-center rounded-xl bg-white p-2 shadow-md" @click="display.filter_modal = true">
-            <button i-fa6-solid-sliders />
+            <button i-fa6-solid-sliders class="h-10" />
           </div>
         </div>
         <DesktopList class="h-screen--50px w-120 overflow-auto" />
