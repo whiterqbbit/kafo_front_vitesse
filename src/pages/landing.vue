@@ -2,7 +2,7 @@
   <LandingHeader />
   <section id="hero" class="overflow-hidden text-center md:text-left">
     <div class="text-cafe-600 container">
-      <div id="title" class="title-font flex flex-col">
+      <div id="title" class="landing-title flex flex-col">
         <span class="z-30">Des espaces de travail inspirants</span>
         <span class="z-30">Des connexions enrichissantes</span>
         <span class="z-30">Du café.</span>
@@ -13,7 +13,7 @@
             <div class="bg-floating-resize bg-shape absolute left-0 top-[-10px] z-0 bg-cafe-200" />
             <img id="hero-pic-mobile" class="relative mx-auto max-w-500px w-90%" :src="hero_pic">
           </div>
-          <div id="sub-title" class="font-subtitle mt-6 md:mt-0">
+          <div id="sub-title" class="landing-subtitle mt-6 md:mt-0">
             Kafo est le réseau qui redonne
             du goût au télétravail
           </div>
@@ -30,8 +30,8 @@
     </div>
   </section>
   <section id="rencontres" class="from-transparent to-cafe-200 from-50% bg-gradient-to-b text-center">
-    <div class="mx-auto h-80 w-100 rounded-3xl from-cafe-50 to-cafe-200 to-80% bg-gradient-to-t p-10 md:w-180">
-      <div class="font-subtitle">
+    <div class="mx-auto w-100 rounded-3xl from-cafe-50 to-cafe-200 to-80% bg-gradient-to-t p-10 md:w-180 sm:h-80">
+      <div class="landing-subtitle">
         Faites de nouvelles rencontres
       </div>
       <div class="mt-6 text-lg">
@@ -56,10 +56,10 @@
       </div>
     </div>
   </section>
-  <div id="empty-space" class="h-32 bg-cafe-200" />
+  <div id="empty-space" class="h-12 bg-cafe-200 sm:h-32" />
   <section id="annuaire" class="from-cafe-200 to-transparent from-20% bg-gradient-to-b text-center">
-    <div class="mx-auto h-80 w-100 rounded-3xl from-cafe-200 to-cafe-50 to-60% bg-gradient-to-t p-10 md:w-180">
-      <div class="font-subtitle">
+    <div class="mx-auto w-100 rounded-3xl from-cafe-200 to-cafe-50 to-60% bg-gradient-to-t p-10 md:w-180 sm:h-80">
+      <div class="landing-subtitle">
         Un annuaire aux petits oignons
       </div>
       <div class="mt-6 text-lg">
@@ -86,8 +86,8 @@
     <CTA class="mx-auto mt-6 text-lg md:mt-12 sm:text-xl md:text-2xl lg:text-3xl" />
   </section>
   <section id="faq" class="mt-10">
-    <div class="mx-auto w-200 rounded-3xl from-cafe-200 to-cafe-50 to-50% bg-gradient-to-tl p-8">
-      <div class="font-subtitle mb-6 text-center">
+    <div class="mx-auto rounded-3xl from-cafe-200 to-cafe-50 to-50% bg-gradient-to-tl p-8 sm:w-200">
+      <div class="landing-subtitle mb-6 text-center">
         Foire aux questions
       </div>
       <div v-for="(question, index) in questions" :key="question.question" class="flex flex-col">
@@ -95,13 +95,31 @@
           <div
             class="img-default mr-4" i-ci-caret-right-sm :class="{ 'img-rotated': is_open(index) }"
           />
-          <div class="mb-2 font-semibold text-lg">
+          <div class="mb-2 font-semibold sm:text-lg">
             {{ question.question }}
           </div>
         </div>
-        <div v-show="is_open(index)" class="mb-4">
+        <div v-show="is_open(index)" class="mb-4 text-sm sm:text-base">
           {{ question.answer }}
         </div>
+      </div>
+    </div>
+  </section>
+  <section id="contact" class="mx-auto mt-8 container sm:mt-16 sm:flex">
+    <img :src="coeur_niais" class="w-1/2 sm:w-1/2">
+    <div class="flex flex-col sm:w-1/2">
+      <div class="landing-title text-left">
+        Une communauté
+      </div>
+      <div class="landing-subtitle">
+        Kafo, c’est vous !
+      </div>
+      <div>
+        Vous construisez le réseau grâce à vos retours.
+        Contactez-nous pour ajouter de nouveaux lieux, suggérer des idées ou simplement nous faire part de vos coups de coeur!
+      </div>
+      <div class="btn">
+        Contactez-nous
       </div>
     </div>
   </section>
@@ -116,6 +134,7 @@ import cocktail from '@/assets/svg/cocktail.svg'
 import table from '@/assets/svg/table.svg'
 import tasses from '@/assets/svg/tasses.svg'
 import notes from '@/assets/svg/notes.svg'
+import coeur_niais from '@/assets/svg/coeur_niais.svg'
 
 const open_indexes: Ref<number[]> = ref([])
 
@@ -158,16 +177,16 @@ const questions = ref([{
 </script>
 
 <style scoped>
-.title-font {
+.landing-title {
   @apply text-xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold;
 }
 
-.font-subtitle {
+.landing-subtitle {
   @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold;
 }
 
 .card {
-  @apply w-4/5 min-w-auto w-70 h-70 p-4 mx-auto bg-cafe-50 rounded-3xl;
+  @apply w-4/5 min-w-auto w-70 sm:h-70 p-4 mx-auto bg-cafe-50 rounded-3xl;
 }
 
 .card>img {
