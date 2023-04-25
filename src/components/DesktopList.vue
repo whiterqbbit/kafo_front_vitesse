@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-screen--50px w-120 overflow-auto">
     <div v-if="coffee_store.db_loading">
       <img :src="spinner" m-auto>
     </div>
