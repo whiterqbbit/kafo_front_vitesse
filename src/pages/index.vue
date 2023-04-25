@@ -16,10 +16,6 @@
       <div class="relative h-full w-full">
         <TheMap class="z-10" />
         <SearchBar class="fixed left-1/2 top-1/8 z-20 w-[528px]" />
-        <MapMarker
-          v-for="coffee in coffee_db" :key="coffee.id" :lng-lat="coffee.location.data"
-          :popup-description="coffee.desc"
-        />
       </div>
     </div>
     <MobileList
