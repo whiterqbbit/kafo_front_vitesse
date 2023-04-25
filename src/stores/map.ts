@@ -94,14 +94,14 @@ export const use_map_store = defineStore('use_map_store', () => {
     } as unknown as MarkerData)
   }
 
-  function removeAllMarkers() {
+  function remove_all_Markers() {
     markers.value.forEach(marker => marker.instance.remove())
     markers.value = []
   }
 
-  function updateMarkers(coffee_db: Ref<Cafe[]>) {
+  function update_markers(coffee_db: Ref<Cafe[]>) {
     // Remove all existing markers from the map
-    removeAllMarkers()
+    remove_all_Markers()
 
     // Add new markers for each filtered coffee shop
     coffee_db.value.forEach((coffee) => {
@@ -167,5 +167,5 @@ export const use_map_store = defineStore('use_map_store', () => {
     fetchGooglePlacesAutocomplete()
   }
 
-  return { map_leaf, markers, bounds, markersOnMap, mapIsLoaded, tileLayerIsLoaded, markerIsLoaded, markerIsClick, removeAllMarkers, getPinsOnMap, addMap, addTileLayer, addMarker, updateMarkers, locate_user, search, user_coords }
+  return { map_leaf, markers, bounds, markersOnMap, mapIsLoaded, tileLayerIsLoaded, markerIsLoaded, markerIsClick, remove_all_Markers, getPinsOnMap, addMap, addTileLayer, addMarker, update_markers, locate_user, search, user_coords }
 })

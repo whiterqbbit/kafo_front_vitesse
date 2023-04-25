@@ -44,10 +44,10 @@
 import { useCookies } from '@vueuse/integrations/useCookies'
 
 const coffee_db = computed(() => use_coffee_store().db_filtered)
-const mapStore = use_map_store()
+const map_store = use_map_store()
 
 watch(coffee_db, () => {
-  mapStore.updateMarkers(coffee_db)
+  map_store.update_markers(coffee_db)
 }, { immediate: true })
 
 const cookies = useCookies(['user'])
