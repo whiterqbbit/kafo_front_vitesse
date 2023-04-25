@@ -48,7 +48,23 @@
 import { useCookies } from '@vueuse/integrations/useCookies'
 import { use_coffee_store } from '@/stores/coffee'
 
-const cookies = useCookies(['user'])
-
 const coffee_db = computed(() => use_coffee_store().db_filtered)
+
+function updateMarkers() {
+  const mapStore = use_map_store()
+
+  // Remove all existing markers from the map
+  mapStore.removeAllMarkers()
+
+  // Add new markers for each filtered coffee shop
+  coffee_db.value.forEach((coffee) => {
+    mapStore.addMarker([coffee.location.data.lat, coffee.location.data.lng], coffee.desc || '')
+  })
+}
+
+watch(coffee_db, () => {
+  updateMarkers()
+}, { immediate: true })
+
+const cookies = useCookies(['user'])
 </script>

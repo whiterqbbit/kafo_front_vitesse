@@ -27,18 +27,20 @@ export const use_coffee_store = defineStore('coffee', () => {
     if (filters.wifi) array_other.push('Wifi')
     if (filters.power) array_other.push('Prises')
     if (filters.our_picks) array_other.push('Top rated')
-    // gérer non vides
 
     if (db.value) {
-      for (const cafe of db.value) {
-        const { tags, is_open } = cafe
+      db.value.forEach((cafe) => {
+        const { tags, is_open, attendance } = cafe
+        const not_empty_matched = !filters.not_empty || attendance !== 0
         const price_matched = !array_price.length || array_price.some(r => tags.includes(r))
         const noise_matched = !array_noise.length || array_noise.some(r => tags.includes(r))
         const other_matched = !array_other.length || array_other.every(r => tags.includes(r))
         const open_matched = !filters.open_now || is_open
 
-        if (price_matched && noise_matched && other_matched && open_matched) filtered_coffee_array.push(cafe)
-      }
+        if (price_matched && noise_matched && other_matched && open_matched && not_empty_matched) {
+          filtered_coffee_array.push(cafe)
+        }
+      })
     }
     return filtered_coffee_array
   })
