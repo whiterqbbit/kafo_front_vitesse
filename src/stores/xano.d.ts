@@ -20,6 +20,7 @@ export type CafeTag =
 	| 'Coworking'
 	| 'Animé'
 	| 'A Vérifier'
+	| 'Gratuit'
 	| 'Autre lieu'
 	| 'Tiers lieu'
 	| 'Hôtel'
