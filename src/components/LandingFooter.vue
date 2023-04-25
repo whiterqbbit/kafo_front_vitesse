@@ -1,27 +1,42 @@
 <template>
-  <footer class="sticky top-0 w-full bg-cafe-500 font-bold">
-    <div class="mx-auto h-35px max-w-7xl flex flex-row place-items-center justify-between md:h-50px">
-      <RouterLink class="icon-btn" to="/">
-        <img :src="logo" alt="logo" class="h-9 pl-4 md:h-12 lg:pl-0">
-      </RouterLink>
-      <nav flex gap-5 text-white>
-        <RouterLink to="/FAQ">
-          FAQ
+  <footer class="mt-20 h-full w-full bg-cafe-600 py-8 font-semibold">
+    <div class="mx-auto max-w-7xl flex flex-row place-items-center justify-around">
+      <nav class="col">
+        <RouterLink to="/mentions-legales">
+          Mentions légales
         </RouterLink>
-        <RouterLink to="/contact">
-          Contact
+        <RouterLink to="/confidentialite">
+          Confidentialité
+        </RouterLink>
+      </nav>
+      <nav class="col">
+        <RouterLink to="/Nos valeurs">
+          Nos valeurs
         </RouterLink>
         <RouterLink to="/a-propos">
           A Propos
         </RouterLink>
-        <RouterLink to="/a-propos">
+        <RouterLink to="/partenaire">
           Devenir partenaire
+        </RouterLink>
+      </nav>
+      <nav class="col">
+        <RouterLink to="/FAQ">
+          Instagram
+        </RouterLink>
+        <RouterLink to="/contact">
+          Linkedin
+        </RouterLink>
+        <RouterLink to="/a-propos">
+          Contact
         </RouterLink>
       </nav>
     </div>
   </footer>
 </template>
 
-<script setup lang="ts">
-import logo from '@/assets/img/logo/kafo_logo_white.png'
-</script>
+<style>
+.col {
+  @apply flex flex-col text-white h-full gap-2;
+}
+</style>

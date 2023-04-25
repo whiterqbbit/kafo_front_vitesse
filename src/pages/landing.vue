@@ -35,14 +35,16 @@
         Faites de nouvelles rencontres
       </div>
       <div class="mt-6 text-lg">
-        Cassez la routine et travaillez dans une ambiance conviviale
+        Cassez la routine et travaillez dans une ambiance conviviale.
+        <br>Partagez des connaissances.
+        <br>Créez des opportunités de collaboration.
       </div>
     </div>
     <div class="mx-auto max-w-250 flex flex flex-col justify-around gap-6 md:flex-row">
       <div class="card">
         <img :src="group" class="h-18">
         <div>Explorez nos clubs</div>
-        <div>Trouvez des personnes ayant les mêmes centres d'intérêt pour s'entraider, partager des connaissances et créer des opportunités de collaboration.</div>
+        <div>Trouvez des personnes ayant les mêmes centres d'intérêt pour s'entraider.</div>
       </div>
       <div class="card">
         <img :src="casque" class="h-15 w-full">
@@ -70,17 +72,17 @@
       <div class="card">
         <img :src="table" class="h-18">
         <div>Télétravailleurs bienvenus</div>
-        <div>Vous savez par avance que votre présence est bienvenue, vous pouvez vous concentrer sur l’essentiel !</div>
+        <div>Vous savez par avance que votre présence est bienvenue, vous pouvez travailler sereinement !</div>
       </div>
       <div class="card">
         <img :src="tasses" class="h-15 w-full">
-        <div>Le prix d'un café ?</div>
-        <div>Les espaces de coworking proposent un paiement à l'heure, et pour les autres lieux, un café suffit pour profiter pleinement de l'espace.</div>
+        <div>Le prix d'un café</div>
+        <div>Il suffit d'une consommation pour rester dans la plupart de nos espaces (sauf coworking et espaces gratuits).</div>
       </div>
       <div class="card">
         <img :src="notes" class="h-15">
         <div>Calme ou animé</div>
-        <div>Choisissez l'ambiance que vous préférez. Fini les mauvaises surprises...</div>
+        <div>Choisissez l'ambiance que vous préférez. Finies les mauvaises surprises.</div>
       </div>
     </div>
     <CTA class="mx-auto mt-6 text-lg md:mt-12 sm:text-xl md:text-2xl lg:text-3xl" />
@@ -106,8 +108,8 @@
     </div>
   </section>
   <section id="contact" class="mx-auto mt-8 container sm:mt-16 sm:flex">
-    <img :src="coeur_niais" class="w-1/2 sm:w-1/2">
-    <div class="flex flex-col sm:w-1/2">
+    <img :src="coeur_niais" class="w-1/2 p-12 sm:w-1/2">
+    <div class="m-auto flex flex-col sm:w-1/2">
       <div class="landing-title text-left">
         Une communauté
       </div>
@@ -123,7 +125,7 @@
       </div>
     </div>
   </section>
-  <LandingFooter class="mt-20" />
+  <LandingFooter />
 </template>
 
 <script setup lang="ts">
@@ -186,7 +188,7 @@ const questions = ref([{
 }
 
 .card {
-  @apply w-4/5 min-w-auto w-70 sm:h-70 p-4 mx-auto bg-cafe-50 rounded-3xl;
+  @apply w-4/5 min-w-auto w-70 sm:h-62 p-4 mx-auto bg-cafe-50 rounded-3xl;
 }
 
 .card>img {
