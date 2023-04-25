@@ -70,7 +70,7 @@
     </div>
     Si une disposition des présentes CGU est jugée invalide, illégale ou inapplicable par un tribunal compétent, les autres dispositions resteront en vigueur et de plein effet. Le fait pour SAS Kafo de ne pas exercer ou de ne pas faire valoir un droit ou une disposition des présentes CGU ne constitue pas une renonciation à ce droit ou à cette disposition.
   </div>
-  <LandingFooter class="mt-20 h-48" />
+  <LandingFooter />
 </template>
 
 <style>

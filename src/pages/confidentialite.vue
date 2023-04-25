@@ -73,7 +73,7 @@
     </div>
     Si vous avez des questions ou des préoccupations concernant la présente politique de confidentialité ou le traitement de vos données personnelles, veuillez nous contacter par e-mail à l'adresse suivante : vincent@kafo.work.
   </div>
-  <LandingFooter class="mt-20 h-48" />
+  <LandingFooter />
 </template>
 
 <style>
