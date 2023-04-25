@@ -1,5 +1,5 @@
 <template>
-  <header sticky top-0 z-50 h-50px w-full flex flex-row place-items-center justify-between bg-cafe-600>
+  <header clas="sticky top-0 z-50 h-50px w-full flex flex-row place-items-center justify-between bg-cafe-600">
     <RouterLink class="icon-btn" to="/landing">
       <img :src="logo" alt="logo" class="h-12 pl-4">
     </RouterLink>
