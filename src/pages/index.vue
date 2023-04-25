@@ -50,5 +50,5 @@ import { use_coffee_store } from '@/stores/coffee'
 
 const cookies = useCookies(['user'])
 
-const coffee_db = computed(() => use_coffee_store().db)
+const coffee_db = computed(() => use_coffee_store().db_filtered)
 </script>

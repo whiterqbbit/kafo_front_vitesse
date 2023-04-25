@@ -31,6 +31,7 @@ export const use_map_store = defineStore('use_map_store', () => {
   const markerIsLoaded = ref(false)
   const markerIsClick = ref(false)
   const user_coords: any = ref()
+  const markerInstances: Ref<any[]> = ref([]) // add this line
 
   const getPinsOnMap = computed(() => {
     if (bounds.value) return markers.value.filter(marker => bounds.value.contains(marker.coordinates))
@@ -75,12 +76,16 @@ export const use_map_store = defineStore('use_map_store', () => {
       popupAnchor: [0, -32],
     })
 
-    marker(lngLat, { icon: customIcon })
+    const markerInstance = marker(lngLat, { icon: customIcon })
       .addTo(map_leaf.value)
       .bindPopup(popupDescription)
       .on('click', () => {
         markerIsClick.value = true
       })
+
+    // add marker instance to the array
+    markerInstances.value.push(markerInstance)
+
     markerIsLoaded.value = true
     bounds.value = map_leaf.value.getBounds()
 
@@ -89,6 +94,12 @@ export const use_map_store = defineStore('use_map_store', () => {
       coordinates: lngLat,
       popupDescription,
     } as unknown as MarkerData)
+  }
+
+  async function removeAllMarkers() {
+    markerInstances.value.forEach(markerInstance => markerInstance.remove())
+    markerInstances.value = []
+    markers.value = []
   }
 
   // ne fait que centrer la carte sur l'utilisateur en l'état
@@ -148,5 +159,5 @@ export const use_map_store = defineStore('use_map_store', () => {
     fetchGooglePlacesAutocomplete()
   }
 
-  return { map_leaf, markers, bounds, markersOnMap, mapIsLoaded, tileLayerIsLoaded, markerIsLoaded, markerIsClick, getPinsOnMap, addMap, addTileLayer, addMarker, locate_user, search, user_coords }
+  return { map_leaf, markers, bounds, markersOnMap, mapIsLoaded, tileLayerIsLoaded, markerIsLoaded, markerIsClick, removeAllMarkers, getPinsOnMap, addMap, addTileLayer, addMarker, locate_user, search, user_coords }
 })
