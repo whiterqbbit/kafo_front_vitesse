@@ -1,10 +1,21 @@
 <template>
-  <footer class="sticky top-0 w-full bg-cafe-500 font-bold">
-    <div class="mx-auto h-35px max-w-7xl flex flex-row place-items-center justify-between md:h-50px">
-      <RouterLink class="icon-btn" to="/">
-        <img :src="logo" alt="logo" class="h-9 pl-4 md:h-12 lg:pl-0">
-      </RouterLink>
-      <nav flex gap-5 text-white>
+  <footer class="w-full bg-cafe-600 font-semibold">
+    <div class="mx-auto max-w-7xl flex flex-row place-items-center justify-around">
+      <nav flex flex-col gap-5 text-white>
+        <RouterLink to="/mentions-legales">
+          Mentions légales
+        </RouterLink>
+        <RouterLink to="/confidentialite">
+          Confidentialité
+        </RouterLink>
+        <RouterLink to="/a-propos">
+          A Propos
+        </RouterLink>
+        <RouterLink to="/a-propos">
+          Devenir partenaire
+        </RouterLink>
+      </nav>
+      <nav flex flex-col gap-5 text-white>
         <RouterLink to="/FAQ">
           FAQ
         </RouterLink>
@@ -18,10 +29,21 @@
           Devenir partenaire
         </RouterLink>
       </nav>
+      <nav flex flex-col gap-5 text-white>
+        <div />
+        <RouterLink to="/FAQ">
+          Instagram
+        </RouterLink>
+        <RouterLink to="/contact">
+          Linkedin
+        </RouterLink>
+        <RouterLink to="/a-propos">
+          Contact
+        </RouterLink>
+      </nav>
     </div>
   </footer>
 </template>
 
 <script setup lang="ts">
-import logo from '@/assets/img/logo/kafo_logo_white.png'
 </script>
