@@ -15,6 +15,7 @@ interface Leaflet {
 interface MarkerData {
   coordinates: simple_coords
   popupDescription: string
+  instance: any
 }
 
 let leaflet: Promise<Leaflet> | undefined
@@ -31,7 +32,6 @@ export const use_map_store = defineStore('use_map_store', () => {
   const markerIsLoaded = ref(false)
   const markerIsClick = ref(false)
   const user_coords: any = ref()
-  const markerInstances: Ref<any[]> = ref([]) // add this line
 
   const getPinsOnMap = computed(() => {
     if (bounds.value) return markers.value.filter(marker => bounds.value.contains(marker.coordinates))
@@ -83,22 +83,18 @@ export const use_map_store = defineStore('use_map_store', () => {
         markerIsClick.value = true
       })
 
-    // add marker instance to the array
-    markerInstances.value.push(markerInstance)
-
     markerIsLoaded.value = true
     bounds.value = map_leaf.value.getBounds()
 
-    // add marker on store
     markers.value.push({
       coordinates: lngLat,
       popupDescription,
+      instance: markerInstance,
     } as unknown as MarkerData)
   }
 
-  async function removeAllMarkers() {
-    markerInstances.value.forEach(markerInstance => markerInstance.remove())
-    markerInstances.value = []
+  function removeAllMarkers() {
+    markers.value.forEach(marker => marker.instance.remove())
     markers.value = []
   }
 
