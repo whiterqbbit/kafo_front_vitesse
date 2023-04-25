@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { useGeolocation } from '@vueuse/core'
 import marker_icon from '@/assets/img/geoloc/marker_6.png'
 import user_icon_url from '@/assets/img/geoloc/user.png'
+import type { Cafe } from '@/stores/xano.d'
 
 type simple_coords = [number, number]
 
@@ -98,6 +99,16 @@ export const use_map_store = defineStore('use_map_store', () => {
     markers.value = []
   }
 
+  function updateMarkers(coffee_db: Ref<Cafe[]>) {
+    // Remove all existing markers from the map
+    removeAllMarkers()
+
+    // Add new markers for each filtered coffee shop
+    coffee_db.value.forEach((coffee) => {
+      addMarker([coffee.location.data.lat, coffee.location.data.lng], coffee.desc || '')
+    })
+  }
+
   // ne fait que centrer la carte sur l'utilisateur en l'état
   async function locate_user() {
     const { coords, resume } = useGeolocation()
@@ -156,5 +167,5 @@ export const use_map_store = defineStore('use_map_store', () => {
     fetchGooglePlacesAutocomplete()
   }
 
-  return { map_leaf, markers, bounds, markersOnMap, mapIsLoaded, tileLayerIsLoaded, markerIsLoaded, markerIsClick, removeAllMarkers, getPinsOnMap, addMap, addTileLayer, addMarker, locate_user, search, user_coords }
+  return { map_leaf, markers, bounds, markersOnMap, mapIsLoaded, tileLayerIsLoaded, markerIsLoaded, markerIsClick, removeAllMarkers, getPinsOnMap, addMap, addTileLayer, addMarker, updateMarkers, locate_user, search, user_coords }
 })
