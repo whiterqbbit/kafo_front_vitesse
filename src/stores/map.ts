@@ -74,7 +74,7 @@ export const use_map_store = defineStore('use_map_store', () => {
       iconUrl: marker_icon,
       iconSize: [20, 32],
       iconAnchor: [20, 32],
-      popupAnchor: [0, -32],
+      popupAnchor: [-10, -32],
     })
 
     const marker_instance = marker(lngLat, { icon: customIcon })
