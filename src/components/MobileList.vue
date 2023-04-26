@@ -1,21 +1,64 @@
 <template>
   <div text-xl>
-    <Flicking :options="{ renderOnlyVisible: true, resizeOnContentsReady: true }">
-      <div v-for="coffee in coffee_store.db" :key="coffee.id" class="flicking-panel flex flex-col">
-        {{ coffee.nom }}
-        <img :src="coffee.aws_miniatures[0].url" class="w-32">
+    <Flicking :options="{ renderOnlyVisible: true, resizeOnContentsReady: true }" class="flicking-container">
+      <div v-for="coffee in coffee_store.db" :key="coffee.id" class="flicking-panel m-4 flex flex-col place-self-center rounded-2xl bg-cafe-100 object-cover p-3">
+        <img :src="coffee.aws_miniatures[0].url" class="h-50 rounded-xl">
+        <div class="flex items-end justify-between">
+          <span class="text-left text-2xl">{{ coffee.nom }}</span>
+          <div class="font-normal">
+            {{ coffee_store.establishment_type(coffee.tags) }}
+          </div>
+        </div>
+        <div class="flex justify-between">
+          <div class="flex gap-2 text-left font-normal text-lg">
+            <img :src="subway_icon" class="h-6">
+            {{ coffee.metro }}
+          </div>
+          <div class="flex justify-between">
+            <div id="tag_icons" w-24 flex gap-2>
+              <div v-if="coffee.tags.includes('Studieux')" i-ci-volume-off class="icon-btn" />
+              <div v-else-if="coffee.tags.includes('Calme')" i-ci-volume-min class="icon-btn" />
+              <div v-else-if="coffee.tags.includes('Animé')" i-ci-volume-max class="icon-btn" />
+              <div v-if="coffee.tags.includes('Wifi')" i-ci-wifi-high class="icon-btn" />
+              <div v-else i-ci-wifi-off class="icon-btn" />
+              <div v-if="coffee.tags.includes('Prises')" i-ic-round-power-off class="icon-btn" />
+              <div v-else i-ic-round-power class="icon-btn" />
+            </div>
+          </div>
+        </div>
+        <div v-if="coffee.attendance" id="attendance">
+          <div class="flex">
+            <div v-for="attendee in coffee.attendees" :key="attendee.id" class="attendee-img h-12 w-12 rounded-full bg-cafe-100">
+              <img :src="attendee.url" class="h-full w-full rounded-full object-cover">
+            </div>
+          </div>
+        </div>
       </div>
-    </Flicking>
+    </flicking>
   </div>
 </template>
 
 <script setup lang="ts">
 import Flicking from '@egjs/vue3-flicking'
+import subway_icon from '@/assets/img/icons/metro_tantative.png'
 
 const coffee_store = use_coffee_store()
 </script>
 
 <style>
+.flicking-container {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  @apply
+}
+
+.flicking-panel {
+  flex: none;
+  width: 50%;
+  height: 100%;
+  @apply p-0
+}
 .flicking-camera {
     width: 100%;
     height: 100%;
@@ -27,20 +70,6 @@ const coffee_store = use_coffee_store()
 .flicking-viewport {
   margin-bottom: 10px;
 }
-.flicking-panel {
-   background-color: #f2a65e;
-    width: 50%;
-    height: 200px;
-    display: flex;
-    border-radius: 5px;
-    margin-right: 10px;
-    align-items: flex-end;
-    justify-content: start;
-    padding: 20px 30px;
-    box-sizing: border-box;
-    position: relative;
-}
-
 .is-justify-content-center {
     justify-content: center!important;
 }

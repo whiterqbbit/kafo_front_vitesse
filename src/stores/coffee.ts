@@ -69,6 +69,25 @@ export const use_coffee_store = defineStore('coffee', () => {
       db_loading.value = false
     }
   }
+  function establishment_type(tags: any) {
+    const tagsList = [
+      'Café',
+      'Bar',
+      'Bistrot',
+      'Brasserie',
+      'Hôtel',
+      'Coworking',
+      'Tiers lieu',
+      'Autre lieu',
+      'Restaurant',
+      'Salon de thé',
+    ]
 
-  return { fetch_db, db, db_loading, db_filtered, db_error, selected, selected_id }
+    for (const single_tag of tagsList) {
+      if (tags.includes(single_tag)) return single_tag
+    }
+    return ''
+  }
+
+  return { fetch_db, db, db_loading, db_filtered, db_error, selected, selected_id, establishment_type }
 })

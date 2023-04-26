@@ -41,7 +41,7 @@
                   {{ coffee.nom }}
                 </div>
                 <div class="font-normal text-xl">
-                  {{ establishment_type(coffee.tags) }}
+                  {{ coffee_store.establishment_type(coffee.tags) }}
                 </div>
               </div>
               <div class="flex gap-2 font-normal text-lg">
@@ -83,28 +83,6 @@ const coffee_db = computed(() => coffee_store.db_filtered)
 function select_coffee(id: number) {
   coffee_store.selected_id = id
 }
-
-const establishment_type = computed(() => {
-  const tagsList = [
-    'Café',
-    'Bar',
-    'Bistrot',
-    'Brasserie',
-    'Hôtel',
-    'Coworking',
-    'Tiers lieu',
-    'Autre lieu',
-    'Restaurant',
-    'Salon de thé',
-  ]
-
-  return (tags: any) => {
-    for (const single_tag of tagsList) {
-      if (tags.includes(single_tag)) return single_tag
-    }
-    return ''
-  }
-})
 </script>
 
 <style scoped>

@@ -20,7 +20,7 @@
     </div>
     <MobileList
       v-if="preferences.is_mobile"
-      class="absolute bottom-0 left-1/2 z-20 h-80 w-full font-title -translate-x-1/2"
+      class="absolute left-1/2 top-180 z-20 h-80 w-full font-title -translate-x-1/2"
     />
     <div v-else class="h-full">
       <div class="flex flex-row overflow-hidden bg-[#faf7f7] font-title">
