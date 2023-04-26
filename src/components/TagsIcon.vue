@@ -1,20 +1,20 @@
 <template>
-  <div class="wrap flex justify-between" :class="props.tags.length < 7 ? 'md:max-w-1/2' : ''">
+  <div class="tag_container" :class="props.tags.length < 6 ? 'md:max-w-1/2' : ''">
     <!-- prix -->
     <div v-if="props.tags.includes('Gratuit')" class="tag_group">
-      <img :src="svg_gratuit">
+      <img class="tag_img" :src="svg_gratuit">
       <div class="tag_text">
         Gratuit
       </div>
     </div>
     <div v-else-if="props.tags.includes('Coworking')" class="tag_group">
-      <img :src="svg_payant">
+      <img class="tag_img" :src="svg_payant">
       <div class="tag_text">
         Payant à l'heure
       </div>
     </div>
     <div v-else class="tag_group">
-      <img :src="svg_coffee">
+      <img class="tag_img" :src="svg_coffee">
       <div class="tag_text">
         Juste un café
       </div>
@@ -22,19 +22,19 @@
 
     <!-- niveau de bruit  -->
     <div v-if="props.tags.includes('Studieux')" class="tag_group">
-      <img :src="svg_studieux">
+      <img class="tag_img" :src="svg_studieux">
       <div class="tag_text">
         Studieux
       </div>
     </div>
     <div v-else-if="props.tags.includes('Calme')" class="tag_group">
-      <img :src="svg_calme">
+      <img class="tag_img" :src="svg_calme">
       <div class="tag_text">
         Calme
       </div>
     </div>
     <div v-else-if="props.tags.includes('Animé')" class="tag_group">
-      <img :src="svg_anime">
+      <img class="tag_img" :src="svg_anime">
       <div class="tag_text">
         Animé
       </div>
@@ -42,13 +42,13 @@
 
     <!-- wifi  -->
     <div v-if="props.tags.includes('Wifi')" class="tag_group">
-      <img :src="svg_wifi">
+      <img class="tag_img" :src="svg_wifi">
       <div class="tag_text">
         Wifi
       </div>
     </div>
     <div v-else class="tag_group">
-      <img :src="svg_wifi_no">
+      <img class="tag_img" :src="svg_wifi_no">
       <div class="tag_text">
         Pas de wifi
       </div>
@@ -56,75 +56,75 @@
 
     <!-- prises  -->
     <div v-if="props.tags.includes('Prises')" class="tag_group">
-      <img :src="svg_plug">
+      <img class="tag_img" :src="svg_plug">
       <div class="tag_text">
         Prises
       </div>
     </div>
     <div v-else class="tag_group">
-      <img :src="svg_plug_no">
+      <img class="tag_img" :src="svg_plug_no">
       <div class="tag_text">
         Pas de prises
       </div>
     </div>
 
     <div v-if="props.tags.includes('Top rated')" class="tag_group">
-      <img :src="svg_fav">
+      <img class="tag_img" :src="svg_fav">
       <div class="tag_text">
         Nos coup de coeur
       </div>
     </div>
 
     <div v-if="props.tags.includes('Salon de thé')" class="tag_group">
-      <img :src="svg_tea">
+      <img class="tag_img" :src="svg_tea">
       <div class="tag_text">
         Salon de thé
       </div>
     </div>
 
     <div v-if="props.tags.includes('Alcool')" class="tag_group">
-      <img :src="svg_alcool">
+      <img class="tag_img" :src="svg_alcool">
       <div class="tag_text">
         Alcool
       </div>
     </div>
 
     <div v-if="props.tags.includes('Bon marché')" class="tag_group">
-      <img :src="svg_cheap">
+      <img class="tag_img" :src="svg_cheap">
       <div class="tag_text">
         Bon marché
       </div>
     </div>
 
     <div v-if="props.tags.includes('Abordable')" class="tag_group">
-      <img :src="svg_cheap">
+      <img class="tag_img" :src="svg_cheap">
       <div class="tag_text">
         Abordable
       </div>
     </div>
 
     <div v-if="props.tags.includes('Partenaire')" class="tag_group">
-      <img :src="svg_partner">
+      <img class="tag_img" :src="svg_partner">
       <div class="tag_text">
         Partenaire
       </div>
     </div>
     <div v-if="props.tags.includes('Etage isolé')" class="tag_group">
-      <img :src="svg_upstairs">
+      <img class="tag_img" :src="svg_upstairs">
       <div class="tag_text">
         Etage isolé
       </div>
     </div>
 
     <div v-if="props.tags.includes('Diner')" class="tag_group">
-      <img :src="svg_meal">
+      <img class="tag_img" :src="svg_meal">
       <div class="tag_text">
         Diner
       </div>
     </div>
 
     <div v-if="props.tags.includes('Déjeuner')" class="tag_group">
-      <img :src="svg_meal">
+      <img class="tag_img" :src="svg_meal">
       <div class="tag_text">
         Déjeuner
       </div>
@@ -157,11 +157,19 @@ const props = defineProps({
 </script>
 
 <style>
+.tag_container{
+    @apply flex-wrap flex justify-between gap-y-5 my-5
+}
+
 .tag_group{
-    @apply flex flex-col place-items-center w-25
+    @apply flex flex-col flex-wrap place-items-center w-30 md:w-25 gap-1
+}
+
+.tag_img{
+    @apply h-10
 }
 
 .tag_text{
-    @apply text-center
+    @apply text-center md:text-base text-xl
 }
 </style>

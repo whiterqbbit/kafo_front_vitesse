@@ -5,7 +5,7 @@
         <a class="font-bold text-4xl">Filtres</a>
       </div>
       <div class="flex gap-4">
-        <input id="init" value="Réinitialiser" type="button" class="btn-light" @click="filters.reset()">
+        <input id="init" value="Réinitialiser" type="button" class="btn-light" @click="reset_filters()">
         <div class="h-fit flex place-items-center place-self-center rounded-full bg-white p-1 shadow-md" @click="display.filter_modal = false">
           <button i-ci-chevron-left-duo />
         </div>
@@ -107,7 +107,7 @@
         <div id="distance_filter" class="filter-container">
           <div class="flex justify-between">
             Près de vous
-            <input id="init" value="Se localiser" type="button" class="btn-light" @click="filters.reset()">
+            <input id="init" value="Se localiser" type="button" class="btn-light" @click="reset_filters()">
           </div>
           <div class="mt-1 flex justify-around py-2 text-xl">
             <div class="bullet">
