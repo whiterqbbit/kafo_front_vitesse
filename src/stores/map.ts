@@ -15,7 +15,7 @@ interface Leaflet {
 
 interface MarkerData {
   coordinates: simple_coords
-  popupDescription: string
+  popup_description: string
   instance: any
 }
 
@@ -67,7 +67,7 @@ export const use_map_store = defineStore('use_map_store', () => {
       })
   }
 
-  async function add_marker(lngLat: simple_coords, popupDescription: string) {
+  async function add_marker(lngLat: simple_coords, popup_description: string) {
     if (!leaflet) return
     const { Icon, marker } = await leaflet
     const customIcon = new Icon({
@@ -77,9 +77,9 @@ export const use_map_store = defineStore('use_map_store', () => {
       popupAnchor: [0, -32],
     })
 
-    const markerInstance = marker(lngLat, { icon: customIcon })
+    const marker_instance = marker(lngLat, { icon: customIcon })
       .addTo(map_leaf.value)
-      .bindPopup(popupDescription)
+      .bindPopup(popup_description)
       .on('click', () => {
         marker_is_click.value = true
       })
@@ -89,8 +89,8 @@ export const use_map_store = defineStore('use_map_store', () => {
 
     markers.value.push({
       coordinates: lngLat,
-      popupDescription,
-      instance: markerInstance,
+      popup_description,
+      instance: marker_instance,
     } as unknown as MarkerData)
   }
 
@@ -150,7 +150,7 @@ export const use_map_store = defineStore('use_map_store', () => {
     // Define the URL and API key
     const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${query}&types=geocode&language=fr&key=${import.meta.env.VITE_GOOGLE_API_KEY}`
     // Function to fetch data from Google Places API
-    async function fetchGooglePlacesAutocomplete() {
+    async function fetch_google_places_autocomplete() {
       try {
         const response = await fetch(url)
 
@@ -164,7 +164,7 @@ export const use_map_store = defineStore('use_map_store', () => {
     }
 
     // Call the function
-    fetchGooglePlacesAutocomplete()
+    fetch_google_places_autocomplete()
   }
 
   return { map_leaf, markers, bounds, markers_on_map, map_is_loaded, tile_layer_is_loaded, marker_is_loaded, marker_is_click, remove_all_markers, get_pins_on_map, add_map, add_tile_layer, add_marker, update_markers, locate_user, search, user_coords }
