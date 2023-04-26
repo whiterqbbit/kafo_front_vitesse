@@ -17,26 +17,26 @@ export const use_coffee_store = defineStore('coffee', () => {
     const selected_misc: CafeTag[] = []
     const filtered_coffees: Cafe[] = []
 
-    if (filters.pricing_free) selected_price_types.push('Gratuit')
-    if (filters.pricing_coffee) selected_price_types.push('Café', 'Restaurant', 'Bar', 'Brasserie', 'Tiers lieu', 'Autre lieu')
-    if (filters.pricing_hourly) selected_price_types.push('Coworking')
+    if (filters.value.pricing_free) selected_price_types.push('Gratuit')
+    if (filters.value.pricing_coffee) selected_price_types.push('Café', 'Restaurant', 'Bar', 'Brasserie', 'Tiers lieu', 'Autre lieu')
+    if (filters.value.pricing_hourly) selected_price_types.push('Coworking')
 
-    if (filters.noise_level_silent) selected_noise_levels.push('Studieux')
-    if (filters.noise_level_calm) selected_noise_levels.push('Calme')
-    if (filters.noise_level_lively) selected_noise_levels.push('Animé')
+    if (filters.value.noise_level_silent) selected_noise_levels.push('Studieux')
+    if (filters.value.noise_level_calm) selected_noise_levels.push('Calme')
+    if (filters.value.noise_level_lively) selected_noise_levels.push('Animé')
 
-    if (filters.wifi) selected_misc.push('Wifi')
-    if (filters.power) selected_misc.push('Prises')
-    if (filters.our_picks) selected_misc.push('Top rated')
+    if (filters.value.wifi) selected_misc.push('Wifi')
+    if (filters.value.power) selected_misc.push('Prises')
+    if (filters.value.our_picks) selected_misc.push('Top rated')
 
     if (db.value) {
       db.value.forEach((cafe) => {
         const { tags, is_open, attendance } = cafe
-        const not_empty_matched = !filters.not_empty || attendance !== 0
+        const not_empty_matched = !filters.value.not_empty || attendance !== 0
         const price_matched = !selected_price_types.length || selected_price_types.some(r => tags.includes(r))
         const noise_level_matched = !selected_noise_levels.length || selected_noise_levels.some(r => tags.includes(r))
         const misc_matched = !selected_misc.length || selected_misc.every(r => tags.includes(r))
-        const is_open_matched = !filters.open_now || is_open
+        const is_open_matched = !filters.value.open_now || is_open
 
         if (price_matched && noise_level_matched && misc_matched && is_open_matched && not_empty_matched) {
           filtered_coffees.push(cafe)
