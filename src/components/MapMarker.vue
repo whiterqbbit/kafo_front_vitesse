@@ -9,7 +9,7 @@ const props = defineProps({
 const kafoMap = use_map_store()
 
 onMounted(() => {
-  kafoMap.addMarker([props.lngLat.lat, props.lngLat.lng], props.popupDescription || '')
+  kafoMap.add_marker([props.lngLat.lat, props.lngLat.lng], props.popupDescription || '')
 })
 </script>
 

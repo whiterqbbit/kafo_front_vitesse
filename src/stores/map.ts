@@ -27,34 +27,34 @@ export const use_map_store = defineStore('use_map_store', () => {
   const map_leaf: any = ref({})
   const markers: Ref<MarkerData[]> = ref([])
   const bounds: any = ref({})
-  const markersOnMap: Ref<MarkerData[]> = ref([])
-  const mapIsLoaded = ref(false)
-  const tileLayerIsLoaded = ref(false)
-  const markerIsLoaded = ref(false)
-  const markerIsClick = ref(false)
+  const markers_on_map: Ref<MarkerData[]> = ref([])
+  const map_is_loaded = ref(false)
+  const tile_layer_is_loaded = ref(false)
+  const marker_is_loaded = ref(false)
+  const marker_is_click = ref(false)
   const user_coords: any = ref()
 
-  const getPinsOnMap = computed(() => {
+  const get_pins_on_map = computed(() => {
     if (bounds.value) return markers.value.filter(marker => bounds.value.contains(marker.coordinates))
   })
 
-  async function addMap(id: string, viewLngLat: simple_coords, zoom: number) {
+  async function add_map(id: string, viewLngLat: simple_coords, zoom: number) {
     if (!leaflet) return
     const { map } = await leaflet
     map_leaf.value = map(id)
       .on('load', () => {
-        mapIsLoaded.value = true
+        map_is_loaded.value = true
       })
       .on('move', () => {
-        if (markerIsLoaded.value === true) {
+        if (marker_is_loaded.value === true) {
           bounds.value = map_leaf.value.getBounds()
-          if (markers.value.length) markersOnMap.value = markers.value.filter(marker => map_leaf.value.getBounds().contains(marker.coordinates))
+          if (markers.value.length) markers_on_map.value = markers.value.filter(marker => map_leaf.value.getBounds().contains(marker.coordinates))
         }
       })
       .setView(viewLngLat, zoom)
   }
 
-  async function addTileLayer(mapUrl: string, maxZoom: number, attribution: string) {
+  async function add_tile_layer(mapUrl: string, maxZoom: number, attribution: string) {
     if (!leaflet) return
     const { tileLayer } = await leaflet
     tileLayer(mapUrl, {
@@ -63,11 +63,11 @@ export const use_map_store = defineStore('use_map_store', () => {
     })
       .addTo(map_leaf.value)
       .on('load', () => {
-        tileLayerIsLoaded.value = true
+        tile_layer_is_loaded.value = true
       })
   }
 
-  async function addMarker(lngLat: simple_coords, popupDescription: string) {
+  async function add_marker(lngLat: simple_coords, popupDescription: string) {
     if (!leaflet) return
     const { Icon, marker } = await leaflet
     const customIcon = new Icon({
@@ -81,10 +81,10 @@ export const use_map_store = defineStore('use_map_store', () => {
       .addTo(map_leaf.value)
       .bindPopup(popupDescription)
       .on('click', () => {
-        markerIsClick.value = true
+        marker_is_click.value = true
       })
 
-    markerIsLoaded.value = true
+    marker_is_loaded.value = true
     bounds.value = map_leaf.value.getBounds()
 
     markers.value.push({
@@ -94,18 +94,18 @@ export const use_map_store = defineStore('use_map_store', () => {
     } as unknown as MarkerData)
   }
 
-  function remove_all_Markers() {
+  function remove_all_markers() {
     markers.value.forEach(marker => marker.instance.remove())
     markers.value = []
   }
 
   function update_markers(coffee_db: Ref<Cafe[]>) {
     // Remove all existing markers from the map
-    remove_all_Markers()
+    remove_all_markers()
 
     // Add new markers for each filtered coffee shop
     coffee_db.value.forEach((coffee) => {
-      addMarker([coffee.location.data.lat, coffee.location.data.lng], coffee.desc || '')
+      add_marker([coffee.location.data.lat, coffee.location.data.lng], coffee.desc || '')
     })
   }
 
@@ -134,9 +134,9 @@ export const use_map_store = defineStore('use_map_store', () => {
         .addTo(map_leaf.value)
         .bindPopup('C\'est vous !')
         .on('click', () => {
-          markerIsClick.value = true
+          marker_is_click.value = true
         })
-      markerIsLoaded.value = true
+      marker_is_loaded.value = true
     })
 
     map_leaf.value.on('locationerror', (error: any) => {
@@ -167,5 +167,5 @@ export const use_map_store = defineStore('use_map_store', () => {
     fetchGooglePlacesAutocomplete()
   }
 
-  return { map_leaf, markers, bounds, markersOnMap, mapIsLoaded, tileLayerIsLoaded, markerIsLoaded, markerIsClick, remove_all_Markers, getPinsOnMap, addMap, addTileLayer, addMarker, update_markers, locate_user, search, user_coords }
+  return { map_leaf, markers, bounds, markers_on_map, map_is_loaded, tile_layer_is_loaded, marker_is_loaded, marker_is_click, remove_all_markers, get_pins_on_map, add_map, add_tile_layer, add_marker, update_markers, locate_user, search, user_coords }
 })
