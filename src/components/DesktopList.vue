@@ -79,7 +79,7 @@ import subway_icon from '@/assets/img/icons/metro_tantative.png'
 import spinner from '@/assets/img/spinner.gif'
 
 const coffee_store = use_coffee_store()
-const coffee_db = computed(() => coffee_store.db)
+const coffee_db = computed(() => coffee_store.db_filtered)
 function select_coffee(id: number) {
   coffee_store.selected_id = id
 }
