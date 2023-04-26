@@ -1,5 +1,5 @@
 <template>
-  <div id="main_container" class="p-4 text-2xl">
+  <div id="main_container" class="h-screen--50px w-150 overflow-auto p-4 text-2xl">
     <div id="top-bar" class="mb-2 flex justify-between">
       <div class="flex gap-4 rounded-2xl px-4">
         <a class="font-bold text-4xl">Filtres</a>

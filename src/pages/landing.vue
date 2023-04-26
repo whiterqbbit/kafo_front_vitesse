@@ -19,6 +19,7 @@
           </div>
           <div id="sub-sub-title" class="z-10 mt-6 text-lg">
             Notre plateforme facilite les rencontres pour les télétravailleurs en quête d'échanges et de collaborations.
+            <br>Gratuitement.
           </div>
           <CTA class="mx-auto mt-6 text-xl md:mt-12 sm:text-2xl md:text-3xl lg:text-4xl" />
         </div>
@@ -152,30 +153,32 @@ function is_open(index: number) {
   return open_indexes.value.includes(index)
 }
 
-const questions = ref([{
-  question: 'Puis-je passer des appels ?',
-  answer: 'Pas de problème dans les établissements “Animés”, selon votre meilleur jugement dans les “Calmes”, dans le respect des autres !',
-},
-{
-  question: 'A quoi correspondent les trois niveaux de bruits ?',
-  answer: 'Studieux : Atmosphère silencieuse, comme une bibliothèque. Calme : Niveau sonore contenu, bavardages et calls discrets autorisés. Animé : Tout ce qui est plus fort ! Beaucoup d\'espaces \'animés\' sont en réalité plutôt calmes hors des heures de pointes.',
-},
-{
-  question: 'Allez-vous bientôt couvrir d\'autres villes ?',
-  answer: 'Oui, nous sommes en train de développer notre réseau dans d\'autres villes (Lyon, Lille, Nantes...). Si tu as de bons plans à partager, nous sommes tout ouïe !',
-},
-{
-  question: 'Combien ça coûte ?',
-  answer: 'Kafo est gratuit :)',
-},
-{
-  question: 'Est-ce que je peux réserver ma place ? ',
-  answer: 'Non, il s\'agit juste de signaler que vous êtes intéressé par le créneau.',
-},
-{
-  question: 'Chocolatine ou pain au chocolat ?',
-  answer: 'Le débat linguistique autour des appellations \'pain au chocolat\' et \'chocolatine\' est ancré dans l\'histoire et la culture françaises. Si cette querelle semble futile pour certains, elle revêt en réalité une importance stratégique pour les startups, et c\'est précisément ce que cet essai se propose d\'explorer. Nous nous pencherons sur les raisons pour lesquelles l\'appellation \'pain au chocolat\' s\'avère supérieure à \'chocolatine\' dans le contexte entrepreneurial, sans pour autant mépriser ceux qui préfèrent l\'autre terme. Tout d\'abord, il est indéniable que l\'appellation \'pain au chocolat\' jouit d\'une popularité et d\'une universalité qui la rendent plus adaptée au monde des startups. En effet, selon une étude menée en 2021 par Le Parisien, près de 84% des Français utilisent le terme \'pain au chocolat\' tandis que seulement 16% emploient \'chocolatine\'. Dans un contexte entrepreneurial où la communication et l\'accessibilité sont cruciales, il est donc judicieux de miser sur le terme le plus répandu et compréhensible par la majorité. Ensuite, il convient de souligner que l\'appellation \'pain au chocolat\' a l\'avantage d\'évoquer immédiatement les ingrédients-clés du produit : le pain et le chocolat. Cette clarté est primordiale pour une startup qui doit, dès sa phase de lancement, être en mesure de capter l\'attention et susciter l\'intérêt de sa cible. La simplicité et l\'efficacité du terme \'pain au chocolat\' sont donc des atouts majeurs pour une entreprise qui vise à s\'imposer sur un marché concurrentiel. Par ailleurs, il est important de considérer l\'envergure internationale des startups, qui cherchent souvent à conquérir des marchés étrangers. Dans cette perspective, l\'appellation \'pain au chocolat\' présente un avantage indéniable. En effet, elle est plus facilement comprise et assimilée par les non-francophones que \'chocolatine\', qui peut sembler obscure ou déroutante pour ceux qui ne sont pas familiers avec le français. Ainsi, le terme \'pain au chocolat\' contribue à renforcer l\'image d\'une startup dynamique et tournée vers l\'international. Enfin, choisir l\'appellation \'pain au chocolat\' peut également devenir une marque de fabrique pour une startup, lui permettant de se démarquer dans un secteur où l\'innovation et l\'originalité sont clés. En assumant pleinement cette appellation, la startup envoie un message fort sur son attachement à la tradition et à la qualité, tout en adoptant une approche moderne et accessible. Cela peut se traduire par une identité visuelle forte, des actions marketing percutantes et une offre de produits qui va au-delà du simple pain au chocolat. En somme, il apparaît évident que l\'appellation \'pain au chocolat\' présente de nombreux avantages pour une startup, tant au niveau national qu\'international. Sa popularité, son évocation claire des ingrédients-clés, son rayonnement à l\'étranger et la possibilité d\'en faire une marque de fabrique sont autant d\'atouts qui plaident en faveur de cette appellation. Toutefois, il est essentiel de rappeler que le respect des préférences locales et régionales demeure primordial. Dans cette optique, une startup peut parfaitement proposer une version \'chocolatine\' de ses produits pour satisfaire les attentes de tous ses clients.',
-}])
+const questions = ref([
+  {
+    question: 'Combien ça coûte ?',
+    answer: 'Kafo est gratuit :)',
+  },
+  {
+    question: 'Puis-je passer des appels ?',
+    answer: 'Pas de problème dans les établissements “Animés”, selon votre jugement dans les “Calmes”, dans le respect des autres !',
+  },
+  {
+    question: 'A quoi correspondent les trois niveaux de bruits ?',
+    answer: 'Studieux : Atmosphère silencieuse, comme une bibliothèque. Calme : Niveau sonore contenu, bavardages et calls discrets autorisés. Animé : Tout ce qui est plus fort ! Beaucoup d\'espaces \'animés\' sont en réalité plutôt calmes hors des heures de pointes.',
+  },
+  {
+    question: 'Allez-vous bientôt couvrir d\'autres villes ?',
+    answer: 'Oui, nous sommes en train de développer notre réseau dans d\'autres villes (Marseille, Lyon, Lille, Nantes...). Si vous avez de bons plans à partager avec la communauté, n\'hésitez pas !',
+  },
+  {
+    question: 'Est-ce que je peux réserver ma place ? ',
+    answer: 'Non, vous pouvez signaler que vous êtes intéressé par une session de coworking, mais cela n\'équivaut pas à une réservation. Nous limitons les places selon le nombre de prises de l\'établissement pour éviter les mauvaises surprises.',
+  },
+  {
+    question: 'Chocolatine ou pain au chocolat ?',
+    answer: 'Le débat linguistique autour des appellations \'pain au chocolat\' et \'chocolatine\' est ancré dans l\'histoire et la culture françaises. Si cette querelle semble futile pour certains, elle revêt en réalité une importance stratégique pour les startups, et c\'est précisément ce que cet essai se propose d\'explorer. Nous nous pencherons sur les raisons pour lesquelles l\'appellation \'pain au chocolat\' s\'avère supérieure à \'chocolatine\' dans le contexte entrepreneurial, sans pour autant mépriser ceux qui préfèrent l\'autre terme. Tout d\'abord, il est indéniable que l\'appellation \'pain au chocolat\' jouit d\'une popularité et d\'une universalité qui la rendent plus adaptée au monde des startups. En effet, selon une étude menée en 2021 par Le Parisien, près de 84% des Français utilisent le terme \'pain au chocolat\' tandis que seulement 16% emploient \'chocolatine\'. Dans un contexte entrepreneurial où la communication et l\'accessibilité sont cruciales, il est donc judicieux de miser sur le terme le plus répandu et compréhensible par la majorité. Ensuite, il convient de souligner que l\'appellation \'pain au chocolat\' a l\'avantage d\'évoquer immédiatement les ingrédients-clés du produit : le pain et le chocolat. Cette clarté est primordiale pour une startup qui doit, dès sa phase de lancement, être en mesure de capter l\'attention et susciter l\'intérêt de sa cible. La simplicité et l\'efficacité du terme \'pain au chocolat\' sont donc des atouts majeurs pour une entreprise qui vise à s\'imposer sur un marché concurrentiel. Par ailleurs, il est important de considérer l\'envergure internationale des startups, qui cherchent souvent à conquérir des marchés étrangers. Dans cette perspective, l\'appellation \'pain au chocolat\' présente un avantage indéniable. En effet, elle est plus facilement comprise et assimilée par les non-francophones que \'chocolatine\', qui peut sembler obscure ou déroutante pour ceux qui ne sont pas familiers avec le français. Ainsi, le terme \'pain au chocolat\' contribue à renforcer l\'image d\'une startup dynamique et tournée vers l\'international. Enfin, choisir l\'appellation \'pain au chocolat\' peut également devenir une marque de fabrique pour une startup, lui permettant de se démarquer dans un secteur où l\'innovation et l\'originalité sont clés. En assumant pleinement cette appellation, la startup envoie un message fort sur son attachement à la tradition et à la qualité, tout en adoptant une approche moderne et accessible. Cela peut se traduire par une identité visuelle forte, des actions marketing percutantes et une offre de produits qui va au-delà du simple pain au chocolat. En somme, il apparaît évident que l\'appellation \'pain au chocolat\' présente de nombreux avantages pour une startup, tant au niveau national qu\'international. Sa popularité, son évocation claire des ingrédients-clés, son rayonnement à l\'étranger et la possibilité d\'en faire une marque de fabrique sont autant d\'atouts qui plaident en faveur de cette appellation. Toutefois, il est essentiel de rappeler que le respect des préférences locales et régionales demeure primordial. Dans cette optique, une startup peut parfaitement proposer une version \'chocolatine\' de ses produits pour satisfaire les attentes de tous ses clients.',
+  },
+])
 </script>
 
 <style scoped>
