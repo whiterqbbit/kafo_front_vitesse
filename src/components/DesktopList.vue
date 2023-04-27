@@ -51,24 +51,10 @@
                     {{ coffee.metro }}
                   </div>
                 </div>
-                <div id="tag_icons" class="w-fit flex">
-                  <div v-if="coffee.tags.includes('Studieux')" i-ci-volume-off class="icon-btn" />
-                  <div v-else-if="coffee.tags.includes('Calme')" i-ci-volume-min class="icon-btn" />
-                  <div v-else-if="coffee.tags.includes('Animé')" i-ci-volume-max class="icon-btn" />
-                  <div v-if="coffee.tags.includes('Wifi')" i-ci-wifi-high class="icon-btn" />
-                  <div v-else i-ci-wifi-off class="icon-btn" />
-                  <div v-if="coffee.tags.includes('Prises')" i-ic-round-power-off class="icon-btn" />
-                  <div v-else i-ic-round-power class="icon-btn" />
-                </div>
+                <TagList :tags="coffee.tags" class="flex" />
               </div>
             </div>
-            <div v-if="coffee.attendance" id="attendance">
-              <div class="flex">
-                <div v-for="attendee in coffee.attendees" :key="attendee.id" class="attendee-img h-12 w-12 rounded-full bg-cafe-100">
-                  <img :src="attendee.url" class="h-full w-full rounded-full object-cover">
-                </div>
-              </div>
-            </div>
+            <AvatarStack v-if="coffee.attendees" :attendees="coffee.attendees" />
           </RouterLink>
         </div>
       </div>
@@ -77,7 +63,7 @@
 </template>
 
 <script setup lang="ts">
-import subway_icon from '@/assets/img/icons/metro_tantative.png'
+import subway_icon from '@/assets/img/icons/metro.png'
 import spinner from '@/assets/img/spinner.gif'
 
 const coffee_store = use_coffee_store()
@@ -86,35 +72,3 @@ function select_coffee(id: number) {
   coffee_store.selected_id = id
 }
 </script>
-
-<style scoped>
-.icon-btn {
-  height: 1.8rem;
-}
-
-.attendee-img {
-  position: relative;
-  margin-right: -10px;
-  z-index: 6;
-}
-
-.attendee-img:nth-child(n+2) {
-  z-index: 5;
-}
-
-.attendee-img:nth-child(n+3) {
-  z-index: 4;
-}
-
-.attendee-img:nth-child(n+4) {
-  z-index: 3;
-}
-
-.attendee-img:nth-child(n+5) {
-  z-index: 2;
-}
-
-.attendee-img:nth-child(n+6) {
-  z-index: 1;
-}
-</style>

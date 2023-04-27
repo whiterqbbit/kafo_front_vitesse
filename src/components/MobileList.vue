@@ -2,41 +2,33 @@
   <div>
     <Flicking :options="{ renderOnlyVisible: true, resizeOnContentsReady: true }" class="flicking-container">
       <div v-for="coffee in coffee_store.db_filtered" :key="coffee.id" class="flicking-panel m-x-4 overflow-hidden rounded-2xl bg-cafe-100 shadow-md">
-        <RouterLink :to="`coffee/${coffee.id}`" class="flex flex-col place-self-center object-cover">
+        <RouterLink :to="`coffee/${coffee.id}`" class="relative flex flex-col place-self-center object-cover">
           <img :src="coffee.aws_miniatures[0].url" class="h-50 object-cover">
           <div class="flex flex-col gap-1 p-3">
+            <div v-if="coffee.is_open" class="absolute right-4 top-3 z-10 inline-block rounded-full bg-grass-500 px-2 py-1 font-bold tracking-wider text-white text-lg">
+              Ouvert
+            </div>
+
+            <!-- Ligne nom + type -->
             <div class="flex items-end justify-between">
               <span class="overflow-hidden text-ellipsis whitespace-nowrap text-left font-bold text-xl">
                 {{ coffee.nom }}
               </span>
-              <div class="font-normal">
+              <div>
                 {{ coffee_store.establishment_type(coffee.tags) }}
               </div>
             </div>
+
+            <!-- Ligne metro + tags -->
             <div class="flex justify-between gap-2">
-              <div class="w-75% inline-flex gap-2 text-left font-normal">
+              <div class="w-3/4 inline-flex gap-2">
                 <img :src="subway_icon" class="h-6">
                 <span class="overflow-hidden text-ellipsis whitespace-nowrap">{{ coffee.metro }}</span>
               </div>
-              <div class="flex">
-                <div id="tag_icons" class="inline-flex gap-2">
-                  <div v-if="coffee.tags.includes('Studieux')" i-ci-volume-off class="icon-btn" />
-                  <div v-else-if="coffee.tags.includes('Calme')" i-ci-volume-min class="icon-btn" />
-                  <div v-else-if="coffee.tags.includes('Animé')" i-ci-volume-max class="icon-btn" />
-                  <div v-if="coffee.tags.includes('Wifi')" i-ci-wifi-high class="icon-btn" />
-                  <div v-else i-ci-wifi-off class="icon-btn" />
-                  <div v-if="coffee.tags.includes('Prises')" i-ic-round-power-off class="icon-btn" />
-                  <div v-else i-ic-round-power class="icon-btn" />
-                </div>
-              </div>
+              <TagList :tags="coffee.tags" class="inline-flex gap-2" />
             </div>
-          </div>
-          <div v-if="coffee.attendance" id="attendance">
-            <div class="flex">
-              <div v-for="attendee in coffee.attendees" :key="attendee.id" class="attendee-img h-12 w-12 rounded-full bg-cafe-100">
-                <img :src="attendee.url" class="h-full w-full rounded-full object-cover">
-              </div>
-            </div>
+
+            <AvatarStack v-if="coffee.attendees" :attendees="coffee.attendees" />
           </div>
         </RouterLink>
       </div>
@@ -46,24 +38,19 @@
 
 <script setup lang="ts">
 import Flicking from '@egjs/vue3-flicking'
-import subway_icon from '@/assets/img/icons/metro_tantative.png'
+import subway_icon from '@/assets/img/icons/metro.png'
 
 const coffee_store = use_coffee_store()
 </script>
 
 <style>
 .flicking-container {
-  display: flex;
-  overflow: hidden;
-  width: 100%;
-  @apply
+  @apply flex w-full overflow-hidden
 }
 
 .flicking-panel {
   flex: none;
-  width: 70%;
-  height: 100%;
-  @apply p-0
+  @apply p-0 w-7/10 h-full
 }
 .flicking-camera {
     width: 100%;
@@ -73,9 +60,7 @@ const coffee_store = use_coffee_store()
     flex-direction: row;
     z-index: 1;
 }
-.flicking-viewport {
-  margin-bottom: 10px;
-}
+
 .is-justify-content-center {
     justify-content: center!important;
 }

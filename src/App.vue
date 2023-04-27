@@ -1,14 +1,9 @@
 <script setup lang="ts">
-import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import { use_user_store } from '@/stores/user'
 
 const user = use_user_store()
 use_coffee_store().fetch_db()
 use_club_store().fetch_db()
-
-function is_landing_page(route: RouteLocationNormalizedLoaded) {
-  return route.path === '/landing'
-}
 
 onBeforeMount(() => {
   const urlParams = new URLSearchParams(window.location.search)
@@ -53,12 +48,8 @@ useHead({
 
 <template>
   <main bg-cafe-50 text-cafe-600>
-    <DesktopHeader v-if="!is_landing_page($route) && !preferences.is_mobile" />
-    <MobileHeader v-else-if="!is_landing_page($route)" />
+    <DesktopHeader v-if="!($route.path === '/landing') && !preferences.is_mobile" />
+    <MobileHeader v-else-if="!($route.path === '/landing')" />
     <RouterView class="h-screen" />
-    <!-- <TheFooter
-      v-if="!is_landing_page($route) && preferences.is_mobile"
-      class="fixed bottom-0 z-50 h-56px w-full rounded-t-xl"
-    /> -->
   </main>
 </template>
