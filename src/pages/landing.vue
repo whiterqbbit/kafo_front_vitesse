@@ -11,7 +11,7 @@
         <div id="text-col" class="mt-4 md:mt-10 md:w-2/3">
           <div class="relative overflow-visible md:hidden">
             <div class="bg-floating-resize bg-shape absolute left-0 top-[-10px] z-0 bg-cafe-200" />
-            <img id="hero-pic-mobile" class="relative mx-auto max-w-500px w-90%" :src="hero_pic">
+            <img id="hero-pic-mobile" class="relative mx-auto max-w-500px w-90%" :src="hero_pic" alt="Cinq télétravailleurs autour d'une table qui coworkent">
           </div>
           <div id="sub-title" class="landing-subtitle mt-6 md:mt-0">
             Kafo est le réseau qui redonne
@@ -25,7 +25,7 @@
         </div>
         <div class="relative overflow-visible">
           <div class="bg-floating-resize bg-shape absolute right-[50px] top-[-100px] z-0 hidden bg-cafe-200 md:block" />
-          <img id="hero-pic" class="relative hidden md:block lg:-top-20 md:-top-10" :src="hero_pic">
+          <img id="hero-pic" class="relative hidden md:block lg:-top-20 md:-top-10" :src="hero_pic" alt="Cinq télétravailleurs autour d'une table qui coworkent">
         </div>
       </div>
     </div>
@@ -43,17 +43,17 @@
     </div>
     <div class="mx-auto max-w-250 flex flex flex-col justify-around gap-6 md:flex-row">
       <div class="card">
-        <img :src="group" class="h-18">
+        <img :src="group" class="h-18" alt="Deux personnes échangeant">
         <div>Explorez nos clubs</div>
         <div>Trouvez des personnes ayant les mêmes centres d'intérêt pour s'entraider.</div>
       </div>
       <div class="card">
-        <img :src="casque" class="h-15 w-full">
+        <img :src="casque" class="h-15 w-full" alt="Ecouteurs">
         <div>Concentré ?</div>
         <div>Indiquez en un clic que vous ne souhaitez pas être dérangé.</div>
       </div>
       <div class="card">
-        <img :src="cocktail" class="h-15">
+        <img :src="cocktail" class="h-15" alt="Deux cocktails">
         <div>Après l’effort...</div>
         <div>Indiquez que vous êtes disponible après le travail pour manger un bout ou boire un verre.</div>
       </div>
@@ -71,17 +71,17 @@
     </div>
     <div class="mx-auto max-w-250 flex flex flex-col justify-around gap-6 md:flex-row">
       <div class="card">
-        <img :src="table" class="h-18">
+        <img :src="table" class="h-18" alt="Une table de café avec un ordinateur et un café">
         <div>Télétravailleurs bienvenus</div>
         <div>Vous savez par avance que votre présence est bienvenue, vous pouvez travailler sereinement !</div>
       </div>
       <div class="card">
-        <img :src="tasses" class="h-15 w-full">
+        <img :src="tasses" class="h-15 w-full" alt="Deux tasses de cafés qui trinquent avec entrain(que)">
         <div>Le prix d'un café</div>
         <div>Il suffit d'une consommation pour rester dans la plupart de nos espaces (sauf coworking et espaces gratuits).</div>
       </div>
       <div class="card">
-        <img :src="notes" class="h-15">
+        <img :src="notes" class="h-15" alt="Des notes de musique">
         <div>Calme ou animé</div>
         <div>Choisissez l'ambiance que vous préférez. Finies les mauvaises surprises.</div>
       </div>
@@ -94,7 +94,7 @@
         Foire aux questions
       </div>
       <div v-for="(question, index) in questions" :key="question.question" class="flex flex-col">
-        <div class="flex cursor-pointer" @click="toggle(index)">
+        <div class="flex cursor-pointer" @click="toggle_faq(index)">
           <div
             class="img-default mr-4" i-ci-caret-right-sm :class="{ 'img-rotated': is_open(index) }"
           />
@@ -109,21 +109,24 @@
     </div>
   </section>
   <section id="contact" class="mx-auto mt-8 container sm:mt-16 sm:flex">
-    <img :src="coeur_niais" class="w-1/2 p-12 sm:w-1/2">
-    <div class="m-auto flex flex-col sm:w-1/2">
-      <div class="landing-title text-left">
+    <img :src="coeur_niais" class="m-auto mb-8 w-2/3 sm:(mb-0 w-1/2 p-12)" alt="Un coworkeur et un garçon de café formant un coeur ensemble, avec leur bras">
+    <div class="m-auto flex flex-col text-center sm:w-1/2 sm:text-left">
+      <div class="landing-title">
         Une communauté
       </div>
-      <div class="landing-subtitle">
+      <div class="landing-subtitle mb-4">
         Kafo, c’est vous !
       </div>
       <div>
         Vous construisez le réseau grâce à vos retours.
         Contactez-nous pour ajouter de nouveaux lieux, suggérer des idées ou simplement nous faire part de vos coups de coeur!
       </div>
-      <div class="btn">
+      <div class="mt-4 w-fit place-self-center bg-cafe-500 font-semibold text-lg btn sm:place-self-auto hover:bg-cafe-600" @click="open_contact = !open_contact">
         Contactez-nous
       </div>
+    </div>
+    <div v-if="open_contact">
+      KIkopu
     </div>
   </section>
   <LandingFooter />
@@ -139,18 +142,19 @@ import tasses from '@/assets/svg/tasses.svg'
 import notes from '@/assets/svg/notes.svg'
 import coeur_niais from '@/assets/svg/coeur_niais.svg'
 
-const open_indexes: Ref<number[]> = ref([])
+const open_faq_indexes: Ref<number[]> = ref([])
+const open_contact = ref(false)
 
-function toggle(index: number) {
-  if (open_indexes.value.includes(index)) {
-    open_indexes.value = open_indexes.value.filter(i => i !== index)
+function toggle_faq(index: number) {
+  if (open_faq_indexes.value.includes(index)) {
+    open_faq_indexes.value = open_faq_indexes.value.filter(i => i !== index)
   } else {
-    open_indexes.value.push(index)
+    open_faq_indexes.value.push(index)
   }
 }
 
 function is_open(index: number) {
-  return open_indexes.value.includes(index)
+  return open_faq_indexes.value.includes(index)
 }
 
 const questions = ref([

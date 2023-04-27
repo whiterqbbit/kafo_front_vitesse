@@ -1,5 +1,5 @@
 <template>
-  <header class="sticky top-0 z-20 w-full bg-cafe-600 font-bold text-xs md:text-lg">
+  <header class="sticky top-0 z-40 w-full bg-cafe-600 font-bold text-xs md:text-lg">
     <div class="mx-auto h-35px max-w-7xl flex flex-row place-items-center justify-between md:h-50px">
       <RouterLink class="icon-btn" to="/landing">
         <img :src="logo" alt="logo" class="ml-2 h-7 object-contain sm:ml-4 xl:ml-0 md:h-12 sm:h-9">
