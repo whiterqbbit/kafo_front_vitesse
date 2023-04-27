@@ -48,8 +48,8 @@ useHead({
 
 <template>
   <main bg-cafe-50 text-cafe-600>
-    <DesktopHeader v-if="!($route.path === '/landing') && !preferences.is_mobile" />
-    <MobileHeader v-else-if="!($route.path === '/landing')" />
+    <DesktopHeader v-if="!($route.path === '/') && !preferences.is_mobile" />
+    <MobileHeader v-else-if="!($route.path === '/')" />
     <RouterView class="h-screen" />
   </main>
 </template>
