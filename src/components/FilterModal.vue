@@ -1,5 +1,5 @@
 <template>
-  <div id="main_container" class="h-screen--50px w-150 overflow-auto p-4 text-2xl">
+  <div id="main_container" class="overflow-auto p-4 text-2xl md:h-screen--50px">
     <div id="top-bar" class="mb-2 flex justify-between">
       <div class="flex gap-4 rounded-2xl px-4">
         <a class="font-bold text-4xl">Filtres</a>
@@ -7,7 +7,7 @@
       <div class="flex gap-4">
         <input id="init" value="Réinitialiser" type="button" class="btn-light" @click="reset_filters()">
         <div class="h-fit flex place-items-center place-self-center rounded-full bg-white p-1 shadow-md" @click="display.filter_modal = false">
-          <button i-ci-chevron-left-duo />
+          <button i-ci-chevron-left-duo class="hidden md:block" />
         </div>
       </div>
     </div>

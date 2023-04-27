@@ -1,6 +1,6 @@
 <template>
   <pre v-if="display.cookie_modal" class="h-fit w-full">{{ cookies.getAll() }}</pre>
-  <div id="main_container" class="relative h-screen--35px flex flex-col bg-green-300 md:h-screen--50px md:flex-row-reverse">
+  <div id="main_container" class="relative h-screen--35px flex flex-col bg-[#faf7f7] md:h-screen--50px md:flex-row-reverse">
     <div v-if="display.login_modal" class="fixed left-0 top-0 z-50 h-full w-full bg-cafe-400 bg-opacity-50">
       <LoginModal class="absolute left-1/4 top-1/6 h-1/4 w-1/2" />
     </div>
@@ -16,12 +16,12 @@
         <SearchBar v-if="!preferences.is_mobile" class="fixed left-1/2 top-1/8 z-20 w-[528px]" />
       </div>
     </div>
-    <MobileList
-      v-if="preferences.is_mobile"
-      class="absolute bottom-20 left-1/2 z-20 h-80 w-full -translate-x-1/2"
-    />
+    <div v-if="preferences.is_mobile" class="flex flex-col">
+      <FilterModal v-if="display.filter_modal" class="w-full font-title" />
+      <MobileList v-else class="absolute bottom-20 left-1/2 z-20 h-80 w-full -translate-x-1/2" />
+    </div>
     <div v-else class="h-full">
-      <div class="flex flex-row overflow-hidden bg-[#faf7f7] font-title">
+      <div class="flex flex-row overflow-hidden font-title">
         <FilterModal v-if="display.filter_modal" class="w-150" />
         <div v-else class="ml-2 mt-4 w-16 place-items-center p-1">
           <div class="h-fit flex place-items-center place-self-center rounded-xl bg-white p-2 shadow-md" @click="display.filter_modal = true">
