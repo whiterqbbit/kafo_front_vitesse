@@ -12,6 +12,7 @@ onBeforeMount(() => {
   }
 
   const isMobileWidth: MediaQueryList = window.matchMedia('(max-width: 768px)')
+  display.filter_modal = !isMobileWidth.matches // Hide the filter modal on mobile
 
   isMobileWidth.addEventListener('change', event => handleWidthChange(event.target as MediaQueryList))
   handleWidthChange(isMobileWidth) // Call the function initially to set the correct state

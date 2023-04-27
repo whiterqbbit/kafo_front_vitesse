@@ -6,10 +6,11 @@
 
     <!-- bar de recherche -->
     <!-- <div class="p-input-icon-left"> -->
-    <div class="hidden">
+    <div>
       <i class="pi pi-search" />
       <InputText v-model="search_value" placeholder="Rechercher" />
     </div>
+    <button i-fa6-solid-sliders class="h-10 text-white" @click="display.filter_modal = !display.filter_modal" />
 
     <div ref="parentMenuContainer" class="relative">
       <button class="focus:outline-none" aria-haspopup="true" :aria-expanded="display_menu" @click="toggleMenu">
