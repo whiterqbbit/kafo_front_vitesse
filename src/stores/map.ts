@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia'
 import { useGeolocation } from '@vueuse/core'
+import { useRouter } from 'vue-router'
 import marker_icon from '@/assets/img/geoloc/marker_6.png'
 import user_icon_url from '@/assets/img/geoloc/user.png'
 import type { Cafe } from '@/stores/xano.d'
+import { use_coffee_store } from '@/stores/coffee'
 
 type simple_coords = [number, number]
 
@@ -80,8 +82,15 @@ export const use_map_store = defineStore('use_map_store', () => {
     const marker_instance = marker(lngLat, { icon: customIcon })
       .addTo(map_leaf.value)
       .bindPopup(popup_description)
-      .on('click', () => {
+      .on('click', (e: L.LeafletMouseEvent) => {
+        console.log('marker clicked', e)
         marker_is_click.value = true
+        use_coffee_store().selected_id = 1
+        console.log('selected_id', use_coffee_store().selected_id)
+
+        const router = useRouter()
+        console.log('router', router)
+        router.push('/coffee/1')
       })
 
     marker_is_loaded.value = true
