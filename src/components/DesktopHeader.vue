@@ -3,7 +3,8 @@
     <RouterLink class="icon-btn" to="/landing">
       <img :src="logo" alt="logo" class="h-12 pl-4">
     </RouterLink>
-    <nav flex gap-5 font-black text-white>
+    <!-- remplacer hidden par flex pour faire apparaitre le menu -->
+    <nav class="hidden gap-5 font-black text-white">
       <InputSwitch v-model="preferences.offline_mode" @click="use_coffee_store().fetch_db()">
         Offline
       </InputSwitch>

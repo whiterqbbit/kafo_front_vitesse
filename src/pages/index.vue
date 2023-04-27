@@ -1,6 +1,4 @@
 <template>
-  <DesktopHeader v-if="!preferences.is_mobile" />
-  <MobileHeader v-else />
   <pre v-if="display.cookie_modal" class="h-fit w-full">{{ cookies.getAll() }}</pre>
   <div id="main_container" class="relative h-screen--35px flex flex-col bg-green-300 md:h-screen--50px md:flex-row-reverse">
     <div v-if="display.login_modal" class="fixed left-0 top-0 z-50 h-full w-full bg-cafe-400 bg-opacity-50">
@@ -15,12 +13,12 @@
     <div md="w-full" class="overflow-none h-full flex items-center justify-center bg-red-100 font-title">
       <div class="relative h-full w-full">
         <TheMap class="z-10" />
-        <SearchBar class="fixed left-1/2 top-1/8 z-20 w-[528px]" />
+        <SearchBar v-if="!preferences.is_mobile" class="fixed left-1/2 top-1/8 z-20 w-[528px]" />
       </div>
     </div>
     <MobileList
       v-if="preferences.is_mobile"
-      class="absolute bottom-0 left-1/2 z-20 h-80 w-full font-title -translate-x-1/2"
+      class="absolute bottom-20 left-1/2 z-20 h-80 w-full -translate-x-1/2"
     />
     <div v-else class="h-full">
       <div class="flex flex-row overflow-hidden bg-[#faf7f7] font-title">
@@ -33,10 +31,6 @@
         <DesktopList />
       </div>
     </div>
-    <TheFooter
-      v-if="preferences.is_mobile"
-      class="fixed bottom-0 z-50 h-56px w-full rounded-t-xl"
-    />
   </div>
 </template>
 

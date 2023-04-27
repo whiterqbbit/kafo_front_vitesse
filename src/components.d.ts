@@ -9,6 +9,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AvatarStack: typeof import('./components/AvatarStack.vue')['default']
     Button: typeof import('primevue/button')['default']
     Checkbox: typeof import('primevue/checkbox')['default']
     CoffeeModal: typeof import('./components/CoffeeModal.vue')['default']
@@ -31,6 +32,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchBar: typeof import('./components/SearchBar.vue')['default']
+    TagList: typeof import('./components/TagList.vue')['default']
     TagsIcon: typeof import('./components/TagsIcon.vue')['default']
     TheFooter: typeof import('./components/TheFooter.vue')['default']
     TheMap: typeof import('./components/TheMap.vue')['default']
