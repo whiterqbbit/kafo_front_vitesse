@@ -1,7 +1,5 @@
 <template>
   <div>
-    <DesktopHeader />
-
     <Flicking
       v-if="preferences.is_mobile && selected_coffee?.aws_pics" class="flicking-container h-max-1/2 h-100"
       :options="{ renderOnlyVisible: false, horizontal: true, circular: true, autoResize: true }"
@@ -15,7 +13,7 @@
       </div>
     </Flicking>
     <div class="flex flex-col gap-6 container">
-      <RouterLink to="/" class="fixed top-25 z-10 ml-10 w-fit rounded-xl bg-cafe-100 px-2 py-1 shadow-md transition-all hover:scale-105">
+      <RouterLink to="/map" class="fixed top-7% z-10 ml-1% w-fit rounded-xl bg-cafe-100 px-2 py-1 shadow-md transition-all md:top-25 hover:scale-105">
         Retour à la carte
       </RouterLink>
       <div id="floating_CTA" class="fixed bottom-3 hidden w-[95%] flex-row place-self-center justify-between rounded-xl bg-cafe-200 p-2 text-center shadow-lg">
@@ -132,25 +130,31 @@
               </div>
             </div>
             <TagsIcon v-if="preferences.is_mobile && selected_coffee" :tags="selected_coffee?.tags" />
-            <div v-if="selected_coffee?.adresse" id="location_container" class="flex flex-row items-center justify-between text-lg">
-              <div class="flex flex-col">
+            <div v-if="selected_coffee?.adresse" id="location_container" class="flex flex-row items-center justify-between">
+              <!-- adresse et metro -->
+              <div class="max-w-2/3 flex flex-col">
                 <div id="address">
                   {{ selected_coffee?.adresse }}
                 </div>
                 <div v-if="selected_coffee?.metro" class="flex items-center gap-2">
                   <img :src="subway_icon" class="h-6 w-6">
-                  {{ selected_coffee?.metro }}
+                  <span class="overflow-hidden text-ellipsis whitespace-nowrap">
+                    {{ selected_coffee?.metro }}
+                  </span>
                 </div>
               </div>
-              <div
-                id="google_map_link"
-                class="flex flex-row place-items-center gap-2 rounded-3xl bg-grass-500 px-4 py-2 font-bold text-cafe-100"
+
+              <!-- Bouton lien itinéraire -->
+              <a
+                class="flex flex-shrink-0 flex-row place-items-center gap-2 rounded-3xl bg-grass-500 px-4 py-2 font-bold text-cafe-100"
+                :href="`https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=${selected_coffee?.nom}&destination_place_id=${selected_coffee?.google_place_id}&travelmode=walking`"
+                target="_blank"
               >
-                <div class="text-xl">
+                <div class="whitespace-nowrap text-xl">
                   Y aller !
                 </div>
-                <img class="h-10" :src="direction">
-              </div>
+                <img class="h-6 w-6" :src="direction">
+              </a>
             </div>
           </div>
         </div>
@@ -174,7 +178,7 @@ import Flicking from '@egjs/vue3-flicking'
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import 'photoswipe/style.css'
 
-import subway_icon from '@/assets/img/icons/metro_tantative.png'
+import subway_icon from '@/assets/img/icons/metro.png'
 import direction from '@/assets/img/direction.png'
 
 const props = defineProps({

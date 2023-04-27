@@ -1,12 +1,16 @@
 <template>
   <header class="h-45px w-full flex flex-row items-center justify-between bg-cafe-600">
-    <RouterLink class="icon-btn" to="/landing">
+    <RouterLink class="icon-btn" to="/">
       <img :src="logo" alt="logo" class="h-8 pl-4">
     </RouterLink>
-    <div class="p-input-icon-left">
+
+    <!-- bar de recherche -->
+    <!-- <div class="p-input-icon-left"> -->
+    <div class="hidden">
       <i class="pi pi-search" />
       <InputText v-model="search_value" placeholder="Rechercher" />
     </div>
+
     <div ref="parentMenuContainer" class="relative">
       <button class="focus:outline-none" aria-haspopup="true" :aria-expanded="display_menu" @click="toggleMenu">
         <img :src="hamburger" alt="hamburger" class="h-8 w-8">
