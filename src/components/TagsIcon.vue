@@ -158,18 +158,18 @@ const props = defineProps({
 
 <style>
 .tag_container{
-    @apply flex-wrap flex justify-between gap-y-5 my-5
+    @apply flex-wrap flex justify-between gap-y-5 my-5 gap-x-3
 }
 
 .tag_group{
-    @apply flex flex-col flex-wrap place-items-center w-30 md:w-25 gap-1
+    @apply flex flex-col flex-wrap place-items-center w-20 md:w-25 gap-1
 }
 
 .tag_img{
-    @apply h-10
+    @apply md:h-10
 }
 
 .tag_text{
-    @apply text-center md:text-base text-xl
+    @apply text-center text-sm md:text-base md:text-xl
 }
 </style>

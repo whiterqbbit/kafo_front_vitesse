@@ -15,12 +15,12 @@
     <div md="w-full" class="overflow-none h-full flex items-center justify-center bg-red-100 font-title">
       <div class="relative h-full w-full">
         <TheMap class="z-10" />
-        <SearchBar class="fixed left-1/2 top-1/8 z-20 w-[528px]" />
+        <SearchBar v-if="!preferences.is_mobile" class="fixed left-1/2 top-1/8 z-20 w-[528px]" />
       </div>
     </div>
     <MobileList
       v-if="preferences.is_mobile"
-      class="absolute left-1/2 top-180 z-20 h-80 w-full font-title -translate-x-1/2"
+      class="absolute bottom-20 left-1/2 z-20 h-80 w-full -translate-x-1/2"
     />
     <div v-else class="h-full">
       <div class="flex flex-row overflow-hidden bg-[#faf7f7] font-title">
