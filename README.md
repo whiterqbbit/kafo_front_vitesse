@@ -10,6 +10,7 @@
 
 <p align='center'>
 <a href="https://master.d211pvmqy38ejk.amplifyapp.com/">Alpha preview</a>
+<br>
 <a href="https://www.kafo.work/">Live version (nocode)</a>
 </p>
 
