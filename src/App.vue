@@ -56,5 +56,9 @@ useHead({
     <DesktopHeader v-if="!is_landing_page($route) && !preferences.is_mobile" />
     <MobileHeader v-else-if="!is_landing_page($route)" />
     <RouterView class="h-screen" />
+    <!-- <TheFooter
+      v-if="!is_landing_page($route) && preferences.is_mobile"
+      class="fixed bottom-0 z-50 h-56px w-full rounded-t-xl"
+    /> -->
   </main>
 </template>

@@ -1,29 +1,33 @@
 <template>
   <div>
     <Flicking :options="{ renderOnlyVisible: true, resizeOnContentsReady: true }" class="flicking-container">
-      <div v-for="coffee in coffee_store.db" :key="coffee.id" class="flicking-panel m-x-4 rounded-2xl bg-cafe-100">
-        <RouterLink :to="`coffee/${coffee.id}`" class="flex flex-col place-self-center object-cover p-3">
-          <img :src="coffee.aws_miniatures[0].url" class="h-50 rounded-xl">
-          <div class="flex items-end justify-between">
-            <span class="overflow-hidden text-ellipsis whitespace-nowrap text-left text-xl">{{ coffee.nom }}</span>
-            <div class="font-normal">
-              {{ coffee_store.establishment_type(coffee.tags) }}
+      <div v-for="coffee in coffee_store.db_filtered" :key="coffee.id" class="flicking-panel m-x-4 overflow-hidden rounded-2xl bg-cafe-100 shadow-md">
+        <RouterLink :to="`coffee/${coffee.id}`" class="flex flex-col place-self-center object-cover">
+          <img :src="coffee.aws_miniatures[0].url" class="h-50 object-cover">
+          <div class="flex flex-col gap-1 p-3">
+            <div class="flex items-end justify-between">
+              <span class="overflow-hidden text-ellipsis whitespace-nowrap text-left font-bold text-xl">
+                {{ coffee.nom }}
+              </span>
+              <div class="font-normal">
+                {{ coffee_store.establishment_type(coffee.tags) }}
+              </div>
             </div>
-          </div>
-          <div class="flex justify-between gap-2">
-            <div class="w-75% inline-flex gap-2 text-left font-normal">
-              <img :src="subway_icon" class="h-6">
-              <span class="overflow-hidden text-ellipsis whitespace-nowrap">{{ coffee.metro }}</span>
-            </div>
-            <div class="flex">
-              <div id="tag_icons" class="inline-flex gap-2">
-                <div v-if="coffee.tags.includes('Studieux')" i-ci-volume-off class="icon-btn" />
-                <div v-else-if="coffee.tags.includes('Calme')" i-ci-volume-min class="icon-btn" />
-                <div v-else-if="coffee.tags.includes('Animé')" i-ci-volume-max class="icon-btn" />
-                <div v-if="coffee.tags.includes('Wifi')" i-ci-wifi-high class="icon-btn" />
-                <div v-else i-ci-wifi-off class="icon-btn" />
-                <div v-if="coffee.tags.includes('Prises')" i-ic-round-power-off class="icon-btn" />
-                <div v-else i-ic-round-power class="icon-btn" />
+            <div class="flex justify-between gap-2">
+              <div class="w-75% inline-flex gap-2 text-left font-normal">
+                <img :src="subway_icon" class="h-6">
+                <span class="overflow-hidden text-ellipsis whitespace-nowrap">{{ coffee.metro }}</span>
+              </div>
+              <div class="flex">
+                <div id="tag_icons" class="inline-flex gap-2">
+                  <div v-if="coffee.tags.includes('Studieux')" i-ci-volume-off class="icon-btn" />
+                  <div v-else-if="coffee.tags.includes('Calme')" i-ci-volume-min class="icon-btn" />
+                  <div v-else-if="coffee.tags.includes('Animé')" i-ci-volume-max class="icon-btn" />
+                  <div v-if="coffee.tags.includes('Wifi')" i-ci-wifi-high class="icon-btn" />
+                  <div v-else i-ci-wifi-off class="icon-btn" />
+                  <div v-if="coffee.tags.includes('Prises')" i-ic-round-power-off class="icon-btn" />
+                  <div v-else i-ic-round-power class="icon-btn" />
+                </div>
               </div>
             </div>
           </div>

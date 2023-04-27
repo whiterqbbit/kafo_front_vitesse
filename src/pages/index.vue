@@ -31,10 +31,6 @@
         <DesktopList />
       </div>
     </div>
-    <TheFooter
-      v-if="preferences.is_mobile"
-      class="fixed bottom-0 z-50 h-56px w-full rounded-t-xl"
-    />
   </div>
 </template>
 

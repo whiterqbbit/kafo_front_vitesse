@@ -17,17 +17,17 @@
               :value="coffee.aws_miniatures"
               :num-visible="3"
               :circular="true"
-              container-style="width: 400px; max-width: 400px; overflow: hidden;"
+              container-style="overflow: hidden;"
               :show-item-navigators="true"
               :show-thumbnails="false"
+              class="content-center"
             >
               <template #item="slotProps">
-                <RouterLink :to="`coffee/${coffee.id}`">
+                <RouterLink :to="`coffee/${coffee.id}`" class="h-full w-full">
                   <img
                     :src="slotProps.item.url"
-                    class="block h-300px w-full rounded-xl object-cover"
+                    class="block h-300px max-h-12rem w-full rounded-xl object-cover object-cover"
                     :alt="coffee.nom"
-                    style="width: 100%; max-height: 12rem; display: block; object-fit: cover;"
                     @click="select_coffee(coffee.id)"
                   >
                 </RouterLink>

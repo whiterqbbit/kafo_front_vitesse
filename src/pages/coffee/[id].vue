@@ -133,25 +133,30 @@
               </div>
             </div>
             <TagsIcon v-if="preferences.is_mobile && selected_coffee" :tags="selected_coffee?.tags" />
-            <div v-if="selected_coffee?.adresse" id="location_container" class="flex flex-row items-center justify-between text-lg">
-              <div class="flex flex-col">
+            <div v-if="selected_coffee?.adresse" id="location_container" class="flex flex-row items-center justify-between">
+              <!-- adresse et metro -->
+              <div class="max-w-65% flex flex-col">
                 <div id="address">
                   {{ selected_coffee?.adresse }}
                 </div>
                 <div v-if="selected_coffee?.metro" class="flex items-center gap-2">
                   <img :src="subway_icon" class="h-6 w-6">
-                  {{ selected_coffee?.metro }}
+                  <span class="overflow-hidden text-ellipsis whitespace-nowrap">
+                    {{ selected_coffee?.metro }}
+                  </span>
                 </div>
               </div>
-              <div
-                id="google_map_link"
-                class="flex flex-row place-items-center gap-2 rounded-3xl bg-grass-500 px-4 py-2 font-bold text-cafe-100"
+
+              <!-- bouton lien direction -->
+              <a
+                class="flex flex-shrink-0 flex-row place-items-center gap-2 rounded-3xl bg-grass-500 px-4 py-2 font-bold text-cafe-100"
+                :href="`https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=${selected_coffee?.nom}&destination_place_id=${selected_coffee?.place_id}&travelmode=walking`"
               >
-                <div class="text-xl">
+                <div class="whitespace-nowrap text-xl">
                   Y aller !
                 </div>
-                <img class="h-10" :src="direction">
-              </div>
+                <img class="h-6 w-6" :src="direction">
+              </a>
             </div>
           </div>
         </div>
