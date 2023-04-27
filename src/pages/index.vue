@@ -1,6 +1,4 @@
 <template>
-  <DesktopHeader v-if="!preferences.is_mobile" />
-  <MobileHeader v-else />
   <pre v-if="display.cookie_modal" class="h-fit w-full">{{ cookies.getAll() }}</pre>
   <div id="main_container" class="relative h-screen--35px flex flex-col bg-green-300 md:h-screen--50px md:flex-row-reverse">
     <div v-if="display.login_modal" class="fixed left-0 top-0 z-50 h-full w-full bg-cafe-400 bg-opacity-50">
