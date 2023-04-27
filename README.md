@@ -9,7 +9,8 @@
 <br>
 
 <p align='center'>
-<a href="https://master.d211pvmqy38ejk.amplifyapp.com/">Alpha</a>
+<a href="https://master.d211pvmqy38ejk.amplifyapp.com/">Alpha preview</a>
+<a href="https://www.kafo.work/">Live version (nocode)</a>
 </p>
 
 <br>
@@ -35,15 +36,4 @@
 
 - ⚙️ Unit Testing with [Vitest](https://github.com/vitest-dev/vitest), E2E Testing with [Cypress](https://cypress.io/) on [GitHub Actions](https://github.com/features/actions)
 
-Basé sur Vitesse !
-
-## Checklist
-
-When you use this template, try follow the checklist to update your info properly
-
-- [ ] Change the author name in `LICENSE`
-- [ ] Change the title in `App.vue`
-- [ ] Change the hostname in `vite.config.ts`
-- [ ] Change the favicon in `public`
-- [ ] Remove the `.github` folder which contains the funding info
-- [ ] Clean up the READMEs and remove routes
+Basé sur [Vitesse](https://github.com/antfu/vitesse) !
