@@ -150,7 +150,7 @@
               <!-- bouton lien direction -->
               <a
                 class="flex flex-shrink-0 flex-row place-items-center gap-2 rounded-3xl bg-grass-500 px-4 py-2 font-bold text-cafe-100"
-                :href="`https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=${selected_coffee?.nom}&destination_place_id=${selected_coffee?.place_id}&travelmode=walking`"
+                :href="`https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=${selected_coffee?.nom}&destination_place_id=${selected_coffee?.google_place_id}&travelmode=walking`"
               >
                 <div class="whitespace-nowrap text-xl">
                   Y aller !
