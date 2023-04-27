@@ -1,6 +1,6 @@
 <template>
   <header class="sticky top-0 z-50 h-50px w-full flex flex-row place-items-center justify-between bg-cafe-600">
-    <RouterLink class="icon-btn" to="/landing">
+    <RouterLink class="icon-btn" to="/">
       <img :src="logo" alt="logo" class="h-12 pl-4">
     </RouterLink>
     <!-- remplacer hidden par flex pour faire apparaitre le menu -->

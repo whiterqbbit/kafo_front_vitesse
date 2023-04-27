@@ -1,6 +1,6 @@
 <template>
   <header class="h-45px w-full flex flex-row items-center justify-between bg-cafe-600">
-    <RouterLink class="icon-btn" to="/landing">
+    <RouterLink class="icon-btn" to="/">
       <img :src="logo" alt="logo" class="h-8 pl-4">
     </RouterLink>
 
