@@ -28,8 +28,12 @@ onBeforeMount(() => {
 // https://github.com/vueuse/head
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the html results with vite-ssg
+const environnement = import.meta.env.VITE_ENV
+const env_string = environnement === 'production' ? '' : environnement === 'staging' ? '[Beta] ' : '[dev] '
+const favicon = environnement === 'production' ? '/favicon.png' : environnement === 'staging' ? '/favicon_beta.png' : '/favicon_dev.png'
+
 useHead({
-  title: '[Alpha] Kafo | Coworking partout, solitude nulle part',
+  title: `${env_string}Kafo | Coworking partout, solitude nulle part`,
   meta: [
     { name: 'description', content: 'Ca va, ca vient' },
     {
@@ -41,7 +45,7 @@ useHead({
     {
       rel: 'icon',
       type: 'image/png',
-      href: '/favicon.png',
+      href: favicon,
     },
   ],
 })
