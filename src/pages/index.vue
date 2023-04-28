@@ -3,9 +3,14 @@
   <section id="hero" class="overflow-hidden text-center md:text-left">
     <div class="text-cafe-600 container">
       <div id="title" class="landing-title flex flex-col">
-        <span class="z-30">Des espaces de travail inspirants</span>
-        <span class="z-30">Des connexions enrichissantes</span>
-        <span class="z-30">Du café.</span>
+        <div class="z-30 flex">
+          <div>Coworke dans des</div>
+          <SlidingWord :items="['cafés', 'brasseries', 'restaurants', 'coworkings', 'hôtels']" class="ml-3" />
+        </div>
+        <div class="z-30 flex">
+          <div>Rencontre des</div>
+          <SlidingWord :items="['entrepreneurs', 'artistes', 'product owners', 'growth hackers', 'freelance']" class="ml-3" />
+        </div>
       </div>
       <div class="flex md:w-110%">
         <div id="text-col" class="mt-4 md:mt-10 md:w-2/3">
