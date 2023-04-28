@@ -1,10 +1,9 @@
 import { defineStore } from 'pinia'
 import { useGeolocation } from '@vueuse/core'
-import { useRouter } from 'vue-router'
+import type { Router } from 'vue-router'
 import marker_icon from '@/assets/img/geoloc/marker_6.png'
 import user_icon_url from '@/assets/img/geoloc/user.png'
 import type { Cafe } from '@/stores/xano.d'
-import { use_coffee_store } from '@/stores/coffee'
 
 type simple_coords = [number, number]
 
@@ -18,6 +17,7 @@ interface Leaflet {
 interface MarkerData {
   coordinates: simple_coords
   popup_description: string
+  id: number
   instance: any
 }
 
@@ -69,7 +69,7 @@ export const use_map_store = defineStore('use_map_store', () => {
       })
   }
 
-  async function add_marker(lngLat: simple_coords, popup_description: string) {
+  async function add_marker(lngLat: simple_coords, popup_description: string, coffee_id: number, router: Router) {
     if (!leaflet) return
     const { Icon, marker } = await leaflet
     const customIcon = new Icon({
@@ -82,15 +82,9 @@ export const use_map_store = defineStore('use_map_store', () => {
     const marker_instance = marker(lngLat, { icon: customIcon })
       .addTo(map_leaf.value)
       .bindPopup(popup_description)
-      .on('click', (e: L.LeafletMouseEvent) => {
-        console.log('marker clicked', e)
+      .on('click', () => {
         marker_is_click.value = true
-        use_coffee_store().selected_id = 1
-        console.log('selected_id', use_coffee_store().selected_id)
-
-        const router = useRouter()
-        console.log('router', router)
-        router.push('/coffee/1')
+        router.push(`/coffee/${coffee_id}`)
       })
 
     marker_is_loaded.value = true
@@ -99,6 +93,7 @@ export const use_map_store = defineStore('use_map_store', () => {
     markers.value.push({
       coordinates: lngLat,
       popup_description,
+      id: coffee_id,
       instance: marker_instance,
     } as unknown as MarkerData)
   }
@@ -108,13 +103,13 @@ export const use_map_store = defineStore('use_map_store', () => {
     markers.value = []
   }
 
-  function update_markers(coffee_db: Ref<Cafe[]>) {
+  function update_markers(coffee_db: Ref<Cafe[]>, router: Router) {
     // Remove all existing markers from the map
     remove_all_markers()
 
     // Add new markers for each filtered coffee shop
     coffee_db.value.forEach((coffee) => {
-      add_marker([coffee.location.data.lat, coffee.location.data.lng], coffee.desc || '')
+      add_marker([coffee.location.data.lat, coffee.location.data.lng], coffee.desc || '', coffee.id, router)
     })
   }
 
