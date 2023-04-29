@@ -3,9 +3,14 @@
   <section id="hero" class="overflow-hidden text-center md:text-left">
     <div class="text-cafe-600 container">
       <div id="title" class="landing-title flex flex-col">
-        <span class="z-30">Des espaces de travail inspirants</span>
-        <span class="z-30">Des connexions enrichissantes</span>
-        <span class="z-30">Du café.</span>
+        <div class="z-30 flex">
+          <div>Coworke dans des</div>
+          <SlidingWord :items="['cafés', 'brasseries', 'restaurants', 'coworkings', 'hôtels']" class="ml-3" />
+        </div>
+        <div class="z-30 flex">
+          <div>Rencontre des</div>
+          <SlidingWord :items="['freelances', 'entrepreneurs', 'artistes', 'product owners', 'growth hackers', 'célibataires']" class="ml-3" />
+        </div>
       </div>
       <div class="flex md:w-110%">
         <div id="text-col" class="mt-4 md:mt-10 md:w-2/3">
@@ -24,8 +29,8 @@
           <LandingCTA class="mx-auto mt-6 text-xl md:mt-12 sm:text-2xl md:text-3xl lg:text-4xl" />
         </div>
         <div class="relative overflow-visible">
-          <div class="bg-floating-resize bg-shape absolute right-[50px] top-[-100px] z-0 hidden bg-cafe-200 md:block" />
-          <img id="hero-pic" class="relative hidden md:block lg:-top-20 md:-top-10" :src="hero_pic" alt="Cinq télétravailleurs autour d'une table qui coworkent">
+          <div class="bg-floating-resize bg-shape absolute right-[50px] z-0 hidden bg-cafe-200 lg:top-[10px] lg:top-0 md:block md:-top-12" />
+          <img id="hero-pic" class="relative hidden lg:top-10 md:block md:-top-10" :src="hero_pic" alt="Cinq télétravailleurs autour d'une table qui coworkent">
         </div>
       </div>
     </div>

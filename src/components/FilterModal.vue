@@ -12,6 +12,7 @@
       </div>
     </div>
     <div id="filter_container" class="flex flex-col gap-4 text-left">
+      <!-- FILTRE TARIFS -->
       <section>
         <div class="filter-container gap-1">
           Tarification
@@ -46,6 +47,8 @@
           </div>
         </div>
       </section>
+
+      <!-- FILTRE AMBIANCE -->
       <section>
         <div class="filter-container gap-1">
           Ambiance
@@ -80,14 +83,16 @@
           </div>
         </div>
       </section>
-      <section>
+
+      <!-- FILTRE FRÉQUENTATION -->
+      <!-- <section>
         <div class="filter-container flex">
           Fréquentation
           <div class="filter-container-inner flex-col">
-            <!-- <div class="bullet">
+            <div class="bullet">
               <Checkbox v-model="filters.not_empty" class="mt-1px" :binary="true" />
               <label for="filter_not_empty">N'est pas vide</label>
-            </div> -->
+            </div>
             <MultiSelect
               v-model="filters.clubs_domain" :options="club_db_domain" filter display="chip" option-label="nom" placeholder="Filtrer par domaine"
               class="w-full md:w-20rem"
@@ -102,7 +107,9 @@
             />
           </div>
         </div>
-      </section>
+      </section> -->
+
+      <!-- FILTRE DISTANCE -->
       <section>
         <div id="distance_filter" class="filter-container">
           <div class="flex justify-between">
@@ -129,6 +136,8 @@
           </div>
         </div>
       </section>
+
+      <!-- FILTRES AUTRES -->
       <section>
         <div id="misc_filters" class="filter-container flex flex-col">
           Autres
@@ -160,9 +169,6 @@
           </div>
         </div>
       </section>
-      <div>
-        <!-- {{ filters }} -->
-      </div>
     </div>
   </div>
 </template>

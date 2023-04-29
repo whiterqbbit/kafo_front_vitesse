@@ -13,7 +13,7 @@
     <div md="w-full" class="overflow-none h-full flex items-center justify-center bg-red-100 font-title">
       <div class="relative h-full w-full">
         <TheMap class="z-10" />
-        <SearchBar v-if="!preferences.is_mobile" class="fixed left-1/2 top-1/8 z-20 w-[528px]" />
+        <!-- <SearchBar v-if="!preferences.is_mobile" class="fixed left-1/2 top-1/8 z-20 w-[528px]" /> -->
       </div>
     </div>
     <div v-if="preferences.is_mobile" class="flex flex-col">
