@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 import { useGeolocation } from '@vueuse/core'
 import type { Router } from 'vue-router'
+import type { Cafe } from '@/stores/xano.d'
 import marker_icon from '@/assets/img/geoloc/marker_6.png'
 import user_icon_url from '@/assets/img/geoloc/user.png'
-import type { Cafe } from '@/stores/xano.d'
 
 type simple_coords = [number, number]
 
