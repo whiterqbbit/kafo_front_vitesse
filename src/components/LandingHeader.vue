@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import logo from '@/assets/img/logo/kafo_logo_white.png'
 
-function scrollTo(id) {
+function scrollTo(id: string) {
   const el = document.getElementById(id)
   if (el) {
     el.scrollIntoView({ behavior: 'smooth' })
