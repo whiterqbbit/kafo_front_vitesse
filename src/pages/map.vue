@@ -36,7 +36,6 @@
 
 <script setup lang="ts">
 import { useCookies } from '@vueuse/integrations/useCookies'
-import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
