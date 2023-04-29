@@ -24,7 +24,6 @@ declare module '@vue/runtime-core' {
     LandingFooter: typeof import('./components/LandingFooter.vue')['default']
     LandingHeader: typeof import('./components/LandingHeader.vue')['default']
     LoginModal: typeof import('./components/LoginModal.vue')['default']
-    MapMarker: typeof import('./components/MapMarker.vue')['default']
     MobileFooter: typeof import('./components/MobileFooter.vue')['default']
     MobileHeader: typeof import('./components/MobileHeader.vue')['default']
     MobileList: typeof import('./components/MobileList.vue')['default']

@@ -37,11 +37,17 @@
 <script setup lang="ts">
 import { useCookies } from '@vueuse/integrations/useCookies'
 
+const router = useRouter()
+
 const coffee_db = computed(() => use_coffee_store().db_filtered)
 const map_store = use_map_store()
 
+// onMounted (() => {
+//   map_store.update_markers(coffee_db, router)
+// })
+
 watch(coffee_db, () => {
-  map_store.update_markers(coffee_db)
+  map_store.update_markers(coffee_db, router)
 }, { immediate: true })
 
 const cookies = useCookies(['user'])
