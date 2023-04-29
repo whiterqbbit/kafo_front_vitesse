@@ -44,7 +44,7 @@
         </button>
         <!-- ligne de séparation -->
         <div class="w-1/2 flex place-self-center border-b-2 border-cafe-600 text-center" />
-        <!-- login login_form -->
+        <!-- login_form -->
         <form v-if="!user.is_auth" class="w-full flex flex-col gap-3" @submit.prevent="user.login(login_form.email, login_form.password)">
           <div class="flex flex-col gap-3 text-cafe-600">
             <input v-model="login_form.email" type="email" placeholder="Email" class="input_text">
@@ -64,6 +64,7 @@
           </div>
         </form>
       </div>
+      <!-- signup -->
       <div v-else class="w-full flex flex-col place-items-center gap-3">
         <form v-if="!user.is_auth" class="w-full flex flex-col gap-3" @submit.prevent="user.signup(signup_form)">
           <div class="border border-cafe-400 bg-cafe-50 px-2 py-1 btn" @click="is_creating = false">
