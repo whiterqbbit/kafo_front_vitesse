@@ -41,7 +41,7 @@ export default defineConfig({
         700: '#503b34',
         600: '#694b42',
         500: '#815a4f',
-        400: '#e3ba9f',
+        400: '#B79282',
         300: '#f5dac8',
         200: '#fdeee2',
         100: '#fff7f2',

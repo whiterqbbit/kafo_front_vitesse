@@ -57,6 +57,9 @@ export const use_user_store = defineStore('user', () => {
     }
   }
 
+  async function signin(infos: { username: string; name: string; first_name: string; job_title: string; bio: string; email: string; password: string }) {
+    return infos
+  }
   const env = import.meta.env.VITE_ENV
 
   let redirect_uri: string
@@ -195,6 +198,7 @@ export const use_user_store = defineStore('user', () => {
     linkedin_init,
     linkedin_continue,
     login,
+    signin,
     logout,
     me,
   }
