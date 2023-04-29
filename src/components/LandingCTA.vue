@@ -1,5 +1,5 @@
 <template>
-  <RouterLink to="/map" class="inline-block w-fit flex cursor-pointer place-content-center whitespace-nowrap rounded-xl bg-grass-500 px-4 py-1 font-bold text-white transition hover:bg-teal-700">
+  <RouterLink to="/map" class="whitespace-nowrap bg-grass-500 font-bold text-white hover:bg-teal-600 btn">
     Coworkez Maintenant
   </RouterLink>
 </template>
