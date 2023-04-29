@@ -36,7 +36,7 @@
 
 <style scoped>
 .icon-box {
-  @apply flex flex-col items-center justify-center gap-1 select-none trans-grass-700;
+  @apply flex flex-col items-center justify-center gap-1 select-none opacity-90 transition duration-200 ease-in-out hover:(opacity-100 text-grass-900);
 }
 
 .icon-btn {
