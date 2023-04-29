@@ -24,12 +24,12 @@
         A Propos
       </RouterLink>
     </nav>
-    <div v-if="!user.is_auth" btn class="m-2 btn-green" @click="display.login_modal = !display.login_modal">
+    <div v-if="!user.is_auth" btn class="m-2 btn-grass" @click="display.login_modal = !display.login_modal">
       Login
     </div>
     <div v-else flex>
       <img :src="user.pic_xsmall ? user.pic_xsmall : default_user_pic" alt="avatar" class="h-12 w-12 border border-cafe-100 rounded-full">
-      <button class="m-2 btn-green" @click="user.logout">
+      <button class="m-2 btn-grass" @click="user.logout">
         Logout
       </button>
     </div>

@@ -10,7 +10,7 @@
       <div v-for="coffee in coffee_db.slice(0, 20)" :key="coffee.id" class="overflow-hidden">
         <div class="relative mx-3 my-2 h-fit flex flex-col cursor-pointer rounded-xl bg-white shadow-md hover:scale-102" @click="select_coffee(coffee.id)">
           <div>
-            <div v-if="coffee.is_open" class="absolute right-4 top-3 z-10 inline-block rounded-full bg-grass-500 px-2 py-1 font-bold tracking-wider text-white text-lg">
+            <div v-if="coffee.is_open" class="absolute right-4 top-3 z-10 inline-block rounded-full bg-grass-500 px-2 py-1 text-lg font-bold tracking-wider text-white">
               Ouvert
             </div>
             <Galleria
@@ -40,12 +40,12 @@
                 <div class="overflow-hidden text-ellipsis whitespace-nowrap">
                   {{ coffee.nom }}
                 </div>
-                <div class="font-normal text-xl">
+                <div class="text-xl font-normal">
                   {{ coffee_store.establishment_type(coffee.tags) }}
                 </div>
               </div>
               <div class="flex justify-between">
-                <div class="flex gap-2 overflow-inherit font-normal text-lg">
+                <div class="flex gap-2 overflow-inherit text-lg font-normal">
                   <img :src="subway_icon" class="m-auto h-6">
                   <div class="max-w-225px overflow-hidden text-ellipsis whitespace-nowrap">
                     {{ coffee.metro }}

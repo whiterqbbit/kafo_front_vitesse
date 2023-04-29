@@ -34,7 +34,7 @@
       <div id="galleries" class="max-h-1/2 overflow-hidden text-left text-3xl">
         <div v-if="!preferences.is_mobile" id="desktop_gallery" class="pswp-gallery relative h-150 flex gap-2 overflow-hidden rounded-2xl">
           <!-- button more images -->
-          <div v-if="selected_coffee && selected_coffee?.aws_pics?.length > 5" class="absolute bottom-10 right-10 rounded-xl bg-cafe-100 px-3 py-1 text-cafe-600 shadow-xl text-base">
+          <div v-if="selected_coffee && selected_coffee?.aws_pics?.length > 5" class="absolute bottom-10 right-10 rounded-xl bg-cafe-100 px-3 py-1 text-base text-cafe-600 shadow-xl">
             <a
               :href="selected_coffee?.aws_pics[0].url"
               :data-pswp-width="1000"
@@ -100,7 +100,7 @@
         </div>
       </div>
       <div id="title_group" class="flex flex-col gap-3">
-        <div id="title" class="font-black text-4xl">
+        <div id="title" class="text-4xl font-black">
           {{ selected_coffee?.nom }}
         </div>
         <div id="subtitle" class="flex flex-col font-bold md:flex-row md:justify-between">
@@ -158,7 +158,7 @@
             </div>
           </div>
         </div>
-        <div id="righty" class="w-full flex flex-col place-content-center place-items-center rounded-3xl bg-cafe-200 p-6 text-cafe-600 text-2xl md:w-1/2">
+        <div id="righty" class="w-full flex flex-col place-content-center place-items-center rounded-3xl bg-cafe-200 p-6 text-2xl text-cafe-600 md:w-1/2">
           Ici, c'est en travaux !
           <img src="http://www.animated-gifs.fr/category_website/under-construction-fr/16072049.gif" class="h-40">
           <div id="events" class="hidden">

@@ -5,13 +5,13 @@
         <RouterLink :to="`coffee/${coffee.id}`" class="relative flex flex-col place-self-center object-cover">
           <img :src="coffee.aws_miniatures[0].url" class="h-50 object-cover">
           <div class="flex flex-col gap-1 p-3">
-            <div v-if="coffee.is_open" class="absolute right-4 top-3 z-10 inline-block rounded-full bg-grass-500 px-2 py-1 font-bold tracking-wider text-white text-lg">
+            <div v-if="coffee.is_open" class="absolute right-4 top-3 z-10 inline-block rounded-full bg-grass-500 px-2 py-1 text-lg font-bold tracking-wider text-white">
               Ouvert
             </div>
 
             <!-- Ligne nom + type -->
             <div class="flex items-end justify-between">
-              <span class="overflow-hidden text-ellipsis whitespace-nowrap text-left font-bold text-xl">
+              <span class="overflow-hidden text-ellipsis whitespace-nowrap text-left text-xl font-bold">
                 {{ coffee.nom }}
               </span>
               <div>
