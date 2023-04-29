@@ -24,12 +24,12 @@
         A Propos
       </RouterLink>
     </nav>
-    <div v-if="!user.is_auth" btn @click="display.login_modal = !display.login_modal">
+    <div v-if="!user.is_auth" btn class="m-2 btn-green" @click="display.login_modal = !display.login_modal">
       Login
     </div>
     <div v-else flex>
-      <img :src="user.pic_xsmall" alt="avatar" class="h-12 w-12 border border-cafe-100 rounded-full">
-      <button btn @click="user.logout">
+      <img :src="user.pic_xsmall ? user.pic_xsmall : default_user_pic" alt="avatar" class="h-12 w-12 border border-cafe-100 rounded-full">
+      <button class="m-2 btn-green" @click="user.logout">
         Logout
       </button>
     </div>
@@ -39,6 +39,7 @@
 <script setup lang="ts">
 import logo from '@/assets/img/logo/kafo_logo_white.png'
 import { use_user_store } from '@/stores/user'
+import default_user_pic from '@/assets/img/Profil3.png'
 
 const user = use_user_store()
 </script>

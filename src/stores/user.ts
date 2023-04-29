@@ -3,6 +3,7 @@ import { useCookies } from '@vueuse/integrations/useCookies'
 import type { Club, User } from './xano.d'
 
 const xano_login_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/login`
+const xano_signup_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/signup`
 const xano_me_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/me`
 const xano_linkedin_init_url = `${import.meta.env.VITE_XANO_API_URL}/api:UpsZVD6L/oauth/linkedin/init`
 const xano_linkedin_continue_url = `${import.meta.env.VITE_XANO_API_URL}/api:UpsZVD6L/oauth/linkedin/continue`
@@ -57,9 +58,36 @@ export const use_user_store = defineStore('user', () => {
     }
   }
 
-  async function signin(infos: { username: string; name: string; first_name: string; job_title: string; bio: string; email: string; password: string }) {
-    return infos
+  async function signup(infos: { name: string; first_name: string; job_title: string; bio: string; email: string; password: string }) {
+    const { name, first_name, job_title, bio, email, password } = infos
+
+    try {
+      const response = await fetch(xano_signup_url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          {
+            email,
+            password,
+            name: first_name,
+            nom_de_famille: name,
+            bio,
+            job_title,
+          },
+        ),
+      })
+      if (!response.ok) throw new Error(`HTTP error ${response.status}`)
+
+      const data = await response.json()
+      token.value = data.authToken
+      me()
+    } catch (error) {
+      console.error('Error during login:', error)
+    }
   }
+
   const env = import.meta.env.VITE_ENV
 
   let redirect_uri: string
@@ -198,7 +226,7 @@ export const use_user_store = defineStore('user', () => {
     linkedin_init,
     linkedin_continue,
     login,
-    signin,
+    signup,
     logout,
     me,
   }
