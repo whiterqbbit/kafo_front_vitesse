@@ -12,7 +12,7 @@ declare module '@vue/runtime-core' {
     AvatarStack: typeof import('./components/AvatarStack.vue')['default']
     Button: typeof import('primevue/button')['default']
     Checkbox: typeof import('primevue/checkbox')['default']
-    CoffeeModal: typeof import('./components/CoffeeModal.vue')['default']
+    ContactModal: typeof import('./components/ContactModal.vue')['default']
     DebugModal: typeof import('./components/DebugModal.vue')['default']
     DesktopHeader: typeof import('./components/DesktopHeader.vue')['default']
     DesktopList: typeof import('./components/DesktopList.vue')['default']

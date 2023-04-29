@@ -1,16 +1,16 @@
 <template>
-  <header class="sticky top-0 z-40 w-full bg-cafe-600 font-bold text-xs md:text-lg">
+  <header class="sticky top-0 z-40 w-full bg-cafe-600 text-xs font-bold md:text-lg">
     <div class="mx-auto h-35px max-w-7xl flex flex-row place-items-center justify-between md:h-50px">
       <RouterLink class="icon-btn" to="/">
         <img :src="logo" alt="logo" class="ml-2 h-7 object-contain sm:ml-4 xl:ml-0 md:h-12 sm:h-9">
       </RouterLink>
-      <nav class="flex gap-2 text-white md:gap-5">
-        <RouterLink to="/FAQ">
+      <nav class="mb-1 h-full flex cursor-pointer items-center gap-2 text-white md:gap-5">
+        <div @click="scrollTo('faq')">
           FAQ
-        </RouterLink>
-        <RouterLink to="/contact">
+        </div>
+        <div @click="scrollTo('contact')">
           Contact
-        </RouterLink>
+        </div>
         <RouterLink to="/a-propos">
           A Propos
         </RouterLink>
@@ -24,4 +24,11 @@
 
 <script setup lang="ts">
 import logo from '@/assets/img/logo/kafo_logo_white.png'
+
+function scrollTo(id) {
+  const el = document.getElementById(id)
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth' })
+  }
+}
 </script>
