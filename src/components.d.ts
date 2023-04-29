@@ -32,6 +32,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchBar: typeof import('./components/SearchBar.vue')['default']
+    SlidingWord: typeof import('./components/SlidingWord.vue')['default']
     TagList: typeof import('./components/TagList.vue')['default']
     TagsIcon: typeof import('./components/TagsIcon.vue')['default']
     TheMap: typeof import('./components/TheMap.vue')['default']
