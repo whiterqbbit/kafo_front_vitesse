@@ -10,13 +10,13 @@ import {
 
 export default defineConfig({
   shortcuts: [
-    ['btn', 'px-4 py-1 rounded-xl inline-block bg-grass-500 place-content-center text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
+    ['btn', 'px-4 py-1 w-fit rounded-xl inline-block place-content-center cursor-pointer transition duration-100 hover:btn-scale disabled:(cursor-default bg-gray-600 opacity-50)'],
+    ['btn-scale', 'scale-103 -translate-y-0.3 duration-20'],
+    ['btn-light', 'px-4 cursor-pointer py-1 h-fit w-fit place-self-center rounded-xl font-normal text-base text-gray-400 transition hover:(rounded-xl text-cafe-700 bg-opacity-25 bg-stone-200)'],
     ['font-title', 'text-3xl font-bold text-center text-cafe-700'],
     ['trans-grass-700', 'opacity-90 transition duration-200 ease-in-out hover:opacity-100 hover:text-grass-900'],
     ['tag', 'px-2 rounded-full inline-block bg-cafe-500 text-cafe-100 text-xs font-bold tracking-wider'],
     ['container', 'bg-cafe-50 mx-auto px-9 py-4 md:py-8 max-w-7xl'],
-    ['btn-press', 'hover:scale-102 shadow-md'],
-    ['btn-light', 'px-4 cursor-pointer py-1 h-fit w-fit place-self-center rounded-xl font-normal text-base text-gray-400 transition hover:(rounded-xl text-cafe-700 bg-opacity-25 bg-stone-200)'],
   ],
   rules: [
     ['text-xs', { 'font-size': '0.75rem' }],
@@ -50,6 +50,7 @@ export default defineConfig({
       grass: {
         900: '#2e4744',
         700: '#2a725f',
+        600: '#3b9f7f',
         500: '#4ccb9f',
         300: '#93e3b4',
         100: '#d2ffe4',

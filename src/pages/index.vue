@@ -126,7 +126,10 @@
         Vous construisez le réseau grâce à vos retours.
         Contactez-nous pour ajouter de nouveaux lieux, suggérer des idées ou simplement nous faire part de vos coups de coeur!
       </div>
-      <div class="mt-4 w-fit place-self-center bg-cafe-500 font-semibold text-lg btn sm:place-self-auto hover:bg-cafe-600" @click="open_contact = !open_contact">
+      <div
+        class="mt-4 place-self-center bg-cafe-500 font-semibold text-white text-lg sm:place-self-auto hover:bg-cafe-600 btn"
+        @click="open_contact = !open_contact"
+      >
         Contactez-nous
       </div>
     </div>
