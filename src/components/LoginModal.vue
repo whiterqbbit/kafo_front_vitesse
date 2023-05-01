@@ -3,8 +3,11 @@
   <div class="fixed z-30 h-full w-full flex place-content-center place-items-center">
     <div class="fixed h-full w-full cursor-pointer bg-cafe-600/50" @click="close_modal" />
     <!-- Main Div -->
-    <div class="relative m-3 h-fit max-w-120 w-full flex flex-col rounded-xl bg-cafe-100 p-10">
+    <div class="relative m-2 h-fit max-w-120 w-full flex flex-col rounded-xl bg-cafe-100 p-5 sm:m-3 sm:p-10">
       <!-- Félicitation -->
+      <button class="absolute right-5 top-5 z-90 rounded-3xl hover:scale-105" icon="pi pi-times" @click="close_modal">
+        <img :src="svg_close">
+      </button>
       <div v-if="user.is_auth" class="flex flex-col gap-4">
         <div class="flex flex-col items-center gap-3">
           <div class="mb-5 text-xl font-bold">
@@ -24,14 +27,8 @@
 
       <!-- Connexion -->
       <div v-else-if="!is_signup" class="flex flex-col place-items-center gap-3">
-        <button class="absolute right-10 top-5 z-90 rounded-3xl hover:scale-105" icon="pi pi-times" @click="close_modal">
-          <img :src="svg_close">
-        </button>
-        <div class="text-center text-xl font-bold">
+        <div class="mb-5 text-center text-2xl font-bold">
           Se connecter
-        </div>
-        <div class="mb-5 text-center">
-          Veuillez entrer vos informations.
         </div>
         <!-- LinkedIn -->
         <button
@@ -67,40 +64,30 @@
       <!-- Signup -->
       <div v-else class="w-full flex flex-col place-items-center gap-3">
         <form v-if="!user.is_auth" class="w-full flex flex-col gap-3" @submit.prevent="user.signup(signup_form)">
-          <div class="border border-cafe-400 bg-cafe-50 px-2 py-1 btn" @click="is_signup = false">
-            Se connecter
+          <div class="mb-5 text-center text-2xl font-bold">
+            Inscription
           </div>
           <div class="flex flex-col gap-3 text-cafe-600">
-            <div class="flex gap-3">
-              <div class="flex flex-col gap-1">
-                <div>Nom</div>
-                <input v-model="signup_form.name" type="text" placeholder="Entrez votre nom" class="input_text">
+            <div class="flex flex-col gap-3">
+              <div class="flex gap-3">
+                <input v-model="signup_form.name" type="text" placeholder="Nom" class="input_text">
+                <input v-model="signup_form.first_name" type="text" placeholder="Prénom" class="input_text">
               </div>
-              <div class="flex flex-col gap-1">
-                <div>Prénom</div>
-                <input v-model="signup_form.first_name" type="text" placeholder="Entrez votre prénom" class="input_text">
+              <input v-model="signup_form.job_title" type="text" placeholder="Intitulé de votre poste" class="input_text">
+              <textarea v-model="signup_form.bio" spellcheck placeholder="Bio" class="input_text" />
+              <input v-model="signup_form.email" type="email" placeholder="Email" class="input_text">
+              <input v-model="signup_form.password" type="password" placeholder="Mot de passe" class="input_text">
+            </div>
+            <button btn-cafe type="submit" class="mt-4 w-full font-bold">
+              S'inscrire
+            </button>
+            <div class="w-fit flex place-self-center text-sm">
+              Vous avez déjà un compte
+              <div class="ml-1 w-fit flex cursor-pointer place-self-center text-sm underline hover:no-underline" @click="is_signup = false">
+                Se connecter
               </div>
-            </div>
-            <div class="flex flex-col gap-1">
-              <div>Intitulé de poste</div>
-              <input v-model="signup_form.job_title" type="text" placeholder="Entrez votre intitulé de votre poste" class="input_text">
-            </div>
-            <div class="flex flex-col gap-1">
-              <div>Bio</div>
-              <textarea v-model="signup_form.bio" spellcheck placeholder="Entrez votre bio" class="input_text" />
-            </div>
-            <div class="flex flex-col gap-1">
-              <div>Email</div>
-              <input v-model="signup_form.email" type="email" placeholder="Entrez votre email" class="input_text">
-            </div>
-            <div class="flex flex-col gap-1">
-              <div>Mot de passe</div>
-              <input v-model="signup_form.password" type="password" placeholder="Entrez votre mot de passe" class="input_text">
             </div>
           </div>
-          <button btn-grass-full type="submit" class="mt-7 h-15 font-bold">
-            S'inscrire
-          </button>
         </form>
       </div>
     </div>
