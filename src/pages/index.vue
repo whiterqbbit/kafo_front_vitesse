@@ -128,7 +128,7 @@
       </div>
       <form class="mt-7 flex flex-col gap-2" @submit.prevent="contact(contact_form)">
         <input v-model="contact_form.email" type="email" class="w-50 input_field" placeholder="Email">
-        <Dropdown v-model="chosen" :options="subject" option-label="name" placeholder="Sujet" class="w-full md:w-14rem" />
+        <Dropdown v-model="chosen" :options="subject" option-label="name" placeholder="Sujet" class="drop-down w-full md:w-14rem" />
         <textarea v-model="contact_form.message" class="h-30 w-full input_field" placeholder="Ecrivez ici votre petit mot" />
         <button
           type="submit"
@@ -155,9 +155,11 @@ import coeur_niais from '@/assets/svg/coeur_niais.svg'
 const open_faq_indexes: Ref<number[]> = ref([])
 
 const subject = ref([
-  { name: 'Suggestion', code: 'SG' },
-  { name: 'message', code: 'MS' },
-  { name: 'jambe', code: 'JMB' },
+  { name: 'Suggestion de lieu' },
+  { name: 'Question' },
+  { name: 'Partenariat' },
+  { name: 'Autre' },
+  { name: 'Lettre d\'amour' },
 ])
 const chosen = ref('')
 
@@ -247,5 +249,18 @@ const contact_form = ref({
 .img-rotated {
   transform: rotate(90deg);
   transition: all 0.2s;
+}
+
+:deep(.p-dropdown) {
+    @apply bg-white border border-cafe-400
+}
+:deep(.p-dropdown:hover) {
+    @apply border border-cafe-600
+}
+:deep(.p-dropdown:active) {
+    @apply bg-blue border border border-teal-500
+}
+:deep(.p-dropdown .p-dropdown-items-wrapper) {
+    @apply bg-blue text-red font-bold
 }
 </style>
