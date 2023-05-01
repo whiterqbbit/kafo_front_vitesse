@@ -43,8 +43,8 @@
         <!-- Login Form -->
         <form v-if="!user.is_auth" class="w-full flex flex-col gap-3" @submit.prevent="user.login(login_form.email, login_form.password)">
           <div class="flex flex-col gap-3 text-cafe-600">
-            <input v-model="login_form.email" type="email" placeholder="Email" class="input_text">
-            <input v-model="login_form.password" type="password" placeholder="Password" class="input_text">
+            <input v-model="login_form.email" type="email" placeholder="Email" class="w-full input_field">
+            <input v-model="login_form.password" type="password" placeholder="Password" class="w-full input_field">
           </div>
           <button type="submit" class="w-full font-semibold btn-cafe-light">
             Se connecter par mail
@@ -70,13 +70,13 @@
           <div class="flex flex-col gap-3 text-cafe-600">
             <div class="flex flex-col gap-3">
               <div class="flex gap-3">
-                <input v-model="signup_form.name" type="text" placeholder="Nom" class="input_text">
-                <input v-model="signup_form.first_name" type="text" placeholder="Prénom" class="input_text">
+                <input v-model="signup_form.name" type="text" placeholder="Nom" class="w-full input_field">
+                <input v-model="signup_form.first_name" type="text" placeholder="Prénom" class="w-full input_field">
               </div>
-              <input v-model="signup_form.job_title" type="text" placeholder="Intitulé de votre poste" class="input_text">
-              <textarea v-model="signup_form.bio" spellcheck placeholder="Bio" class="input_text" />
-              <input v-model="signup_form.email" type="email" placeholder="Email" class="input_text">
-              <input v-model="signup_form.password" type="password" placeholder="Mot de passe" class="input_text">
+              <input v-model="signup_form.job_title" type="text" placeholder="Intitulé de votre poste" class="w-full input_field">
+              <textarea v-model="signup_form.bio" spellcheck placeholder="Bio" class="w-full input_field" />
+              <input v-model="signup_form.email" type="email" placeholder="Email" class="w-full input_field">
+              <input v-model="signup_form.password" type="password" placeholder="Mot de passe" class="w-full input_field">
             </div>
             <button btn-cafe type="submit" class="mt-4 w-full font-bold">
               S'inscrire
@@ -128,9 +128,3 @@ const signup_form = ref({
   password: '',
 })
 </script>
-
-<style scoped>
-.input_text{
-  @apply border border-cafe-400 rounded-xl p-2 placeholder-cafe-400 w-full
-}
-</style>

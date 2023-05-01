@@ -47,6 +47,5 @@ const map_store = use_map_store()
 watch(coffee_db, () => {
   map_store.update_markers(coffee_db, router)
 }, { immediate: true })
-
 const cookies = useCookies(['user'])
 </script>
