@@ -26,7 +26,7 @@
             Notre plateforme facilite les rencontres pour les télétravailleurs en quête d'échanges et de collaborations.
             <br>Gratuitement.
           </div>
-          <LandingCTA class="mx-auto mt-6 text-xl md:mt-12 sm:text-2xl md:text-3xl lg:text-4xl" />
+          <LandingCTA class="mx-auto mt-6 text-xl md:mt-12 lg:text-4xl md:text-3xl sm:text-2xl" />
         </div>
         <div class="relative overflow-visible">
           <div class="bg-floating-resize bg-shape absolute right-[50px] z-0 hidden bg-cafe-200 lg:top-[10px] lg:top-0 md:block md:-top-12" />
@@ -91,7 +91,7 @@
         <div>Choisissez l'ambiance que vous préférez. Finies les mauvaises surprises.</div>
       </div>
     </div>
-    <LandingCTA class="mx-auto mt-6 text-lg md:mt-12 sm:text-xl md:text-2xl lg:text-3xl" />
+    <LandingCTA class="mx-auto mt-6 text-lg md:mt-12 lg:text-3xl md:text-2xl sm:text-xl" />
   </section>
   <section id="faq" class="mt-10">
     <div class="mx-auto rounded-3xl from-cafe-200 to-cafe-50 to-50% bg-gradient-to-tl p-8 sm:w-200">
@@ -127,7 +127,7 @@
         Contactez-nous pour ajouter de nouveaux lieux, suggérer des idées ou simplement nous faire part de vos coups de coeur!
       </div>
       <div
-        class="mt-4 place-self-center bg-cafe-500 font-semibold text-white text-lg sm:place-self-auto hover:bg-cafe-600 btn"
+        class="mt-4 place-self-center bg-cafe-500 text-lg font-semibold text-white sm:place-self-auto hover:bg-cafe-600 btn"
         @click="open_contact = !open_contact"
       >
         Contactez-nous

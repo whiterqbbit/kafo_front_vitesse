@@ -22,7 +22,7 @@
     </div>
     <div v-else>
       <div class="flex flex-row overflow-hidden font-title">
-        <DesktopSideBar />
+        <DesktopSidebar />
         <DesktopList />
         <FilterModal v-if="display.filter_modal" class="w-150" />
       </div>

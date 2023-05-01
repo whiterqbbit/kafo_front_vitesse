@@ -24,7 +24,7 @@
         <div class="py-1" role="none">
           <div v-if="!user.is_auth">
             <button
-              class="block w-full px-4 py-2 text-left text-gray-700 text-sm hover:bg-gray-100 hover:text-gray-900"
+              class="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem" tabindex="-1" @click="display.login_modal = !display.login_modal"
             >
               Login
@@ -32,7 +32,7 @@
           </div>
           <div v-else>
             <button
-              class="block w-full px-4 py-2 text-left text-gray-700 text-sm hover:bg-gray-100 hover:text-gray-900"
+              class="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem" tabindex="-1" @click="user.logout"
             >
               Logout
