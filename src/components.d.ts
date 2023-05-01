@@ -16,6 +16,7 @@ declare module '@vue/runtime-core' {
     DebugModal: typeof import('./components/DebugModal.vue')['default']
     DesktopHeader: typeof import('./components/DesktopHeader.vue')['default']
     DesktopList: typeof import('./components/DesktopList.vue')['default']
+    DesktopSideBar: typeof import('./components/DesktopSideBar.vue')['default']
     FilterModal: typeof import('./components/FilterModal.vue')['default']
     Galleria: typeof import('primevue/galleria')['default']
     InputSwitch: typeof import('primevue/inputswitch')['default']
@@ -36,5 +37,6 @@ declare module '@vue/runtime-core' {
     TagList: typeof import('./components/TagList.vue')['default']
     TagsIcon: typeof import('./components/TagsIcon.vue')['default']
     TheMap: typeof import('./components/TheMap.vue')['default']
+    ThreeDotsSpinner: typeof import('./components/svg/ThreeDotsSpinner.vue')['default']
   }
 }
