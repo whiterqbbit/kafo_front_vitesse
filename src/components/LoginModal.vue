@@ -1,6 +1,6 @@
 <template>
-  <!-- Backdrop -->
   <div class="fixed z-30 h-full w-full flex place-content-center place-items-center">
+    <!-- Backdrop -->
     <div class="fixed h-full w-full cursor-pointer bg-cafe-600/50" @click="close_modal" />
     <!-- Main Div -->
     <div class="relative m-2 h-fit max-w-120 w-full flex flex-col rounded-xl bg-cafe-100 p-5 sm:m-3 sm:p-10">

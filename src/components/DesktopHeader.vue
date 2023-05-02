@@ -24,7 +24,7 @@
         A Propos
       </RouterLink>
     </nav>
-    <div v-if="!user.is_auth" btn class="m-2 btn-grass" @click="display.login_modal = !display.login_modal">
+    <div v-if="!user.is_auth" class="m-2 btn-grass" @click="display.login_modal = !display.login_modal">
       Login
     </div>
     <div v-else flex>
