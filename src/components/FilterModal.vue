@@ -114,7 +114,7 @@
         <div id="distance_filter" class="filter-container">
           <div class="flex justify-between">
             Près de vous
-            <input id="init" value="Se localiser" type="button" class="btn-light" @click="reset_filters()">
+            <input id="init" value="Se localiser" type="button" class="btn-light" @click="use_map_store().locate_user()">
           </div>
           <div class="mt-1 flex justify-around py-2 text-xl">
             <div class="bullet">
