@@ -106,7 +106,7 @@
 import { use_user_store } from '@/stores/user'
 import svg_linkedin from '@/assets/svg/icon/linkedin_logo.svg'
 import svg_close from '@/assets/svg/icon/MingcuteCloseFill.svg'
-import default_user_pic from '@/assets/img/Profil3.png'
+import default_user_pic from '@/assets/img/default_user_pic.png'
 
 const user = use_user_store()
 const is_signup = ref(false)
