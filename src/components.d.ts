@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AvatarStack: typeof import('./components/AvatarStack.vue')['default']
     Checkbox: typeof import('primevue/checkbox')['default']
+    CoffeeCard: typeof import('./components/CoffeeCard.vue')['default']
     DebugModal: typeof import('./components/DebugModal.vue')['default']
     DesktopHeader: typeof import('./components/DesktopHeader.vue')['default']
     DesktopList: typeof import('./components/DesktopList.vue')['default']
