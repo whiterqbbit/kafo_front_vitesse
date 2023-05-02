@@ -19,7 +19,7 @@ export default defineConfig({
     ['btn-light', 'px-4 cursor-pointer py-1 h-fit w-fit place-self-center rounded-xl font-normal text-base text-gray-400 transition hover:(rounded-xl text-cafe-700 bg-opacity-25 bg-stone-200)'],
     ['font-title', 'text-3xl font-bold text-center text-cafe-700'],
     ['container', 'bg-cafe-50 mx-auto px-9 py-4 md:py-8 max-w-7xl'],
-    ['input_field', 'border border-cafe-400 rounded-lg p-2 placeholder-gray-400 focus:ring-1 focus:ring-cafe-400 focus:outline-none'],
+    ['input-field', 'border border-cafe-400 rounded-lg p-2 placeholder-gray-400 focus:ring-1 focus:ring-cafe-400 focus:outline-none'],
   ],
   theme: {
     height: {
@@ -33,7 +33,7 @@ export default defineConfig({
         700: '#503b34',
         600: '#694b42',
         500: '#815a4f',
-        400: '#B79282',
+        400: '#b79282',
         300: '#f5dac8',
         200: '#fdeee2',
         100: '#fff7f2',

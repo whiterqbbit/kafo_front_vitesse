@@ -43,8 +43,8 @@
         <!-- Login Form -->
         <form v-if="!user.is_auth" class="w-full flex flex-col gap-3" @submit.prevent="login_user(login_form.email, login_form.password)">
           <div class="flex flex-col gap-3 text-cafe-600">
-            <input v-model="login_form.email" type="email" placeholder="Email" class="w-full input_field">
-            <input v-model="login_form.password" type="password" placeholder="Password" class="w-full input_field">
+            <input v-model="login_form.email" type="email" placeholder="Email" class="w-full input-field">
+            <input v-model="login_form.password" type="password" placeholder="Password" class="w-full input-field">
           </div>
           <button type="submit" class="w-full font-semibold btn-cafe-light">
             Se connecter par mail
@@ -74,13 +74,13 @@
           <div class="flex flex-col gap-3 text-cafe-600">
             <div class="flex flex-col gap-3">
               <div class="flex gap-3">
-                <input v-model="signup_form.name" type="text" placeholder="Nom" class="w-full input_field">
-                <input v-model="signup_form.first_name" type="text" placeholder="Prénom" class="w-full input_field">
+                <input v-model="signup_form.name" type="text" placeholder="Nom" class="w-full input-field">
+                <input v-model="signup_form.first_name" type="text" placeholder="Prénom" class="w-full input-field">
               </div>
-              <input v-model="signup_form.job_title" type="text" placeholder="Intitulé de votre poste" class="w-full input_field">
-              <textarea v-model="signup_form.bio" spellcheck placeholder="Bio" class="w-full input_field" />
-              <input v-model="signup_form.email" type="email" placeholder="Email" class="w-full input_field">
-              <input v-model="signup_form.password" type="password" placeholder="Mot de passe" class="w-full input_field">
+              <input v-model="signup_form.job_title" type="text" placeholder="Intitulé de votre poste" class="w-full input-field">
+              <textarea v-model="signup_form.bio" spellcheck placeholder="Bio" class="w-full input-field" />
+              <input v-model="signup_form.email" type="email" placeholder="Email" class="w-full input-field">
+              <input v-model="signup_form.password" type="password" placeholder="Mot de passe" class="w-full input-field">
             </div>
             <button btn-cafe type="submit" class="mt-4 w-full font-bold">
               S'inscrire
