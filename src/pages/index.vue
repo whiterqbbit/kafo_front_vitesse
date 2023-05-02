@@ -9,7 +9,7 @@
         </div>
         <div class="z-30 flex">
           <div>Rencontre des</div>
-          <SlidingWord :items="['freelances', 'entrepreneurs', 'artistes', 'product owners', 'growth hackers', 'célibataires']" class="ml-3" />
+          <SlidingWord :items="['freelances', 'entrepreneurs', 'artistes', 'product owners', 'growth hackers']" class="ml-3" />
         </div>
       </div>
       <div class="flex md:w-110%">
