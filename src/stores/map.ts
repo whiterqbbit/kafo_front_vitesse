@@ -134,7 +134,6 @@ export const use_map_store = defineStore('use_map_store', () => {
     if (!leaflet) return
     const L = await leaflet
 
-    // @ts-expect-error: mdr
     L.control.locate({
       position: 'topright',
       strings: {
