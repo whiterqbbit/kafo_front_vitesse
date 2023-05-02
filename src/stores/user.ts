@@ -47,14 +47,17 @@ export const use_user_store = defineStore('user', () => {
           },
         ),
       })
-
-      if (!response.ok) throw new Error(`HTTP error ${response.status}`)
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.message)
+      }
 
       const data = await response.json()
       token.value = data.authToken
       me()
     } catch (error) {
       console.error('Error during login:', error)
+      throw error
     }
   }
 
@@ -78,13 +81,17 @@ export const use_user_store = defineStore('user', () => {
           },
         ),
       })
-      if (!response.ok) throw new Error(`HTTP error ${response.status}`)
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.message)
+      }
 
       const data = await response.json()
       token.value = data.authToken
       me()
     } catch (error) {
-      console.error('Error during login:', error)
+      console.error('Error during signup:', error)
+      throw error
     }
   }
 

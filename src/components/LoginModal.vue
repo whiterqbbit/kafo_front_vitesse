@@ -41,7 +41,7 @@
         <!-- Ligne de séparation -->
         <div class="w-1/2 flex place-self-center border-b-2 border-cafe-600 text-center" />
         <!-- Login Form -->
-        <form v-if="!user.is_auth" class="w-full flex flex-col gap-3" @submit.prevent="user.login(login_form.email, login_form.password)">
+        <form v-if="!user.is_auth" class="w-full flex flex-col gap-3" @submit.prevent="login_user(login_form.email, login_form.password)">
           <div class="flex flex-col gap-3 text-cafe-600">
             <input v-model="login_form.email" type="email" placeholder="Email" class="w-full input_field">
             <input v-model="login_form.password" type="password" placeholder="Password" class="w-full input_field">
@@ -49,6 +49,10 @@
           <button type="submit" class="w-full font-semibold btn-cafe-light">
             Se connecter par mail
           </button>
+          <!-- Erreur -->
+          <div v-if="display_error" class="text-center text-sm text-red-500">
+            {{ display_error }}
+          </div>
           <a class="w-fit flex cursor-pointer place-self-center text-sm underline hover:no-underline">
             Mot de passe oublié
           </a>
@@ -63,7 +67,7 @@
 
       <!-- Signup -->
       <div v-else class="w-full flex flex-col place-items-center gap-3">
-        <form v-if="!user.is_auth" class="w-full flex flex-col gap-3" @submit.prevent="user.signup(signup_form)">
+        <form v-if="!user.is_auth" class="w-full flex flex-col gap-3" @submit.prevent="signup_user(signup_form)">
           <div class="mb-5 text-center text-2xl font-bold">
             Inscription
           </div>
@@ -87,6 +91,10 @@
                 Se connecter
               </div>
             </div>
+            <!-- Erreur -->
+            <div v-if="display_error" class="text-sm text-red-500">
+              {{ display_error }}
+            </div>
           </div>
         </form>
       </div>
@@ -102,6 +110,55 @@ import default_user_pic from '@/assets/img/Profil3.png'
 
 const user = use_user_store()
 const is_signup = ref(false)
+const display_error = ref('')
+
+async function signup_user(form: { name: string; first_name: string; job_title: string; bio: string; email: string; password: string }) {
+  try {
+    await user.signup(form)
+  } catch (error) {
+    const typed_error = error as Error
+    switch (typed_error.message) {
+      case 'Missing param: nom_de_famille':
+        display_error.value = 'Veuillez entrer un nom de famille.'
+        break
+      case 'This account is already in use.':
+        display_error.value = 'Ce compte est déjà utilisé.'
+        break
+      case 'Missing param: field_value':
+        display_error.value = 'Veuillez remplir tous les champs.'
+        break
+      case 'Input does not meet minimum length requirement of 8 characters':
+        display_error.value = 'Le mot de passe doit contenir 8 caractères minimum.'
+        break
+      case 'Weak password detected. Please use at least 1 numbers.':
+        display_error.value = 'Le mot de passe est trop faible, veuillez entrer au moins un chiffre.'
+        break
+      default:
+        display_error.value = typed_error.message
+    }
+  }
+}
+
+async function login_user(email: string, password: string) {
+  try {
+    await user.login(email, password)
+  } catch (error) {
+    const typed_error = error as Error
+    switch (typed_error.message) {
+      case 'Invalid Credentials.':
+        display_error.value = 'Identifiants incorects.'
+        break
+      case 'Missing param: password':
+        display_error.value = 'Veuillez entrer un mot de passe.'
+        break
+      case 'Missing param: field_value':
+        display_error.value = 'Veuillez remplir tous les champs.'
+        break
+      default:
+        display_error.value = typed_error.message
+    }
+  }
+}
 
 function close_modal() {
   display.login_modal = false
