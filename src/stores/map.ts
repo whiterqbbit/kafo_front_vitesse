@@ -12,6 +12,7 @@ interface Leaflet {
   tileLayer: typeof import('leaflet')['tileLayer']
   Icon: typeof import('leaflet')['Icon']
   marker: typeof import('leaflet')['marker']
+  control: typeof import('leaflet')['control']
 }
 
 interface MarkerData {
@@ -42,8 +43,9 @@ export const use_map_store = defineStore('use_map_store', () => {
 
   async function add_map(id: string, viewLngLat: simple_coords, zoom: number) {
     if (!leaflet) return
-    const { map } = await leaflet
-    map_leaf.value = map(id)
+    const L = await leaflet
+
+    map_leaf.value = L.map(id)
       .on('load', () => {
         map_is_loaded.value = true
       })
@@ -54,6 +56,7 @@ export const use_map_store = defineStore('use_map_store', () => {
         }
       })
       .setView(viewLngLat, zoom)
+    L.control.zoom({ position: 'bottomright' }).addTo(map_leaf.value)
   }
 
   async function add_tile_layer(mapUrl: string, maxZoom: number, attribution: string) {

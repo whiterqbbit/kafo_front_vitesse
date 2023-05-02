@@ -1,8 +1,6 @@
 <template>
-  <div class="h-screen--50px w-120 overflow-auto">
-    <div v-if="coffee_store.db_loading">
-      <img :src="spinner" m-auto>
-    </div>
+  <div class="h-screen--50px w-120 overflow-auto fill-current fill-grass-500">
+    <ThreeDotsSpinner v-if="coffee_store.db_loading" class="m-auto h-full w-30 text-cafe-500" />
     <div v-else-if="coffee_store.db_error">
       {{ coffee_store.db_error }}
     </div>
@@ -64,7 +62,6 @@
 
 <script setup lang="ts">
 import subway_icon from '@/assets/img/icons/metro.png'
-import spinner from '@/assets/img/spinner.gif'
 
 const coffee_store = use_coffee_store()
 const coffee_db = computed(() => coffee_store.db_filtered)
