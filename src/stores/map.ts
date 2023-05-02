@@ -1,12 +1,18 @@
 import { defineStore } from 'pinia'
 import { useGeolocation } from '@vueuse/core'
 import type { Router } from 'vue-router'
-import * as L from 'leaflet'
 import type { Cafe } from '@/stores/xano.d'
 import marker_icon from '@/assets/img/geoloc/marker_6.png'
-import 'leaflet.locatecontrol'
 
 type simple_coords = [number, number]
+
+interface Leaflet {
+  map: typeof import('leaflet')['map']
+  tileLayer: typeof import('leaflet')['tileLayer']
+  Icon: typeof import('leaflet')['Icon']
+  marker: typeof import('leaflet')['marker']
+  control: typeof import('leaflet')['control']
+}
 
 interface MarkerData {
   coordinates: simple_coords
@@ -15,6 +21,12 @@ interface MarkerData {
   instance: any
 }
 
+let leaflet: Promise<Leaflet> | undefined
+
+if (typeof window !== 'undefined') {
+  leaflet = import('leaflet').then(module => module)
+  import('leaflet.locatecontrol')
+}
 export const use_map_store = defineStore('use_map_store', () => {
   const map_leaf: any = ref({})
   const markers: Ref<MarkerData[]> = ref([])
@@ -30,8 +42,10 @@ export const use_map_store = defineStore('use_map_store', () => {
     if (bounds.value) return markers.value.filter(marker => bounds.value.contains(marker.coordinates))
   })
 
-  function add_map(id: string, viewLngLat: simple_coords, zoom: number) {
-    if (!L) return
+  async function add_map(id: string, viewLngLat: simple_coords, zoom: number) {
+    if (!leaflet) return
+    const L = await leaflet
+
     map_leaf.value = L.map(id)
       .on('load', () => {
         map_is_loaded.value = true
@@ -43,12 +57,19 @@ export const use_map_store = defineStore('use_map_store', () => {
         }
       })
       .setView(viewLngLat, zoom)
+
     L.control.zoom({ position: 'bottomright' }).addTo(map_leaf.value)
+
+    // Load leaflet.locatecontrol dynamically
+    if (typeof window !== 'undefined') {
+      import('leaflet.locatecontrol')
+    }
   }
 
-  function add_tile_layer(mapUrl: string, maxZoom: number, attribution: string) {
-    if (!L) return
-    L.tileLayer(mapUrl, {
+  async function add_tile_layer(mapUrl: string, maxZoom: number, attribution: string) {
+    if (!leaflet) return
+    const { tileLayer } = await leaflet
+    tileLayer(mapUrl, {
       maxZoom,
       attribution,
     })
@@ -58,9 +79,9 @@ export const use_map_store = defineStore('use_map_store', () => {
       })
   }
 
-  function add_marker(lngLat: simple_coords, popup_description: string, coffee_id: number, router: Router) {
-    if (!L) return
-    const { Icon, marker } = L
+  async function add_marker(lngLat: simple_coords, popup_description: string, coffee_id: number, router: Router) {
+    if (!leaflet) return
+    const { Icon, marker } = await leaflet
     const customIcon = new Icon({
       iconUrl: marker_icon,
       iconSize: [20, 32],
@@ -103,10 +124,15 @@ export const use_map_store = defineStore('use_map_store', () => {
   }
 
   // ne fait que centrer la carte sur l'utilisateur en l'état
-  function locate_user() {
+  async function locate_user() {
+    if (typeof window === 'undefined') return
+
     const { coords, resume } = useGeolocation()
     resume()
     if (!coords.value || !coords.value.latitude || !coords.value.longitude) return
+
+    if (!leaflet) return
+    const L = await leaflet
 
     // @ts-expect-error: mdr
     L.control.locate({
