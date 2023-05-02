@@ -128,10 +128,10 @@
       </div>
       <form class="mt-7 flex flex-col gap-2" @submit.prevent="contact(contact_form)">
         <div class="flex gap-2">
-          <input v-model="contact_form.email" type="email" class="w-1/2 input_field" placeholder="Email">
+          <input v-model="contact_form.email" type="email" class="w-1/2 input-field" placeholder="Email">
           <Dropdown v-model="contact_form.category" :options="subject" option-label="name" placeholder="Sujet" class="drop-downw-full" />
         </div>
-        <textarea v-model="contact_form.message" class="h-30 w-full input_field" placeholder="Ecrivez ici votre petit mot" />
+        <textarea v-model="contact_form.message" class="h-30 w-full input-field" placeholder="Ecrivez ici votre petit mot" />
         <button
           type="submit"
           class="place-self-center bg-cafe-500 text-lg font-semibold text-white sm:place-self-auto hover:bg-cafe-600 btn"
