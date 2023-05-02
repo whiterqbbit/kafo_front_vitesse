@@ -116,26 +116,7 @@ async function signup_user(form: { name: string; first_name: string; job_title: 
   try {
     await user.signup(form)
   } catch (error) {
-    const typed_error = error as Error
-    switch (typed_error.message) {
-      case 'Missing param: nom_de_famille':
-        display_error.value = 'Veuillez entrer un nom de famille.'
-        break
-      case 'This account is already in use.':
-        display_error.value = 'Ce compte est déjà utilisé.'
-        break
-      case 'Missing param: field_value':
-        display_error.value = 'Veuillez remplir tous les champs.'
-        break
-      case 'Input does not meet minimum length requirement of 8 characters':
-        display_error.value = 'Le mot de passe doit contenir 8 caractères minimum.'
-        break
-      case 'Weak password detected. Please use at least 1 numbers.':
-        display_error.value = 'Le mot de passe est trop faible, veuillez entrer au moins un chiffre.'
-        break
-      default:
-        display_error.value = typed_error.message
-    }
+    display_error.value = error.message
   }
 }
 
@@ -143,20 +124,7 @@ async function login_user(email: string, password: string) {
   try {
     await user.login(email, password)
   } catch (error) {
-    const typed_error = error as Error
-    switch (typed_error.message) {
-      case 'Invalid Credentials.':
-        display_error.value = 'Identifiants incorects.'
-        break
-      case 'Missing param: password':
-        display_error.value = 'Veuillez entrer un mot de passe.'
-        break
-      case 'Missing param: field_value':
-        display_error.value = 'Veuillez remplir tous les champs.'
-        break
-      default:
-        display_error.value = typed_error.message
-    }
+    display_error.value = error.message
   }
 }
 
