@@ -5,7 +5,7 @@
       {{ coffee_store.db_error }}
     </div>
     <div v-else-if="coffee_db" class="my-3 flex flex-col gap-4">
-      <div v-for="coffee in coffee_db.slice(0, 20)" :key="coffee.id" class="relative mx-2 overflow-hidden rounded-xl shadow-md">
+      <div v-for="coffee in coffee_db" :key="coffee.id" class="relative mx-2 overflow-hidden rounded-xl shadow-md">
         <CoffeeCard :place="coffee" />
       </div>
     </div>
