@@ -33,6 +33,7 @@ export default defineConfig({
         200: '#fdeee2',
         100: '#fff7f2',
         50: '#fff9f9',
+        25: '#faf7f7',
       },
       grass: {
         900: '#2e4744',
