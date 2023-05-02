@@ -26,7 +26,7 @@
             Notre plateforme facilite les rencontres pour les télétravailleurs en quête d'échanges et de collaborations.
             <br>Gratuitement.
           </div>
-          <LandingCTA class="mx-auto mt-6 text-xl md:mt-12 sm:text-2xl md:text-3xl lg:text-4xl" />
+          <LandingCTA class="mx-auto mt-6 text-xl md:mt-12 lg:text-4xl md:text-3xl sm:text-2xl" />
         </div>
         <div class="relative overflow-visible">
           <div class="bg-floating-resize bg-shape absolute right-[50px] z-0 hidden bg-cafe-200 lg:top-[10px] lg:top-0 md:block md:-top-12" />
@@ -91,7 +91,7 @@
         <div>Choisissez l'ambiance que vous préférez. Finies les mauvaises surprises.</div>
       </div>
     </div>
-    <LandingCTA class="mx-auto mt-6 text-lg md:mt-12 sm:text-xl md:text-2xl lg:text-3xl" />
+    <LandingCTA class="mx-auto mt-6 text-lg md:mt-12 lg:text-3xl md:text-2xl sm:text-xl" />
   </section>
   <section id="faq" class="mt-10">
     <div class="mx-auto rounded-3xl from-cafe-200 to-cafe-50 to-50% bg-gradient-to-tl p-8 sm:w-200">
@@ -123,18 +123,25 @@
         Kafo, c’est vous !
       </div>
       <div>
-        Vous construisez le réseau grâce à vos retours.
+        Vous construisez le réseau grâce à vos partages.
         Contactez-nous pour ajouter de nouveaux lieux, suggérer des idées ou simplement nous faire part de vos coups de coeur!
       </div>
-      <div
-        class="mt-4 place-self-center bg-cafe-500 font-semibold text-white text-lg sm:place-self-auto hover:bg-cafe-600 btn"
-        @click="open_contact = !open_contact"
-      >
-        Contactez-nous
-      </div>
-    </div>
-    <div v-if="open_contact">
-      KIkopu
+      <form class="mt-7 flex flex-col gap-2" @submit.prevent="contact(contact_form)">
+        <div class="flex gap-2">
+          <input v-model="contact_form.email" type="email" class="w-1/2 input-field" placeholder="Email">
+          <Dropdown v-model="contact_form.category" :options="subject" option-label="name" placeholder="Sujet" class="drop-downw-full" />
+        </div>
+        <textarea v-model="contact_form.message" class="h-30 w-full input-field" placeholder="Ecrivez ici votre petit mot" />
+        <button
+          type="submit"
+          class="place-self-center bg-cafe-500 text-lg font-semibold text-white sm:place-self-auto hover:bg-cafe-600 btn"
+        >
+          Contactez-nous
+        </button>
+        <div v-if="confirmation_message" class="animate-wobble font-bold text-grass-500">
+          {{ confirmation_message }}
+        </div>
+      </form>
     </div>
   </section>
   <LandingFooter />
@@ -150,8 +157,23 @@ import tasses from '@/assets/svg/tasses.svg'
 import notes from '@/assets/svg/notes.svg'
 import coeur_niais from '@/assets/svg/coeur_niais.svg'
 
+const user = use_user_store()
 const open_faq_indexes: Ref<number[]> = ref([])
-const open_contact = ref(false)
+const confirmation_message = ref('')
+
+const subject = ref([
+  { name: 'Suggestion de lieu' },
+  { name: 'Question' },
+  { name: 'Partenariat' },
+  { name: 'Autre' },
+  { name: 'Lettre d\'amour' },
+])
+
+const contact_form = reactive ({
+  email: '',
+  message: '',
+  category: { name: '' },
+})
 
 function toggle_faq(index: number) {
   if (open_faq_indexes.value.includes(index)) {
@@ -191,6 +213,14 @@ const questions = ref([
     answer: 'Le débat linguistique autour des appellations \'pain au chocolat\' et \'chocolatine\' est ancré dans l\'histoire et la culture françaises. Si cette querelle semble futile pour certains, elle revêt en réalité une importance stratégique pour les startups, et c\'est précisément ce que cet essai se propose d\'explorer. Nous nous pencherons sur les raisons pour lesquelles l\'appellation \'pain au chocolat\' s\'avère supérieure à \'chocolatine\' dans le contexte entrepreneurial, sans pour autant mépriser ceux qui préfèrent l\'autre terme. Tout d\'abord, il est indéniable que l\'appellation \'pain au chocolat\' jouit d\'une popularité et d\'une universalité qui la rendent plus adaptée au monde des startups. En effet, selon une étude menée en 2021 par Le Parisien, près de 84% des Français utilisent le terme \'pain au chocolat\' tandis que seulement 16% emploient \'chocolatine\'. Dans un contexte entrepreneurial où la communication et l\'accessibilité sont cruciales, il est donc judicieux de miser sur le terme le plus répandu et compréhensible par la majorité. Ensuite, il convient de souligner que l\'appellation \'pain au chocolat\' a l\'avantage d\'évoquer immédiatement les ingrédients-clés du produit : le pain et le chocolat. Cette clarté est primordiale pour une startup qui doit, dès sa phase de lancement, être en mesure de capter l\'attention et susciter l\'intérêt de sa cible. La simplicité et l\'efficacité du terme \'pain au chocolat\' sont donc des atouts majeurs pour une entreprise qui vise à s\'imposer sur un marché concurrentiel. Par ailleurs, il est important de considérer l\'envergure internationale des startups, qui cherchent souvent à conquérir des marchés étrangers. Dans cette perspective, l\'appellation \'pain au chocolat\' présente un avantage indéniable. En effet, elle est plus facilement comprise et assimilée par les non-francophones que \'chocolatine\', qui peut sembler obscure ou déroutante pour ceux qui ne sont pas familiers avec le français. Ainsi, le terme \'pain au chocolat\' contribue à renforcer l\'image d\'une startup dynamique et tournée vers l\'international. Enfin, choisir l\'appellation \'pain au chocolat\' peut également devenir une marque de fabrique pour une startup, lui permettant de se démarquer dans un secteur où l\'innovation et l\'originalité sont clés. En assumant pleinement cette appellation, la startup envoie un message fort sur son attachement à la tradition et à la qualité, tout en adoptant une approche moderne et accessible. Cela peut se traduire par une identité visuelle forte, des actions marketing percutantes et une offre de produits qui va au-delà du simple pain au chocolat. En somme, il apparaît évident que l\'appellation \'pain au chocolat\' présente de nombreux avantages pour une startup, tant au niveau national qu\'international. Sa popularité, son évocation claire des ingrédients-clés, son rayonnement à l\'étranger et la possibilité d\'en faire une marque de fabrique sont autant d\'atouts qui plaident en faveur de cette appellation. Toutefois, il est essentiel de rappeler que le respect des préférences locales et régionales demeure primordial. Dans cette optique, une startup peut parfaitement proposer une version \'chocolatine\' de ses produits pour satisfaire les attentes de tous ses clients.',
   },
 ])
+
+function contact(form: { email: string; message: string; category: { name: string } }) {
+  try {
+    user.suggestion(form)
+  } catch (error) {
+  }
+  confirmation_message.value = '✔️ Message envoyé'
+}
 </script>
 
 <style scoped>
@@ -230,5 +260,18 @@ const questions = ref([
 .img-rotated {
   transform: rotate(90deg);
   transition: all 0.2s;
+}
+
+:deep(.p-dropdown) {
+    @apply bg-white border border-cafe-400 w-1/2
+}
+:deep(.p-dropdown:hover) {
+    @apply border border-cafe-600
+}
+:deep(.p-dropdown:active) {
+    @apply bg-blue border border border-teal-500
+}
+:deep(.p-dropdown .p-dropdown-items-wrapper) {
+    @apply bg-blue text-red font-bold
 }
 </style>

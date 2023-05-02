@@ -12,9 +12,14 @@ export default defineConfig({
   shortcuts: [
     ['btn', 'px-4 py-1 w-fit rounded-xl inline-block place-content-center cursor-pointer transition duration-100 hover:btn-scale disabled:(cursor-default bg-gray-600 opacity-50)'],
     ['btn-scale', 'scale-103 -translate-y-0.3 duration-60'],
+    ['btn-grass', 'btn bg-grass-500 text-cafe-50 hover:bg-grass-600'],
+    ['btn-cafe', 'btn bg-cafe-600 text-cafe-50 hover:bg-cafe-700'],
+    ['btn-cafe-light', 'btn text-cafe-600 bg-cafe-50 hover:shadow-sm border border-cafe-400 hover:border-cafe-500'],
+    ['btn-grass-full', 'btn-grass w-full'],
     ['btn-light', 'px-4 cursor-pointer py-1 h-fit w-fit place-self-center rounded-xl font-normal text-base text-gray-400 transition hover:(rounded-xl text-cafe-700 bg-opacity-25 bg-stone-200)'],
     ['font-title', 'text-3xl font-bold text-center text-cafe-700'],
     ['container', 'bg-cafe-50 mx-auto px-9 py-4 md:py-8 max-w-7xl'],
+    ['input-field', 'border border-cafe-400 rounded-lg p-2 placeholder-gray-400 focus:ring-1 focus:ring-cafe-400 focus:outline-none'],
   ],
   theme: {
     height: {
@@ -28,7 +33,7 @@ export default defineConfig({
         700: '#503b34',
         600: '#694b42',
         500: '#815a4f',
-        400: '#e3ba9f',
+        400: '#b79282',
         300: '#f5dac8',
         200: '#fdeee2',
         100: '#fff7f2',

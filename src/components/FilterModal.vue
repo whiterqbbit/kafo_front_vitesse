@@ -2,7 +2,7 @@
   <div id="main_container" class="overflow-auto p-4 text-2xl md:h-screen--50px">
     <div id="top-bar" class="mb-2 flex justify-between">
       <div class="flex gap-4 rounded-2xl px-4">
-        <a class="font-bold text-4xl">Filtres</a>
+        <a class="text-4xl font-bold">Filtres</a>
       </div>
       <div class="flex gap-4">
         <input id="init" value="Réinitialiser" type="button" class="btn-light" @click="reset_filters()">

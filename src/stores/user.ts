@@ -3,6 +3,8 @@ import { useCookies } from '@vueuse/integrations/useCookies'
 import type { Club, User } from './xano.d'
 
 const xano_login_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/login`
+const xano_signup_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/signup`
+const xano_suggestion_url = `${import.meta.env.VITE_XANO_API_URL}/api:5e9BgwVw/suggestion`
 const xano_me_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/me`
 const xano_linkedin_init_url = `${import.meta.env.VITE_XANO_API_URL}/api:UpsZVD6L/oauth/linkedin/init`
 const xano_linkedin_continue_url = `${import.meta.env.VITE_XANO_API_URL}/api:UpsZVD6L/oauth/linkedin/continue`
@@ -32,6 +34,31 @@ export const use_user_store = defineStore('user', () => {
   const type = ref('')
   const token = ref('')
 
+  async function suggestion(form: { email: string; message: string; category: { name: string } }): Promise<void> {
+    try {
+      const response = await fetch(xano_suggestion_url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          {
+            from_email: form.email,
+            category: form.category.name,
+            body: form.message,
+          },
+        ),
+      })
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.message)
+      }
+    } catch (error) {
+      console.error('Error during suggestion:', error)
+      throw error
+    }
+  }
+
   async function login(email: string, password: string): Promise<void> {
     try {
       const response = await fetch(xano_login_url, {
@@ -46,14 +73,85 @@ export const use_user_store = defineStore('user', () => {
           },
         ),
       })
-
-      if (!response.ok) throw new Error(`HTTP error ${response.status}`)
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.message)
+      }
 
       const data = await response.json()
       token.value = data.authToken
       me()
     } catch (error) {
       console.error('Error during login:', error)
+
+      const typed_error = error as Error
+      switch (typed_error.message) {
+        case 'Invalid Credentials.':
+          typed_error.message = 'Identifiants incorrects.'
+          break
+        case 'Missing param: password':
+          typed_error.message = 'Veuillez entrer un mot de passe.'
+          break
+        case 'Missing param: field_value':
+          typed_error.message = 'Veuillez remplir tous les champs.'
+          break
+      }
+
+      throw typed_error
+    }
+  }
+
+  async function signup(infos: { name: string; first_name: string; job_title: string; bio: string; email: string; password: string }) {
+    const { name, first_name, job_title, bio, email, password } = infos
+
+    try {
+      const response = await fetch(xano_signup_url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          {
+            email,
+            password,
+            name: first_name,
+            nom_de_famille: name,
+            bio,
+            job_title,
+          },
+        ),
+      })
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.message)
+      }
+
+      const data = await response.json()
+      token.value = data.authToken
+      me()
+    } catch (error) {
+      console.error('Error during signup:', error)
+      const typed_error = error as Error
+
+      switch (typed_error.message) {
+        case 'Missing param: nom_de_famille':
+          typed_error.message = 'Veuillez entrer un nom de famille.'
+          break
+        case 'This account is already in use.':
+          typed_error.message = 'Ce compte est déjà utilisé.'
+          break
+        case 'Missing param: field_value':
+          typed_error.message = 'Veuillez remplir tous les champs.'
+          break
+        case 'Input does not meet minimum length requirement of 8 characters':
+          typed_error.message = 'Le mot de passe doit contenir 8 caractères minimum.'
+          break
+        case 'Weak password detected. Please use at least 1 numbers.':
+          typed_error.message = 'Le mot de passe est trop faible, veuillez entrer au moins un chiffre.'
+          break
+      }
+
+      throw typed_error
     }
   }
 
@@ -190,11 +288,13 @@ export const use_user_store = defineStore('user', () => {
     pic_small,
     pic_xsmall,
     role,
+    suggestion,
     type,
     token,
     linkedin_init,
     linkedin_continue,
     login,
+    signup,
     logout,
     me,
   }
