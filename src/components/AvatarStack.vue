@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <div v-for="attendee in props.attendees" :key="attendee.id" class="attendee-img h-12 w-12 rounded-full bg-cafe-100">
+    <div v-for="attendee in props.attendees" :key="attendee.id" class="attendee-img h-10 w-10 rounded-full bg-cafe-100">
       <img :src="attendee.url" class="h-full w-full rounded-full object-cover">
     </div>
   </div>

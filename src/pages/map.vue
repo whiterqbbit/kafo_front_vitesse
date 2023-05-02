@@ -8,21 +8,20 @@
     >
       <DebugModal class="absolute left-1/12 top-1/12 h-3/4 w-3/4" :props="coffee_db" />
     </div>
-    <div md="w-full" class="h-full flex items-center justify-center font-title">
+    <div md="w-full" class="h-full flex items-center justify-center">
       <div class="relative h-full w-full">
+        <FilterModal v-if="display.filter_modal" />
         <TheMap class="z-10" />
         <!-- <SearchBar v-if="!preferences.is_mobile" class="fixed left-1/2 top-1/8 z-20 w-[528px]" /> -->
       </div>
     </div>
-    <div v-if="preferences.is_mobile" class="flex flex-col">
-      <FilterModal v-if="display.filter_modal" class="w-full font-title" />
-      <MobileList v-else class="absolute bottom-20 left-1/2 z-20 h-80 w-full -translate-x-1/2" />
+    <div v-if="preferences.is_mobile" class="relative flex flex-col">
+      <MobileList v-if="!display.filter_modal" class="absolute bottom-5 left-1/2 z-20 h-80 w-full -translate-x-1/2" />
     </div>
     <div v-else>
-      <div class="flex flex-row overflow-hidden font-title">
+      <div class="flex flex-row overflow-hidden">
         <DesktopSidebar />
         <DesktopList />
-        <FilterModal v-if="display.filter_modal" class="absolute left-138" />
       </div>
     </div>
   </div>
