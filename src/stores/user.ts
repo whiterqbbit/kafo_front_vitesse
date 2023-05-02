@@ -83,7 +83,21 @@ export const use_user_store = defineStore('user', () => {
       me()
     } catch (error) {
       console.error('Error during login:', error)
-      throw error
+
+      const typed_error = error as Error
+      switch (typed_error.message) {
+        case 'Invalid Credentials.':
+          typed_error.message = 'Identifiants incorrects.'
+          break
+        case 'Missing param: password':
+          typed_error.message = 'Veuillez entrer un mot de passe.'
+          break
+        case 'Missing param: field_value':
+          typed_error.message = 'Veuillez remplir tous les champs.'
+          break
+      }
+
+      throw typed_error
     }
   }
 
@@ -117,7 +131,27 @@ export const use_user_store = defineStore('user', () => {
       me()
     } catch (error) {
       console.error('Error during signup:', error)
-      throw error
+      const typed_error = error as Error
+
+      switch (typed_error.message) {
+        case 'Missing param: nom_de_famille':
+          typed_error.message = 'Veuillez entrer un nom de famille.'
+          break
+        case 'This account is already in use.':
+          typed_error.message = 'Ce compte est déjà utilisé.'
+          break
+        case 'Missing param: field_value':
+          typed_error.message = 'Veuillez remplir tous les champs.'
+          break
+        case 'Input does not meet minimum length requirement of 8 characters':
+          typed_error.message = 'Le mot de passe doit contenir 8 caractères minimum.'
+          break
+        case 'Weak password detected. Please use at least 1 numbers.':
+          typed_error.message = 'Le mot de passe est trop faible, veuillez entrer au moins un chiffre.'
+          break
+      }
+
+      throw typed_error
     }
   }
 

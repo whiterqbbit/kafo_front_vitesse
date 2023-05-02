@@ -3,7 +3,7 @@
     <!-- Backdrop -->
     <div class="fixed h-full w-full cursor-pointer bg-cafe-600/50" @click="close_modal" />
     <!-- Main Div -->
-    <div class="relative m-2 h-fit max-w-120 w-full flex flex-col rounded-xl bg-cafe-100 p-5 sm:m-3 sm:p-10">
+    <div class="relative m-2 h-fit max-w-120 w-full flex flex-col animate-zoom-in-up rounded-xl bg-cafe-100 p-5 sm:m-3 sm:p-10">
       <!-- Félicitation -->
       <button class="absolute right-5 top-5 z-90 rounded-3xl hover:scale-105" icon="pi pi-times" @click="close_modal">
         <img :src="svg_close">
@@ -36,7 +36,7 @@
           @click="linkedin_login"
         >
           <span>Se connecter avec Linked</span>
-          <img :src="svg_linkedin" alt="linkedin_icon" class="ml-0.5 h-4 place-self-center">
+          <img :src="svg_linkedin" alt="linkedin icon" class="ml-0.5 h-4 place-self-center">
         </button>
         <!-- Ligne de séparation -->
         <div class="w-1/2 flex place-self-center border-b-2 border-cafe-600 text-center" />
@@ -117,25 +117,7 @@ async function signup_user(form: { name: string; first_name: string; job_title: 
     await user.signup(form)
   } catch (error) {
     const typed_error = error as Error
-    switch (typed_error.message) {
-      case 'Missing param: nom_de_famille':
-        display_error.value = 'Veuillez entrer un nom de famille.'
-        break
-      case 'This account is already in use.':
-        display_error.value = 'Ce compte est déjà utilisé.'
-        break
-      case 'Missing param: field_value':
-        display_error.value = 'Veuillez remplir tous les champs.'
-        break
-      case 'Input does not meet minimum length requirement of 8 characters':
-        display_error.value = 'Le mot de passe doit contenir 8 caractères minimum.'
-        break
-      case 'Weak password detected. Please use at least 1 numbers.':
-        display_error.value = 'Le mot de passe est trop faible, veuillez entrer au moins un chiffre.'
-        break
-      default:
-        display_error.value = typed_error.message
-    }
+    display_error.value = typed_error.message
   }
 }
 
@@ -144,19 +126,7 @@ async function login_user(email: string, password: string) {
     await user.login(email, password)
   } catch (error) {
     const typed_error = error as Error
-    switch (typed_error.message) {
-      case 'Invalid Credentials.':
-        display_error.value = 'Identifiants incorects.'
-        break
-      case 'Missing param: password':
-        display_error.value = 'Veuillez entrer un mot de passe.'
-        break
-      case 'Missing param: field_value':
-        display_error.value = 'Veuillez remplir tous les champs.'
-        break
-      default:
-        display_error.value = typed_error.message
-    }
+    display_error.value = typed_error.message
   }
 }
 

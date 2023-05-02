@@ -123,7 +123,7 @@
         Kafo, c’est vous !
       </div>
       <div>
-        Vous construisez le réseau grâce à vos retours.
+        Vous construisez le réseau grâce à vos partages.
         Contactez-nous pour ajouter de nouveaux lieux, suggérer des idées ou simplement nous faire part de vos coups de coeur!
       </div>
       <form class="mt-7 flex flex-col gap-2" @submit.prevent="contact(contact_form)">
@@ -138,7 +138,7 @@
         >
           Contactez-nous
         </button>
-        <div v-if="confirmation_message" class="animate-pulse font-bold text-grass-500">
+        <div v-if="confirmation_message" class="animate-wobble font-bold text-grass-500">
           {{ confirmation_message }}
         </div>
       </form>
