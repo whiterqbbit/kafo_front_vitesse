@@ -15,7 +15,7 @@
       <!-- FILTRE TARIFS -->
       <section>
         <div class="filter-container gap-1">
-          <span class="titles">Tarification</span>
+          <span class="filter-modal-title">Tarification</span>
           <div class="filter-container-inner">
             <div class="w-1/3 flex gap-2">
               <Checkbox v-model="filters.pricing_free" class="mt-2px" :binary="true" />
@@ -53,10 +53,10 @@
       <!-- FILTRE AMBIANCE -->
       <section>
         <div class="filter-container gap-1">
-          <span class="titles">Ambiances</span>
+          <span class="filter-modal-title">Ambiances</span>
           <div class="filter-container-inner">
             <div class="w-1/3 flex gap-2">
-              <Checkbox v-model="filters.noise_level_silent" class="checkboxes" :binary="true" />
+              <Checkbox v-model="filters.noise_level_silent" class="filter-modal-checkbox" :binary="true" />
               <div class="flex flex-col">
                 <label for="filter-coworking" class="cursor-pointer" @click="filters.noise_level_silent = !filters.noise_level_silent">Studieux</label>
                 <div class="description">
@@ -65,7 +65,7 @@
               </div>
             </div>
             <div class="w-1/3 flex gap-2">
-              <Checkbox v-model="filters.noise_level_calm" class="checkboxes" :binary="true" />
+              <Checkbox v-model="filters.noise_level_calm" class="filter-modal-checkbox" :binary="true" />
               <div class="flex flex-col">
                 <label for="filter-coworking" class="cursor-pointer" @click="filters.noise_level_calm = !filters.noise_level_calm">Calme</label>
                 <div class="description">
@@ -74,7 +74,7 @@
               </div>
             </div>
             <div class="w-1/3 flex gap-2">
-              <Checkbox v-model="filters.noise_level_lively" class="checkboxes" :binary="true" />
+              <Checkbox v-model="filters.noise_level_lively" class="filter-modal-checkbox" :binary="true" />
               <div class="flex flex-col">
                 <label for="filter-coworking" class="cursor-pointer" @click="filters.noise_level_lively = !filters.noise_level_lively">Animé</label>
                 <div class="description">
@@ -115,7 +115,7 @@
       <section>
         <div id="distance_filter" class="filter-container">
           <div class="flex justify-between">
-            <span class="titles">Près de vous</span>
+            <span class="filter-modal-title">Près de vous</span>
             <input id="init" value="Se localiser" type="button" class="btn-light" @click="use_map_store().locate_user()">
           </div>
           <div class="filter-container-inner justify-between">
@@ -142,29 +142,29 @@
       <!-- FILTRES AUTRES -->
       <section>
         <div id="misc_filters" class="filter-container flex flex-col">
-          <span class="titles">Autres</span>
+          <span class="filter-modal-title">Autres</span>
           <div class="filter-container-inner justify-between">
             <div class="flex flex-col gap-1">
               <div class="bullet">
-                <Checkbox v-model="filters.our_picks" class="checkboxes" :binary="true" />
+                <Checkbox v-model="filters.our_picks" class="filter-modal-checkbox" :binary="true" />
                 <label class="cursor-pointer" for="filter_our_picks" @click="filters.our_picks = !filters.our_picks">Nos coups de coeurs</label>
               </div>
               <div class="bullet">
-                <Checkbox v-model="filters.wifi" class="checkboxes" :binary="true" />
+                <Checkbox v-model="filters.wifi" class="filter-modal-checkbox" :binary="true" />
                 <label class="cursor-pointer" for="filter_wifi" @click="filters.wifi = !filters.wifi">Wifi</label>
               </div>
               <div class="bullet">
-                <Checkbox v-model="filters.power" class="checkboxes" :binary="true" />
+                <Checkbox v-model="filters.power" class="filter-modal-checkbox" :binary="true" />
                 <label for="filter_power">Prises</label>
               </div>
             </div>
             <div class="flex flex-col gap-1">
               <div class="bullet">
-                <Checkbox v-model="filters.open_now" class="checkboxes" :binary="true" />
+                <Checkbox v-model="filters.open_now" class="filter-modal-checkbox" :binary="true" />
                 <label class="cursor-pointer" for="filter_open" @click="filters.open_now = !filters.open_now">Ouvert actuellement</label>
               </div>
               <div class="bullet">
-                <Checkbox v-model="filters.limit_to_map" class="checkboxes" :binary="true" />
+                <Checkbox v-model="filters.limit_to_map" class="filter-modal-checkbox" :binary="true" />
                 <label class="cursor-pointer" for="filter_limit_to_map" @click="filters.limit_to_map = !filters.limit_to_map">Limiter à la carte</label>
               </div>
             </div>
@@ -197,11 +197,11 @@ const club_db_domain = computed(() => use_club_store().db?.filter(club => club.t
     @apply flex p-2
   }
 
-  .titles{
+  .filter-modal-title{
   @apply text-xl font-semibold text-cafe-700
   }
 
-  .checkboxes{
+  .filter-modal-checkbox{
     @apply mt-3px
   }
 </style>

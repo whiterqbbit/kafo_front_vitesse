@@ -2,7 +2,7 @@
   <div>
     <Flicking :options="{ renderOnlyVisible: true, resizeOnContentsReady: true }" class="flicking-container">
       <div v-for="coffee in coffee_store.db_filtered" :key="coffee.id" class="flicking-panel relative m-x-4 overflow-hidden rounded-2xl bg-cafe-100 shadow-md">
-        <CoffeeCard :place="coffee" class="h-full w-full" />
+        <CoffeeCard :place="coffee" />
       </div>
     </flicking>
   </div>
