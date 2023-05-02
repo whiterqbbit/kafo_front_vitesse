@@ -166,7 +166,7 @@ function close_modal() {
 
 async function linkedin_login() {
   const link = await user.linkedin_init()
-  window.open(link, '_blank')
+  window.location.href = link
   close_modal()
 }
 
