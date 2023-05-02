@@ -3,7 +3,6 @@ import { useGeolocation } from '@vueuse/core'
 import type { Router } from 'vue-router'
 import type { Cafe } from '@/stores/xano.d'
 import marker_icon from '@/assets/img/geoloc/marker_6.png'
-import user_icon_url from '@/assets/img/geoloc/user.png'
 
 type simple_coords = [number, number]
 
@@ -24,8 +23,10 @@ interface MarkerData {
 
 let leaflet: Promise<Leaflet> | undefined
 
-if (typeof window !== 'undefined') leaflet = import('leaflet').then(module => module)
-
+if (typeof window !== 'undefined') {
+  leaflet = import('leaflet').then(module => module)
+  import('leaflet.locatecontrol')
+}
 export const use_map_store = defineStore('use_map_store', () => {
   const map_leaf: any = ref({})
   const markers: Ref<MarkerData[]> = ref([])
@@ -56,7 +57,13 @@ export const use_map_store = defineStore('use_map_store', () => {
         }
       })
       .setView(viewLngLat, zoom)
+
     L.control.zoom({ position: 'bottomright' }).addTo(map_leaf.value)
+
+    // Load leaflet.locatecontrol dynamically
+    if (typeof window !== 'undefined') {
+      import('leaflet.locatecontrol')
+    }
   }
 
   async function add_tile_layer(mapUrl: string, maxZoom: number, attribution: string) {
@@ -118,37 +125,24 @@ export const use_map_store = defineStore('use_map_store', () => {
 
   // ne fait que centrer la carte sur l'utilisateur en l'état
   async function locate_user() {
+    if (typeof window === 'undefined') return
+
     const { coords, resume } = useGeolocation()
     resume()
     if (!coords.value || !coords.value.latitude || !coords.value.longitude) return
 
     if (!leaflet) return
-    const { Icon, marker } = await leaflet
+    const L = await leaflet
 
-    const customIcon = new Icon({
-      iconUrl: user_icon_url,
-      iconSize: [20, 32],
-      iconAnchor: [20, 32],
-      popupAnchor: [0, -32],
-    })
-
-    map_leaf.value.locate({ setView: true, maxZoom: 16 })
-
-    map_leaf.value.on('locationfound', (event: any) => {
-      const { latitude, longitude } = event.latlng
-      const lngLat: simple_coords = [latitude, longitude]
-      marker(lngLat, { icon: customIcon })
-        .addTo(map_leaf.value)
-        .bindPopup('C\'est vous !')
-        .on('click', () => {
-          marker_is_click.value = true
-        })
-      marker_is_loaded.value = true
-    })
-
-    map_leaf.value.on('locationerror', (error: any) => {
-      console.error('Error getting user location:', error)
-    })
+    L.control.locate({
+      position: 'topright',
+      strings: {
+        title: 'Me localiser!',
+      },
+      locateOptions: {
+        maxZoom: 15,
+      },
+    }).addTo(map_leaf.value).start()
   }
 
   // ne fonctionne pas en l'état, 403
