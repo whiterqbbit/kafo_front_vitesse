@@ -31,6 +31,9 @@ dependencies:
   leaflet:
     specifier: ^1.9.3
     version: 1.9.3
+  leaflet.locatecontrol:
+    specifier: ^0.79.0
+    version: 0.79.0
   nprogress:
     specifier: ^0.2.0
     version: 0.2.0
@@ -6902,6 +6905,10 @@ packages:
     resolution: {integrity: sha512-cc8oEVoctTvsFZ/Oje/kGnHbpWHYBe8IAJe4C0QNc3t8uM/0Y8+erSz/7Y1ALuXTEZTMvxXwO6YbX1ey3ujiZw==}
     engines: {node: '> 0.8'}
     dev: true
+
+  /leaflet.locatecontrol@0.79.0:
+    resolution: {integrity: sha512-h64QIHFkypYdr90lkSfjKvPvvk8/b8UnP3m9WuoWdp5p2AaCWC0T1NVwyuj4rd5U4fBW3tQt4ppmZ2LceHMIDg==}
+    dev: false
 
   /leaflet@1.9.3:
     resolution: {integrity: sha512-iB2cR9vAkDOu5l3HAay2obcUHZ7xwUBBjph8+PGtmW/2lYhbLizWtG7nTeYht36WfOslixQF9D/uSIzhZgGMfQ==}
