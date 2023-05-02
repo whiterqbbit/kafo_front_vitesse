@@ -3,7 +3,7 @@
     <!-- Backdrop -->
     <div class="fixed h-full w-full cursor-pointer bg-cafe-600/50" @click="close_modal" />
     <!-- Main Div -->
-    <div class="relative m-2 h-fit max-w-120 w-full flex flex-col rounded-xl bg-cafe-100 p-5 sm:m-3 sm:p-10">
+    <div class="relative m-2 h-fit max-w-120 w-full flex flex-col animate-zoom-in-up rounded-xl bg-cafe-100 p-5 sm:m-3 sm:p-10">
       <!-- Félicitation -->
       <button class="absolute right-5 top-5 z-90 rounded-3xl hover:scale-105" icon="pi pi-times" @click="close_modal">
         <img :src="svg_close">
@@ -36,7 +36,7 @@
           @click="linkedin_login"
         >
           <span>Se connecter avec Linked</span>
-          <img :src="svg_linkedin" alt="linkedin_icon" class="ml-0.5 h-4 place-self-center">
+          <img :src="svg_linkedin" alt="linkedin icon" class="ml-0.5 h-4 place-self-center">
         </button>
         <!-- Ligne de séparation -->
         <div class="w-1/2 flex place-self-center border-b-2 border-cafe-600 text-center" />
