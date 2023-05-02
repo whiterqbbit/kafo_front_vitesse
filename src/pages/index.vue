@@ -127,8 +127,10 @@
         Contactez-nous pour ajouter de nouveaux lieux, suggérer des idées ou simplement nous faire part de vos coups de coeur!
       </div>
       <form class="mt-7 flex flex-col gap-2" @submit.prevent="contact(contact_form)">
-        <input v-model="contact_form.email" type="email" class="w-50 input_field" placeholder="Email">
-        <Dropdown v-model="chosen" :options="subject" option-label="name" placeholder="Sujet" class="drop-down w-full md:w-14rem" />
+        <div class="flex gap-2">
+          <input v-model="contact_form.email" type="email" class="w-1/2 input_field" placeholder="Email">
+          <Dropdown v-model="contact_form.category" :options="subject" option-label="name" placeholder="Sujet" class="drop-downw-full" />
+        </div>
         <textarea v-model="contact_form.message" class="h-30 w-full input_field" placeholder="Ecrivez ici votre petit mot" />
         <button
           type="submit"
@@ -136,6 +138,9 @@
         >
           Contactez-nous
         </button>
+        <div v-if="confirmation_message" class="animate-pulse font-bold text-grass-500">
+          {{ confirmation_message }}
+        </div>
       </form>
     </div>
   </section>
@@ -152,7 +157,9 @@ import tasses from '@/assets/svg/tasses.svg'
 import notes from '@/assets/svg/notes.svg'
 import coeur_niais from '@/assets/svg/coeur_niais.svg'
 
+const user = use_user_store()
 const open_faq_indexes: Ref<number[]> = ref([])
+const confirmation_message = ref('')
 
 const subject = ref([
   { name: 'Suggestion de lieu' },
@@ -161,11 +168,12 @@ const subject = ref([
   { name: 'Autre' },
   { name: 'Lettre d\'amour' },
 ])
-const chosen = ref('')
 
-function contact(form: { email: string; message: string }) {
-  return form
-}
+const contact_form = reactive ({
+  email: '',
+  message: '',
+  category: { name: '' },
+})
 
 function toggle_faq(index: number) {
   if (open_faq_indexes.value.includes(index)) {
@@ -206,10 +214,13 @@ const questions = ref([
   },
 ])
 
-const contact_form = ref({
-  email: '',
-  message: '',
-})
+function contact(form: { email: string; message: string; category: { name: string } }) {
+  try {
+    user.suggestion(form)
+  } catch (error) {
+  }
+  confirmation_message.value = '✔️ Message envoyé'
+}
 </script>
 
 <style scoped>
@@ -252,7 +263,7 @@ const contact_form = ref({
 }
 
 :deep(.p-dropdown) {
-    @apply bg-white border border-cafe-400
+    @apply bg-white border border-cafe-400 w-1/2
 }
 :deep(.p-dropdown:hover) {
     @apply border border-cafe-600

@@ -4,6 +4,7 @@ import type { Club, User } from './xano.d'
 
 const xano_login_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/login`
 const xano_signup_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/signup`
+const xano_suggestion_url = `${import.meta.env.VITE_XANO_API_URL}/api:5e9BgwVw/suggestion`
 const xano_me_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/me`
 const xano_linkedin_init_url = `${import.meta.env.VITE_XANO_API_URL}/api:UpsZVD6L/oauth/linkedin/init`
 const xano_linkedin_continue_url = `${import.meta.env.VITE_XANO_API_URL}/api:UpsZVD6L/oauth/linkedin/continue`
@@ -32,6 +33,31 @@ export const use_user_store = defineStore('user', () => {
   const role = ref('')
   const type = ref('')
   const token = ref('')
+
+  async function suggestion(form: { email: string; message: string; category: { name: string } }): Promise<void> {
+    try {
+      const response = await fetch(xano_suggestion_url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          {
+            from_email: form.email,
+            category: form.category.name,
+            body: form.message,
+          },
+        ),
+      })
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.message)
+      }
+    } catch (error) {
+      console.error('Error during suggestion:', error)
+      throw error
+    }
+  }
 
   async function login(email: string, password: string): Promise<void> {
     try {
@@ -228,6 +254,7 @@ export const use_user_store = defineStore('user', () => {
     pic_small,
     pic_xsmall,
     role,
+    suggestion,
     type,
     token,
     linkedin_init,
