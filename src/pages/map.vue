@@ -10,7 +10,7 @@
     </div>
     <div md="w-full" class="h-full flex items-center justify-center">
       <div class="relative h-full w-full">
-        <FilterModal v-if="display.filter_modal" class="absolute left-0 top-0 w-fit md:w-150" />
+        <FilterModal v-if="display.filter_modal" />
         <TheMap class="z-10" />
         <!-- <SearchBar v-if="!preferences.is_mobile" class="fixed left-1/2 top-1/8 z-20 w-[528px]" /> -->
       </div>
