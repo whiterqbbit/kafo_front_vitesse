@@ -43,6 +43,7 @@ export const use_map_store = defineStore('use_map_store', () => {
         }
       })
       .setView(viewLngLat, zoom)
+    L.control.zoom({ position: 'bottomright' }).addTo(map_leaf.value)
   }
 
   function add_tile_layer(mapUrl: string, maxZoom: number, attribution: string) {

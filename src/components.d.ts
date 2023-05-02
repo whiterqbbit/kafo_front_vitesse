@@ -10,9 +10,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AvatarStack: typeof import('./components/AvatarStack.vue')['default']
-    Button: typeof import('primevue/button')['default']
     Checkbox: typeof import('primevue/checkbox')['default']
-    ContactModal: typeof import('./components/ContactModal.vue')['default']
     DebugModal: typeof import('./components/DebugModal.vue')['default']
     DesktopHeader: typeof import('./components/DesktopHeader.vue')['default']
     DesktopList: typeof import('./components/DesktopList.vue')['default']
@@ -29,7 +27,6 @@ declare module '@vue/runtime-core' {
     MobileFooter: typeof import('./components/MobileFooter.vue')['default']
     MobileHeader: typeof import('./components/MobileHeader.vue')['default']
     MobileList: typeof import('./components/MobileList.vue')['default']
-    MultiSelect: typeof import('primevue/multiselect')['default']
     RadioButton: typeof import('primevue/radiobutton')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
