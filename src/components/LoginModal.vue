@@ -116,7 +116,8 @@ async function signup_user(form: { name: string; first_name: string; job_title: 
   try {
     await user.signup(form)
   } catch (error) {
-    display_error.value = error.message
+    const typed_error = error as Error
+    display_error.value = typed_error.message
   }
 }
 
@@ -124,7 +125,8 @@ async function login_user(email: string, password: string) {
   try {
     await user.login(email, password)
   } catch (error) {
-    display_error.value = error.message
+    const typed_error = error as Error
+    display_error.value = typed_error.message
   }
 }
 
