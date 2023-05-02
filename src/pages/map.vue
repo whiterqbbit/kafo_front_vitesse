@@ -1,6 +1,6 @@
 <template>
   <pre v-if="display.cookie_modal" class="h-fit w-full">{{ cookies.getAll() }}</pre>
-  <div id="main_container" class="relative h-screen--35px flex flex-col bg-[#faf7f7] md:h-screen--50px md:flex-row-reverse">
+  <div id="main_container" class="relative h-screen--35px flex flex-col bg-cafe-100 md:h-screen--50px md:flex-row-reverse">
     <LoginModal v-if="display.login_modal" />
     <div
       v-if="display.debug_modal" class="fixed left-0 top-0 z-50 h-full w-full bg-cafe-400 bg-opacity-50"
@@ -8,18 +8,18 @@
     >
       <DebugModal class="absolute left-1/12 top-1/12 h-3/4 w-3/4" :props="coffee_db" />
     </div>
-    <div md="w-full" class="overflow-none h-full flex items-center justify-center bg-red-100 font-title">
+    <div md="w-full" class="overflow-none h-full flex items-center justify-center bg-red-100">
       <div class="relative h-full w-full">
         <TheMap class="z-10" />
         <!-- <SearchBar v-if="!preferences.is_mobile" class="fixed left-1/2 top-1/8 z-20 w-[528px]" /> -->
       </div>
     </div>
     <div v-if="preferences.is_mobile" class="flex flex-col">
-      <FilterModal v-if="display.filter_modal" class="w-full font-title" />
-      <MobileList v-else class="absolute bottom-20 left-1/2 z-20 h-80 w-full -translate-x-1/2" />
+      <FilterModal v-if="display.filter_modal" class="w-full" />
+      <MobileList v-else class="absolute bottom-5 left-1/2 z-20 h-80 w-full -translate-x-1/2" />
     </div>
     <div v-else class="h-full">
-      <div class="flex flex-row overflow-hidden font-title">
+      <div class="flex flex-row overflow-hidden">
         <FilterModal v-if="display.filter_modal" class="w-150" />
         <div v-else class="ml-2 mt-4 w-16 place-items-center p-1">
           <div class="h-fit flex place-items-center place-self-center rounded-xl bg-white p-2 shadow-md" @click="display.filter_modal = true">
