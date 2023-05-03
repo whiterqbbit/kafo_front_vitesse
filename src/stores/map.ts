@@ -23,6 +23,7 @@ interface MarkerData {
 
 let leaflet: Promise<Leaflet> | undefined
 
+// for SSG
 if (typeof window !== 'undefined') {
   leaflet = import('leaflet').then(module => module)
   import('leaflet.locatecontrol')
@@ -60,7 +61,7 @@ export const use_map_store = defineStore('use_map_store', () => {
 
     L.control.zoom({ position: 'bottomright' }).addTo(map_leaf.value)
 
-    // Load leaflet.locatecontrol dynamically
+    // for SSG
     if (typeof window !== 'undefined') {
       import('leaflet.locatecontrol')
     }
@@ -123,8 +124,8 @@ export const use_map_store = defineStore('use_map_store', () => {
     })
   }
 
-  // ne fait que centrer la carte sur l'utilisateur en l'état
   async function locate_user() {
+    // for SSG
     if (typeof window === 'undefined') return
 
     const { coords, resume } = useGeolocation()
