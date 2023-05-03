@@ -19,6 +19,7 @@ declare module '@vue/runtime-core' {
     Dropdown: typeof import('primevue/dropdown')['default']
     FilterModal: typeof import('./components/FilterModal.vue')['default']
     Galleria: typeof import('primevue/galleria')['default']
+    HoverProfile: typeof import('./components/HoverProfile.vue')['default']
     InputSwitch: typeof import('primevue/inputswitch')['default']
     InputText: typeof import('primevue/inputtext')['default']
     LandingCTA: typeof import('./components/LandingCTA.vue')['default']

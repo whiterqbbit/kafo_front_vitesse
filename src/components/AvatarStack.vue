@@ -1,7 +1,17 @@
 <template>
-  <div class="flex">
-    <div v-for="attendee in props.attendees" :key="attendee.id" class="attendee-img h-10 w-10 rounded-full bg-cafe-100">
+  <div class="avatar-container flex">
+    <div
+      v-for="attendee in props.attendees"
+      :key="attendee.id"
+      class="attendee-img relative h-10 w-10 rounded-full bg-cafe-100"
+      @mouseenter="show_hover_profile(attendee)"
+      @mouseleave="hide_hover_profile"
+    >
       <img :src="attendee.url" class="h-full w-full rounded-full object-cover">
+      <span>{{ attendee.id }}</span>
+      <Teleport v-if="is_mounted" to="#main_container">
+        <HoverProfile v-if="hover_profile_visible" :attendee="current_attendee" :x="x" :y="y" :width="width" :height="height" />
+      </Teleport>
     </div>
   </div>
 </template>
@@ -13,6 +23,32 @@ const props = defineProps<{
     url: string
   }[]
 }>()
+
+interface Attendee {
+  id: number
+  url: string
+}
+
+const is_mounted = ref(false)
+const hover_profile_visible = ref(false)
+const current_attendee = ref<Attendee | null>(null)
+
+const { x, y } = useMouse()
+const { width, height } = useWindowSize()
+
+onMounted(() => {
+  // for SSG
+  is_mounted.value = true
+})
+
+function show_hover_profile(attendee: Attendee) {
+  current_attendee.value = attendee
+  hover_profile_visible.value = true
+}
+
+function hide_hover_profile() {
+  hover_profile_visible.value = false
+}
 </script>
 
 <style scoped>
