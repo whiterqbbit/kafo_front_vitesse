@@ -38,5 +38,6 @@ declare module '@vue/runtime-core' {
     TagsIcon: typeof import('./components/TagsIcon.vue')['default']
     TheMap: typeof import('./components/TheMap.vue')['default']
     ThreeDotsSpinner: typeof import('./components/svg/ThreeDotsSpinner.vue')['default']
+    WelcomeModal: typeof import('./components/WelcomeModal.vue')['default']
   }
 }
