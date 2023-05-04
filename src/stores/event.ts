@@ -9,12 +9,6 @@ export const use_event_store = defineStore('event', () => {
   const selected_coffee_events_loading = ref(false)
   const selected_coffee_events_error = ref<string | null>(null)
 
-  function date_to_day_month(date: Date) {
-    const day = date.getDate()
-    const month = date.getMonth() + 1
-    return `${day}/${month}`
-  }
-
   async function get_coffee_events() {
     selected_coffee_events.value = null
     selected_coffee_events_loading.value = true
@@ -36,5 +30,5 @@ export const use_event_store = defineStore('event', () => {
     }
     return selected_coffee_events.value
   }
-  return { selected_coffee_events, selected_coffee_events_loading, selected_coffee_events_error, selected_coffee_id, get_coffee_events, date_to_day_month }
+  return { selected_coffee_events, selected_coffee_events_loading, selected_coffee_events_error, selected_coffee_id, get_coffee_events }
 })
