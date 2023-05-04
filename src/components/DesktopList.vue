@@ -12,7 +12,7 @@
         <div v-bind="wrapperProps" class="flex flex-col gap-3">
           <div v-for="item in list" :key="item.index" class="w-86">
             <CoffeeCard :place="item.data" class="relative rounded-xl shadow-md" />
-          </div>s
+          </div>
         </div>
       </div>
     </div>
