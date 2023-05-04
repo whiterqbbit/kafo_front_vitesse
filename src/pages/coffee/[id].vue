@@ -158,31 +158,14 @@
             </div>
           </div>
         </div>
-        <div id="righty" class="w-full flex flex-col place-content-center place-items-center rounded-3xl bg-cafe-200 p-6 text-cafe-600 md:w-1/2">
-          <div class="m-3 w-full flex justify-between rounded-xl bg-cafe-400">
-            <div v-if="next_event" class="w-1/4 p-3 text-2xl font-bold text-cafe-50">
-              {{ event_store.date_to_day_month(next_event?.jour) }}<span> ID : {{ next_event?.id }} </span>
-            </div>
-            <div class="w-3/4 rounded-xl bg-cafe-100 p-3">
-              <span class="text-3xl font-bold uppercase"> En ce moment</span>
-              <div v-if="next_event_users?.length" class="flex flex-col gap-4">
-                <div v-for="user in next_event_users" :key="user.id || 'fallback-key'" class="flex items-center gap-4">
-                  <img :src="user.pic_xsmall" class="aspect-square h-15 rounded-full object-cover">
-                  <div>
-                    <div class="text-lg font-bold">
-                      {{ user.first_name }}
-                    </div>
-                    <div>{{ user.job_title }}</div>
-                  </div>
-                </div>
-                <button class="p-2 text-3xl font-bold btn-grass-full">
-                  Rejoindre
-                </button>
-              </div>
-              <div v-else>
-                else
-              </div>
-            </div>
+        <div id="righty" class="w-full flex flex-col place-content-center place-items-center rounded-3xl bg-cafe-200 p-6 text-2xl text-cafe-600 md:w-1/2">
+          Ici, c'est en travaux !
+          <img src="http://www.animated-gifs.fr/category_website/under-construction-fr/16072049.gif" class="h-40">
+          <div id="events" class="hidden">
+            events
+          </div>
+          <div id="chat" class="hidden">
+            chat
           </div>
         </div>
       </div>
@@ -194,7 +177,6 @@
 import Flicking from '@egjs/vue3-flicking'
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import 'photoswipe/style.css'
-import type { Event, User } from '@/stores/xano.d'
 
 import subway_icon from '@/assets/img/icons/metro.png'
 import direction from '@/assets/img/direction.png'
@@ -202,28 +184,11 @@ import direction from '@/assets/img/direction.png'
 const props = defineProps({
   id: String,
 })
-
-// Get the selected coffee from the store
+// get the selected coffee from the store
 const selected_coffee_id = Number(props.id)
 const coffee_store = use_coffee_store()
 coffee_store.selected_id = selected_coffee_id
 const selected_coffee = computed(() => coffee_store.selected)
-
-// Get the events of the coffee
-const event_store = use_event_store()
-event_store.selected_coffee_id = selected_coffee_id
-const selected_events: Ref<Event[] | null> = ref(null)
-const next_event_users: Ref<User[] | null> = ref(null)
-const next_event: Ref<Event | null> = ref(null)
-
-async function get_selected_coffee_events() {
-  await event_store.get_coffee_events()
-  selected_events.value = event_store.selected_coffee_events
-  next_event.value = selected_events.value ? selected_events.value[0] : null
-  next_event_users.value = selected_events.value ? selected_events.value[0]?.user_id : []
-}
-
-get_selected_coffee_events()
 
 async function initialize_gallery() {
   if (selected_coffee.value?.aws_pics) {
