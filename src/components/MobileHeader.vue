@@ -4,8 +4,7 @@
       <img :src="logo" alt="logo" class="h-8 pl-4">
     </RouterLink>
 
-    <!-- bar de recherche -->
-    <!-- <div class="p-input-icon-left"> -->
+    <!-- Barre de recherche -->
     <div>
       <i class="pi pi-search" />
       <InputText v-model="search_string" placeholder="Rechercher" />
@@ -13,7 +12,7 @@
     <button i-fa6-solid-sliders class="h-10 text-white" @click="display.filter_modal = !display.filter_modal" />
 
     <div ref="parentMenuContainer" class="relative">
-      <button class="focus:outline-none" aria-haspopup="true" :aria-expanded="display_menu" @click="toggleMenu">
+      <button class="focus:outline-none" aria-haspopup="true" :aria-expanded="display_menu" @click="display_menu = !display_menu">
         <img :src="hamburger" alt="hamburger" class="h-8 w-8">
       </button>
       <div
@@ -42,30 +41,45 @@
       </div>
     </div>
   </header>
-  {{ search_results }}
+  <div
+    v-for="result in search_results" :key="result.name"
+    class="flex flex-col gap-2 btn-grass"
+    @click="click_suggestion(result)"
+  >
+    {{ result.name }}
+  </div>
 </template>
 
 <script setup lang="ts">
 import { onClickOutside } from '@vueuse/core'
 import { use_user_store } from '@/stores/user'
+import { use_utils_store } from '@/stores/utils'
+import { use_map_store } from '@/stores/map'
 import logo from '@/assets/img/logo/kafo_logo_white.png'
 import hamburger from '@/assets/img/icons/hamburger.svg'
+import type { Feature, Suggestion } from '@/stores/mapbox.d'
+
+const user = use_user_store()
+const utils = use_utils_store()
+const map = use_map_store()
 
 const search_string = ref('')
 const debounced_search = refDebounced(search_string, 400)
-const search_results: Ref<string[]> = ref([])
+const search_results: Ref<Suggestion[]> = ref([])
+
 watch(debounced_search, async (new_value) => {
-  search_results.value = await utils.search_google(new_value)
+  search_results.value = await utils.mapbox_search_suggest(new_value)
 })
 
-const user = use_user_store()
 const display_menu = ref(false)
-
 const parentMenuContainer = ref(null)
-
 onClickOutside(toRef(parentMenuContainer, 'value'), () => display_menu.value = false)
 
-function toggleMenu() {
-  display_menu.value = !display_menu.value
+async function click_suggestion(suggestion: Suggestion) {
+  search_string.value = ''
+  search_results.value = []
+  const retrieve_results: Feature[] = await utils.mapbox_search_retrieve(suggestion.mapbox_id)
+  const coordinates = retrieve_results[0].geometry.coordinates
+  map.move_map_to([coordinates[1], coordinates[0]])
 }
 </script>

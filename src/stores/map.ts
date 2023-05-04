@@ -79,6 +79,10 @@ export const use_map_store = defineStore('use_map_store', () => {
       })
   }
 
+  function move_map_to(lngLat: simple_coords, zoom = 15) {
+    map_leaf.value.flyTo(lngLat, zoom)
+  }
+
   async function add_marker(lngLat: simple_coords, popup_description: string, coffee_id: number, router: Router) {
     if (!leaflet) return
     const { Icon, marker } = await leaflet
@@ -168,5 +172,5 @@ export const use_map_store = defineStore('use_map_store', () => {
     fetch_google_places_autocomplete()
   }
 
-  return { map_leaf, markers, bounds, markers_on_map, map_is_loaded, tile_layer_is_loaded, marker_is_loaded, marker_is_click, remove_all_markers, get_pins_on_map, add_map, add_tile_layer, add_marker, update_markers, locate_user, search, user_coords }
+  return { map_leaf, markers, bounds, markers_on_map, map_is_loaded, tile_layer_is_loaded, marker_is_loaded, marker_is_click, remove_all_markers, get_pins_on_map, add_map, add_tile_layer, add_marker, update_markers, locate_user, search, user_coords, move_map_to }
 })
