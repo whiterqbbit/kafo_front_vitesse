@@ -58,23 +58,4 @@ function hide_hover_profile() {
   z-index: 6;
 }
 
-.attendee-img:nth-child(n+2) {
-  z-index: 5;
-}
-
-.attendee-img:nth-child(n+3) {
-  z-index: 4;
-}
-
-.attendee-img:nth-child(n+4) {
-  z-index: 3;
-}
-
-.attendee-img:nth-child(n+5) {
-  z-index: 2;
-}
-
-.attendee-img:nth-child(n+6) {
-  z-index: 1;
-}
 </style>

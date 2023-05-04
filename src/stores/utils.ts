@@ -15,7 +15,7 @@ export const use_utils_store = defineStore('utils', () => {
 
   async function mapbox_search_suggest(query: string) {
     try {
-      if (search_count > 10) {
+      if (search_count > 50) {
         session_id = generate_id()
         search_count = 0
       }
