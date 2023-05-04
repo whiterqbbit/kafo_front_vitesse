@@ -44,6 +44,10 @@ export const use_map_store = defineStore('use_map_store', () => {
   })
 
   async function add_map(id: string, viewLngLat: simple_coords, zoom: number) {
+    // for SSG
+    if (typeof window !== 'undefined') {
+      import('leaflet.locatecontrol')
+    }
     if (!leaflet) return
     const L = await leaflet
 
@@ -60,11 +64,6 @@ export const use_map_store = defineStore('use_map_store', () => {
       .setView(viewLngLat, zoom)
 
     L.control.zoom({ position: 'bottomright' }).addTo(map_leaf.value)
-
-    // for SSG
-    if (typeof window !== 'undefined') {
-      import('leaflet.locatecontrol')
-    }
   }
 
   async function add_tile_layer(mapUrl: string, maxZoom: number, attribution: string) {
