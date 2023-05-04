@@ -1,6 +1,6 @@
 <template>
   <div class="shadow-md">
-    <div v-if="coffee.is_open" class="absolute right-4 top-3 z-10 inline-block rounded-full bg-grass-500 px-2 py-1 text-lg font-bold tracking-wider text-white">
+    <div v-if="coffee.is_open" class="absolute right-4 top-3 z-10 inline-block rounded-full bg-grass-500 px-2 font-semibold tracking-wider text-white">
       Ouvert
     </div>
     <Galleria
