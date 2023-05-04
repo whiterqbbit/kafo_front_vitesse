@@ -278,6 +278,7 @@ declare global {
   const useWindowSize: typeof import('@vueuse/core')['useWindowSize']
   const use_club_store: typeof import('./stores/clubs')['use_club_store']
   const use_coffee_store: typeof import('./stores/coffee')['use_coffee_store']
+  const use_event_store: typeof import('./stores/event')['use_event_store']
   const use_map_store: typeof import('./stores/map')['use_map_store']
   const use_user_store: typeof import('./stores/user')['use_user_store']
   const watch: typeof import('vue')['watch']
@@ -580,6 +581,7 @@ declare module 'vue' {
     readonly useWindowSize: UnwrapRef<typeof import('@vueuse/core')['useWindowSize']>
     readonly use_club_store: UnwrapRef<typeof import('./stores/clubs')['use_club_store']>
     readonly use_coffee_store: UnwrapRef<typeof import('./stores/coffee')['use_coffee_store']>
+    readonly use_event_store: UnwrapRef<typeof import('./stores/event')['use_event_store']>
     readonly use_map_store: UnwrapRef<typeof import('./stores/map')['use_map_store']>
     readonly use_user_store: UnwrapRef<typeof import('./stores/user')['use_user_store']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>

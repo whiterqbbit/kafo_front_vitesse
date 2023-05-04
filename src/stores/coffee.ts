@@ -69,6 +69,7 @@ export const use_coffee_store = defineStore('coffee', () => {
       db_loading.value = false
     }
   }
+
   function establishment_type(tags: any) {
     const tagsList = [
       'Café',

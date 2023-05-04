@@ -1,13 +1,13 @@
 <template>
-  <div class="ml-2 mt-3 w-13 flex flex-col place-items-center gap-1">
-    <div
+  <div class="mx-2 mt-3 h-fit w-13 flex flex-col place-items-center gap-1">
+    <!-- <div
       class="sidebar-group-button"
       :class="[display.filter_modal ? 'activated' : 'desactivated']"
       @click="display.filter_modal = !display.filter_modal"
     >
       <button i-fa6-solid-user-group class="sidebar-button" />
     </div>
-    <span class="name">Groupes</span>
+    <span class="name">Groupes</span> -->
     <div
       class="sidebar-group-button"
       :class="[display.filter_modal ? 'activated' : 'desactivated']"
@@ -16,7 +16,7 @@
       <button i-fa6-solid-sliders class="sidebar-button" />
     </div>
     <span class="name">Filtres</span>
-    <div
+    <!-- <div
       class="sidebar-group-button"
       :class="[display.filter_modal ? 'activated' : 'desactivated']"
       @click="display.filter_modal = !display.filter_modal"
@@ -31,7 +31,7 @@
     >
       <button i-fa6-solid-comment class="sidebar-button" />
     </div>
-    <span class="name">Chats</span>
+    <span class="name">Chats</span> -->
   </div>
 </template>
 
