@@ -8,7 +8,7 @@
     <!-- <div class="p-input-icon-left"> -->
     <div>
       <i class="pi pi-search" />
-      <InputText v-model="search_value" placeholder="Rechercher" />
+      <InputText v-model="search_string" placeholder="Rechercher" />
     </div>
     <button i-fa6-solid-sliders class="h-10 text-white" @click="display.filter_modal = !display.filter_modal" />
 
@@ -42,16 +42,22 @@
       </div>
     </div>
   </header>
+  {{ search_results }}
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { use_user_store } from '@/stores/user'
 import logo from '@/assets/img/logo/kafo_logo_white.png'
 import hamburger from '@/assets/img/icons/hamburger.svg'
 
-const search_value = ref('')
+const search_string = ref('')
+const debounced_search = refDebounced(search_string, 400)
+const search_results: Ref<string[]> = ref([])
+watch(debounced_search, async (new_value) => {
+  search_results.value = await utils.search_google(new_value)
+})
+
 const user = use_user_store()
 const display_menu = ref(false)
 

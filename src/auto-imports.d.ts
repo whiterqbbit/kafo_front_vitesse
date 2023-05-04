@@ -281,6 +281,7 @@ declare global {
   const use_coffee_store: typeof import('./stores/coffee')['use_coffee_store']
   const use_map_store: typeof import('./stores/map')['use_map_store']
   const use_user_store: typeof import('./stores/user')['use_user_store']
+  const utils: typeof import('./stores/utils')['utils']
   const watch: typeof import('vue')['watch']
   const watchArray: typeof import('@vueuse/core')['watchArray']
   const watchAtMost: typeof import('@vueuse/core')['watchAtMost']
@@ -584,6 +585,7 @@ declare module 'vue' {
     readonly use_coffee_store: UnwrapRef<typeof import('./stores/coffee')['use_coffee_store']>
     readonly use_map_store: UnwrapRef<typeof import('./stores/map')['use_map_store']>
     readonly use_user_store: UnwrapRef<typeof import('./stores/user')['use_user_store']>
+    readonly utils: UnwrapRef<typeof import('./stores/utils')['utils']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchArray: UnwrapRef<typeof import('@vueuse/core')['watchArray']>
     readonly watchAtMost: UnwrapRef<typeof import('@vueuse/core')['watchAtMost']>
