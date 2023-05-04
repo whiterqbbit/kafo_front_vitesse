@@ -82,7 +82,7 @@ export interface Cafe {
 	nom_contact?: string
 	email?: string
 	telephone?: string
-	aws_miniatures:AwsPics[]
+	aws_miniatures: AwsPics[]
 	aws_pics: AwsPics[]
 	created_at?: Date
 	etage_isole?: boolean
@@ -160,15 +160,15 @@ export interface User {
 }
 
 interface Event {
-  id: number
-  created_at: Date
-  user_id: User[]
-  coffee_id: number
-  jour: Date
-  creneau: 'Matin' | 'Après midi' | 'Fermé' | 'Soir'
-  horaires_string: string
-  start: Date
-  end: Date
+	id: number
+	created_at: Date
+	user_id: User[]
+	coffee_id: number
+	jour: Date
+	creneau: 'Matin' | 'Après midi' | 'Fermé' | 'Soir'
+	horaires_string: string
+	start: Date
+	end: Date
 }
 
 interface User {
