@@ -32,3 +32,14 @@ export function get_relative_date_from_date(date_to_test: Date) {
     return dayOfWeek[date.getDay()]
   }
 }
+
+export function is_slot_current(start: Date, end: Date) {
+  const date_now = new Date()
+  const date_start = new Date(start)
+  const date_end = new Date(end)
+  if (date_now >= date_start && date_now <= date_end) {
+    return true
+  } else {
+    return false
+  }
+}

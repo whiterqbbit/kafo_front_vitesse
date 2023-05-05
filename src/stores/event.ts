@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import type { Event } from './xano'
-import { get_relative_date_from_date } from '@/utils/time_conversion'
 
 const xano_get_events_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/coffee_events`
 const xano_sub_event_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/events/sub`
@@ -69,17 +68,6 @@ export const use_event_store = defineStore('event', () => {
     return selected_coffee_events.value
   }
 
-  function is_slot_current(start: Date, end: Date) {
-    const date_now = new Date()
-    const date_start = new Date(start)
-    const date_end = new Date(end)
-    if (date_now >= date_start && date_now <= date_end) {
-      return true
-    } else {
-      return false
-    }
-  }
-
   return {
     selected_coffee_events,
     selected_coffee_events_loading,
@@ -87,8 +75,6 @@ export const use_event_store = defineStore('event', () => {
     selected_coffee_id,
     submit_events,
     get_coffee_events,
-    get_relative_date_from_date,
-    is_slot_current,
     is_user_in_event,
   }
 })

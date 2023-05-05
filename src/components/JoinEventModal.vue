@@ -3,10 +3,10 @@
     <div v-if="current_event" class="m-3 w-full flex justify-between rounded-xl bg-cafe-400 p-1">
       <div class="w-1/4 flex flex-col p-3 font-bold text-cafe-50">
         <div class="text-5xl">
-          {{ event_store.date_to_day(current_event?.jour) }}
+          {{ get_day_from_date(current_event?.jour) }}
         </div>
         <div class="text-2xl uppercase">
-          {{ event_store.date_to_month(current_event?.jour) }}
+          {{ get_month_name_from_date(current_event?.jour) }}
         </div>
       </div>
       <div class="w-3/4 rounded-xl bg-cafe-100 p-3">
@@ -32,10 +32,10 @@
     <div v-if="next_event" class="m-3 w-full flex justify-between rounded-xl bg-cafe-400 p-1">
       <div class="w-1/4 flex flex-col p-3 font-bold text-cafe-50">
         <div class="text-5xl">
-          {{ event_store.date_to_day(next_event?.jour) }}
+          {{ get_day_from_date(next_event?.jour) }}
         </div>
         <div class="text-2xl uppercase">
-          {{ event_store.date_to_month(next_event?.jour) }}
+          {{ get_month_name_from_date(next_event?.jour) }}
         </div>
       </div>
       <div class="w-3/4 rounded-xl bg-cafe-100 p-3">
@@ -63,6 +63,7 @@
 
 <script setup lang="ts">
 import type { Event, User } from '@/stores/xano.d'
+import { get_day_from_date, get_month_name_from_date, get_relative_date_from_date, is_slot_current } from '@/utils/date_utils'
 
 const props = defineProps({
   id: String,
@@ -95,15 +96,15 @@ async function get_selected_coffee_events() {
   current_event.value = selected_events.value ? selected_events.value[0] : null
   current_event_users.value = selected_events.value ? selected_events.value[0]?.user_id : []
   if (current_event?.value?.jour) {
-    current_event_relative_date.value = event_store.date_to_relative_date(current_event?.value?.jour)
-    if ((current_event_relative_date.value === 'Aujourd\'hui') && event_store.slot_is_now(current_event.value.start, current_event.value.end)) {
+    current_event_relative_date.value = get_relative_date_from_date(current_event?.value?.jour)
+    if ((current_event_relative_date.value === 'Aujourd\'hui') && is_slot_current(current_event.value.start, current_event.value.end)) {
       current_event_relative_date.value = 'En ce moment'
     }
   }
 
   next_event.value = selected_events.value ? selected_events.value[1] : null
   next_event_users.value = selected_events.value ? selected_events.value[1]?.user_id : []
-  if (next_event?.value?.jour) next_event_relative_date.value = event_store.date_to_relative_date(next_event?.value?.jour)
+  if (next_event?.value?.jour) next_event_relative_date.value = get_relative_date_from_date(next_event?.value?.jour)
 }
 
 async function submit_to_event(event_id: number) {
