@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import type { Event } from './xano'
+import { date_to_day, date_to_day_month, date_to_month } from '@/utils/time_conversion'
 
 const xano_get_events_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/coffee_events`
 const xano_sub_event_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/events/sub`
@@ -11,25 +12,6 @@ export const use_event_store = defineStore('event', () => {
   const selected_coffee_events: Ref<Event[] | null> = ref(null)
   const selected_coffee_events_loading = ref(false)
   const selected_coffee_events_error = ref<string | null>(null)
-
-  function date_to_day(date: Date) {
-    const new_date = new Date(date)
-    const day = new_date.getDate()
-    return day
-  }
-
-  function date_to_month(date: Date) {
-    const new_date = new Date(date)
-    const month = new_date.toLocaleString('FR-fr', { month: 'long' })
-    return month
-  }
-
-  function date_to_day_month(date: Date) {
-    const new_date = new Date(date)
-    const day = new_date.getDate()
-    const month = new_date.toLocaleString('FR-fr', { month: 'long' })
-    return `${day} ${month}`
-  }
 
   async function get_coffee_events() {
     selected_coffee_events.value = null
@@ -71,11 +53,7 @@ export const use_event_store = defineStore('event', () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${user_store.token}`,
         },
-        body: JSON.stringify(
-          {
-            subscribe,
-          },
-        ),
+        body: JSON.stringify({ subscribe }),
       })
       if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}`)
       const data = await response.json()
