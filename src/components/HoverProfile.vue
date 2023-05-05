@@ -1,7 +1,7 @@
 <template>
   <div class="hover-profile-container absolute" :style="position_style">
-    <div class="w-60 rounded-3xl rounded-lg bg-white p-4 shadow-md">
-      <h3>{{ props.attendee?.id }}</h3>
+    <div class="w-fit rounded-3xl rounded-lg bg-white p-4 shadow-md">
+      <!-- <h3>{{ props.attendee?.id }}</h3> -->
       <img :src="props.attendee?.url" class="rounded-3xl">
     </div>
   </div>

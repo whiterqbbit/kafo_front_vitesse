@@ -23,7 +23,7 @@
             {{ selected_coffee?.attendance }}
           </div>
         </div>
-        <!-- <div v-for="person in next_event.user_id" key="person.id">
+        <!-- <div v-for="person in current_event.user_id" key="person.id">
           les gens dans le prochain event
         </div> -->
         <div class="font-extra-bold rounded-xl bg-grass-500 p-4 text-cafe-100">
@@ -131,7 +131,7 @@
             </div>
             <TagsIcon v-if="preferences.is_mobile && selected_coffee" :tags="selected_coffee?.tags" />
             <div v-if="selected_coffee?.adresse" id="location_container" class="flex flex-row items-center justify-between">
-              <!-- adresse et metro -->
+              <!-- Adresse et métro -->
               <div class="max-w-2/3 flex flex-col">
                 <div id="address">
                   {{ selected_coffee?.adresse }}
@@ -146,7 +146,7 @@
 
               <!-- Bouton lien itinéraire -->
               <a
-                class="flex flex-shrink-0 flex-row place-items-center gap-2 rounded-3xl bg-grass-500 px-4 py-2 font-bold text-cafe-100"
+                class="flex flex-shrink-0 flex-row place-items-center gap-2 rounded-3xl px-4 py-2 font-bold text-cafe-100 btn-grass"
                 :href="`https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=${selected_coffee?.nom}&destination_place_id=${selected_coffee?.google_place_id}&travelmode=walking`"
                 target="_blank"
               >
@@ -158,16 +158,7 @@
             </div>
           </div>
         </div>
-        <div id="righty" class="w-full flex flex-col place-content-center place-items-center rounded-3xl bg-cafe-200 p-6 text-2xl text-cafe-600 md:w-1/2">
-          Ici, c'est en travaux !
-          <img src="http://www.animated-gifs.fr/category_website/under-construction-fr/16072049.gif" class="h-40">
-          <div id="events" class="hidden">
-            events
-          </div>
-          <div id="chat" class="hidden">
-            chat
-          </div>
-        </div>
+        <JoinEventModal :id="props.id" />
       </div>
     </div>
   </div>
@@ -203,10 +194,6 @@ async function initialize_gallery() {
 onMounted(() => {
   initialize_gallery()
 })
-
-// watch(() => selected_coffee.value?.aws_pics, () => {
-//   initialize_gallery()
-// }, { immediate: true })
 </script>
 
 <style scoped>
