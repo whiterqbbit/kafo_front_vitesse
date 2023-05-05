@@ -2,15 +2,12 @@
   <div class="w-full flex flex-col place-content-center place-items-center rounded-3xl bg-cafe-200 p-6 text-cafe-600 shadow-md md:w-1/2">
     <div v-if="current_event" class="m-3 w-full flex justify-between rounded-xl bg-cafe-400 p-1">
       <div class="w-1/4 flex flex-col p-3 font-bold text-cafe-50">
-        <div class="text-5xl">
-          {{ get_day_from_date(current_event?.jour) }}
-        </div>
-        <div class="text-2xl uppercase">
-          {{ get_month_name_from_date(current_event?.jour) }}
+        <div class="text-xl">
+          {{ get_day_from_date(current_event?.jour) }} {{ get_month_name_from_date(current_event?.jour) }}
         </div>
       </div>
       <div class="w-3/4 rounded-xl bg-cafe-100 p-3">
-        <div class="mb-7 text-3xl font-bold uppercase">
+        <div class="mb-1 text-xl font-bold uppercase">
           {{ current_event_relative_date }}
         </div>
         <div v-if="current_event_users?.length" class="my-2 max-h-80 flex flex-col gap-4 overflow-auto">
@@ -24,22 +21,20 @@
             </div>
           </div>
         </div>
-        <button class="p-2 text-3xl font-bold btn-grass-full" @click="submit_to_event(current_event.id)">
+        <button class="p-2 font-bold btn-grass-full" @click="submit_to_event(current_event.id)">
           {{ event_store?.is_user_in_event(current_event.id) ? 'Quitter' : 'Rejoindre' }}
         </button>
       </div>
     </div>
+    <!-- refactor pour avoir un composant event ?? -->
     <div v-if="next_event" class="m-3 w-full flex justify-between rounded-xl bg-cafe-400 p-1">
       <div class="w-1/4 flex flex-col p-3 font-bold text-cafe-50">
-        <div class="text-5xl">
-          {{ get_day_from_date(next_event?.jour) }}
-        </div>
-        <div class="text-2xl uppercase">
-          {{ get_month_name_from_date(next_event?.jour) }}
+        <div class="text-xl">
+          {{ get_day_from_date(next_event?.jour) }} {{ get_month_name_from_date(next_event?.jour) }}
         </div>
       </div>
       <div class="w-3/4 rounded-xl bg-cafe-100 p-3">
-        <div class="mb-5 text-3xl font-bold uppercase">
+        <div class="mb-5 text-xl font-bold uppercase">
           {{ next_event_relative_date === "Aujourd'hui" ? "Cet après-midi" : next_event_relative_date }}
         </div>
         <div v-if="next_event_users?.length" class="my-2 mt-5 max-h-80 flex flex-col gap-4 overflow-auto">
@@ -53,7 +48,7 @@
             </div>
           </div>
         </div>
-        <button class="w-full bg-cafe-400 p-2 text-3xl font-bold btn-cafe" @click="submit_to_event(next_event.id)">
+        <button class="w-full bg-cafe-400 p-2 font-bold btn-cafe" @click="submit_to_event(next_event.id)">
           {{ event_store?.is_user_in_event(next_event.id) ? 'Quitter' : 'Rejoindre' }}
         </button>
       </div>
