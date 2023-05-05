@@ -17,17 +17,14 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
-  attendees: {
-    id: number
-    url: string
-  }[]
-}>()
-
 interface Attendee {
   id: number
   url: string
 }
+
+const props = defineProps<{
+  attendees: Attendee[]
+}>()
 
 const is_mounted = ref(false)
 const hover_profile_visible = ref(false)
@@ -57,5 +54,4 @@ function hide_hover_profile() {
   margin-right: -10px;
   z-index: 6;
 }
-
 </style>
