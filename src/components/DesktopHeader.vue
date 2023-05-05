@@ -40,6 +40,7 @@
       </div>
     </div>
   </header>
+  <LoginModal v-if="display.login_modal" />
 </template>
 
 <script setup lang="ts">
