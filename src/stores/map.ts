@@ -44,6 +44,10 @@ export const use_map_store = defineStore('use_map_store', () => {
   })
 
   async function add_map(id: string, viewLngLat: simple_coords, zoom: number) {
+    // for SSG
+    if (typeof window !== 'undefined') {
+      import('leaflet.locatecontrol')
+    }
     if (!leaflet) return
     const L = await leaflet
 
@@ -60,11 +64,6 @@ export const use_map_store = defineStore('use_map_store', () => {
       .setView(viewLngLat, zoom)
 
     L.control.zoom({ position: 'bottomright' }).addTo(map_leaf.value)
-
-    // for SSG
-    if (typeof window !== 'undefined') {
-      import('leaflet.locatecontrol')
-    }
   }
 
   async function add_tile_layer(mapUrl: string, maxZoom: number, attribution: string) {
@@ -78,6 +77,10 @@ export const use_map_store = defineStore('use_map_store', () => {
       .on('load', () => {
         tile_layer_is_loaded.value = true
       })
+  }
+
+  function move_map_to(lngLat: simple_coords, zoom = 15) {
+    map_leaf.value.flyTo(lngLat, zoom)
   }
 
   async function add_marker(lngLat: simple_coords, popup_description: string, coffee_id: number, router: Router) {
@@ -169,5 +172,5 @@ export const use_map_store = defineStore('use_map_store', () => {
     fetch_google_places_autocomplete()
   }
 
-  return { map_leaf, markers, bounds, markers_on_map, map_is_loaded, tile_layer_is_loaded, marker_is_loaded, marker_is_click, remove_all_markers, get_pins_on_map, add_map, add_tile_layer, add_marker, update_markers, locate_user, search, user_coords }
+  return { map_leaf, markers, bounds, markers_on_map, map_is_loaded, tile_layer_is_loaded, marker_is_loaded, marker_is_click, remove_all_markers, get_pins_on_map, add_map, add_tile_layer, add_marker, update_markers, locate_user, search, user_coords, move_map_to }
 })
