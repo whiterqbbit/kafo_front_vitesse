@@ -175,8 +175,7 @@ import direction from '@/assets/img/direction.png'
 const props = defineProps({
   id: String,
 })
-
-// Get the selected coffee from the store
+// get the selected coffee from the store
 const selected_coffee_id = Number(props.id)
 const coffee_store = use_coffee_store()
 coffee_store.selected_id = selected_coffee_id

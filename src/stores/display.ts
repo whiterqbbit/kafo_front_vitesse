@@ -6,3 +6,7 @@ export const display = reactive({
   filter_modal: false,
   burger_menu: false,
 })
+
+export const stored_display = useStorage('stored_display', {
+  welcome_modal: true,
+})
