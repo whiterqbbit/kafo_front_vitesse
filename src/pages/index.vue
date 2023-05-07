@@ -1,7 +1,7 @@
 <template>
   <LandingHeader />
   <section id="hero" class="overflow-hidden text-center md:text-left">
-    <div class="text-cafe-600 container">
+    <div class="container">
       <div id="title" class="landing-title flex flex-col">
         <div class="z-30 flex">
           <div>Coworke dans des</div>

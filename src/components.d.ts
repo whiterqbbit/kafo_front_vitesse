@@ -19,8 +19,10 @@ declare module '@vue/runtime-core' {
     Dropdown: typeof import('primevue/dropdown')['default']
     FilterModal: typeof import('./components/FilterModal.vue')['default']
     Galleria: typeof import('primevue/galleria')['default']
+    HoverProfile: typeof import('./components/HoverProfile.vue')['default']
     InputSwitch: typeof import('primevue/inputswitch')['default']
     InputText: typeof import('primevue/inputtext')['default']
+    JoinEventModal: typeof import('./components/JoinEventModal.vue')['default']
     LandingCTA: typeof import('./components/LandingCTA.vue')['default']
     LandingFooter: typeof import('./components/LandingFooter.vue')['default']
     LandingHeader: typeof import('./components/LandingHeader.vue')['default']
@@ -37,5 +39,6 @@ declare module '@vue/runtime-core' {
     TagsIcon: typeof import('./components/TagsIcon.vue')['default']
     TheMap: typeof import('./components/TheMap.vue')['default']
     ThreeDotsSpinner: typeof import('./components/svg/ThreeDotsSpinner.vue')['default']
+    WelcomeModal: typeof import('./components/WelcomeModal.vue')['default']
   }
 }

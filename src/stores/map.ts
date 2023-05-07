@@ -3,7 +3,6 @@ import { useGeolocation } from '@vueuse/core'
 import type { Router } from 'vue-router'
 import type { Cafe } from '@/stores/xano.d'
 import marker_icon from '@/assets/img/geoloc/marker_6.png'
-import user_icon_url from '@/assets/img/geoloc/user.png'
 
 type simple_coords = [number, number]
 
@@ -24,8 +23,11 @@ interface MarkerData {
 
 let leaflet: Promise<Leaflet> | undefined
 
-if (typeof window !== 'undefined') leaflet = import('leaflet').then(module => module)
-
+// for SSG
+if (typeof window !== 'undefined') {
+  leaflet = import('leaflet').then(module => module)
+  import('leaflet.locatecontrol')
+}
 export const use_map_store = defineStore('use_map_store', () => {
   const map_leaf: any = ref({})
   const markers: Ref<MarkerData[]> = ref([])
@@ -42,6 +44,10 @@ export const use_map_store = defineStore('use_map_store', () => {
   })
 
   async function add_map(id: string, viewLngLat: simple_coords, zoom: number) {
+    // for SSG
+    if (typeof window !== 'undefined') {
+      import('leaflet.locatecontrol')
+    }
     if (!leaflet) return
     const L = await leaflet
 
@@ -56,6 +62,7 @@ export const use_map_store = defineStore('use_map_store', () => {
         }
       })
       .setView(viewLngLat, zoom)
+
     L.control.zoom({ position: 'bottomright' }).addTo(map_leaf.value)
   }
 
@@ -70,6 +77,10 @@ export const use_map_store = defineStore('use_map_store', () => {
       .on('load', () => {
         tile_layer_is_loaded.value = true
       })
+  }
+
+  function move_map_to(lngLat: simple_coords, zoom = 15) {
+    map_leaf.value.flyTo(lngLat, zoom)
   }
 
   async function add_marker(lngLat: simple_coords, popup_description: string, coffee_id: number, router: Router) {
@@ -116,39 +127,26 @@ export const use_map_store = defineStore('use_map_store', () => {
     })
   }
 
-  // ne fait que centrer la carte sur l'utilisateur en l'état
   async function locate_user() {
+    // for SSG
+    if (typeof window === 'undefined') return
+
     const { coords, resume } = useGeolocation()
     resume()
     if (!coords.value || !coords.value.latitude || !coords.value.longitude) return
 
     if (!leaflet) return
-    const { Icon, marker } = await leaflet
+    const L = await leaflet
 
-    const customIcon = new Icon({
-      iconUrl: user_icon_url,
-      iconSize: [20, 32],
-      iconAnchor: [20, 32],
-      popupAnchor: [0, -32],
-    })
-
-    map_leaf.value.locate({ setView: true, maxZoom: 16 })
-
-    map_leaf.value.on('locationfound', (event: any) => {
-      const { latitude, longitude } = event.latlng
-      const lngLat: simple_coords = [latitude, longitude]
-      marker(lngLat, { icon: customIcon })
-        .addTo(map_leaf.value)
-        .bindPopup('C\'est vous !')
-        .on('click', () => {
-          marker_is_click.value = true
-        })
-      marker_is_loaded.value = true
-    })
-
-    map_leaf.value.on('locationerror', (error: any) => {
-      console.error('Error getting user location:', error)
-    })
+    L.control.locate({
+      position: 'topright',
+      strings: {
+        title: 'Me localiser!',
+      },
+      locateOptions: {
+        maxZoom: 15,
+      },
+    }).addTo(map_leaf.value).start()
   }
 
   // ne fonctionne pas en l'état, 403
@@ -174,5 +172,5 @@ export const use_map_store = defineStore('use_map_store', () => {
     fetch_google_places_autocomplete()
   }
 
-  return { map_leaf, markers, bounds, markers_on_map, map_is_loaded, tile_layer_is_loaded, marker_is_loaded, marker_is_click, remove_all_markers, get_pins_on_map, add_map, add_tile_layer, add_marker, update_markers, locate_user, search, user_coords }
+  return { map_leaf, markers, bounds, markers_on_map, map_is_loaded, tile_layer_is_loaded, marker_is_loaded, marker_is_click, remove_all_markers, get_pins_on_map, add_map, add_tile_layer, add_marker, update_markers, locate_user, search, user_coords, move_map_to }
 })
