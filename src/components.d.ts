@@ -22,6 +22,7 @@ declare module '@vue/runtime-core' {
     HoverProfile: typeof import('./components/HoverProfile.vue')['default']
     InputSwitch: typeof import('primevue/inputswitch')['default']
     InputText: typeof import('primevue/inputtext')['default']
+    JoinEventModal: typeof import('./components/JoinEventModal.vue')['default']
     LandingCTA: typeof import('./components/LandingCTA.vue')['default']
     LandingFooter: typeof import('./components/LandingFooter.vue')['default']
     LandingHeader: typeof import('./components/LandingHeader.vue')['default']

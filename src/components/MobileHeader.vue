@@ -41,6 +41,7 @@
       </div>
     </div>
   </header>
+  <LoginModal v-if="display.login_modal" />
   <div
     v-for="result in search_results" :key="result.name"
     class="flex flex-col gap-2 btn-grass"

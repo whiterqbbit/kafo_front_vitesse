@@ -8,7 +8,6 @@
       @mouseleave="hide_hover_profile"
     >
       <img :src="attendee.url" class="h-full w-full rounded-full object-cover">
-      <span>{{ attendee.id }}</span>
       <Teleport v-if="is_mounted" to="#main_container">
         <HoverProfile v-if="hover_profile_visible" :attendee="current_attendee" :x="x" :y="y" :width="width" :height="height" />
       </Teleport>
