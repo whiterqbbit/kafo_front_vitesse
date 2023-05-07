@@ -12,7 +12,7 @@
         <img :src="pic.url" class="h-full w-full object-cover">
       </div>
     </Flicking>
-    <div class="flex flex-col gap-6 container">
+    <div class="flex flex-col gap-3 container">
       <RouterLink to="/map" class="fixed top-7% z-10 ml-1% w-fit rounded-xl bg-cafe-100 px-2 py-1 shadow-md transition-all md:top-25 hover:scale-105">
         Retour à la carte
       </RouterLink>
