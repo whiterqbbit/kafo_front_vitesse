@@ -5,9 +5,6 @@
     </RouterLink>
     <!-- remplacer hidden par flex pour faire apparaitre le menu -->
     <nav class="hidden gap-5 font-black text-white">
-      <InputSwitch v-model="preferences.offline_mode" @click="use_coffee_store().fetch_db()">
-        Offline
-      </InputSwitch>
       <button @click="display.debug_modal = !display.debug_modal">
         Debug
       </button>
