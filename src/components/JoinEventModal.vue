@@ -3,7 +3,7 @@
     <div v-if="current_event" class="m-3 w-full flex justify-between rounded-xl bg-cafe-400 p-1">
       <div class="w-1/4 flex flex-col p-3 font-bold text-cafe-50">
         <div class="text-xl">
-          {{ get_day_from_date(current_event?.jour) }} {{ get_month_name_from_date(current_event?.jour) }}
+          {{ get_day_from_date(current_event?.jour) }} {{ get_month_name_from_date(current_event?.jour) }} <span v-if="preferences.debug_mode">id= {{ current_event?.id }} </span>
         </div>
       </div>
       <div class="w-3/4 rounded-xl bg-cafe-100 p-3">
@@ -48,7 +48,7 @@
             </div>
           </div>
         </div>
-        <button class="w-full bg-cafe-400 p-2 font-bold btn-cafe" @click="submit_to_event(next_event.id)">
+        <button class="w-full bg-cafe-400 p-2 font-bold hover:bg-cafe-500 btn-cafe" @click="submit_to_event(next_event.id)">
           {{ event_store?.is_user_in_event(next_event.id) ? 'Quitter' : 'Rejoindre' }}
         </button>
       </div>

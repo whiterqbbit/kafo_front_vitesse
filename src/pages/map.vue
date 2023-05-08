@@ -3,12 +3,6 @@
   <div id="main_container" class="relative h-screen--35px flex flex-col bg-cafe-25 md:h-screen--50px md:flex-row-reverse">
     <WelcomeModal v-if="stored_display.welcome_modal" />
     <LoginModal v-if="display.login_modal" />
-    <div
-      v-if="display.debug_modal" class="fixed left-0 top-0 z-50 h-full w-full bg-cafe-400 bg-opacity-50"
-      @click="display.debug_modal = !display.debug_modal"
-    >
-      <DebugModal class="absolute left-1/12 top-1/12 h-3/4 w-3/4" :props="coffee_db" />
-    </div>
     <div md="w-full" class="h-full flex items-center justify-center">
       <div class="relative h-full w-full">
         <FilterModal v-if="display.filter_modal" />
