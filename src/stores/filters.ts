@@ -4,7 +4,7 @@ import type { Club } from '@/stores/xano.d'
 export const filters = useStorage('filters', {
   limit_to_map: false,
   pricing_free: true,
-  pricing_coffee: true,
+  pricing_place: true,
   pricing_hourly: false,
   max_distance: <Number | null> null,
   noise_level_silent: false,
@@ -27,7 +27,7 @@ export function reset_filters() {
   filters.value.noise_level_calm = false
   filters.value.noise_level_lively = false
   filters.value.pricing_free = true
-  filters.value.pricing_coffee = true
+  filters.value.pricing_place = true
   filters.value.pricing_hourly = false
   filters.value.open_now = true
   filters.value.wifi = true
