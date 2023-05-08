@@ -1,16 +1,12 @@
 import { defineStore } from 'pinia'
-import type { Event } from './xano'
-
-const xano_get_events_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/coffee_events`
-const xano_sub_event_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/events/sub`
-
-const user_store = use_user_store()
+import type { Attendance, Event } from './xano'
 
 export const use_event_store = defineStore('event', () => {
   const selected_coffee_id = ref<number | null>(null)
   const selected_coffee_events: Ref<Event[] | null> = ref(null)
   const selected_coffee_events_loading = ref(false)
   const selected_coffee_events_error = ref<string | null>(null)
+  const is_populated = ref(false)
 
   async function get_coffee_events() {
     selected_coffee_events.value = null
@@ -18,6 +14,7 @@ export const use_event_store = defineStore('event', () => {
     selected_coffee_events_error.value = null
 
     try {
+      const xano_get_events_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/coffee_events`
       const url_with_query = `${xano_get_events_url}?coffee_id_req=${selected_coffee_id.value?.toString()}`
       const response = await fetch(url_with_query)
       if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}. Failed to fetch coffee events.`)
@@ -34,17 +31,29 @@ export const use_event_store = defineStore('event', () => {
     return selected_coffee_events.value
   }
 
-  function is_user_in_event(event_id: number) {
-    const user_in_event = selected_coffee_events.value?.find(event => event.id === event_id)?.user_id?.find(user => user.id === user_store.id)
-    if (user_in_event) {
-      return true
-    } else {
-      return false
+  async function populate_events() {
+    try {
+      const xano_attendance_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/attendance`
+      const attendance = await fetch(xano_attendance_url).then(res => res.json())
+      console.log('attendance =>', attendance as Attendance)
+    } catch (error) {
+      console.error(error)
     }
   }
+
+  function is_user_in_event(event_id: number) {
+    const user_store = use_user_store()
+    const user_is_in_event = selected_coffee_events.value?.find(event => event.id === event_id)?.user_id?.find(user => user.id === user_store.id)
+    if (user_is_in_event) return true
+    return false
+  }
+
   async function submit_events(event_id: number) {
     const subscribe = !is_user_in_event(event_id)
+    const xano_sub_event_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/events/sub`
     const url_with_query = `${xano_sub_event_url}/${event_id}`
+    const user_store = use_user_store()
+
     try {
       const response = await fetch(url_with_query, {
         method: 'POST',
@@ -75,6 +84,8 @@ export const use_event_store = defineStore('event', () => {
     selected_coffee_id,
     submit_events,
     get_coffee_events,
+    populate_events,
+    is_populated,
     is_user_in_event,
   }
 })
