@@ -19,7 +19,10 @@ jobs:
         with:
           node-version: 16.x
           cache: pnpm
-
+  
+      - name: Prebuild
+        run: pnpm run prebuild
+  
       - name: Install
         run: pnpm install
 
@@ -35,6 +38,9 @@ jobs:
         with:
           node-version: 16.x
           cache: pnpm
+
+      - name: Prebuild
+        run: pnpm run prebuild
 
       - name: Install
         run: pnpm install
@@ -62,6 +68,7 @@ jobs:
           cache: pnpm
 
       - run: pnpm install
+      - run: pnpm run prebuild
       - run: pnpm run test:unit
 
   test-e2e:
@@ -84,6 +91,7 @@ jobs:
           cache: pnpm
 
       - run: pnpm install
+      - run: pnpm run prebuild
 
       - name: Cypress PNPM Patch
         run: cp pnpm-lock.yaml package-lock.json
