@@ -33,10 +33,10 @@ export const use_event_store = defineStore('event', () => {
 
   async function populate_places() {
     try {
-      const xano_attendance_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/attendance`
-      const attendance: Attendance[] = await fetch(xano_attendance_url).then(res => res.json())
       const place_store = use_place_store()
       if (!place_store.db) throw Error
+      const xano_attendance_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/attendance`
+      const attendance: Attendance[] = await fetch(xano_attendance_url).then(res => res.json())
 
       const places: Place[] = place_store?.db
 
