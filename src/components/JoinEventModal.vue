@@ -38,7 +38,7 @@
           {{ next_event_relative_date === "Aujourd'hui" ? "Cet après-midi" : next_event_relative_date }}
         </div>
         <div v-if="next_event_users?.length" class="my-2 mt-5 max-h-80 flex flex-col gap-4 overflow-auto">
-          {{ next_event_users }}
+          <!-- {{ next_event_users }} -->
           <!-- <AvatarStack :attendees="next_event_users" /> -->
         </div>
         <button class="w-full bg-cafe-400 p-2 font-bold hover:bg-cafe-500 btn-cafe" @click="submit_to_event(next_event.id)">
