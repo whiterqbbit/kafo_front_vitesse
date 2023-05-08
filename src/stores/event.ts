@@ -34,8 +34,8 @@ export const use_event_store = defineStore('event', () => {
   async function populate_events() {
     try {
       const xano_attendance_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/attendance`
-      const attendance = await fetch(xano_attendance_url).then(res => res.json())
-      console.log('attendance =>', attendance as Attendance)
+      const attendance: Attendance = await fetch(xano_attendance_url).then(res => res.json())
+      console.log('attendance =>', attendance)
     } catch (error) {
       console.error(error)
     }
