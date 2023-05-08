@@ -166,7 +166,7 @@ const props = defineProps({
 }
 
 .tag_img{
-    @apply md:h-10
+    @apply md:h-8
 }
 
 .tag_text{

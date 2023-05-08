@@ -5,9 +5,6 @@
     </RouterLink>
     <!-- remplacer hidden par flex pour faire apparaitre le menu -->
     <nav class="hidden gap-5 font-black text-white">
-      <button @click="display.debug_modal = !display.debug_modal">
-        Debug
-      </button>
       <button @click="display.cookie_modal = !display.cookie_modal">
         Cookies
       </button>
