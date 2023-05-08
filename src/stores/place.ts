@@ -43,6 +43,20 @@ export const use_place_store = defineStore('place', () => {
     return filtered_places
   })
 
+  async function update_open_status() {
+    try {
+      const xano_open_status_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/place/opening`
+
+      const open_status: { id: number; is_open: boolean }[] = await fetch(xano_open_status_url).then(res => res.json())
+      open_status.forEach((place) => {
+        const place_to_update = db.value?.find(p => p.id === place.id)
+        if (place_to_update) place_to_update.is_open = place.is_open
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   async function fetch_db() {
     db.value = null
     const error_message = 'Error while getting the database, please check your connection and try again'
@@ -77,5 +91,5 @@ export const use_place_store = defineStore('place', () => {
     return ''
   }
 
-  return { fetch_db, db, db_filtered, selected, selected_id, establishment_type }
+  return { fetch_db, db, db_filtered, selected, selected_id, establishment_type, update_open_status }
 })
