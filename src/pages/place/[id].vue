@@ -106,9 +106,9 @@
         <div id="subtitle" class="flex flex-col font-bold md:flex-row md:justify-between">
           <div v-if="selected_place?.attendance !== 0" id="attendance">
             <div class="flex flex-row items-center gap-5">
-              <AvatarStack v-if="selected_places?.attendees" :attendees="selected_place?.attendees" class="ml-2 flex" />
-              <div v-if="selected_places?.attendance">
-                {{ selected_place?.attendance }} {{selected_places?.attendance===1 ? 'personne y est en ce moment' : 'personnes y sont en ce moment'}} 
+              <AvatarStack v-if="selected_place?.attendees" :attendees="selected_place?.attendees" class="ml-2 flex" />
+              <div v-if="selected_place?.attendance">
+                {{ selected_place?.attendance }} {{ selected_place?.attendance === 1 ? 'personne y est en ce moment' : 'personnes y sont en ce moment' }}
               </div>
             </div>
             <!-- <div id="eta">

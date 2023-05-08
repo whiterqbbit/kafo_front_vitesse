@@ -9,7 +9,7 @@
     >
       <img :src="attendee?.pic_xsmall ? attendee?.pic_xsmall : default_user_pic" class="h-full w-full rounded-full object-cover">
       <Teleport v-if="is_mounted" to="#main_container">
-        <HoverProfile v-if="hover_profile_visible" :attendee="current_attendee ? current_attendee : null" :x="x" :y="y" :width="width" :height="height" class="z-100" />
+        <HoverProfile v-if="hover_profile_visible" ref="hover_profile" :profile_dimensions="profile_dimensions" :attendee="current_attendee ? current_attendee : null" :x="x" :y="y" :width="width" :height="height" class="z-100" />
       </Teleport>
     </div>
   </div>
@@ -29,6 +29,13 @@ const current_attendee = ref<User | null>(null)
 
 const { x, y } = useMouse()
 const { width, height } = useWindowSize()
+const hover_profile = ref<HTMLElement | null>(null)
+const profile_width = hover_profile?.value?.clientWidth ?? 0
+const profile_height = hover_profile?.value?.clientHeight ?? 0
+const profile_dimensions = {
+  width: profile_width,
+  height: profile_height,
+}
 
 onMounted(() => {
   // for SSG
