@@ -8,9 +8,6 @@
       <InputSwitch v-model="preferences.offline_mode" @click="use_coffee_store().fetch_db()">
         Offline
       </InputSwitch>
-      <button @click="display.debug_modal = !display.debug_modal">
-        Debug
-      </button>
       <button @click="display.cookie_modal = !display.cookie_modal">
         Cookies
       </button>

@@ -111,9 +111,9 @@
               </div>
               {{ selected_coffee?.attendance }} personnes y sont en ce moment
             </div>
-            <div id="eta">
+            <!-- <div id="eta">
               Les minutes
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
