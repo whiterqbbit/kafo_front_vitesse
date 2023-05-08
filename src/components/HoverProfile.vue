@@ -7,7 +7,7 @@
         {{ props.attendee?.first_name }}
       </div>
       <div>
-        {{ props.attendee?.job_title}}
+        {{ props.attendee?.job_title }}
       </div>
       <div class="text-sm text-gray-500">
         {{ props.attendee?.bio }}

@@ -2,7 +2,7 @@
   <div class="avatar-container flex">
     <div
       v-for="attendee in props.attendees"
-      :key="attendee.id"
+      :key="attendee.id || 'fallback'"
       class="attendee-img relative h-10 w-10 rounded-full bg-cafe-100"
       @mouseenter="show_hover_profile(attendee)"
       @mouseleave="hide_hover_profile"
