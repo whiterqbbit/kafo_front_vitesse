@@ -19,12 +19,12 @@ jobs:
         with:
           node-version: 16.x
           cache: pnpm
-  
-      - name: Prebuild
-        run: pnpm run prebuild
-  
+
       - name: Install
         run: pnpm install
+
+      - name: Prebuild
+        run: pnpm run prebuild
 
       - name: Lint
         run: pnpm run lint
@@ -39,11 +39,11 @@ jobs:
           node-version: 16.x
           cache: pnpm
 
-      - name: Prebuild
-        run: pnpm run prebuild
-
       - name: Install
         run: pnpm install
+
+      - name: Prebuild
+        run: pnpm run prebuild
 
       - name: Typecheck
         run: pnpm run typecheck
