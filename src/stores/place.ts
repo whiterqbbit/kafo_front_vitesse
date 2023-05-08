@@ -103,6 +103,6 @@ export const use_place_store = defineStore('place', () => {
     selected_id,
     establishment_type,
     sort_places,
-    update_open_status
+    update_open_status,
   }
 })
