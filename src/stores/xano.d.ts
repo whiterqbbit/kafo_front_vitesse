@@ -56,7 +56,7 @@ export interface AwsPics {
 	}
 }
 
-export interface Cafe {
+export interface Place {
 	id: number
 	nom: string
 	tags: CafeTag[]

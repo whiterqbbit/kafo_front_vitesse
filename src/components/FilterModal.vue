@@ -29,9 +29,9 @@
               </div>
             </div>
             <div class="w-1/3 flex gap-2">
-              <Checkbox v-model="filters.pricing_coffee" class="mt-2px" :binary="true" />
+              <Checkbox v-model="filters.pricing_place" class="mt-2px" :binary="true" />
               <div class="flex flex-col">
-                <label for="filter-coworking" class="cursor-pointer" @click="filters.pricing_coffee = !filters.pricing_coffee">A la conso</label>
+                <label for="filter-coworking" class="cursor-pointer" @click="filters.pricing_place = !filters.pricing_place">A la conso</label>
                 <div class="description">
                   Il suffit d'un café pour travailler !
                 </div>

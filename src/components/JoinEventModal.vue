@@ -66,14 +66,14 @@ const props = defineProps({
 
 const user_store = use_user_store()
 
-// Get the selected coffee from the store
-const selected_coffee_id = Number(props.id)
-const coffee_store = use_coffee_store()
-coffee_store.selected_id = selected_coffee_id
+// Get the selected place from the store
+const selected_place_id = Number(props.id)
+const place_store = use_place_store()
+place_store.selected_id = selected_place_id
 
-// Get the events of the coffee
+// Get the events of the place
 const event_store = use_event_store()
-event_store.selected_coffee_id = selected_coffee_id
+event_store.selected_place_id = selected_place_id
 const selected_events: Ref<Event[] | null> = ref(null)
 
 const current_event_users: Ref<User[] | null> = ref(null)
@@ -84,9 +84,9 @@ const next_event_users: Ref<User[] | null> = ref(null)
 const next_event: Ref<Event | null> = ref(null)
 const next_event_relative_date = ref('')
 
-async function get_selected_coffee_events() {
-  await event_store.get_coffee_events()
-  selected_events.value = event_store.selected_coffee_events
+async function get_selected_place_events() {
+  await event_store.get_place_events()
+  selected_events.value = event_store.selected_place_events
 
   current_event.value = selected_events.value ? selected_events.value[0] : null
   current_event_users.value = selected_events.value ? selected_events.value[0]?.user_id : []
@@ -107,8 +107,8 @@ async function submit_to_event(event_id: number) {
     display.login_modal = true
   }
   await event_store.submit_events(event_id)
-  await get_selected_coffee_events()
+  await get_selected_place_events()
 }
 
-get_selected_coffee_events()
+get_selected_place_events()
 </script>

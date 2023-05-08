@@ -1,8 +1,8 @@
 <template>
   <div>
     <Flicking :options="{ renderOnlyVisible: true, resizeOnContentsReady: true }" class="flicking-container">
-      <div v-for="coffee in coffee_store.db_filtered" :key="coffee.id" class="flicking-panel relative mx-4 overflow-hidden rounded-2xl bg-cafe-50 shadow-md">
-        <CoffeeCard :place="coffee" />
+      <div v-for="place in place_store.db_filtered" :key="place.id" class="flicking-panel relative mx-4 overflow-hidden rounded-2xl bg-cafe-50 shadow-md">
+        <PlaceCard :place="place" />
       </div>
     </flicking>
   </div>
@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import Flicking from '@egjs/vue3-flicking'
 
-const coffee_store = use_coffee_store()
+const place_store = use_place_store()
 </script>
 
 <style>

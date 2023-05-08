@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 import CryptoJS from 'crypto-js'
-import type { Cafe, CafeTag } from './xano.d'
+import type { CafeTag, Place } from './xano'
 
-export const use_coffee_store = defineStore('coffee', () => {
-  const db: Ref<Cafe[] | null> = ref(null)
+export const use_place_store = defineStore('place', () => {
+  const db: Ref<Place[] | null> = ref(null)
   const selected_id = ref<number | null>(null)
 
   const selected = computed(() => db.value?.find(cafe => cafe.id === selected_id.value) ?? null)
@@ -12,10 +12,10 @@ export const use_coffee_store = defineStore('coffee', () => {
     const selected_price_types: CafeTag[] = []
     const selected_noise_levels: CafeTag[] = []
     const selected_misc: CafeTag[] = []
-    const filtered_coffees: Cafe[] = []
+    const filtered_places: Place[] = []
 
     if (filters.value.pricing_free) selected_price_types.push('Gratuit')
-    if (filters.value.pricing_coffee) selected_price_types.push('Café', 'Restaurant', 'Bar', 'Brasserie', 'Tiers lieu', 'Autre lieu')
+    if (filters.value.pricing_place) selected_price_types.push('Café', 'Restaurant', 'Bar', 'Brasserie', 'Tiers lieu', 'Autre lieu')
     if (filters.value.pricing_hourly) selected_price_types.push('Coworking')
 
     if (filters.value.noise_level_silent) selected_noise_levels.push('Studieux')
@@ -36,11 +36,11 @@ export const use_coffee_store = defineStore('coffee', () => {
         const is_open_matched = !filters.value.open_now || is_open
 
         if (price_matched && noise_level_matched && misc_matched && is_open_matched && not_empty_matched) {
-          filtered_coffees.push(cafe)
+          filtered_places.push(cafe)
         }
       })
     }
-    return filtered_coffees
+    return filtered_places
   })
 
   async function fetch_db() {
@@ -54,7 +54,7 @@ export const use_coffee_store = defineStore('coffee', () => {
     }) as any
     const db_decoded_to_json = JSON.parse(db_decoded.toString(CryptoJS.enc.Utf8)) as unknown
 
-    db.value = db_decoded_to_json as Cafe[]
+    db.value = db_decoded_to_json as Place[]
   }
 
   function establishment_type(tags: any) {
