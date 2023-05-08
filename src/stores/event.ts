@@ -33,12 +33,12 @@ export const use_event_store = defineStore('event', () => {
 
   async function populate_places() {
     try {
-      const place_store = use_place_store()
-      if (!place_store?.db) throw new Error('Place store or its \'db\' property is not available.')
-      const places: Place[] = place_store.db
-
       const xano_attendance_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/attendance`
       const attendance: Attendance[] = await fetch(xano_attendance_url).then(res => res.json())
+      const place_store = use_place_store()
+      if (!place_store.db) throw new Error('Place store or its \'db\' property is not available.')
+
+      const places: Place[] = place_store?.db
 
       attendance.forEach((place) => {
         const updated_place = places?.find((p: Place) => p.id === place.place_id)
