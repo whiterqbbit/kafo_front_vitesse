@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { use_user_store } from '@/stores/user'
-
-const user = use_user_store()
 use_place_store().fetch_db()
+use_place_store().update_open_status()
 use_event_store().populate_places()
 use_club_store().fetch_db()
 
 onBeforeMount(() => {
   const urlParams = new URLSearchParams(window.location.search)
   if (urlParams.get('code') !== null) {
-    user.linkedin_continue(urlParams.get('code'))
+    use_user_store().linkedin_continue(urlParams.get('code'))
   }
 
   const isMobileWidth: MediaQueryList = window.matchMedia('(max-width: 768px)')

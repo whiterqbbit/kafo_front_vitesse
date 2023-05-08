@@ -6,7 +6,7 @@
       </div> -->
       <div v-bind="containerProps" class="h-200vh w-fit">
         <div v-bind="wrapperProps" class="flex flex-col gap-3">
-          <div v-for="item in list" :key="item.index" class="w-86">
+          <div v-for="item in list" :key="item.data.id" class="w-86">
             <PlaceCard :place="item.data" class="relative rounded-xl shadow-md" />
           </div>
         </div>
@@ -21,9 +21,6 @@ import { useVirtualList } from '@vueuse/core'
 const place_store = use_place_store()
 const place_db = computed(() => place_store.db_filtered)
 const { list, containerProps, wrapperProps } = useVirtualList(
-  place_db,
-  {
-    itemHeight: 300,
-  },
+  place_db, { itemHeight: 300 },
 )
 </script>
