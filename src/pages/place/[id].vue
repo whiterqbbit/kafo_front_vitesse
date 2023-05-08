@@ -107,7 +107,7 @@
           <div v-if="selected_place?.attendance !== 0" id="attendance">
             <div class="flex flex-row items-center gap-5">
               <div class="ml-2 flex">
-                <AvatarStack :attendees="selected_place?.attendees" />
+                <!-- <AvatarStack :attendees="selected_place?.attendees" /> -->
               </div>
               <div>
                 {{ selected_place?.attendance }} personnes y sont en ce moment
