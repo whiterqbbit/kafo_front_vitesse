@@ -71,6 +71,10 @@ export const use_place_store = defineStore('place', () => {
     db.value = db_decoded_to_json as Place[]
   }
 
+  function sort_places() {
+    db.value?.sort((a, b) => (b.attendance || 0) - (a?.attendance || 0))
+  }
+
   function establishment_type(tags: any) {
     const tagsList = [
       'Café',
@@ -91,5 +95,14 @@ export const use_place_store = defineStore('place', () => {
     return ''
   }
 
-  return { fetch_db, db, db_filtered, selected, selected_id, establishment_type, update_open_status }
+  return {
+    fetch_db,
+    db,
+    db_filtered,
+    selected,
+    selected_id,
+    establishment_type,
+    sort_places,
+    update_open_status,
+  }
 })
