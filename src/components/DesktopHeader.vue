@@ -3,7 +3,7 @@
     <RouterLink class="icon-btn" to="/">
       <img :src="logo" alt="logo" class="h-12 pl-4">
     </RouterLink>
-    <span class="text-white">x{{x}} y{{y}}</span>
+    <!-- <span class="text-white">x{{x}} y{{y}}</span> -->
     <!-- remplacer hidden par flex pour faire apparaitre le menu -->
     <nav class="hidden gap-5 font-black text-white">
       <button @click="display.cookie_modal = !display.cookie_modal">

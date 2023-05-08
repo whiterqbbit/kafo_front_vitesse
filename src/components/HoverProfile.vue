@@ -54,6 +54,6 @@ const position_style = computed(() => {
 <style scoped>
 .hover-profile-container {
     transform: translateX(-50%);
-    @apply fixed max-w-60 rounded-3xl rounded-lg bg-white p-3 shadow-md flex gap-3
+    @apply absolute max-w-60 rounded-3xl rounded-lg bg-white p-3 shadow-md flex gap-3
 }
 </style>
