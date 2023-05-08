@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex flex-col place-content-center place-items-center rounded-3xl bg-cafe-200 p-6 text-cafe-600 shadow-md md:w-1/2">
+  <div id="main_container" class="w-full flex flex-col place-content-center place-items-center rounded-3xl bg-cafe-200 p-6 text-cafe-600 shadow-md md:w-1/2">
     <div v-if="current_event" class="m-3 w-full flex justify-between rounded-xl bg-cafe-400 p-1">
       <div class="w-1/4 flex flex-col p-3 font-bold text-cafe-50">
         <div class="text-xl">
@@ -10,9 +10,9 @@
         <div class="mb-1 text-xl font-bold uppercase">
           {{ current_event_relative_date }}
         </div>
-        <div v-if="current_event_users?.length" class="my-2 max-h-80 flex flex-col gap-4 overflow-auto">
+        <div v-if="!!current_event_users?.length" class="my-2 max-h-80 flex flex-col gap-4 overflow-auto">
           <div v-for="user in current_event_users" :key="user.id || 'fallback-key'" class="flex items-center gap-3 rounded-xl p-1.5" :class="user_store.id === user.id ? 'bg-cafe-300' : '' ">
-            <img :src="user.pic_xsmall" class="aspect-square h-15 rounded-full object-cover">
+            <img :src="user.pic_xsmall ? user.pic_xsmall : default_user_pic" class="aspect-square h-15 rounded-full object-cover">
             <div>
               <div class="text-lg font-bold">
                 {{ user.first_name }}
@@ -38,15 +38,8 @@
           {{ next_event_relative_date === "Aujourd'hui" ? "Cet après-midi" : next_event_relative_date }}
         </div>
         <div v-if="next_event_users?.length" class="my-2 mt-5 max-h-80 flex flex-col gap-4 overflow-auto">
-          <div v-for="user in next_event_users" :key="user.id || 'fallback-key'" class="flex items-center gap-4 rounded-xl p-1.5" :class="user_store.id === user.id ? 'bg-cafe-300' : '' ">
-            <img :src="user.pic_xsmall" class="aspect-square h-15 rounded-full object-cover">
-            <div>
-              <div class="text-lg font-bold">
-                {{ user.first_name }}
-              </div>
-              <div>{{ user.job_title }}</div>
-            </div>
-          </div>
+          {{ next_event_users }}
+          <AvatarStack :attendees="next_event_users" />
         </div>
         <button class="w-full bg-cafe-400 p-2 font-bold hover:bg-cafe-500 btn-cafe" @click="submit_to_event(next_event.id)">
           {{ event_store?.is_user_in_event(next_event.id) ? 'Quitter' : 'Rejoindre' }}
@@ -59,6 +52,7 @@
 <script setup lang="ts">
 import type { Event, User } from '@/stores/xano.d'
 import { get_day_from_date, get_month_name_from_date, get_relative_date_from_date, is_slot_current } from '@/utils/date_utils'
+import default_user_pic from '@/assets/img/default_user_pic.png'
 
 const props = defineProps({
   id: String,

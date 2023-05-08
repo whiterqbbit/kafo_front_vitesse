@@ -56,7 +56,8 @@ export const use_event_store = defineStore('event', () => {
 
   function is_user_in_event(event_id: number) {
     const user_store = use_user_store()
-    const user_is_in_event = selected_place_events.value?.find(event => event.id === event_id)?.user_id?.find(user => user.id === user_store.id)
+    if (!selected_place_events.value || !Array.isArray(selected_place_events.value)) return false
+    const user_is_in_event = selected_place_events?.value?.find(event => event.id === event_id)?.user_id?.find(user => user.id === user_store.id)
     if (user_is_in_event) return true
     return false
   }
