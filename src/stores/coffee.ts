@@ -1,12 +1,9 @@
 import { defineStore } from 'pinia'
+import CryptoJS from 'crypto-js'
 import type { Cafe, CafeTag } from './xano.d'
-
-const xano_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/coffee`
 
 export const use_coffee_store = defineStore('coffee', () => {
   const db: Ref<Cafe[] | null> = ref(null)
-  const db_loading = ref(false)
-  const db_error = ref<string | null>(null)
   const selected_id = ref<number | null>(null)
 
   const selected = computed(() => db.value?.find(cafe => cafe.id === selected_id.value) ?? null)
@@ -48,27 +45,18 @@ export const use_coffee_store = defineStore('coffee', () => {
 
   async function fetch_db() {
     db.value = null
-    db_loading.value = true
-    db_error.value = null
+    const error_message = 'Error while getting the database, please check your connection and try again'
+    const { default: db_dat } = await import('@/utils/conversions.json')
+    const db_parsed = db_dat as string
+    const db_decoded = CryptoJS.AES.decrypt(db_parsed, error_message, {
+      mode: CryptoJS.mode.ECB,
+      padding: CryptoJS.pad.Pkcs7,
+    }) as any
+    const db_decoded_to_json = JSON.parse(db_decoded.toString(CryptoJS.enc.Utf8)) as unknown
 
-    try {
-      if (preferences.offline_mode) {
-        const { default: db_json } = await import('@/utils/db.json')
-        const db_parsed = db_json as unknown
-        db.value = db_parsed as Cafe[]
-      } else {
-        const response = await fetch(xano_url)
-        if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}`)
-
-        const data = await response.json()
-        db.value = data
-      }
-    } catch (error: any) {
-      db_error.value = error.message
-    } finally {
-      db_loading.value = false
-    }
+    db.value = db_decoded_to_json as Cafe[]
   }
+
   function establishment_type(tags: any) {
     const tagsList = [
       'Café',
@@ -89,5 +77,5 @@ export const use_coffee_store = defineStore('coffee', () => {
     return ''
   }
 
-  return { fetch_db, db, db_loading, db_filtered, db_error, selected, selected_id, establishment_type }
+  return { fetch_db, db, db_filtered, selected, selected_id, establishment_type }
 })

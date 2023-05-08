@@ -3,6 +3,7 @@ import { use_user_store } from '@/stores/user'
 
 const user = use_user_store()
 use_coffee_store().fetch_db()
+use_event_store().populate_events()
 use_club_store().fetch_db()
 
 onBeforeMount(() => {
@@ -25,6 +26,7 @@ onBeforeMount(() => {
     }
   }
 })
+
 // https://github.com/vueuse/head
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the html results with vite-ssg
