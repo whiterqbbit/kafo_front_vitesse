@@ -1,17 +1,27 @@
 <template>
-  <div class="hover-profile-container absolute" :style="position_style">
-    <div class="w-60 rounded-3xl rounded-lg bg-white p-4 shadow-md">
-      <img :src="props.attendee?.url" class="rounded-3xl">
+  <div class="hover-profile-container" :style="position_style">
+    <img :src="props.attendee?.pic_xsmall ? props.attendee?.pic_xsmall : default_user_pic" class="h-20 rounded-3xl">
+    <!-- Information -->
+    <div>
+      <div class="text-lg font-bold">
+        {{ props.attendee?.first_name }}
+      </div>
+      <div>
+        {{ props.attendee?.job_title}}
+      </div>
+      <div class="text-sm text-gray-500">
+        {{ props.attendee?.bio }}
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { User } from '@/stores/xano.d.ts'
+import default_user_pic from '@/assets/img/default_user_pic.png'
+
 const props = defineProps<{
-  attendee: {
-    id: number
-    url: string
-  } | null
+  attendee: User | null
   x: number
   y: number
   width: number
@@ -41,5 +51,6 @@ const position_style = computed(() => {
 <style scoped>
 .hover-profile-container {
     transform: translateX(-50%);
+    @apply absolute max-w-60 rounded-3xl rounded-lg bg-white p-3 shadow-md flex gap-3
 }
 </style>
