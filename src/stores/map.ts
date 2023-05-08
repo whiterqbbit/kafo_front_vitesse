@@ -98,7 +98,7 @@ export const use_map_store = defineStore('use_map_store', () => {
       .bindPopup(popup_description)
       .on('click', () => {
         marker_is_click.value = true
-        router.push(`/coffee/${place_id}`)
+        router.push(`/place/${place_id}`)
       })
 
     marker_is_loaded.value = true

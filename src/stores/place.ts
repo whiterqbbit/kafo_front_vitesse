@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import CryptoJS from 'crypto-js'
-import type { CafeTag, Place } from './xano.d'
+import type { CafeTag, Place } from './xano'
 
 export const use_place_store = defineStore('place', () => {
   const db: Ref<Place[] | null> = ref(null)
