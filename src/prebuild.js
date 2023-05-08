@@ -16,7 +16,7 @@ async function write_places_db() {
     padding: CryptoJS.pad.Pkcs7,
   }).toString()
 
-  fs.writeFileSync('./src/utils/conversions.json', JSON.stringify(encrypted_db))
+  fs.writeFileSync('./src/utils/conversions.json', `${JSON.stringify(encrypted_db)}\n`)
 }
 
 write_places_db()
