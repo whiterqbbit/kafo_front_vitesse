@@ -12,6 +12,9 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    env:
+      VITE_XANO_API_URL: ${{ secrets.VITE_XANO_API_URL }}
+      VITE_ENCRYPTION_KEY: ${{ secrets.VITE_ENCRYPTION_KEY }}
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
@@ -22,12 +25,18 @@ jobs:
 
       - name: Install
         run: pnpm install
+
+      - name: Prebuild
+        run: pnpm run prebuild
 
       - name: Lint
         run: pnpm run lint
 
   typecheck:
     runs-on: ubuntu-latest
+    env:
+      VITE_XANO_API_URL: ${{ secrets.VITE_XANO_API_URL }}
+      VITE_ENCRYPTION_KEY: ${{ secrets.VITE_ENCRYPTION_KEY }}
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
@@ -39,11 +48,17 @@ jobs:
       - name: Install
         run: pnpm install
 
+      - name: Prebuild
+        run: pnpm run prebuild
+
       - name: Typecheck
         run: pnpm run typecheck
 
   test:
     runs-on: ${{ matrix.os }}
+    env:
+      VITE_XANO_API_URL: ${{ secrets.VITE_XANO_API_URL }}
+      VITE_ENCRYPTION_KEY: ${{ secrets.VITE_ENCRYPTION_KEY }}
 
     strategy:
       matrix:
@@ -62,10 +77,14 @@ jobs:
           cache: pnpm
 
       - run: pnpm install
+      - run: pnpm run prebuild
       - run: pnpm run test:unit
 
   test-e2e:
     runs-on: ubuntu-latest
+    env:
+      VITE_XANO_API_URL: ${{ secrets.VITE_XANO_API_URL }}
+      VITE_ENCRYPTION_KEY: ${{ secrets.VITE_ENCRYPTION_KEY }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/cache@v3
@@ -84,6 +103,7 @@ jobs:
           cache: pnpm
 
       - run: pnpm install
+      - run: pnpm run prebuild
 
       - name: Cypress PNPM Patch
         run: cp pnpm-lock.yaml package-lock.json

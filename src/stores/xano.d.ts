@@ -161,6 +161,7 @@ export interface User {
 
 interface Event {
 	id: number
+	event_id: number
 	created_at: Date
 	user_id: User[]
 	coffee_id: number
@@ -173,6 +174,7 @@ interface Event {
 
 interface User {
 	id: number
+	user_id: number
 	first_name: string
 	job_title: string
 	bio: string
@@ -181,4 +183,12 @@ interface User {
 	pic_small: string
 	open_to_afterwork: boolean
 	open_to_lunch: boolean
+	open_to_pause: boolean
 }
+
+interface Attendance {
+	attendance: number
+	attendees: User[]
+	place_id: number
+	events: Event[]
+}[]

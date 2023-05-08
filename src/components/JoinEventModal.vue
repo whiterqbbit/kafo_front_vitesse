@@ -48,7 +48,7 @@
             </div>
           </div>
         </div>
-        <button class="w-full bg-cafe-400 p-2 font-bold btn-cafe" @click="submit_to_event(next_event.id)">
+        <button class="w-full bg-cafe-400 p-2 font-bold hover:bg-cafe-500 btn-cafe" @click="submit_to_event(next_event.id)">
           {{ event_store?.is_user_in_event(next_event.id) ? 'Quitter' : 'Rejoindre' }}
         </button>
       </div>
