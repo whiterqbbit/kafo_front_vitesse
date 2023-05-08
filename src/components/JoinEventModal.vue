@@ -3,7 +3,7 @@
     <div v-if="current_event" class="m-3 w-full flex justify-between rounded-xl bg-cafe-400 p-1">
       <div class="w-1/4 flex flex-col p-3 font-bold text-cafe-50">
         <div class="text-xl">
-          {{ get_day_from_date(current_event?.jour) }} {{ get_month_name_from_date(current_event?.jour) }} id= {{current_event?.id}}
+          {{ get_day_from_date(current_event?.jour) }} {{ get_month_name_from_date(current_event?.jour) }} id= {{ current_event?.id }}
         </div>
       </div>
       <div class="w-3/4 rounded-xl bg-cafe-100 p-3">
