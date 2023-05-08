@@ -2,8 +2,8 @@
 import { use_user_store } from '@/stores/user'
 
 const user = use_user_store()
-use_coffee_store().fetch_db()
-use_event_store().populate_events()
+use_place_store().fetch_db()
+use_event_store().populate_places()
 use_club_store().fetch_db()
 
 onBeforeMount(() => {
