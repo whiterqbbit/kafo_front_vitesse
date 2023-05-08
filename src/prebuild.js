@@ -6,7 +6,7 @@ import CryptoJS from 'crypto-js'
 dotenv.config()
 
 async function write_places_db() {
-  const xano_url = `${process.env.VITE_XANO_API_URL}/api:EW8LvnML/coffee`
+  const xano_url = `${process.env.VITE_XANO_API_URL}/api:EW8LvnML/place`
   const response = await fetch(xano_url)
   const data = await response.json()
 
