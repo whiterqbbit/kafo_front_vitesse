@@ -1,16 +1,26 @@
 <template>
   <header class="h-45px w-full flex flex-row items-center justify-between bg-cafe-600">
-    <RouterLink class="icon-btn" to="/">
-      <img :src="logo" alt="logo" class="h-8 pl-4">
+    <RouterLink to="/">
+      <img :src="logo" alt="logo" class="h-auto pl-4">
     </RouterLink>
 
     <!-- Barre de recherche -->
-    <div>
-      <i class="pi pi-search" />
-      <InputText v-model="search_string" placeholder="Rechercher" />
+    <div class="relative">
+      <div class="flex items-center">
+        <i class="pi pi-search" />
+        <InputText v-model="search_string" placeholder="Rechercher" />
+      </div>
+      <Listbox
+        v-if="search_results"
+        v-model="selected_result" :options="search_results" option-label="name"
+        class="absolute top-full z-20 mt-1 w-full"
+      />
     </div>
+
+    <!-- Bouton filtre -->
     <button i-fa6-solid-sliders class="h-10 text-white" @click="display.filter_modal = !display.filter_modal" />
 
+    <!-- Burger -->
     <div ref="parentMenuContainer" class="relative">
       <button class="focus:outline-none" aria-haspopup="true" :aria-expanded="display_menu" @click="display_menu = !display_menu">
         <img :src="hamburger" alt="hamburger" class="h-8 w-8">
@@ -42,13 +52,6 @@
     </div>
   </header>
   <LoginModal v-if="display.login_modal" />
-  <div
-    v-for="result in search_results" :key="result.name"
-    class="flex flex-col gap-2 btn-grass"
-    @click="click_suggestion(result)"
-  >
-    {{ result.name }}
-  </div>
 </template>
 
 <script setup lang="ts">
@@ -66,10 +69,21 @@ const map_store = use_map_store()
 
 const search_string = ref('')
 const debounced_search = refDebounced(search_string, 400)
-const search_results: Ref<Suggestion[]> = ref([])
+const search_results: Ref<Suggestion[] | null> = ref(null)
+const selected_result: Ref<Suggestion | null> = ref(null)
 
 watch(debounced_search, async (new_value) => {
+  if (new_value.length < 2 || new_value === null) {
+    search_results.value = null
+    return
+  }
   search_results.value = await utils_store.mapbox_search_suggest(new_value)
+})
+
+watch (selected_result, (new_value) => {
+  if (new_value !== null) {
+    click_suggestion(new_value)
+  }
 })
 
 const display_menu = ref(false)
@@ -78,7 +92,7 @@ onClickOutside(toRef(parentMenuContainer, 'value'), () => display_menu.value = f
 
 async function click_suggestion(suggestion: Suggestion) {
   search_string.value = ''
-  search_results.value = []
+  search_results.value = null
   const retrieve_results: Feature[] = await utils_store.mapbox_search_retrieve(suggestion.mapbox_id)
   const coordinates = retrieve_results[0].geometry.coordinates
   map_store.move_map_to([coordinates[1], coordinates[0]])

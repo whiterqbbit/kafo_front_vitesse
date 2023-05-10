@@ -1,10 +1,12 @@
 <template>
-  <div w-full flex>
-    <img
-      :src="geoloc_icon" alt="geolocalisation button" class="cursor-pointer border-4 border-cafe-500 rounded-full"
-      @click="use_map_store().locate_user()"
-    >
-    <span class="p-input-icon-left w-full">
+  <div class="w-full flex place-items-center gap-2">
+    <div class="cursor-pointer rounded-2xl bg-cafe-100 p-1 text-cafe-500 shadow-md">
+      <MaterialLocation
+        class="h-10 w-10 place-self-center"
+        @click="use_map_store().locate_user()"
+      />
+    </div>
+    <span class="p-input-icon-left w-full place-self-center">
       <i class="pi pi-search" />
       <InputText v-model="query" placeholder="Rechercher un lieu ou une adresse" class="w-full" />
     </span>
@@ -13,7 +15,6 @@
 
 <script setup lang="ts">
 import { useDebounceFn } from '@vueuse/core'
-import geoloc_icon from '@/assets/img/geoloc/target (copy).png'
 import { use_map_store } from '@/stores/map'
 
 const query = ref('')

@@ -7,7 +7,7 @@
       <div class="relative h-full w-full">
         <FilterModal v-if="display.filter_modal" />
         <TheMap class="z-10" />
-        <!-- <SearchBar v-if="!preferences.is_mobile" class="fixed left-1/2 top-1/8 z-20 w-[528px]" /> -->
+        <SearchBar v-if="!preferences.is_mobile" class="fixed left-1/2 top-1/8 z-20 w-[528px]" />
       </div>
     </div>
     <div v-if="preferences.is_mobile" class="relative flex flex-col">
@@ -23,19 +23,9 @@
 </template>
 
 <script setup lang="ts">
-import { useCookies } from '@vueuse/integrations/useCookies'
-
-const router = useRouter()
-
 const place_db = computed(() => use_place_store().db_filtered)
-const map_store = use_map_store()
-
-// onMounted (() => {
-//   map_store.update_markers(place_db, router)
-// })
 
 watch(place_db, () => {
-  map_store.update_markers(place_db, router)
+  use_map_store().update_markers(place_db, useRouter())
 }, { immediate: true })
-const cookies = useCookies(['user'])
 </script>
