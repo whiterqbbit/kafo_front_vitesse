@@ -1,7 +1,7 @@
 <template>
   <div class="hover-profile-container" :style="position_style">
     <img :src="props.attendee?.pic_xsmall ? props.attendee?.pic_xsmall : default_user_pic" class="h-20 rounded-3xl">
-    x{{ x }} y{{ y }}
+    <!-- x{{ x }} y{{ y }} -->
     <!-- Information -->
     <div>
       <div class="text-lg font-bold">
