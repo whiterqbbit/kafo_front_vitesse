@@ -1,5 +1,5 @@
 <template>
-  <div class="hover-profile-container" :style="position_style">
+  <div ref="hover_profile" class="hover-profile-container" :style="position_style">
     <img :src="props.attendee?.pic_xsmall ? props.attendee?.pic_xsmall : default_user_pic" class="h-20 rounded-3xl">
     <!-- x{{ x }} y{{ y }} -->
     <!-- Information -->
@@ -27,22 +27,19 @@ const props = defineProps<{
   y: number
   width: number
   height: number
-  profile_dimensions: {
-    width: number
-    height: number
-  }
 }>()
+const hover_profile = ref<HTMLElement | null>(null)
 
 const position_style = computed(() => {
   const padding = 16
 
-  let left = (props.x ?? 0) + window.scrollX
-  let top = (props.y ?? 0) + window.scrollY
+  const left = props.x ?? 0
+  const top = props.y + 5 ?? 0
 
-  if (left + props.profile_dimensions.width + padding > props.width) left = props.width - props.profile_dimensions.width - padding
-  if (left - props.profile_dimensions.width - padding < 0) left = props.profile_dimensions.width + padding
-  if (top + props.profile_dimensions.height + padding > props.height) top = props.height - props.profile_dimensions.height - padding
-  if (top - props.profile_dimensions.height - padding < 0) top = props.profile_dimensions.height + padding
+  // if (left + props.profile_dimensions.width + padding > props.width) left = props.width - props.profile_dimensions.width - padding
+  // if (left - props.profile_dimensions.width - padding < 0) left = props.profile_dimensions.width + padding
+  // if (top + props.profile_dimensions.height + padding > props.height) top = props.height - props.profile_dimensions.height - padding
+  // if (top - props.profile_dimensions.height - padding < 0) top = props.profile_dimensions.height + padding
 
   return {
     left: `${left}px`,
