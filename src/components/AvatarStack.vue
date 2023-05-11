@@ -9,7 +9,7 @@
     >
       <img :src="attendee?.pic_xsmall ? attendee?.pic_xsmall : default_user_pic" class="h-full w-full rounded-full object-cover">
       <Teleport v-if="is_mounted" to="#main_container">
-        <HoverProfile v-if="hover_profile_visible" :attendee="current_attendee ? current_attendee : null" :x="x" :y="y" :width="width" :height="height" class="z-100" />
+        <HoverProfile v-if="hover_profile_visible" :attendee="current_attendee ? current_attendee : null" :x="x" :y="y" class="z-100" />
       </Teleport>
     </div>
   </div>

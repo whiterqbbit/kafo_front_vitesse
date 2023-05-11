@@ -25,16 +25,22 @@ const props = defineProps<{
   attendee: User | null
   x: number
   y: number
-  width: number
-  height: number
 }>()
 const hover_profile = ref<HTMLElement | null>(null)
 
-const position_style = computed(() => {
-  const padding = 5
+const profile_dimensions = computed(() => {
+  if (!hover_profile.value) return { width: 400, height: 400 }
+  return {
+    width: hover_profile.value.clientWidth,
+    height: hover_profile.value.clientHeight,
+  }
+})
 
-  const left = props.x ?? 0
-  const top = props.y + padding ?? 0
+const position_style = computed(() => {
+  const padding = 10
+
+  const left = props.x + profile_dimensions.value.width / 2 + padding ?? 0
+  const top = props.y - profile_dimensions.value.height - padding ?? 0
 
   // if (left + props.profile_dimensions.width + padding > props.width) left = props.width - props.profile_dimensions.width - padding
   // if (left - props.profile_dimensions.width - padding < 0) left = props.profile_dimensions.width + padding
