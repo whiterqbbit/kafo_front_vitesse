@@ -17,7 +17,7 @@
         <div class="filter-container gap-1">
           <span class="filter-modal-title">Tarification</span>
           <div class="filter-container-inner">
-            <div class="w-1/3 flex gap-2">
+            <!-- <div class="w-1/3 flex gap-2">
               <Checkbox v-model="filters.pricing_free" class="mt-2px" :binary="true" />
               <div class="flex flex-col">
                 <label for="filter-coworking" class="cursor-pointer" @click="filters.pricing_free = !filters.pricing_free">
@@ -27,8 +27,8 @@
                   Accès libre et illimité
                 </div>
               </div>
-            </div>
-            <div class="w-1/3 flex gap-2">
+            </div> -->
+            <div class="w-1/2 flex gap-2">
               <Checkbox v-model="filters.pricing_place" class="mt-2px" :binary="true" />
               <div class="flex flex-col">
                 <label for="filter-coworking" class="cursor-pointer" @click="filters.pricing_place = !filters.pricing_place">A la conso</label>
@@ -37,7 +37,7 @@
                 </div>
               </div>
             </div>
-            <div class="w-1/3 flex gap-2">
+            <div class="w-1/2 flex gap-2">
               <Checkbox v-model="filters.pricing_hourly" class="mt-2px" :binary="true" />
               <div class="flex flex-col">
                 <label for="filter-coworking" class="cursor-pointer" @click="filters.pricing_hourly = !filters.pricing_hourly">A l'heure</label>

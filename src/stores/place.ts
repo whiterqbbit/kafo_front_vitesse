@@ -14,7 +14,7 @@ export const use_place_store = defineStore('place', () => {
     const selected_misc: CafeTag[] = []
     const filtered_places: Place[] = []
 
-    if (filters.value.pricing_free) selected_price_types.push('Gratuit')
+    if (filters.value.pricing_place) selected_price_types.push('Gratuit')
     if (filters.value.pricing_place) selected_price_types.push('Café', 'Restaurant', 'Bar', 'Brasserie', 'Tiers lieu', 'Autre lieu')
     if (filters.value.pricing_hourly) selected_price_types.push('Coworking')
 
