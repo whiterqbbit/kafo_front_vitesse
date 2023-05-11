@@ -1,7 +1,7 @@
 <template>
   <header class="h-45px w-full flex flex-row items-center justify-between bg-cafe-600">
     <RouterLink to="/">
-      <img :src="logo" alt="logo" class="h-auto pl-4">
+      <img :src="logo" alt="logo" class="h-fit w-26 pl-4">
     </RouterLink>
 
     <!-- Barre de recherche -->
@@ -55,10 +55,6 @@
 </template>
 
 <script setup lang="ts">
-import { onClickOutside } from '@vueuse/core'
-import { use_user_store } from '@/stores/user'
-import { use_utils_store } from '@/stores/utils'
-import { use_map_store } from '@/stores/map'
 import logo from '@/assets/img/logo/kafo_logo_white.png'
 import hamburger from '@/assets/img/icons/hamburger.svg'
 import type { Feature, Suggestion } from '@/stores/mapbox.d'
