@@ -10,7 +10,7 @@
       <div v-if="props.attendee?.job_title">
         {{ props.attendee?.job_title }}
       </div>
-      <div  v-if="props.attendee?.bio" class="text-sm text-gray-500">
+      <div v-if="props.attendee?.bio" class="text-sm text-gray-500">
         {{ props.attendee?.bio }}
       </div>
       <div>
