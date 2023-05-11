@@ -31,10 +31,10 @@ const props = defineProps<{
 const hover_profile = ref<HTMLElement | null>(null)
 
 const position_style = computed(() => {
-  const padding = 16
+  const padding = 5
 
   const left = props.x ?? 0
-  const top = props.y + 5 ?? 0
+  const top = props.y + padding ?? 0
 
   // if (left + props.profile_dimensions.width + padding > props.width) left = props.width - props.profile_dimensions.width - padding
   // if (left - props.profile_dimensions.width - padding < 0) left = props.profile_dimensions.width + padding
