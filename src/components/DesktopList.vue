@@ -1,7 +1,7 @@
 <template>
   <div class="ml-2 h-screen--50px w-90 fill-current fill-grass-500">
     <div class="my-3 flex flex-col gap-4">
-      <div v-bind="containerProps" class="h-200vh w-fit">
+      <div v-bind="containerProps" class="h-screen--50px w-fit">
         <div v-bind="wrapperProps" class="flex flex-col gap-3">
           <div v-for="item in list" :key="item.data.id" class="w-86">
             <PlaceCard :place="item.data" class="relative rounded-xl shadow-md" />

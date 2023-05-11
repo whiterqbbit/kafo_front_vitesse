@@ -1,5 +1,5 @@
 <template>
-  <div class="hover-profile-container" :style="position_style">
+  <div ref="hover_profile" class="hover-profile-container" :style="position_style">
     <img :src="props.attendee?.pic_xsmall ? props.attendee?.pic_xsmall : default_user_pic" class="h-20 rounded-3xl">
     <!-- x{{ x }} y{{ y }} -->
     <!-- Information -->
@@ -25,24 +25,27 @@ const props = defineProps<{
   attendee: User | null
   x: number
   y: number
-  width: number
-  height: number
-  profile_dimensions: {
-    width: number
-    height: number
-  }
 }>()
+const hover_profile = ref<HTMLElement | null>(null)
+
+const profile_dimensions = computed(() => {
+  if (!hover_profile.value) return { width: 400, height: 400 }
+  return {
+    width: hover_profile.value.clientWidth,
+    height: hover_profile.value.clientHeight,
+  }
+})
 
 const position_style = computed(() => {
-  const padding = 16
+  const padding = 10
 
-  let left = (props.x ?? 0) + window.scrollX
-  let top = (props.y ?? 0) + window.scrollY
+  const left = props.x + profile_dimensions.value.width / 2 + padding ?? 0
+  const top = props.y - profile_dimensions.value.height - padding ?? 0
 
-  if (left + props.profile_dimensions.width + padding > props.width) left = props.width - props.profile_dimensions.width - padding
-  if (left - props.profile_dimensions.width - padding < 0) left = props.profile_dimensions.width + padding
-  if (top + props.profile_dimensions.height + padding > props.height) top = props.height - props.profile_dimensions.height - padding
-  if (top - props.profile_dimensions.height - padding < 0) top = props.profile_dimensions.height + padding
+  // if (left + props.profile_dimensions.width + padding > props.width) left = props.width - props.profile_dimensions.width - padding
+  // if (left - props.profile_dimensions.width - padding < 0) left = props.profile_dimensions.width + padding
+  // if (top + props.profile_dimensions.height + padding > props.height) top = props.height - props.profile_dimensions.height - padding
+  // if (top - props.profile_dimensions.height - padding < 0) top = props.profile_dimensions.height + padding
 
   return {
     left: `${left}px`,
