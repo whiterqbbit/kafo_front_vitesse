@@ -1,17 +1,28 @@
 <template>
   <div ref="hover_profile" class="hover-profile-container" :style="position_style">
-    <img :src="props.attendee?.pic_xsmall ? props.attendee?.pic_xsmall : default_user_pic" class="h-20 rounded-3xl">
+    <img :src="props.attendee?.pic_xsmall ? props.attendee?.pic_small : default_user_pic" class="h-25 rounded-full">
     <!-- x{{ x }} y{{ y }} -->
     <!-- Information -->
-    <div>
-      <div class="text-lg font-bold">
+    <div class="flex flex-col gap-1">
+      <div v-if="props.attendee?.first_name" class="text-lg font-bold">
         {{ props.attendee?.first_name }}
       </div>
-      <div>
+      <div v-if="props.attendee?.job_title">
         {{ props.attendee?.job_title }}
       </div>
-      <div class="text-sm text-gray-500">
+      <div  v-if="props.attendee?.bio" class="text-sm text-gray-500">
         {{ props.attendee?.bio }}
+      </div>
+      <div>
+        <div v-if="props.attendee?.open_to_pause" class="text-xs font-bold">
+          Dispo pour un café
+        </div>
+        <div v-if="props.attendee?.open_to_lunch" class="text-xs font-bold">
+          Dispo pour casser une graine
+        </div>
+        <div v-if="props.attendee?.open_to_afterwork" class="text-xs font-bold">
+          Dispo pour un afterwork
+        </div>
       </div>
     </div>
   </div>
@@ -57,6 +68,6 @@ const position_style = computed(() => {
 <style scoped>
 .hover-profile-container {
     transform: translateX(-50%);
-    @apply absolute max-w-60 rounded-3xl rounded-lg bg-white p-3 shadow-md flex gap-3
+    @apply absolute place-items-center max-w-100 rounded-3xl overflow-hidden  bg-white p-3 shadow-md flex gap-3
 }
 </style>
