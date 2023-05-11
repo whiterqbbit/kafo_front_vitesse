@@ -17,6 +17,7 @@
         <div class="filter-container gap-1">
           <span class="filter-modal-title">Tarification</span>
           <div class="filter-container-inner">
+            <!-- FILTRE GRATUIT DÉPRÉCIÉ -->
             <!-- <div class="w-1/3 flex gap-2">
               <Checkbox v-model="filters.pricing_free" class="mt-2px" :binary="true" />
               <div class="flex flex-col">
