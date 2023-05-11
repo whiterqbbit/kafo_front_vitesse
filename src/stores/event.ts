@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Attendance, Event } from './xano'
+import type { Attendance, Event, Place } from './xano'
 
 export const use_event_store = defineStore('event', () => {
   const selected_place_id = ref<number | null>(null)
@@ -34,8 +34,21 @@ export const use_event_store = defineStore('event', () => {
   async function populate_places() {
     try {
       const xano_attendance_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/attendance`
-      const attendance: Attendance = await fetch(xano_attendance_url).then(res => res.json())
-      console.log('attendance =>', attendance)
+      const attendance: Attendance[] = await fetch(xano_attendance_url).then(res => res.json())
+      const place_store = use_place_store()
+      if (!place_store.db) throw new Error('Place store or its \'db\' property is not available.')
+
+      const places: Place[] = place_store?.db
+
+      attendance.forEach((place) => {
+        const updated_place = places?.find((p: Place) => p.id === place.place_id)
+        if (!updated_place) throw Error
+
+        updated_place.events = place.events
+        updated_place.attendance = place.attendance
+        updated_place.attendees = place.attendees
+      })
+      place_store.sort_places()
     } catch (error) {
       console.error(error)
     }
@@ -43,7 +56,8 @@ export const use_event_store = defineStore('event', () => {
 
   function is_user_in_event(event_id: number) {
     const user_store = use_user_store()
-    const user_is_in_event = selected_place_events.value?.find(event => event.id === event_id)?.user_id?.find(user => user.id === user_store.id)
+    if (!selected_place_events.value || !Array.isArray(selected_place_events.value)) return false
+    const user_is_in_event = selected_place_events?.value?.find(event => event.id === event_id)?.user_id?.find(user => user.id === user_store.id)
     if (user_is_in_event) return true
     return false
   }
