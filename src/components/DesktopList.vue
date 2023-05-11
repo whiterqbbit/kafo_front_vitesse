@@ -13,11 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import { useVirtualList } from '@vueuse/core'
-
-const place_store = use_place_store()
-const place_db = computed(() => place_store.db_filtered)
-const { list, containerProps, wrapperProps } = useVirtualList(
-  place_db, { itemHeight: 300 },
-)
+const place_db = computed(() => use_place_store().db_filtered)
+const { list, containerProps, wrapperProps } = useVirtualList(place_db, { itemHeight: 300 })
 </script>
