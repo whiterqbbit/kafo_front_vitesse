@@ -53,7 +53,7 @@
       <!-- FILTRE AMBIANCE -->
       <section>
         <div class="filter-container gap-1">
-          <span class="filter-modal-title">Ambiances</span>
+          <span class="filter-modal-title">Ambiance</span>
           <div class="filter-container-inner">
             <div class="w-1/3 flex gap-2">
               <Checkbox v-model="filters.noise_level_silent" class="filter-modal-checkbox" :binary="true" />
