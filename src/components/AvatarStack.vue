@@ -28,7 +28,6 @@ const hover_profile_visible = ref(false)
 const current_attendee = ref<User | null>(null)
 
 const { x, y } = useMouse({ type: 'page' })
-const { width, height } = useWindowSize()
 
 onMounted(() => {
   // for SSG
