@@ -24,12 +24,12 @@
     </div>
     <img v-else :src="user.pic_xsmall ? user.pic_xsmall : default_user_pic" alt="avatar" class="h-12 w-12 border border-cafe-100 rounded-full" @click="display.burger_menu = !display.burger_menu">
     <div v-if="display.burger_menu" class="absolute right-0 top-[50px] flex flex-col rounded-bl-xl bg-cafe-600 p-4 font-semibold text-white">
-      <div class="menu-item">
+      <!-- <div class="menu-item">
         Mon profil
       </div>
       <div class="menu-item">
         Placeholder
-      </div>
+      </div> -->
       <div class="menu-item" @click="logout">
         Se déconnecter
       </div>
