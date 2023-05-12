@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute left-0 top-0 z-20 w-fit overflow-auto rounded-r-3xl bg-cafe-25 p-4 md:w-120">
+  <div class="absolute left-0 top-0 z-20 max-h-screen--50px w-fit overflow-auto rounded-r-3xl bg-cafe-25 p-4 md:w-120">
     <div id="top-bar" class="mb-2 flex justify-between">
       <div class="flex gap-4">
         <a class="text-2xl font-bold text-cafe-700">Filtres</a>
@@ -17,7 +17,7 @@
         <div class="filter-container">
           <span class="filter-modal-title">Nos coups de coeurs</span>
           <div class="filter-container-inner">
-            <Checkbox v-model="filters.our_picks" :binary="true"  @click="click_our_picks"/>
+            <Checkbox v-model="filters.our_picks" :binary="true" @click="click_our_picks" />
             <label for="filter-our-picks" class="cursor-pointer">
               Le meilleur de Kafo !
             </label>
@@ -180,14 +180,30 @@
           </div>
         </div>
       </section>
+
+      <!-- FILTRES CLUBS -->
+      <section>
+        <div id="club_filters" class="filter-container flex flex-col">
+          <span class="filter-modal-title">Clubs</span>
+          <div class="filter-container-inner flex flex-col justify-between gap-2">
+            <input v-model="search_input" type="text" class="w-full input-field" placeholder="Personnes appartenant à">
+            <div
+              v-if="clubs"
+              class="max-h-30 flex flex-wrap overflow-auto overflow-auto border border-1 border-cafe-400 rounded-lg p-1"
+            >
+              <ClubList :clubs="clubs" :search_input="search_input" />
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-// const club_db_tech = computed(() => use_club_store().db?.filter(club => club.type === 'tech') ?? [])
-// const club_db_roles = computed(() => use_club_store().db?.filter(club => club.type === 'roles') ?? [])
-// const club_db_domain = computed(() => use_club_store().db?.filter(club => club.type === 'domain') ?? [])
+const search_input = ref('')
+
+const clubs = computed(() => use_club_store().db)
 
 function click_our_picks() {
   if (!filters.value.our_picks) {

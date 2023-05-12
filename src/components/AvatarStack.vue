@@ -3,13 +3,13 @@
     <div
       v-for="attendee in props.attendees"
       :key="attendee.id || 'fallback'"
-      class="attendee-img relative h-10 w-10 rounded-full bg-cafe-100"
+      class="attendee-img h-10 w-10 rounded-full bg-cafe-100"
       @mouseenter="show_hover_profile(attendee)"
       @mouseleave="hide_hover_profile"
     >
       <img :src="attendee?.pic_xsmall ? attendee?.pic_xsmall : default_user_pic" class="h-full w-full rounded-full object-cover">
       <Teleport v-if="is_mounted" to="#main_container">
-        <HoverProfile v-if="hover_profile_visible" ref="hover_profile" :profile_dimensions="profile_dimensions" :attendee="current_attendee ? current_attendee : null" :x="x" :y="y" :width="width" :height="height" class="z-100" />
+        <HoverProfile v-if="hover_profile_visible" :attendee="current_attendee ? current_attendee : null" :x="x" :y="y" class="z-100" />
       </Teleport>
     </div>
   </div>
@@ -27,15 +27,7 @@ const is_mounted = ref(false)
 const hover_profile_visible = ref(false)
 const current_attendee = ref<User | null>(null)
 
-const { x, y } = useMouse()
-const { width, height } = useWindowSize()
-const hover_profile = ref<HTMLElement | null>(null)
-const profile_width = hover_profile?.value?.clientWidth ?? 0
-const profile_height = hover_profile?.value?.clientHeight ?? 0
-const profile_dimensions = {
-  width: profile_width,
-  height: profile_height,
-}
+const { x, y } = useMouse({ type: 'page' })
 
 onMounted(() => {
   // for SSG

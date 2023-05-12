@@ -24,9 +24,10 @@
 </template>
 
 <script setup lang="ts">
+const router = useRouter()
 const place_db = computed(() => use_place_store().db_filtered)
 
 watch(place_db, () => {
-  use_map_store().update_markers(place_db, useRouter())
+  use_map_store().update_markers(place_db, router)
 }, { immediate: true })
 </script>

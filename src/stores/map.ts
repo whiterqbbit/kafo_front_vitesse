@@ -106,10 +106,10 @@ export const use_map_store = defineStore('use_map_store', () => {
 
     const marker_instance = marker(lngLat, { icon: customIcon })
       .addTo(map_leaf.value)
-      .bindPopup(popup_description)
+      // .bindPopup(popup_description)
       .on('click', () => {
         marker_is_click.value = true
-        router.push(`/place/${place_id}`)
+        router.push(`place/${place_id}`)
       })
 
     marker_is_loaded.value = true
