@@ -26,6 +26,9 @@ export default defineConfig({
       'screen--35px': 'calc(100vh - 35px)',
       'screen--50px': 'calc(100vh - 50px)',
     },
+    maxHeight: {
+      'screen--50px': 'calc(100vh - 50px)',
+    },
     colors: {
       cafe: {
         900: '#261b17',
