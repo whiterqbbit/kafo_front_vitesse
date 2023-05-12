@@ -179,7 +179,7 @@
             <input v-model="search_input" type="text" class="w-full input-field" placeholder="Rechercher un club">
             <div
               v-if="clubs"
-              class="max-h-30 flex flex-wrap overflow-auto overflow-auto border border-2 border-cafe-300 rounded-lg p-1"
+              class="max-h-30 flex flex-wrap overflow-auto overflow-auto border border-1 border-cafe-400 rounded-lg p-1"
             >
               <ClubList :clubs="clubs" :search_input="search_input" />
             </div>

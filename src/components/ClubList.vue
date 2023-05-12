@@ -3,7 +3,7 @@
     <div
       v-for="club in filtered_clubs"
       :key="club.id || 'fallback'"
-      class="rounded-full bg-cafe-500 px-2 text-white"
+      class="rounded-full bg-cafe-500 px-2 py-0.5 text-sm text-white"
     >
       {{ club.nom }}
     </div>

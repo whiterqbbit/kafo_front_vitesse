@@ -1,8 +1,6 @@
 <template>
   <div ref="hover_profile" class="hover-profile-container" :style="position_style">
     <img :src="props.attendee?.pic_xsmall ? props.attendee?.pic_small : default_user_pic" class="h-25 rounded-full">
-    <!-- x{{ x }} y{{ y }} -->
-    <!-- Information -->
     <div class="flex flex-col gap-1">
       <div v-if="props.attendee?.first_name" class="text-lg font-bold">
         {{ props.attendee?.first_name }}
