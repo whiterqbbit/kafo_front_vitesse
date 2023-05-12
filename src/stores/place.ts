@@ -1,10 +1,12 @@
 import { defineStore } from 'pinia'
 import CryptoJS from 'crypto-js'
 import type { CafeTag, Place } from './xano'
+import { use_user_store } from './user'
 
 export const use_place_store = defineStore('place', () => {
   const db: Ref<Place[] | null> = ref(null)
   const selected_id = ref<number | null>(null)
+  const distance_is_calculated = ref(false)
 
   const selected = computed(() => db.value?.find(cafe => cafe.id === selected_id.value) ?? null)
 
@@ -28,15 +30,9 @@ export const use_place_store = defineStore('place', () => {
     if (filters.value.wifi) selected_misc.push('Wifi')
     if (filters.value.power) selected_misc.push('Prises')
 
-    function filter_by_distance() {
-      db.value?.forEach((cafe) => {
-        const { lat, lng } = cafe.location.data
-        // cafe.distance = haversineDistance(coords.value.latitude, coords.value.longitude, lat, lng)
-      })
-
-      // Add a function to calculate the distance between two coordinates
+    function calculate_distance_from_places() {
+      // Calculate the distance between two coordinates
       function haversineDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
-        console.log('haversineDistance', lat1)
         const R = 6371 // Radius of the Earth in km
         const dLat = (lat2 - lat1) * Math.PI / 180
         const dLon = (lon2 - lon1) * Math.PI / 180
@@ -47,21 +43,31 @@ export const use_place_store = defineStore('place', () => {
         const distance = R * c
         return distance
       }
+
+      const user_coords = use_user_store().user_coords
+      if (user_coords === null || user_coords.lat === Infinity || db.value === null) return
+      db.value?.forEach((cafe) => {
+        const { lat, lng } = cafe.location.data
+        cafe.distance = haversineDistance(user_coords.lat, user_coords.lng, lat, lng)
+      })
+
+      distance_is_calculated.value = true
     }
 
-    if (filters.value.max_distance !== -1) filter_by_distance()
+    if (!distance_is_calculated.value) calculate_distance_from_places()
 
     if (db.value) {
       db.value.forEach((cafe) => {
-        const { tags, is_open, attendance, our_fav } = cafe
+        const { tags, is_open, attendance, our_fav, distance } = cafe
         const not_empty_matched = !filters.value.not_empty || attendance !== 0
         const price_matched = !selected_price_types.length || selected_price_types.some(r => tags.includes(r))
         const noise_level_matched = !selected_noise_levels.length || selected_noise_levels.some(r => tags.includes(r))
         const misc_matched = !selected_misc.length || selected_misc.every(r => tags.includes(r))
         const is_open_matched = !filters.value.open_now || is_open
         const our_picks_matched = !filters.value.our_picks || our_fav
+        const distance_matched = filters.value.max_distance === -1 || (distance && distance < filters.value.max_distance)
 
-        if (price_matched && noise_level_matched && misc_matched && is_open_matched && not_empty_matched && our_picks_matched) {
+        if (price_matched && noise_level_matched && misc_matched && is_open_matched && not_empty_matched && distance_matched && our_picks_matched) {
           filtered_places.push(cafe)
         }
       })

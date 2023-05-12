@@ -6,7 +6,7 @@ export const filters = useStorage('filters', {
   pricing_free: true,
   pricing_place: true,
   pricing_hourly: false,
-  max_distance: <Number | null> null,
+  max_distance: -1,
   noise_level_silent: false,
   noise_level_calm: false,
   noise_level_lively: false,
@@ -22,7 +22,7 @@ export const filters = useStorage('filters', {
 })
 
 export function reset_filters() {
-  filters.value.max_distance = null
+  filters.value.max_distance = -1
   filters.value.noise_level_silent = false
   filters.value.noise_level_calm = false
   filters.value.noise_level_lively = false
