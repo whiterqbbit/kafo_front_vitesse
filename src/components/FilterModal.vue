@@ -12,6 +12,20 @@
       </div>
     </div>
     <div id="filter_container" class="flex flex-col gap-2 text-left">
+      <!-- FILTRE NOS COUPS DE COEUR -->
+      <section>
+        <div class="filter-container">
+          <span class="filter-modal-title">Nos coups de coeurs</span>
+          <div class="filter-container-inner">
+            <div class="flex gap-2">
+              <Checkbox v-model="filters.our_picks" :binary="true" />
+              <label for="filter-our-picks" class="cursor-pointer" @click="click_our_picks">
+                Le meilleur de Kafo !
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
       <!-- FILTRE TARIFS -->
       <section>
         <div class="filter-container gap-1">
@@ -144,21 +158,7 @@
       <section>
         <div id="misc_filters" class="filter-container flex flex-col">
           <span class="filter-modal-title">Autres</span>
-          <div class="filter-container-inner justify-between">
-            <div class="flex flex-col gap-1">
-              <div class="bullet">
-                <Checkbox v-model="filters.our_picks" class="filter-modal-checkbox" :binary="true" />
-                <label class="cursor-pointer" for="filter_our_picks" @click="filters.our_picks = !filters.our_picks">Nos coups de coeurs</label>
-              </div>
-              <div class="bullet">
-                <Checkbox v-model="filters.wifi" class="filter-modal-checkbox" :binary="true" />
-                <label class="cursor-pointer" for="filter_wifi" @click="filters.wifi = !filters.wifi">Wifi</label>
-              </div>
-              <div class="bullet">
-                <Checkbox v-model="filters.power" class="filter-modal-checkbox" :binary="true" />
-                <label for="filter_power">Prises</label>
-              </div>
-            </div>
+          <div class="filter-container-inner justify-start gap-8">
             <div class="flex flex-col gap-1">
               <div class="bullet">
                 <Checkbox v-model="filters.open_now" class="filter-modal-checkbox" :binary="true" />
@@ -169,6 +169,16 @@
                 <label class="cursor-pointer" for="filter_limit_to_map" @click="filters.limit_to_map = !filters.limit_to_map">Limiter à la carte</label>
               </div>
             </div>
+            <div class="flex flex-col gap-1">
+              <div class="bullet">
+                <Checkbox v-model="filters.wifi" class="filter-modal-checkbox" :binary="true" />
+                <label class="cursor-pointer" for="filter_wifi" @click="filters.wifi = !filters.wifi">Wifi</label>
+              </div>
+              <div class="bullet">
+                <Checkbox v-model="filters.power" class="filter-modal-checkbox" :binary="true" />
+                <label for="filter_power">Prises</label>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -177,9 +187,25 @@
 </template>
 
 <script setup lang="ts">
-const club_db_tech = computed(() => use_club_store().db?.filter(club => club.type === 'tech') ?? [])
-const club_db_roles = computed(() => use_club_store().db?.filter(club => club.type === 'roles') ?? [])
-const club_db_domain = computed(() => use_club_store().db?.filter(club => club.type === 'domain') ?? [])
+// const club_db_tech = computed(() => use_club_store().db?.filter(club => club.type === 'tech') ?? [])
+// const club_db_roles = computed(() => use_club_store().db?.filter(club => club.type === 'roles') ?? [])
+// const club_db_domain = computed(() => use_club_store().db?.filter(club => club.type === 'domain') ?? [])
+
+function click_our_picks() {
+  filters.value.our_picks = !filters.value.our_picks
+  if (filters.value.our_picks) {
+    filters.value.limit_to_map = false
+    filters.value.max_distance = -1
+    filters.value.open_now = false
+    filters.value.wifi = false
+    filters.value.power = false
+    filters.value.pricing_hourly = false
+    filters.value.pricing_place = false
+    filters.value.noise_level_silent = false
+    filters.value.noise_level_calm = false
+    filters.value.noise_level_lively = false
+  }
+}
 </script>
 
 <style scoped>
