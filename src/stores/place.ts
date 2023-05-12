@@ -75,6 +75,20 @@ export const use_place_store = defineStore('place', () => {
     return filtered_places
   })
 
+  function get_previous_place_id(id: number) {
+    const index = db_filtered.value?.findIndex(p => p.id === id) ?? -1
+    if (index === -1) return null
+    const previous_place_id = db_filtered.value?.[index - 1].id ?? null
+    return previous_place_id
+  }
+
+  function get_next_place_id(id: number) {
+    const index = db_filtered.value?.findIndex(p => p.id === id) ?? -1
+    if (index === -1) return null
+    const next_place_id = db_filtered.value?.[index + 1].id ?? null
+    return next_place_id
+  }
+
   async function update_open_status() {
     try {
       const xano_open_status_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/place/opening`
@@ -136,5 +150,7 @@ export const use_place_store = defineStore('place', () => {
     establishment_type,
     sort_places,
     update_open_status,
+    get_previous_place_id,
+    get_next_place_id,
   }
 })

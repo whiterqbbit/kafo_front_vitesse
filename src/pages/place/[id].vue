@@ -153,7 +153,7 @@
                 <div class="whitespace-nowrap text-xl">
                   Y aller !
                 </div>
-                <img class="h-6 w-6" :src="direction">
+                <img class="h-6 w-6" :src="google_maps_icon">
               </a>
             </div>
           </div>
@@ -170,11 +170,12 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import 'photoswipe/style.css'
 
 import subway_icon from '@/assets/img/icons/metro.png'
-import direction from '@/assets/img/direction.png'
+import google_maps_icon from '@/assets/img/google_maps_icon.png'
 
 const props = defineProps({
   id: String,
 })
+
 // get the selected place from the store
 const selected_place_id = Number(props.id)
 const place_store = use_place_store()
@@ -194,14 +195,44 @@ async function initialize_gallery() {
 onMounted(() => {
   initialize_gallery()
 })
+
+const router = useRouter()
+function go_to_previous_place() {
+  const previous_place = place_store.get_previous_place_id(selected_place_id)
+  if (previous_place) router.push(`${previous_place}`)
+}
+
+function go_to_next_place() {
+  const next_place = place_store.get_next_place_id(selected_place_id)
+  if (next_place) router.push(`${next_place}`)
+}
+
+onKeyStroke('Escape', () => {
+  router.push('/map')
+})
+
+onKeyStroke('ArrowLeft', () => {
+  go_to_previous_place()
+})
+
+onKeyStroke('ArrowRight', () => {
+  go_to_next_place()
+})
+
+const el = ref(null)
+const { isSwiping, direction } = useSwipe(el)
+
+watch(isSwiping, () => {
+  if (direction.value === 'left') {
+    go_to_next_place()
+  } else if (direction.value === 'right') {
+    go_to_previous_place()
+  }
+})
 </script>
 
 <style scoped>
 @import 'photoswipe/dist/photoswipe.css';
-
-.services {
-  @apply flex place-content-center bg-cafe-300 rounded-xl p-x-3
-}
 
 .flicking-container {
   display: flex;
