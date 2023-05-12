@@ -1,13 +1,13 @@
 <template>
   <LandingHeader />
-  <section id="hero" class="overflow-hidden text-center md:text-left">
-    <div class="container">
+  <section id="hero" class="h-screen flex place-items-center overflow-hidden text-center md:text-left">
+    <div class="max-w-7xl place-content-center container">
       <div id="title" class="landing-title flex flex-col">
-        <div class="z-30 flex">
+        <div class="z-30 flex text-7xl">
           <div>Coworke dans des</div>
           <SlidingWord :items="['cafés', 'brasseries', 'restaurants', 'coworkings', 'hôtels']" class="ml-3" />
         </div>
-        <div class="z-30 flex">
+        <div class="z-30 flex text-7xl">
           <div>Rencontre des</div>
           <SlidingWord :items="['freelances', 'entrepreneurs', 'artistes', 'product owners', 'growth hackers']" class="ml-3" />
         </div>
@@ -18,12 +18,12 @@
             <div class="bg-floating-resize bg-shape absolute left-0 top-[-10px] z-0 bg-cafe-200" />
             <img id="hero-pic-mobile" class="relative mx-auto max-w-500px w-90%" :src="hero_pic" alt="Cinq télétravailleurs autour d'une table qui coworkent">
           </div>
-          <div id="sub-title" class="landing-subtitle mt-6 md:mt-0">
+          <!-- <div id="sub-title" class="landing-subtitle mt-6 md:mt-0">
             Kafo est le réseau qui redonne
             du goût au télétravail
-          </div>
+          </div> -->
           <div id="sub-sub-title" class="z-10 mt-6 text-lg">
-            Notre plateforme facilite les rencontres pour les télétravailleurs en quête d'échanges et de collaborations.
+            Kafo facilite les rencontres entre télétravailleurs en quête d'échanges et de collaborations.
             <br>Gratuitement.
           </div>
           <LandingCTA class="mx-auto mt-6 text-xl md:mt-12 lg:text-4xl md:text-3xl sm:text-2xl" />
