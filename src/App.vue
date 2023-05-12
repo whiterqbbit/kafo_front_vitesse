@@ -56,7 +56,7 @@ useHead({
   <main bg-cafe-50 text-cafe-600>
     <DesktopHeader v-if="!($route.path === '/') && !preferences.is_mobile" />
     <MobileHeader v-else-if="!($route.path === '/')" />
-    <RouterView v-slot="{ Component }" class="h-screen">
+    <RouterView v-slot="{ Component }" :key="$route.fullPath" class="h-screen">
       <KeepAlive include="map">
         <component :is="Component" />
       </KeepAlive>

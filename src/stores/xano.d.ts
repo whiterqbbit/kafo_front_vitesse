@@ -112,11 +112,11 @@ export interface Place {
 	disabled?: boolean
 	pricing?: string
 	public_phone?: string
-	distance?: string
-	color?: string
+	distance?: number
 	is_open: boolean
 	attendance?: number
 	attendees?: User[]
+	our_fav: boolean
 }
 
 export interface Club {

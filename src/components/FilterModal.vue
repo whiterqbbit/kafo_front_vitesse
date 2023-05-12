@@ -12,12 +12,25 @@
       </div>
     </div>
     <div id="filter_container" class="flex flex-col gap-2 text-left">
+      <!-- FILTRE NOS COUPS DE COEUR -->
+      <section>
+        <div class="filter-container">
+          <span class="filter-modal-title">Nos coups de coeurs</span>
+          <div class="filter-container-inner">
+            <Checkbox v-model="filters.our_picks" :binary="true" @click="click_our_picks" />
+            <label for="filter-our-picks" class="cursor-pointer">
+              Le meilleur de Kafo !
+            </label>
+          </div>
+        </div>
+      </section>
       <!-- FILTRE TARIFS -->
       <section>
         <div class="filter-container gap-1">
           <span class="filter-modal-title">Tarification</span>
           <div class="filter-container-inner">
-            <div class="w-1/3 flex gap-2">
+            <!-- FILTRE GRATUIT DÉPRÉCIÉ -->
+            <!-- <div class="w-1/3 flex gap-2">
               <Checkbox v-model="filters.pricing_free" class="mt-2px" :binary="true" />
               <div class="flex flex-col">
                 <label for="filter-coworking" class="cursor-pointer" @click="filters.pricing_free = !filters.pricing_free">
@@ -27,8 +40,8 @@
                   Accès libre et illimité
                 </div>
               </div>
-            </div>
-            <div class="w-1/3 flex gap-2">
+            </div> -->
+            <div class="w-1/2 flex gap-2">
               <Checkbox v-model="filters.pricing_place" class="mt-2px" :binary="true" />
               <div class="flex flex-col">
                 <label for="filter-coworking" class="cursor-pointer" @click="filters.pricing_place = !filters.pricing_place">A la conso</label>
@@ -37,7 +50,7 @@
                 </div>
               </div>
             </div>
-            <div class="w-1/3 flex gap-2">
+            <div class="w-1/2 flex gap-2">
               <Checkbox v-model="filters.pricing_hourly" class="mt-2px" :binary="true" />
               <div class="flex flex-col">
                 <label for="filter-coworking" class="cursor-pointer" @click="filters.pricing_hourly = !filters.pricing_hourly">A l'heure</label>
@@ -143,21 +156,7 @@
       <section>
         <div id="misc_filters" class="filter-container flex flex-col">
           <span class="filter-modal-title">Autres</span>
-          <div class="filter-container-inner justify-between">
-            <div class="flex flex-col gap-1">
-              <div class="bullet">
-                <Checkbox v-model="filters.our_picks" class="filter-modal-checkbox" :binary="true" />
-                <label class="cursor-pointer" for="filter_our_picks" @click="filters.our_picks = !filters.our_picks">Nos coups de coeurs</label>
-              </div>
-              <div class="bullet">
-                <Checkbox v-model="filters.wifi" class="filter-modal-checkbox" :binary="true" />
-                <label class="cursor-pointer" for="filter_wifi" @click="filters.wifi = !filters.wifi">Wifi</label>
-              </div>
-              <div class="bullet">
-                <Checkbox v-model="filters.power" class="filter-modal-checkbox" :binary="true" />
-                <label for="filter_power">Prises</label>
-              </div>
-            </div>
+          <div class="filter-container-inner justify-start gap-8">
             <div class="flex flex-col gap-1">
               <div class="bullet">
                 <Checkbox v-model="filters.open_now" class="filter-modal-checkbox" :binary="true" />
@@ -166,6 +165,16 @@
               <div class="bullet">
                 <Checkbox v-model="filters.limit_to_map" class="filter-modal-checkbox" :binary="true" />
                 <label class="cursor-pointer" for="filter_limit_to_map" @click="filters.limit_to_map = !filters.limit_to_map">Limiter à la carte</label>
+              </div>
+            </div>
+            <div class="flex flex-col gap-1">
+              <div class="bullet">
+                <Checkbox v-model="filters.wifi" class="filter-modal-checkbox" :binary="true" />
+                <label class="cursor-pointer" for="filter_wifi" @click="filters.wifi = !filters.wifi">Wifi</label>
+              </div>
+              <div class="bullet">
+                <Checkbox v-model="filters.power" class="filter-modal-checkbox" :binary="true" />
+                <label for="filter_power">Prises</label>
               </div>
             </div>
           </div>
@@ -195,6 +204,12 @@
 const search_input = ref('')
 
 const clubs = computed(() => use_club_store().db)
+
+function click_our_picks() {
+  if (!filters.value.our_picks) {
+    reset_filters()
+  }
+}
 </script>
 
 <style scoped>
@@ -210,7 +225,7 @@ const clubs = computed(() => use_club_store().db)
   }
 
   .filter-container-inner{
-    @apply flex p-2
+    @apply flex p-2 gap-2
   }
 
   .filter-modal-title{

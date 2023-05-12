@@ -6,6 +6,7 @@ const cookies = useCookies(['user'])
 
 export const use_user_store = defineStore('user', () => {
   const is_auth = ref(false)
+  const user_coords = ref<{ lat: number; lng: number } | null>(null)
   const bio = ref<string | null>(null)
   const clubs = ref<Array<Club>>([])
   const domaine = ref('')
@@ -260,6 +261,7 @@ export const use_user_store = defineStore('user', () => {
     is_auth,
     bio,
     clubs,
+    user_coords,
     domaine,
     email,
     family_name,

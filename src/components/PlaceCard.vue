@@ -1,5 +1,5 @@
 <template>
-  <div class="shadow-md">
+  <div class="bg-white shadow-md">
     <div v-if="place.is_open" class="absolute right-4 top-3 z-10 inline-block rounded-full bg-grass-500 px-2 font-semibold tracking-wider text-white">
       Ouvert
     </div>

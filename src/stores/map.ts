@@ -3,6 +3,7 @@ import { useGeolocation } from '@vueuse/core'
 import type { Router } from 'vue-router'
 import type { Place } from '@/stores/xano.d'
 import marker_icon from '@/assets/img/geoloc/marker_6.png'
+import { use_user_store } from '@/stores/user'
 
 type simple_coords = [number, number]
 
@@ -64,6 +65,16 @@ export const use_map_store = defineStore('use_map_store', () => {
       .setView(viewLngLat, zoom)
 
     L.control.zoom({ position: 'bottomright' }).addTo(map_leaf.value)
+
+    L.control.locate({
+      position: 'topright',
+      strings: {
+        title: 'Me localiser!',
+      },
+      locateOptions: {
+        maxZoom: 15,
+      },
+    }).addTo(map_leaf.value).start()
   }
 
   async function add_tile_layer(mapUrl: string, maxZoom: number, attribution: string) {
@@ -131,22 +142,13 @@ export const use_map_store = defineStore('use_map_store', () => {
     // for SSG
     if (typeof window === 'undefined') return
 
-    const { coords, resume } = useGeolocation()
-    resume()
+    useGeolocation().resume()
+    const { coords } = useGeolocation()
     if (!coords.value || !coords.value.latitude || !coords.value.longitude) return
 
-    if (!leaflet) return
-    const L = await leaflet
-
-    L.control.locate({
-      position: 'topright',
-      strings: {
-        title: 'Me localiser!',
-      },
-      locateOptions: {
-        maxZoom: 15,
-      },
-    }).addTo(map_leaf.value).start()
+    watchEffect(() => {
+      use_user_store().user_coords = { lat: coords.value.latitude, lng: coords.value.longitude }
+    })
   }
 
   // ne fonctionne pas en l'état, 403
