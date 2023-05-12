@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute left-0 top-0 z-20 w-fit overflow-auto rounded-r-3xl bg-cafe-25 p-4 md:w-120">
+  <div class="absolute left-0 top-0 z-20 max-h-screen--50px w-fit overflow-auto rounded-r-3xl bg-cafe-25 p-4 md:w-120">
     <div id="top-bar" class="mb-2 flex justify-between">
       <div class="flex gap-4">
         <a class="text-2xl font-bold text-cafe-700">Filtres</a>
@@ -172,11 +172,12 @@
         </div>
       </section>
 
+      <!-- FILTRES CLUBS -->
       <section>
-        <div id="misc_filters" class="filter-container flex flex-col">
+        <div id="club_filters" class="filter-container flex flex-col">
           <span class="filter-modal-title">Clubs</span>
           <div class="filter-container-inner flex flex-col justify-between gap-2">
-            <input v-model="search_input" type="text" class="w-full input-field" placeholder="Rechercher un club">
+            <input v-model="search_input" type="text" class="w-full input-field" placeholder="Personnes appartenant à">
             <div
               v-if="clubs"
               class="max-h-30 flex flex-wrap overflow-auto overflow-auto border border-1 border-cafe-400 rounded-lg p-1"
