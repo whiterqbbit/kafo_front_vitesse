@@ -184,15 +184,10 @@
       <!-- FILTRES CLUBS -->
       <section>
         <div id="club_filters" class="filter-container flex flex-col">
-          <span class="filter-modal-title">Clubs</span>
+          <span class="filter-modal-title">Fréquentation</span>
           <div class="filter-container-inner flex flex-col justify-between gap-2">
-            <input v-model="search_input" type="text" class="w-full input-field" placeholder="Personnes appartenant à">
-            <div
-              v-if="clubs"
-              class="max-h-30 flex flex-wrap overflow-auto overflow-auto border border-1 border-cafe-400 rounded-lg p-1"
-            >
-              <ClubList :clubs="clubs" :search_input="search_input" />
-            </div>
+            <input v-model="search_input" type="text" class="w-full input-field" placeholder="Chercher un tag">
+              <ClubList v-if="clubs" :clubs="clubs" :search_input="search_input" />
           </div>
         </div>
       </section>
