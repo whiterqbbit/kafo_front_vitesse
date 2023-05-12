@@ -99,7 +99,7 @@
           </div>
         </div>
       </div>
-      <div id="title_group" class="flex flex-col gap-3">
+      <div id="title_group" ref="swipe_target" class="flex flex-col gap-3">
         <div id="title" class="text-4xl font-black">
           {{ selected_place?.nom }}
         </div>
@@ -168,6 +168,7 @@
 import Flicking from '@egjs/vue3-flicking'
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import 'photoswipe/style.css'
+import type { UseSwipeDirection } from '@vueuse/core'
 
 import subway_icon from '@/assets/img/icons/metro.png'
 import google_maps_icon from '@/assets/img/google_maps_icon.png'
@@ -219,15 +220,16 @@ onKeyStroke('ArrowRight', () => {
   go_to_next_place()
 })
 
-const el = ref(null)
-const { isSwiping, direction } = useSwipe(el)
-
-watch(isSwiping, () => {
-  if (direction.value === 'left') {
-    go_to_next_place()
-  } else if (direction.value === 'right') {
-    go_to_previous_place()
-  }
+const swipe_target = ref<HTMLElement | null>(null)
+useSwipe(swipe_target, {
+  passive: false,
+  onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection) {
+    if (direction === 'left') {
+      go_to_next_place()
+    } else if (direction === 'right') {
+      go_to_previous_place()
+    }
+  },
 })
 </script>
 
