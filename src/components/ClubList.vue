@@ -1,6 +1,5 @@
 <template>
   <div class="flex flex-wrap justify-between gap-2 px-1 py-2">
-    {{ searchResults }}
     <div
       v-for="club in filtered_clubs"
       :key="club.id || 'fallback'"
