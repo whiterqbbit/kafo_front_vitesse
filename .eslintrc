@@ -8,6 +8,7 @@
       }
     ],
     "vue/valid-attribute-name": "off",
+    "vue/prop-name-casing": "off",
     "@typescript-eslint/brace-style": [
       "error",
       "1tbs",

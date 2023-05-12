@@ -171,14 +171,29 @@
           </div>
         </div>
       </section>
+
+      <section>
+        <div id="misc_filters" class="filter-container flex flex-col">
+          <span class="filter-modal-title">Clubs</span>
+          <div class="filter-container-inner flex flex-col justify-between gap-2">
+            <input v-model="search_input" type="text" class="w-full input-field" placeholder="Rechercher un club">
+            <div
+              v-if="clubs"
+              class="max-h-30 flex flex-wrap overflow-auto overflow-auto border border-2 border-cafe-300 rounded-lg p-1"
+            >
+              <ClubList :clubs="clubs" :search_input="search_input" />
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const club_db_tech = computed(() => use_club_store().db?.filter(club => club.type === 'tech') ?? [])
-const club_db_roles = computed(() => use_club_store().db?.filter(club => club.type === 'roles') ?? [])
-const club_db_domain = computed(() => use_club_store().db?.filter(club => club.type === 'domain') ?? [])
+const search_input = ref('')
+
+const clubs = computed(() => use_club_store().db)
 </script>
 
 <style scoped>

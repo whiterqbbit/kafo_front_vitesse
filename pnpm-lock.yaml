@@ -21,7 +21,7 @@ dependencies:
     version: 1.1.26(vue@3.2.47)
   '@vueuse/integrations':
     specifier: ^9.13.0
-    version: 9.13.0(nprogress@0.2.0)(universal-cookie@4.0.4)(vue@3.2.47)
+    version: 9.13.0(fuse.js@6.6.2)(nprogress@0.2.0)(universal-cookie@4.0.4)(vue@3.2.47)
   '@vueuse/motion':
     specifier: 2.0.0-beta.22
     version: 2.0.0-beta.22(@nuxt/kit@3.4.3)(vue@3.2.47)
@@ -34,6 +34,9 @@ dependencies:
   fs:
     specifier: 0.0.1-security
     version: 0.0.1-security
+  fuse.js:
+    specifier: ^6.6.2
+    version: 6.6.2
   leaflet:
     specifier: ^1.9.3
     version: 1.9.3
@@ -3562,7 +3565,7 @@ packages:
       '@unhead/vue': 1.1.26(vue@3.2.47)
       vue: 3.2.47
 
-  /@vueuse/integrations@9.13.0(nprogress@0.2.0)(universal-cookie@4.0.4)(vue@3.2.47):
+  /@vueuse/integrations@9.13.0(fuse.js@6.6.2)(nprogress@0.2.0)(universal-cookie@4.0.4)(vue@3.2.47):
     resolution: {integrity: sha512-I1kX/tsfcvWWLZD7HZaP0LsSfchK13YxReLfharXhk72SFXp87doLbRaTfIF5w8m/gr/vPtcNyQPAXW7Ubpuww==}
     peerDependencies:
       async-validator: '*'
@@ -3602,6 +3605,7 @@ packages:
     dependencies:
       '@vueuse/core': 9.13.0(vue@3.2.47)
       '@vueuse/shared': 9.13.0(vue@3.2.47)
+      fuse.js: 6.6.2
       nprogress: 0.2.0
       universal-cookie: 4.0.4
       vue-demi: 0.14.0(vue@3.2.47)
@@ -5926,6 +5930,11 @@ packages:
   /functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
     dev: true
+
+  /fuse.js@6.6.2:
+    resolution: {integrity: sha512-cJaJkxCCxC8qIIcPBF9yGxY0W/tVZS3uEISDxhYIdtk8OL93pe+6Zj7LjCqVV4dzbqcriOZ+kQ/NE4RXZHsIGA==}
+    engines: {node: '>=10'}
+    dev: false
 
   /gauge@4.0.4:
     resolution: {integrity: sha512-f9m+BEN5jkg6a0fZjleidjN51VE1X+mPFQ2DJ0uv1V39oCLCbsGe6yjbBnp7eK7z/+GAon99a3nHuqbuuthyPg==}
