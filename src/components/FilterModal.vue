@@ -17,12 +17,10 @@
         <div class="filter-container">
           <span class="filter-modal-title">Nos coups de coeurs</span>
           <div class="filter-container-inner">
-            <div class="flex gap-2">
-              <Checkbox v-model="filters.our_picks" :binary="true" />
-              <label for="filter-our-picks" class="cursor-pointer" @click="click_our_picks">
-                Le meilleur de Kafo !
-              </label>
-            </div>
+            <Checkbox v-model="filters.our_picks" :binary="true"  @click="click_our_picks"/>
+            <label for="filter-our-picks" class="cursor-pointer">
+              Le meilleur de Kafo !
+            </label>
           </div>
         </div>
       </section>
@@ -192,18 +190,8 @@
 // const club_db_domain = computed(() => use_club_store().db?.filter(club => club.type === 'domain') ?? [])
 
 function click_our_picks() {
-  filters.value.our_picks = !filters.value.our_picks
-  if (filters.value.our_picks) {
-    filters.value.limit_to_map = false
-    filters.value.max_distance = -1
-    filters.value.open_now = false
-    filters.value.wifi = false
-    filters.value.power = false
-    filters.value.pricing_hourly = false
-    filters.value.pricing_place = false
-    filters.value.noise_level_silent = false
-    filters.value.noise_level_calm = false
-    filters.value.noise_level_lively = false
+  if (!filters.value.our_picks) {
+    reset_filters()
   }
 }
 </script>
@@ -221,7 +209,7 @@ function click_our_picks() {
   }
 
   .filter-container-inner{
-    @apply flex p-2
+    @apply flex p-2 gap-2
   }
 
   .filter-modal-title{

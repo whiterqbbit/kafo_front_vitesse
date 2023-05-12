@@ -26,12 +26,12 @@ export function reset_filters() {
   filters.value.noise_level_silent = false
   filters.value.noise_level_calm = false
   filters.value.noise_level_lively = false
-  filters.value.pricing_free = true
-  filters.value.pricing_place = true
+  filters.value.pricing_free = false
+  filters.value.pricing_place = false
   filters.value.pricing_hourly = false
-  filters.value.open_now = true
-  filters.value.wifi = true
-  filters.value.power = true
+  filters.value.open_now = false
+  filters.value.wifi = false
+  filters.value.power = false
   filters.value.our_picks = false
   filters.value.filter_status = ''
   filters.value.not_empty = false
