@@ -187,7 +187,7 @@
           <span class="filter-modal-title">Fréquentation</span>
           <div class="filter-container-inner flex flex-col justify-between gap-2">
             <input v-model="search_input" type="text" class="w-full input-field" placeholder="Chercher un tag">
-              <ClubList v-if="clubs" :clubs="clubs" :search_input="search_input" />
+            <ClubList v-if="clubs" :clubs="clubs" :search_input="search_input" />
           </div>
         </div>
       </section>
