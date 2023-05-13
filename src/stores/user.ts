@@ -3,6 +3,7 @@ import { useCookies } from '@vueuse/integrations/useCookies'
 import type { Club, User } from './xano.d'
 
 const cookies = useCookies(['user'])
+const user_auth_cookie = cookies.get('token')
 
 export const use_user_store = defineStore('user', () => {
   const is_auth = ref(false)
@@ -27,9 +28,6 @@ export const use_user_store = defineStore('user', () => {
   const pic_xsmall = ref('')
   const role = ref('')
   const type = ref('')
-  const token = ref('')
-  token.value = cookies.get('token')
-  // console.log('initial user token.value', token.value.slice(0, 10))
 
   async function suggestion(form: { email: string; message: string; category: { name: string } }): Promise<void> {
     try {
@@ -78,9 +76,7 @@ export const use_user_store = defineStore('user', () => {
       }
 
       const data = await response.json()
-      token.value = data.authToken
-      cookies.set('token', token.value)
-      console.log('me called from login')
+      cookies.set('token', data.authToken)
       me()
     } catch (error) {
       console.error('Error during login:', error)
@@ -129,9 +125,7 @@ export const use_user_store = defineStore('user', () => {
       }
 
       const data = await response.json()
-      token.value = data.authToken
-      cookies.set('token', token.value)
-      console.log('me called from signup')
+      cookies.set('token', data.authToken)
       me()
     } catch (error) {
       console.error('Error during signup:', error)
@@ -205,9 +199,7 @@ export const use_user_store = defineStore('user', () => {
       })
       if (!response.ok) throw new Error(`HTTP error ${response.status}`)
       const data = await response.json()
-      token.value = data.authToken
       cookies.set('token', data.authToken)
-      console.log('me called from linkedin continue')
       me()
     } catch (error) {
       console.error('Error during linkedin continue:', error)
@@ -216,14 +208,11 @@ export const use_user_store = defineStore('user', () => {
 
   function logout(): void {
     updateUser(null)
-    token.value = ''
+    cookies.set('token', '')
   }
 
   async function me(): Promise<void> {
-    const token_cookie = cookies.get('token')
-    // console.log('>> me called', token_cookie.slice(0, 10))
-    if (!token_cookie) return
-    // console.log('>> me called with token', token_cookie.slice(0, 10))
+    if (!user_auth_cookie) return
 
     try {
       const xano_me_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/me`
@@ -231,12 +220,10 @@ export const use_user_store = defineStore('user', () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token_cookie}`,
+          'Authorization': `Bearer ${user_auth_cookie}`,
         },
       })
       const data: User = await response.json()
-      console.log('>> me data', data)
-      // console.log('>> me token set', token.value.slice(0, 10))
 
       updateUser(data)
     } catch (error) {
@@ -292,7 +279,6 @@ export const use_user_store = defineStore('user', () => {
     role,
     suggestion,
     type,
-    token,
     linkedin_init,
     linkedin_continue,
     login,
