@@ -17,13 +17,14 @@
         <div class="filter-container">
           <span class="filter-modal-title">Nos coups de coeurs</span>
           <div class="filter-container-inner">
-            <Checkbox v-model="filters.our_picks" :binary="true" @click="click_our_picks" />
-            <label for="filter-our-picks" class="cursor-pointer">
+            <Checkbox v-model="filters.our_picks" name="filter-our-picks" :binary="true" />
+            <label for="filter-our-picks" class="cursor-pointer" @click="click_our_picks">
               Le meilleur de Kafo !
             </label>
           </div>
         </div>
       </section>
+
       <!-- FILTRE TARIFS -->
       <section>
         <div class="filter-container gap-1">
@@ -206,6 +207,7 @@ const search_input = ref('')
 const clubs = computed(() => use_club_store().db)
 
 function click_our_picks() {
+  filters.value.our_picks = !filters.value.our_picks
   if (!filters.value.our_picks) {
     reset_filters()
   }
