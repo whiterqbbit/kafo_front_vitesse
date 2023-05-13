@@ -214,8 +214,8 @@ export const use_user_store = defineStore('user', () => {
   }
 
   async function me(): Promise<void> {
-    console.log('me called', token.value)
-    if (!token.value) return
+    console.log('me called', cookies.get('token'))
+    if (!cookies.get('token')) return
     console.log('me called with token')
 
     try {
@@ -229,6 +229,7 @@ export const use_user_store = defineStore('user', () => {
       })
       const data: User = await response.json()
       cookies.set('token', token.value)
+      console.log('token set', token.value, token)
 
       updateUser(data)
     } catch (error) {
