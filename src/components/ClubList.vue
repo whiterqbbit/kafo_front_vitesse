@@ -44,24 +44,22 @@ watch(
 )
 
 const filtered_clubs = computed(() => {
-  // Define a function called "excludeSelected" that takes a club as an argument
-  // and returns true if the club is NOT in the "selected_clubs" list.
-  const is_not_selected = (club: Club) => !selected_clubs.value.some(selected => selected.uuid === club.uuid)
+  function is_not_selected(club: Club) {
+    return !selected_clubs.value.some(selected => selected.uuid === club.uuid)
+  }
 
-  // Create a new array called "available_clubs" by filtering out the clubs
-  // in the "clubs" list that are in the "selected_clubs" list.
+  // Filters available clubs that are not selected
   const available_clubs = clubs.value.filter(club => is_not_selected(club))
 
-  // If there's a search input, return the filtered clubs based on the search results.
+  // If there is a search input, filter the results based on the search
   if (props.search_input) {
-    // Get the search results and extract only the club items.
+    // Map the search results to an array of items
     const filtered_results = searchResults.value?.map(result => result.item)
 
-    // Return the filtered clubs, excluding the clubs in the "selected_clubs" list.
+    // Return the filtered results if the club is not selected
     return filtered_results?.filter(club => is_not_selected(club))
   } else {
-    // If there's no search input, return the available clubs
-    // that are not in the "selected_clubs" list.
+    // Return available clubs if there is no search input
     return available_clubs
   }
 })

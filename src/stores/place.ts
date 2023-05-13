@@ -16,8 +16,6 @@ export const use_place_store = defineStore('place', () => {
     const selected_misc: CafeTag[] = []
     const filtered_places: Place[] = []
 
-    console.log('db_filtered')
-
     // Pricing filters
     if (filters.value.pricing_place) selected_price_types.push('Gratuit')
     if (filters.value.pricing_place) selected_price_types.push('Café', 'Restaurant', 'Bar', 'Brasserie', 'Tiers lieu', 'Autre lieu')
@@ -68,16 +66,21 @@ export const use_place_store = defineStore('place', () => {
         const is_open_matched = !filters.value.open_now || is_open
         const our_picks_matched = !filters.value.our_picks || our_fav
         const distance_matched = filters.value.max_distance === -1 || (distance && distance < filters.value.max_distance)
-        const clubs_selected_matched = (
-          filters.value.clubs_selected_uuids.length === 0
-          || ((attendees && attendees.some(att =>
-            att.clubs_uuid && att.clubs_uuid.some(
-              (club_uuid) => {
-                return filters.value.clubs_selected_uuids.includes(club_uuid)
-              },
-            ),
-          )) ?? false)
-        )
+
+        const clubs_selected_matched: boolean = (() => {
+          const no_selected_clubs = filters.value.clubs_selected_uuids.length === 0
+          if (no_selected_clubs) return true
+          if (!attendees) return false
+
+          return attendees.some((attendee) => {
+            if (!attendee.clubs_uuid) return false
+
+            return attendee.clubs_uuid.some(club_uuid =>
+              filters.value.clubs_selected_uuids.includes(club_uuid),
+            )
+          })
+        })()
+
         if (price_matched
           && noise_level_matched
           && misc_matched
@@ -86,7 +89,6 @@ export const use_place_store = defineStore('place', () => {
           && distance_matched
           && our_picks_matched
           && clubs_selected_matched
-
         ) {
           filtered_places.push(cafe)
         }

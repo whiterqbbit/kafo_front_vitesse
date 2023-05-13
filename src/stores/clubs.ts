@@ -23,10 +23,10 @@ export const use_club_store = defineStore('club', () => {
       const { attendees } = place
       if (!attendees) return
 
-      attendees.forEach((att) => {
-        if (!att.clubs_uuid) return
+      attendees.forEach((attendee) => {
+        if (!attendee.clubs_uuid) return
 
-        att.clubs_uuid.forEach((club_uuid) => {
+        attendee.clubs_uuid.forEach((club_uuid) => {
           if (!uuids_filtered.includes(club_uuid)) uuids_filtered.push(club_uuid)
         })
       })
