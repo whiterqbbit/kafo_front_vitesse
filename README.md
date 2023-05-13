@@ -9,9 +9,9 @@
 <br>
 
 <p align='center'>
-<a href="https://beta.kafo.work/">Beta preview</a>
+<a href="https://www.kafo.work/">Website</a>
 <br>
-<a href="https://www.kafo.work/">Live version (nocode)</a>
+<a href="https://beta.kafo.work/">Staging branch</a>
 </p>
 
 <br>
