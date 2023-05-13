@@ -206,7 +206,7 @@ export const use_user_store = defineStore('user', () => {
       if (!response.ok) throw new Error(`HTTP error ${response.status}`)
       const data = await response.json()
       token.value = data.authToken
-      cookies.set('token', token.value)
+      cookies.set('token', data.authToken)
       console.log('me called from linkedin continue')
       me()
     } catch (error) {
@@ -231,7 +231,7 @@ export const use_user_store = defineStore('user', () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token.value}`,
+          'Authorization': `Bearer ${token_cookie}`,
         },
       })
       const data: User = await response.json()
