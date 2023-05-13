@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
 import { useGeolocation } from '@vueuse/core'
 import type { Router } from 'vue-router'
-import type { Cafe } from '@/stores/xano.d'
+import type { Place } from '@/stores/xano.d'
 import marker_icon from '@/assets/img/geoloc/marker_6.png'
+import { use_user_store } from '@/stores/user'
 
 type simple_coords = [number, number]
 
@@ -64,6 +65,16 @@ export const use_map_store = defineStore('use_map_store', () => {
       .setView(viewLngLat, zoom)
 
     L.control.zoom({ position: 'bottomright' }).addTo(map_leaf.value)
+
+    L.control.locate({
+      position: 'topright',
+      strings: {
+        title: 'Me localiser!',
+      },
+      locateOptions: {
+        maxZoom: 15,
+      },
+    }).addTo(map_leaf.value).start()
   }
 
   async function add_tile_layer(mapUrl: string, maxZoom: number, attribution: string) {
@@ -83,7 +94,7 @@ export const use_map_store = defineStore('use_map_store', () => {
     map_leaf.value.flyTo(lngLat, zoom)
   }
 
-  async function add_marker(lngLat: simple_coords, popup_description: string, coffee_id: number, router: Router) {
+  async function add_marker(lngLat: simple_coords, popup_description: string, place_id: number, router: Router) {
     if (!leaflet) return
     const { Icon, marker } = await leaflet
     const customIcon = new Icon({
@@ -95,10 +106,10 @@ export const use_map_store = defineStore('use_map_store', () => {
 
     const marker_instance = marker(lngLat, { icon: customIcon })
       .addTo(map_leaf.value)
-      .bindPopup(popup_description)
+      // .bindPopup(popup_description)
       .on('click', () => {
         marker_is_click.value = true
-        router.push(`/coffee/${coffee_id}`)
+        router.push(`place/${place_id}`)
       })
 
     marker_is_loaded.value = true
@@ -107,7 +118,7 @@ export const use_map_store = defineStore('use_map_store', () => {
     markers.value.push({
       coordinates: lngLat,
       popup_description,
-      id: coffee_id,
+      id: place_id,
       instance: marker_instance,
     } as unknown as MarkerData)
   }
@@ -117,13 +128,13 @@ export const use_map_store = defineStore('use_map_store', () => {
     markers.value = []
   }
 
-  function update_markers(coffee_db: Ref<Cafe[]>, router: Router) {
+  function update_markers(place_db: Ref<Place[]>, router: Router) {
     // Remove all existing markers from the map
     remove_all_markers()
 
-    // Add new markers for each filtered coffee shop
-    coffee_db.value.forEach((coffee) => {
-      add_marker([coffee.location.data.lat, coffee.location.data.lng], coffee.desc || '', coffee.id, router)
+    // Add new markers for each filtered place
+    place_db.value.forEach((place) => {
+      add_marker([place.location.data.lat, place.location.data.lng], place.desc || '', place.id, router)
     })
   }
 
@@ -131,22 +142,12 @@ export const use_map_store = defineStore('use_map_store', () => {
     // for SSG
     if (typeof window === 'undefined') return
 
-    const { coords, resume } = useGeolocation()
-    resume()
+    const { coords } = useGeolocation()
     if (!coords.value || !coords.value.latitude || !coords.value.longitude) return
 
-    if (!leaflet) return
-    const L = await leaflet
-
-    L.control.locate({
-      position: 'topright',
-      strings: {
-        title: 'Me localiser!',
-      },
-      locateOptions: {
-        maxZoom: 15,
-      },
-    }).addTo(map_leaf.value).start()
+    watchEffect(() => {
+      use_user_store().user_coords = { lat: coords.value.latitude, lng: coords.value.longitude }
+    })
   }
 
   // ne fonctionne pas en l'état, 403

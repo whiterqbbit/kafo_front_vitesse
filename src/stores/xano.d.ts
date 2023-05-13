@@ -56,11 +56,12 @@ export interface AwsPics {
 	}
 }
 
-export interface Cafe {
+export interface Place {
 	id: number
 	nom: string
 	tags: CafeTag[]
 	type?: PlaceType
+	events?: Event[]
 	website?: string
 	location: {
 		data: {
@@ -111,14 +112,11 @@ export interface Cafe {
 	disabled?: boolean
 	pricing?: string
 	public_phone?: string
-	distance?: string
-	color?: string
+	distance?: number
 	is_open: boolean
 	attendance?: number
-	attendees?: {
-		id: number
-		url: string
-	}[]
+	attendees?: User[]
+	our_fav: boolean
 }
 
 export interface Club {
@@ -136,8 +134,8 @@ export interface Club {
 
 export interface User {
 	is_auth?: boolean
+	clubs_uuid?: Array<string>
 	bio?: string
-	clubs?: Array<Club>
 	domaine?: string
 	email?: string
 	family_name?: string
@@ -156,7 +154,7 @@ export interface User {
 	pic_xsmall?: string
 	role?: string
 	type?: string
-	token?: string
+	clubs?: Club[]
 }
 
 interface Event {
@@ -191,4 +189,4 @@ interface Attendance {
 	attendees: User[]
 	place_id: number
 	events: Event[]
-}[]
+}

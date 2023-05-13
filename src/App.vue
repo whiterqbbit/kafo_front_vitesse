@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { use_user_store } from '@/stores/user'
-
-const user = use_user_store()
-use_coffee_store().fetch_db()
-use_event_store().populate_events()
+use_place_store().fetch_db()
+use_place_store().update_open_status()
+use_user_store().me()
+use_event_store().populate_places()
 use_club_store().fetch_db()
 
 onBeforeMount(() => {
   const urlParams = new URLSearchParams(window.location.search)
   if (urlParams.get('code') !== null) {
-    user.linkedin_continue(urlParams.get('code'))
+    use_user_store().linkedin_continue(urlParams.get('code'))
   }
 
   const isMobileWidth: MediaQueryList = window.matchMedia('(max-width: 768px)')
@@ -57,7 +56,7 @@ useHead({
   <main bg-cafe-50 text-cafe-600>
     <DesktopHeader v-if="!($route.path === '/') && !preferences.is_mobile" />
     <MobileHeader v-else-if="!($route.path === '/')" />
-    <RouterView v-slot="{ Component }" class="h-screen">
+    <RouterView v-slot="{ Component }" :key="$route.fullPath" class="h-screen">
       <KeepAlive include="map">
         <component :is="Component" />
       </KeepAlive>

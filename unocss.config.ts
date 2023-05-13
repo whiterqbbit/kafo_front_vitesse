@@ -16,7 +16,7 @@ export default defineConfig({
     ['btn-cafe', 'btn bg-cafe-600 text-cafe-50 hover:bg-cafe-700'],
     ['btn-cafe-light', 'btn text-cafe-600 bg-cafe-50 hover:shadow-sm border border-cafe-400 hover:border-cafe-500'],
     ['btn-grass-full', 'btn-grass w-full'],
-    ['btn-light', 'px-4 cursor-pointer py-1 h-fit w-fit place-self-center rounded-xl font-normal text-base text-gray-400 transition hover:(rounded-xl text-cafe-700 bg-opacity-25 bg-stone-200)'],
+    ['btn-light', 'px-4 cursor-pointer py-1 h-fit w-fit place-self-center rounded-xl font-normal text-base text-gray-400 transition hover:(rounded-xl text-cafe-700 bg-white)'],
     ['font-title', 'text-3xl font-bold text-center text-cafe-700'],
     ['container', 'bg-cafe-50 mx-auto px-9 py-4 md:py-8 max-w-7xl'],
     ['input-field', 'border border-cafe-400 rounded-lg p-2 placeholder-gray-400 focus:ring-1 focus:ring-cafe-400 focus:outline-none'],
@@ -24,6 +24,9 @@ export default defineConfig({
   theme: {
     height: {
       'screen--35px': 'calc(100vh - 35px)',
+      'screen--50px': 'calc(100vh - 50px)',
+    },
+    maxHeight: {
       'screen--50px': 'calc(100vh - 50px)',
     },
     colors: {
