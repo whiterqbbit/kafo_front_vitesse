@@ -1,5 +1,5 @@
 <template>
-  <div class="flex place-items-center gap-2">
+  <div class="flex place-items-center gap-2 rounded-xl p-3 shadow-md backdrop-blur-lg">
     <div class="cursor-pointer rounded-2xl bg-cafe-100 p-1 text-cafe-500 shadow-md">
       <MaterialLocation
         class="h-10 w-10 place-self-center"

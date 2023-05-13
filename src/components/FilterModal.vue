@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute left-0 top-0 z-20 max-h-screen--50px w-fit overflow-auto rounded-r-3xl bg-cafe-25 p-4 md:w-120">
+  <div class="absolute left-0 top-0 z-20 max-h-screen--50px w-fit overflow-auto rounded-r-3xl p-4 backdrop-blur md:w-120">
     <div id="top-bar" class="mb-2 flex justify-between">
       <div class="flex gap-4">
         <a class="text-2xl font-bold text-cafe-700">Filtres</a>
@@ -17,13 +17,14 @@
         <div class="filter-container">
           <span class="filter-modal-title">Nos coups de coeurs</span>
           <div class="filter-container-inner">
-            <Checkbox v-model="filters.our_picks" :binary="true" @click="click_our_picks" />
-            <label for="filter-our-picks" class="cursor-pointer">
+            <Checkbox v-model="filters.our_picks" name="filter-our-picks" :binary="true" />
+            <label for="filter-our-picks" class="cursor-pointer" @click="filters.our_picks = !filters.our_picks">
               Le meilleur de Kafo !
             </label>
           </div>
         </div>
       </section>
+
       <!-- FILTRE TARIFS -->
       <section>
         <div class="filter-container gap-1">
@@ -200,11 +201,11 @@ const search_input = ref('')
 
 const clubs = computed(() => use_club_store().db_filtered)
 
-function click_our_picks() {
-  if (!filters.value.our_picks) {
+watch(() => filters.value.our_picks, () => {
+  if (filters.value.our_picks) {
     reset_filters()
   }
-}
+})
 </script>
 
 <style scoped>

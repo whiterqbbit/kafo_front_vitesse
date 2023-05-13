@@ -29,7 +29,7 @@ export function reset_filters() {
   filters.value.open_now = false
   filters.value.wifi = false
   filters.value.power = false
-  filters.value.our_picks = false
+  // filters.value.our_picks = false
   filters.value.filter_status = ''
   filters.value.not_empty = false
   filters.value.clubs_selected_uuids = []

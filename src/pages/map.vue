@@ -7,7 +7,7 @@
         <FilterModal v-if="display.filter_modal" />
         <TheMap class="z-10" />
         <div class="relative z-10">
-          <SearchBar v-if="!preferences.is_mobile" class="fixed left-9/20 top-1/10 max-w-500px w-3/7" />
+          <SearchBar v-if="!preferences.is_mobile && !display.filter_modal" class="fixed left-9/20 top-1/10 max-w-500px w-3/7" />
         </div>
       </div>
     </div>
