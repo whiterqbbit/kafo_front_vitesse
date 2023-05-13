@@ -155,6 +155,7 @@ export interface User {
 	role?: string
 	type?: string
 	token?: string
+	clubs?: Club[]
 }
 
 interface Event {
