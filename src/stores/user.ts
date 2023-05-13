@@ -28,6 +28,7 @@ export const use_user_store = defineStore('user', () => {
   const role = ref('')
   const type = ref('')
   const token = ref('')
+  console.log('cookies.get(token)', cookies.get('token'))
   token.value = cookies.get('token')
 
   async function suggestion(form: { email: string; message: string; category: { name: string } }): Promise<void> {
@@ -213,7 +214,9 @@ export const use_user_store = defineStore('user', () => {
   }
 
   async function me(): Promise<void> {
+    console.log('me called')
     if (!token.value) return
+    console.log('me called with token')
 
     try {
       const xano_me_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/me`
