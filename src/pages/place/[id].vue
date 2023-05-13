@@ -154,7 +154,7 @@
                   <div class="whitespace-nowrap text-xl">
                     Y aller !
                   </div>
-                  <img class="h-6 w-6" :src="direction">
+                  <img class="h-6 w-6" :src="google_maps_icon">
                 </a>
               </div>
             </div>
@@ -172,8 +172,7 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import 'photoswipe/style.css'
 import type { UseSwipeDirection } from '@vueuse/core'
 import subway_icon from '@/assets/img/icons/metro.png'
-
-// import google_maps_icon from '@/assets/img/google_maps_icon.png'
+import google_maps_icon from '@/assets/img/google_maps_icon.png'
 
 const props = defineProps({
   id: String,
