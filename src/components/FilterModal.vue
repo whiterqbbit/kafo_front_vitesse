@@ -182,12 +182,12 @@
       </section>
 
       <!-- FILTRES CLUBS -->
-      <section>
+      <section v-if="clubs">
         <div id="club_filters" class="filter-container flex flex-col">
           <span class="filter-modal-title">Fréquentation</span>
           <div class="filter-container-inner flex flex-col justify-between gap-2">
             <input v-model="search_input" type="text" class="w-full input-field" placeholder="Chercher un tag">
-            <ClubList v-if="clubs" :clubs="clubs" :search_input="search_input" />
+            <ClubList :search_input="search_input" />
           </div>
         </div>
       </section>
@@ -198,7 +198,7 @@
 <script setup lang="ts">
 const search_input = ref('')
 
-const clubs = computed(() => use_club_store().db)
+const clubs = computed(() => use_club_store().db_filtered)
 
 function click_our_picks() {
   if (!filters.value.our_picks) {

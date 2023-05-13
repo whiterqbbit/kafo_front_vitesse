@@ -26,11 +26,10 @@ import { useFuse } from '@vueuse/integrations/useFuse'
 import type { Club } from '@/stores/xano.d.ts'
 
 const props = defineProps<{
-  clubs: Club[]
   search_input: string
 }>()
 
-const clubs: Ref<Club[] | []> = ref([...props.clubs])
+const clubs = computed(() => use_club_store().db_filtered)
 const selected_clubs: Ref<Club[] | []> = ref([])
 const searchResults: Ref<{ item: Club }[] | null> = ref(null)
 filters.value.clubs_selected_uuids = selected_clubs.value.map(club => club.uuid)
