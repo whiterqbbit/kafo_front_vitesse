@@ -80,6 +80,7 @@ export const use_user_store = defineStore('user', () => {
 
       const data = await response.json()
       token.value = data.authToken
+      cookies.set('token', token.value)
       console.log('me called from login')
       me()
     } catch (error) {
@@ -130,6 +131,7 @@ export const use_user_store = defineStore('user', () => {
 
       const data = await response.json()
       token.value = data.authToken
+      cookies.set('token', token.value)
       console.log('me called from signup')
       me()
     } catch (error) {
@@ -205,6 +207,7 @@ export const use_user_store = defineStore('user', () => {
       if (!response.ok) throw new Error(`HTTP error ${response.status}`)
       const data = await response.json()
       token.value = data.authToken
+      cookies.set('token', token.value)
       console.log('me called from linkedin continue')
       me()
     } catch (error) {
@@ -233,7 +236,7 @@ export const use_user_store = defineStore('user', () => {
         },
       })
       const data: User = await response.json()
-      cookies.set('token', token.value)
+      console.log('>> me data', data)
       console.log('token set', token.value, token)
 
       updateUser(data)
