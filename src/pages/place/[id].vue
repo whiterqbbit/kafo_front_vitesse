@@ -194,6 +194,7 @@ async function initialize_gallery() {
     lightbox.init()
   }
 }
+
 onMounted(() => {
   initialize_gallery()
 })

@@ -1,5 +1,4 @@
 import { useStorage } from '@vueuse/core'
-import type { Club } from '@/stores/xano.d'
 
 export const filters = useStorage('filters', {
   limit_to_map: false,
@@ -16,9 +15,7 @@ export const filters = useStorage('filters', {
   our_picks: false,
   filter_status: '',
   not_empty: false,
-  clubs_tech: <Club[]>[],
-  clubs_domain: <Club[]>[],
-  clubs_roles: <Club[]>[],
+  clubs_selected_uuids: [] as string[],
 })
 
 export function reset_filters() {
@@ -35,7 +32,5 @@ export function reset_filters() {
   // filters.value.our_picks = false
   filters.value.filter_status = ''
   filters.value.not_empty = false
-  filters.value.clubs_tech = []
-  filters.value.clubs_domain = []
-  filters.value.clubs_roles = []
+  filters.value.clubs_selected_uuids = []
 }
