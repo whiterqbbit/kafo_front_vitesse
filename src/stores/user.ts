@@ -29,8 +29,7 @@ export const use_user_store = defineStore('user', () => {
   const type = ref('')
   const token = ref('')
   token.value = cookies.get('token')
-  console.log('cookies.get(token)', cookies.get('token'))
-  console.log('token.value', token.value, 'token', token)
+  console.log('initial user token.value', token.value.slice(0, 10))
 
   async function suggestion(form: { email: string; message: string; category: { name: string } }): Promise<void> {
     try {
@@ -222,9 +221,9 @@ export const use_user_store = defineStore('user', () => {
 
   async function me(): Promise<void> {
     const token_cookie = cookies.get('token')
-    console.log('>> me called', token_cookie)
+    console.log('>> me called', token_cookie.slice(0, 10))
     if (!token_cookie) return
-    console.log('>> me called with token', token_cookie)
+    console.log('>> me called with token', token_cookie.slice(0, 10))
 
     try {
       const xano_me_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/me`
@@ -237,7 +236,7 @@ export const use_user_store = defineStore('user', () => {
       })
       const data: User = await response.json()
       console.log('>> me data', data)
-      console.log('token set', token.value, token)
+      console.log('>> me token set', token.value.slice(0, 10))
 
       updateUser(data)
     } catch (error) {
