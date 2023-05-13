@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute left-0 top-0 z-20 max-h-screen--50px w-fit overflow-auto rounded-r-3xl bg-cafe-25 p-4 md:w-120">
+  <div class="absolute left-0 top-0 z-20 max-h-screen--50px w-fit overflow-auto rounded-r-3xl p-4 backdrop-blur md:w-120">
     <div id="top-bar" class="mb-2 flex justify-between">
       <div class="flex gap-4">
         <a class="text-2xl font-bold text-cafe-700">Filtres</a>
