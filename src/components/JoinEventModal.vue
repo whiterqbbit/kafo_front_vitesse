@@ -46,7 +46,7 @@
         </button>
       </div>
     </div>
-    <EventCard :day="toomorrow" />
+    <EventCard :day="today" />
   </div>
 </template>
 
