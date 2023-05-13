@@ -17,6 +17,7 @@ declare module '@vue/runtime-core' {
     DesktopList: typeof import('./components/DesktopList.vue')['default']
     DesktopSidebar: typeof import('./components/DesktopSidebar.vue')['default']
     Dropdown: typeof import('primevue/dropdown')['default']
+    EventCard: typeof import('./components/EventCard.vue')['default']
     FilterModal: typeof import('./components/FilterModal.vue')['default']
     Galleria: typeof import('primevue/galleria')['default']
     HoverProfile: typeof import('./components/HoverProfile.vue')['default']

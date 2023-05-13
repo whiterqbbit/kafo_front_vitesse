@@ -46,6 +46,7 @@
         </button>
       </div>
     </div>
+    <EventCard :day="toomorrow" />
   </div>
 </template>
 
@@ -55,13 +56,17 @@ import { get_day_from_date, get_month_name_from_date, get_relative_date_from_dat
 import default_user_pic from '@/assets/img/default_user_pic.png'
 
 const props = defineProps({
-  id: String,
+  place_id: String,
 })
 
 const user_store = use_user_store()
 
+const today = new Date()
+const toomorrow = new Date(today)
+toomorrow.setDate(toomorrow.getDate() + 1)
+
 // Get the selected place from the store
-const selected_place_id = Number(props.id)
+const selected_place_id = Number(props.place_id)
 const place_store = use_place_store()
 place_store.selected_id = selected_place_id
 
