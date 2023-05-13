@@ -28,8 +28,9 @@ export const use_user_store = defineStore('user', () => {
   const role = ref('')
   const type = ref('')
   const token = ref('')
-  console.log('cookies.get(token)', cookies.get('token'))
   token.value = cookies.get('token')
+  console.log('cookies.get(token)', cookies.get('token'))
+  console.log('token.value', token.value, 'token', token)
 
   async function suggestion(form: { email: string; message: string; category: { name: string } }): Promise<void> {
     try {
