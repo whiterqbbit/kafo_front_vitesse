@@ -21,7 +21,7 @@
     <div v-if="!user.is_auth" class="m-2 font-bold btn-grass" @click="display.login_modal = !display.login_modal">
       Se connecter
     </div>
-    <img v-else :src="user.pic_xsmall ? user.pic_xsmall : default_user_pic" alt="avatar" class="h-12 w-12 border border-cafe-100 rounded-full" @click="display.burger_menu = !display.burger_menu">
+    <img v-else :src="user.pic_xsmall ? user.pic_xsmall : default_user_pic" alt="avatar" class="mr-4 h-10 w-10 border border-cafe-100 rounded-full" @click="display.burger_menu = !display.burger_menu">
     <div v-if="display.burger_menu" class="absolute right-0 top-[50px] flex flex-col rounded-bl-xl bg-cafe-600 p-4 font-semibold text-white">
       <!-- <div class="menu-item">
         Mon profil
