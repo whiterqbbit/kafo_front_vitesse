@@ -154,7 +154,7 @@
                   <div class="whitespace-nowrap text-xl">
                     Y aller !
                   </div>
-                  <img class="h-6 w-6" :src="direction">
+                  <img class="h-6 w-6" :src="img_direction">
                 </a>
               </div>
             </div>
@@ -172,6 +172,7 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import 'photoswipe/style.css'
 import type { UseSwipeDirection } from '@vueuse/core'
 import subway_icon from '@/assets/img/icons/metro.png'
+import img_direction from '@/assets/img/google_maps_icon.png'
 
 // import google_maps_icon from '@/assets/img/google_maps_icon.png'
 
@@ -195,6 +196,7 @@ async function initialize_gallery() {
     lightbox.init()
   }
 }
+
 onMounted(() => {
   initialize_gallery()
 })

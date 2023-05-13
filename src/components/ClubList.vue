@@ -33,6 +33,7 @@ const props = defineProps<{
 const clubs: Ref<Club[] | []> = ref([...props.clubs])
 const selected_clubs: Ref<Club[] | []> = ref([])
 const searchResults: Ref<{ item: Club }[] | null> = ref(null)
+filters.value.clubs_selected_uuids = selected_clubs.value.map(club => club.uuid)
 
 watch(
   () => props.search_input,
@@ -72,5 +73,6 @@ function toggle_selected_club(club: Club) {
   } else {
     selected_clubs.value = selected_clubs.value.filter(selected_club => selected_club.uuid !== club.uuid)
   }
+  filters.value.clubs_selected_uuids = selected_clubs.value.map(club => club.uuid)
 }
 </script>

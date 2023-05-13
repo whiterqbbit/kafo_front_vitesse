@@ -16,6 +16,8 @@ export const use_place_store = defineStore('place', () => {
     const selected_misc: CafeTag[] = []
     const filtered_places: Place[] = []
 
+    console.log('db_filtered')
+
     // Pricing filters
     if (filters.value.pricing_place) selected_price_types.push('Gratuit')
     if (filters.value.pricing_place) selected_price_types.push('Café', 'Restaurant', 'Bar', 'Brasserie', 'Tiers lieu', 'Autre lieu')
@@ -58,7 +60,7 @@ export const use_place_store = defineStore('place', () => {
 
     if (db.value) {
       db.value.forEach((cafe) => {
-        const { tags, is_open, attendance, our_fav, distance } = cafe
+        const { tags, is_open, attendance, our_fav, attendees, distance } = cafe
         const not_empty_matched = !filters.value.not_empty || attendance !== 0
         const price_matched = !selected_price_types.length || selected_price_types.some(r => tags.includes(r))
         const noise_level_matched = !selected_noise_levels.length || selected_noise_levels.some(r => tags.includes(r))
@@ -66,8 +68,26 @@ export const use_place_store = defineStore('place', () => {
         const is_open_matched = !filters.value.open_now || is_open
         const our_picks_matched = !filters.value.our_picks || our_fav
         const distance_matched = filters.value.max_distance === -1 || (distance && distance < filters.value.max_distance)
+        const clubs_selected_matched = (
+          filters.value.clubs_selected_uuids.length === 0
+          || ((attendees && attendees.some(att =>
+            att.clubs_uuid && att.clubs_uuid.some(
+              (club_uuid) => {
+                return filters.value.clubs_selected_uuids.includes(club_uuid)
+              },
+            ),
+          )) ?? false)
+        )
+        if (price_matched
+          && noise_level_matched
+          && misc_matched
+          && is_open_matched
+          && not_empty_matched
+          && distance_matched
+          && our_picks_matched
+          && clubs_selected_matched
 
-        if (price_matched && noise_level_matched && misc_matched && is_open_matched && not_empty_matched && distance_matched && our_picks_matched) {
+        ) {
           filtered_places.push(cafe)
         }
       })
