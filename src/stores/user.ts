@@ -80,6 +80,7 @@ export const use_user_store = defineStore('user', () => {
 
       const data = await response.json()
       token.value = data.authToken
+      console.log('me called from login')
       me()
     } catch (error) {
       console.error('Error during login:', error)
@@ -129,6 +130,7 @@ export const use_user_store = defineStore('user', () => {
 
       const data = await response.json()
       token.value = data.authToken
+      console.log('me called from signup')
       me()
     } catch (error) {
       console.error('Error during signup:', error)
@@ -203,6 +205,7 @@ export const use_user_store = defineStore('user', () => {
       if (!response.ok) throw new Error(`HTTP error ${response.status}`)
       const data = await response.json()
       token.value = data.authToken
+      console.log('me called from linkedin continue')
       me()
     } catch (error) {
       console.error('Error during linkedin continue:', error)
@@ -215,9 +218,10 @@ export const use_user_store = defineStore('user', () => {
   }
 
   async function me(): Promise<void> {
-    console.log('me called', cookies.get('token'))
-    if (!cookies.get('token')) return
-    console.log('me called with token')
+    const token_cookie = cookies.get('token')
+    console.log('>> me called', token_cookie)
+    if (!token_cookie) return
+    console.log('>> me called with token', token_cookie)
 
     try {
       const xano_me_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/me`
