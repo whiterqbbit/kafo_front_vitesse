@@ -214,7 +214,7 @@ export const use_user_store = defineStore('user', () => {
   }
 
   async function me(): Promise<void> {
-    console.log('me called')
+    console.log('me called', token.value)
     if (!token.value) return
     console.log('me called with token')
 
