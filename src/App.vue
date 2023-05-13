@@ -1,7 +1,6 @@
 <script setup lang="ts">
 use_place_store().fetch_db()
 use_place_store().update_open_status()
-console.log('me() called from App.vue (onBeforeMount)')
 use_user_store().me()
 use_event_store().populate_places()
 use_club_store().fetch_db()
