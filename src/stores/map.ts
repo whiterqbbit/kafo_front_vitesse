@@ -142,7 +142,6 @@ export const use_map_store = defineStore('use_map_store', () => {
     // for SSG
     if (typeof window === 'undefined') return
 
-    useGeolocation().resume()
     const { coords } = useGeolocation()
     if (!coords.value || !coords.value.latitude || !coords.value.longitude) return
 
