@@ -2,7 +2,7 @@
   <LandingHeader />
   <section id="hero" class="h-screen flex place-items-center overflow-hidden text-center md:text-left">
     <div class="max-w-7xl container">
-      <div id="title" class="landing-title mb-20 flex flex-col gap-3 pl-9">
+      <div id="title" class="landing-title mb-20 flex flex-col gap-3 pl-9 -mt-12">
         <div class="z-30 flex text-7xl">
           <div class="text-cafe-700">
             Coworke dans des
@@ -23,11 +23,11 @@
             <img id="hero-pic-mobile" class="relative mx-auto max-w-500px w-90%" :src="hero_pic" alt="Cinq télétravailleurs autour d'une table qui coworkent">
           </div>
           <div class="flex flex-col">
-            <div id="sub-title" class="z-10 text-center text-xl">
+            <div id="sub-title" class="z-10 text-center text-2xl">
               Kafo facilite les rencontres entre télétravailleurs.
               <br>Gratuitement.
             </div>
-            <LandingCTA class="mx-auto mt-6 place-self-center text-xl md:mt-12 lg:text-4xl md:text-3xl sm:text-2xl" />
+            <LandingCTA class="mx-auto mt-6 place-self-center px-8 py-4 text-xl md:mt-12 lg:text-4xl md:text-3xl sm:text-2xl" />
           </div>
         </div>
         <div class="relative overflow-visible">
