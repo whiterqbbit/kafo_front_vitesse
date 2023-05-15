@@ -1,5 +1,9 @@
 import { defineStore } from 'pinia'
+import { useCookies } from '@vueuse/integrations/useCookies'
 import type { Attendance, Event, Place } from './xano'
+
+const cookies = useCookies(['user'])
+const user_auth_cookie = cookies.get('token')
 
 export const use_event_store = defineStore('event', () => {
   const selected_place_id = ref<number | null>(null)
@@ -73,7 +77,7 @@ export const use_event_store = defineStore('event', () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${user_store.token}`,
+          'Authorization': `Bearer ${user_auth_cookie}`,
         },
         body: JSON.stringify({ subscribe }),
       })

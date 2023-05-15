@@ -134,8 +134,8 @@ export interface Club {
 
 export interface User {
 	is_auth?: boolean
+	clubs_uuid?: Array<string>
 	bio?: string
-	clubs?: Array<Club>
 	domaine?: string
 	email?: string
 	family_name?: string
@@ -154,7 +154,7 @@ export interface User {
 	pic_xsmall?: string
 	role?: string
 	type?: string
-	token?: string
+	clubs?: Club[]
 }
 
 interface Event {

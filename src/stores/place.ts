@@ -58,7 +58,7 @@ export const use_place_store = defineStore('place', () => {
 
     if (db.value) {
       db.value.forEach((cafe) => {
-        const { tags, is_open, attendance, our_fav, distance } = cafe
+        const { tags, is_open, attendance, our_fav, attendees, distance } = cafe
         const not_empty_matched = !filters.value.not_empty || attendance !== 0
         const price_matched = !selected_price_types.length || selected_price_types.some(r => tags.includes(r))
         const noise_level_matched = !selected_noise_levels.length || selected_noise_levels.some(r => tags.includes(r))
@@ -67,7 +67,29 @@ export const use_place_store = defineStore('place', () => {
         const our_picks_matched = !filters.value.our_picks || our_fav
         const distance_matched = filters.value.max_distance === -1 || (distance && distance < filters.value.max_distance)
 
-        if (price_matched && noise_level_matched && misc_matched && is_open_matched && not_empty_matched && distance_matched && our_picks_matched) {
+        const clubs_selected_matched: boolean = (() => {
+          const no_selected_clubs = filters.value.clubs_selected_uuids.length === 0
+          if (no_selected_clubs) return true
+          if (!attendees) return false
+
+          return attendees.some((attendee) => {
+            if (!attendee.clubs_uuid) return false
+
+            return attendee.clubs_uuid.some(club_uuid =>
+              filters.value.clubs_selected_uuids.includes(club_uuid),
+            )
+          })
+        })()
+
+        if (price_matched
+          && noise_level_matched
+          && misc_matched
+          && is_open_matched
+          && not_empty_matched
+          && distance_matched
+          && our_picks_matched
+          && clubs_selected_matched
+        ) {
           filtered_places.push(cafe)
         }
       })
