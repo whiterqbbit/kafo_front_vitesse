@@ -2,7 +2,7 @@
   <LandingHeader />
   <section id="hero" class="h-screen flex place-items-center overflow-hidden text-center md:text-left">
     <div class="max-w-7xl container">
-      <div id="title" class="landing-title mb-20 flex flex-col gap-3 pl-9 -mt-12">
+      <div id="title" class="landing-title mb-20 flex flex-col gap-3 -mr-9 -mt-12">
         <div class="z-30 flex text-7xl">
           <div class="text-cafe-700">
             Coworke dans des
@@ -227,7 +227,7 @@ function contact(form: { email: string; message: string; category: { name: strin
 
 <style scoped>
 .landing-title {
-  @apply text-xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold;
+  @apply text-xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold font-museo;
 }
 
 .landing-subtitle {

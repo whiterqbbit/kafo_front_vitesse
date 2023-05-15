@@ -75,6 +75,7 @@ export default defineConfig({
     presetWebFonts({
       fonts: {
         sans: 'Poppins',
+        museo: 'MuseoSansRounded',
       },
     }),
   ],
