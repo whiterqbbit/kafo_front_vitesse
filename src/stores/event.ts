@@ -10,7 +10,6 @@ export const use_event_store = defineStore('event', () => {
   const is_populated = ref(false)
 
   async function get_place_events() {
-    selected_place_events.value = null
     selected_place_events_loading.value = true
     selected_place_events_error.value = null
 
@@ -80,17 +79,13 @@ export const use_event_store = defineStore('event', () => {
         body: JSON.stringify({ subscribe }),
       })
       if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}. Failed to submit event.`)
-      const data = await response.json()
 
-      selected_place_events.value = data
+      get_place_events()
+      populate_places()
     } catch (error) {
       const typed_error = error as Error
-
       selected_place_events_error.value = typed_error.message
-    } finally {
-      selected_place_events_loading.value = false
     }
-    return selected_place_events.value
   }
 
   return {

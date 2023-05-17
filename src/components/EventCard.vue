@@ -30,7 +30,10 @@
           </div>
         </div>
         <button class="w-full p-2 font-bold" :class="event?.in_current_slot ? 'btn-grass' : 'btn-cafe  hover:bg-cafe-500'" @click="submit_to_event(event.id)">
-          {{ event_store?.is_user_in_event(event.id) ? 'Quitter' : 'Rejoindre' }}
+          <div v-if="!is_loading.get(event.id)">
+            {{ event_store?.is_user_in_event(event.id) ? 'Quitter' : 'Rejoindre' }}
+          </div>
+          <ThreeDotsSpinner v-else class="mx-auto" />
         </button>
       </div>
     </div>
@@ -72,6 +75,7 @@ const event_store = use_event_store()
 const user_store = use_user_store()
 
 const day = ref(props.day ?? new Date())
+const is_loading = ref(new Map())
 
 // Creates an array of the event of the day and add useful variables to each event
 const events_of_the_day = computed(() => {
@@ -112,8 +116,13 @@ async function submit_to_event(event_id: number) {
     display.login_modal = true
     return false
   }
-  await event_store.submit_events(event_id)
-  await event_store.get_place_events() // refresh the events
-  await event_store.populate_places()
+  is_loading.value.set(event_id, true)
+  try {
+    await event_store.submit_events(event_id)
+  } catch (error) {
+    console.error(error)
+  } finally {
+    is_loading.value.set(event_id, false)
+  }
 }
 </script>
