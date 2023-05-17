@@ -31,7 +31,7 @@
             </div>
           </div>
         </div>
-        <button class="w-full bg-cafe-400 p-2 font-bold hover:bg-cafe-500 btn-cafe" :class="event?.in_current_slot ? 'btn-grass-full' : ''" @click="submit_to_event(event.id)">
+        <button class="w-full p-2 font-bold" :class="event?.in_current_slot ? 'btn-grass' : 'btn-cafe  hover:bg-cafe-500'" @click="submit_to_event(event.id)">
           {{ event_store?.is_user_in_event(event.id) ? 'Quitter' : 'Rejoindre' }}
         </button>
       </div>
