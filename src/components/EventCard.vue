@@ -49,7 +49,7 @@
           {{ get_relative_date_from_date(day) }}
         </div>
         <div class="font-bold uppercase text-cafe-100">
-          indisponible
+          Indisponible
         </div>
       </div>
     </div>
@@ -73,7 +73,7 @@ const user_store = use_user_store()
 
 const day = ref(props.day ?? new Date())
 
-// the next : create an array of the event of the day and add usefull variable to each event
+// Creates an array of the event of the day and add useful variables to each event
 const events_of_the_day = computed(() => {
   if (!event_store.selected_place_events) {
     return null
@@ -86,22 +86,21 @@ const events_of_the_day = computed(() => {
       && event_date.getMonth() === day.value.getMonth()
       && event_date.getFullYear() === day.value.getFullYear()
     ) {
-      // add a boolean to know if the event is in the current slot
       event.in_current_slot = is_slot_current(event.start, event.end)
 
-      // add a relative string
-      let relative_string = get_relative_date_from_date(day.value)
-      if ((relative_string === 'Aujourd\'hui') && event.in_current_slot) {
-        relative_string = 'En ce moment'
+      let date_relative_to_today = get_relative_date_from_date(day.value)
+      if ((date_relative_to_today === 'Aujourd\'hui') && event.in_current_slot) {
+        date_relative_to_today = 'En ce moment'
       }
-      event.relative_to_now = relative_string
+      event.relative_to_now = date_relative_to_today
       return true
     }
     return false
   })
   if (events?.length) return events
-  return []
+  return null
 })
+
 function convert_to_hour_format(date_to_compute: Date) {
   const date = new Date(date_to_compute)
   const formattedTime = date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' }).replace(':', 'h')

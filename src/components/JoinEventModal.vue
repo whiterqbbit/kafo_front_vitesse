@@ -2,7 +2,7 @@
   <div id="main_container" class="w-full flex flex-col place-content-center place-items-center rounded-3xl bg-cafe-200 p-6 text-cafe-600 shadow-md md:w-1/2">
     <EventCard :day="today" />
     <div class="my-4 font-bold underline btn" @click="display_more_events = !display_more_events">
-      {{ !display_more_events ? "Plus d'évenements" : "Moins d'évenements" }}
+      {{ !display_more_events ? "Plus d'évènements" : "Moins d'évènements" }}
       <img>
     </div>
     <div v-if="display_more_events" class="w-full flex flex-col gap-3">
