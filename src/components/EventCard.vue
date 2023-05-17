@@ -1,5 +1,5 @@
 <template>
-  <div v-if="events_of_the_day.length" class="w-full">
+  <div v-if="events_of_the_day" class="w-full flex flex-col gap-1">
     <div
       v-for="event in events_of_the_day"
       :key="event.id || 'Fallback'"
@@ -11,8 +11,11 @@
         </div>
       </div>
       <div class="w-3/4 rounded-xl bg-cafe-100 p-3">
-        <div class="mb-5 text-xl font-bold uppercase">
+        <div class="text-xl font-bold uppercase">
           {{ event.relative_to_now }}
+        </div>
+        <div>
+          {{ computed_event_time(event.start) }} - {{ computed_event_time(event.end) }}
         </div>
         <div v-if="event.user_id?.length && !event.in_current_slot" class="my-2 mt-5 max-h-80 flex flex-col gap-4 overflow-auto">
           <AvatarStack :attendees="event.user_id" />
@@ -48,7 +51,7 @@
           {{ get_relative_date_from_date(day) }}
         </div>
         <div class="font-bold uppercase text-cafe-100">
-          Fermé
+          indisponible
         </div>
       </div>
     </div>
@@ -70,13 +73,12 @@ const props = defineProps({
 const event_store = use_event_store()
 const user_store = use_user_store()
 
-const day = ref(props.day)
-if (!day.value) day.value = new Date()
+const day = ref(props.day ?? new Date())
 
 // the next : create an array of the event of the day and add usefull variable to each event
 const events_of_the_day = computed(() => {
-  if (!Array.isArray(event_store.selected_place_events)) {
-    return []
+  if (!event_store.selected_place_events) {
+    return null
   }
   const events = event_store.selected_place_events?.filter((event) => {
     if (!event.jour) return false
@@ -102,10 +104,16 @@ const events_of_the_day = computed(() => {
   if (events?.length) return events
   return []
 })
+function computed_event_time(date_to_compute: string | number) {
+  const date = new Date(date_to_compute)
+  const formattedTime = date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' }).replace(':', 'h')
 
+  return formattedTime
+}
 async function submit_to_event(event_id: number) {
   if (!user_store.id) {
     display.login_modal = true
+    return false
   }
   await event_store.submit_events(event_id)
   await event_store.get_place_events() // refresh the events
