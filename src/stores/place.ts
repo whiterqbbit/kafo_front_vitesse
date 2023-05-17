@@ -140,7 +140,13 @@ export const use_place_store = defineStore('place', () => {
   }
 
   function sort_places() {
-    db.value?.sort((a, b) => (b.attendance || 0) - (a?.attendance || 0))
+    db.value?.sort((a, b) => {
+      const attendanceDiff = (b.attendance || 0) - (a.attendance || 0)
+      if (attendanceDiff === 0) {
+        return (b.our_fav ? 1 : 0) - (a.our_fav ? 1 : 0)
+      }
+      return attendanceDiff
+    })
   }
 
   function establishment_type(tags: any) {
