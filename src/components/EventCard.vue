@@ -5,17 +5,15 @@
       :key="event.id || 'Fallback'"
       class="w-full flex justify-between rounded-xl bg-cafe-400 p-1"
     >
-      <div class="w-1/4 flex flex-col p-3 font-bold text-cafe-50">
-        <div class="text-xl">
-          {{ get_day_from_date(event?.jour) }} {{ get_month_name_from_date(event?.jour) }}
-        </div>
+      <div class="w-1/4 flex flex-col p-3 text-xl font-bold text-cafe-50">
+        {{ get_day_from_date(event?.jour) }} {{ get_month_name_from_date(event?.jour) }}
       </div>
       <div class="w-3/4 rounded-xl bg-cafe-100 p-3">
         <div class="text-xl font-bold uppercase">
           {{ event.relative_to_now }}
         </div>
         <div>
-          {{ computed_event_time(event.start) }} - {{ computed_event_time(event.end) }}
+          {{ convert_to_hour_format(event.start) }} - {{ convert_to_hour_format(event.end) }}
         </div>
         <div v-if="event.user_id?.length && !event.in_current_slot" class="my-2 mt-5 max-h-80 flex flex-col gap-4 overflow-auto">
           <AvatarStack :attendees="event.user_id" />
@@ -104,7 +102,7 @@ const events_of_the_day = computed(() => {
   if (events?.length) return events
   return []
 })
-function computed_event_time(date_to_compute: Date) {
+function convert_to_hour_format(date_to_compute: Date) {
   const date = new Date(date_to_compute)
   const formattedTime = date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' }).replace(':', 'h')
 
