@@ -159,7 +159,7 @@
               </div>
             </div>
           </div>
-          <JoinEventModal :id="props.id" />
+          <JoinEventModal :place_id="props.id" />
         </div>
       </div>
     </div>

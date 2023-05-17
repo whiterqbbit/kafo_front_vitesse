@@ -168,6 +168,8 @@ interface Event {
 	horaires_string: string
 	start: Date
 	end: Date
+	in_current_slot?: boolean
+	relative_to_now?: string
 }
 
 interface User {
