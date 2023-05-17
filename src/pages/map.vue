@@ -30,6 +30,10 @@
 const router = useRouter()
 const place_db = computed(() => use_place_store().db_filtered)
 
+onMounted(() => {
+  use_map_store().update_markers(place_db, router)
+})
+
 watch(place_db, () => {
   use_map_store().update_markers(place_db, router)
 }, { immediate: true })
