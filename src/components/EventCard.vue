@@ -104,7 +104,7 @@ const events_of_the_day = computed(() => {
   if (events?.length) return events
   return []
 })
-function computed_event_time(date_to_compute: string | number) {
+function computed_event_time(date_to_compute: Date) {
   const date = new Date(date_to_compute)
   const formattedTime = date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' }).replace(':', 'h')
 
