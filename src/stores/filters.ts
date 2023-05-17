@@ -16,7 +16,7 @@ export const filters = useStorage('filters', {
   filter_status: '',
   not_empty: false,
   clubs_selected_uuids: [] as string[],
-})
+}, localStorage, { mergeDefaults: true })
 
 export function reset_filters() {
   filters.value.max_distance = -1
