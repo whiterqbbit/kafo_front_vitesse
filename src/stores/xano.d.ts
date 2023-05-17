@@ -154,7 +154,6 @@ export interface User {
 	pic_xsmall?: string
 	role?: string
 	type?: string
-	token?: string
 	clubs?: Club[]
 }
 

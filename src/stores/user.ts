@@ -27,8 +27,7 @@ export const use_user_store = defineStore('user', () => {
   const pic_xsmall = ref('')
   const role = ref('')
   const type = ref('')
-  const token = ref('')
-  token.value = cookies.get('token')
+  const is_loading = ref(false)
 
   async function suggestion(form: { email: string; message: string; category: { name: string } }): Promise<void> {
     try {
@@ -57,6 +56,7 @@ export const use_user_store = defineStore('user', () => {
   }
 
   async function login(email: string, password: string): Promise<void> {
+    is_loading.value = true
     try {
       const xano_login_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/login`
       const response = await fetch(xano_login_url, {
@@ -77,7 +77,7 @@ export const use_user_store = defineStore('user', () => {
       }
 
       const data = await response.json()
-      token.value = data.authToken
+      cookies.set('token', data.authToken)
       me()
     } catch (error) {
       console.error('Error during login:', error)
@@ -97,6 +97,7 @@ export const use_user_store = defineStore('user', () => {
 
       throw typed_error
     }
+    is_loading.value = false
   }
 
   async function signup(infos: { name: string; first_name: string; job_title: string; bio: string; email: string; password: string }) {
@@ -126,7 +127,7 @@ export const use_user_store = defineStore('user', () => {
       }
 
       const data = await response.json()
-      token.value = data.authToken
+      cookies.set('token', data.authToken)
       me()
     } catch (error) {
       console.error('Error during signup:', error)
@@ -173,6 +174,7 @@ export const use_user_store = defineStore('user', () => {
   }
 
   async function linkedin_init() {
+    is_loading.value = true
     try {
       const xano_linkedin_init_url = `${import.meta.env.VITE_XANO_API_URL}/api:UpsZVD6L/oauth/linkedin/init`
       const response = await fetch(`${xano_linkedin_init_url}?redirect_uri=${encodeURIComponent(redirect_uri)}`, {
@@ -187,9 +189,11 @@ export const use_user_store = defineStore('user', () => {
     } catch (error) {
       console.error('Error during linkedin init:', error)
     }
+    is_loading.value = false
   }
 
   async function linkedin_continue(code: string | null): Promise<void> {
+    is_loading.value = true
     try {
       const xano_linkedin_continue_url = `${import.meta.env.VITE_XANO_API_URL}/api:UpsZVD6L/oauth/linkedin/continue`
       const response = await fetch(`${xano_linkedin_continue_url}?code=${code}&redirect_uri=${redirect_uri}`, {
@@ -200,37 +204,42 @@ export const use_user_store = defineStore('user', () => {
       })
       if (!response.ok) throw new Error(`HTTP error ${response.status}`)
       const data = await response.json()
-      token.value = data.authToken
+      cookies.set('token', data.authToken)
       me()
     } catch (error) {
       console.error('Error during linkedin continue:', error)
     }
+    is_loading.value = false
   }
 
   function logout(): void {
     updateUser(null)
-    token.value = ''
+    cookies.set('token', '')
   }
 
   async function me(): Promise<void> {
-    if (!token.value) return
+    const user_auth_cookie = cookies.get('token')
+    if (!user_auth_cookie) {
+      console.error('No user auth cookie')
+      return
+    }
 
+    is_loading.value = true
     try {
       const xano_me_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/auth/me`
       const response = await fetch(xano_me_url, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token.value}`,
+          'Authorization': `Bearer ${user_auth_cookie}`,
         },
       })
       const data: User = await response.json()
-      cookies.set('token', token.value)
-
       updateUser(data)
     } catch (error) {
       console.error(error)
     }
+    is_loading.value = false
   }
 
   function updateUser(data: User | null) {
@@ -259,6 +268,7 @@ export const use_user_store = defineStore('user', () => {
 
   return {
     is_auth,
+    is_loading,
     bio,
     clubs,
     user_coords,
@@ -281,7 +291,6 @@ export const use_user_store = defineStore('user', () => {
     role,
     suggestion,
     type,
-    token,
     linkedin_init,
     linkedin_continue,
     login,
@@ -291,6 +300,3 @@ export const use_user_store = defineStore('user', () => {
   }
 },
 )
-
-// if (import.meta.hot)
-//   import.meta.hot.accept(acceptHMRUpdate(use_user_store, import.meta.hot))

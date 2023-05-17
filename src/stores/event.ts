@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useCookies } from '@vueuse/integrations/useCookies'
 import type { Attendance, Event, Place } from './xano'
 
 export const use_event_store = defineStore('event', () => {
@@ -63,17 +64,18 @@ export const use_event_store = defineStore('event', () => {
   }
 
   async function submit_events(event_id: number) {
+    const cookies = useCookies(['user'])
+    const user_auth_cookie = cookies.get('token')
     const subscribe = !is_user_in_event(event_id)
     const xano_sub_event_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/events/sub`
     const url_with_query = `${xano_sub_event_url}/${event_id}`
-    const user_store = use_user_store()
 
     try {
       const response = await fetch(url_with_query, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${user_store.token}`,
+          'Authorization': `Bearer ${user_auth_cookie}`,
         },
         body: JSON.stringify({ subscribe }),
       })
