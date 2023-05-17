@@ -68,7 +68,7 @@ export const use_place_store = defineStore('place', () => {
         const distance_matched = filters.value.max_distance === -1 || (distance && distance < filters.value.max_distance)
 
         const clubs_selected_matched: boolean = (() => {
-          const no_selected_clubs = filters.value.clubs_selected_uuids.length === 0
+          const no_selected_clubs = filters.value.clubs_selected_uuids?.length === 0
           if (no_selected_clubs) return true
           if (!attendees) return false
 

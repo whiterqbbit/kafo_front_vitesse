@@ -19,7 +19,7 @@ export const use_event_store = defineStore('event', () => {
       const url_with_query = `${xano_get_events_url}?coffee_id_req=${selected_place_id.value?.toString()}`
       const response = await fetch(url_with_query)
       if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}. Failed to fetch place events.`)
-      const data = await response.json()
+      const data = await response.json() as Event[] | null
 
       selected_place_events.value = data
     } catch (error) {
