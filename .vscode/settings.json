@@ -12,6 +12,5 @@
     "*.css": "postcss"
   },
   "editor.formatOnSave": true,
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "workbench.colorTheme": "NetBeans Light Theme"
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
