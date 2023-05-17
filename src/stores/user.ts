@@ -219,7 +219,10 @@ export const use_user_store = defineStore('user', () => {
 
   async function me(): Promise<void> {
     const user_auth_cookie = cookies.get('token')
-    if (!user_auth_cookie) return
+    if (!user_auth_cookie) {
+      console.error('No user auth cookie')
+      return
+    }
 
     is_loading.value = true
     try {
