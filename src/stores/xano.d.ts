@@ -154,7 +154,6 @@ export interface User {
 	pic_xsmall?: string
 	role?: string
 	type?: string
-	token?: string
 	clubs?: Club[]
 }
 
@@ -169,6 +168,8 @@ interface Event {
 	horaires_string: string
 	start: Date
 	end: Date
+	in_current_slot?: boolean
+	relative_to_now?: string
 }
 
 interface User {

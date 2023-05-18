@@ -13,10 +13,9 @@ export const filters = useStorage('filters', {
   wifi: true,
   power: true,
   our_picks: false,
-  filter_status: '',
   not_empty: false,
   clubs_selected_uuids: [] as string[],
-})
+}, typeof window !== 'undefined' ? localStorage : undefined, { mergeDefaults: true })
 
 export function reset_filters() {
   filters.value.max_distance = -1
@@ -30,7 +29,6 @@ export function reset_filters() {
   filters.value.wifi = false
   filters.value.power = false
   // filters.value.our_picks = false
-  filters.value.filter_status = ''
   filters.value.not_empty = false
   filters.value.clubs_selected_uuids = []
 }

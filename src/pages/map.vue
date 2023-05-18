@@ -1,5 +1,5 @@
 <template>
-  <!-- <pre v-if="display.cookie_modal" class="h-fit w-full">{{ useCookies.getAll() }}</pre> -->
+  <!-- <pre v-if="display.cookie_modal" class="h-fit w-full">Cookies bien frèèèèè : {{ cookies.getAll() }}</pre> -->
   <div id="main_container" class="relative h-screen--35px flex flex-col bg-cafe-25 md:h-screen--50px md:flex-row-reverse">
     <WelcomeModal v-if="stored_display.welcome_modal" />
     <div md="w-full" class="h-full flex items-center justify-center">
@@ -24,8 +24,15 @@
 </template>
 
 <script setup lang="ts">
+// import { useCookies } from '@vueuse/integrations/useCookies'
+
+// const cookies = useCookies()
 const router = useRouter()
 const place_db = computed(() => use_place_store().db_filtered)
+
+onMounted(() => {
+  use_map_store().update_markers(place_db, router)
+})
 
 watch(place_db, () => {
   use_map_store().update_markers(place_db, router)

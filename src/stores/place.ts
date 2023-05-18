@@ -68,7 +68,7 @@ export const use_place_store = defineStore('place', () => {
         const distance_matched = filters.value.max_distance === -1 || (distance && distance < filters.value.max_distance)
 
         const clubs_selected_matched: boolean = (() => {
-          const no_selected_clubs = filters.value.clubs_selected_uuids.length === 0
+          const no_selected_clubs = filters.value.clubs_selected_uuids?.length === 0
           if (no_selected_clubs) return true
           if (!attendees) return false
 
@@ -140,7 +140,13 @@ export const use_place_store = defineStore('place', () => {
   }
 
   function sort_places() {
-    db.value?.sort((a, b) => (b.attendance || 0) - (a?.attendance || 0))
+    db.value?.sort((a, b) => {
+      const attendanceDiff = (b.attendance || 0) - (a.attendance || 0)
+      if (attendanceDiff === 0) {
+        return (b.our_fav ? 1 : 0) - (a.our_fav ? 1 : 0)
+      }
+      return attendanceDiff
+    })
   }
 
   function establishment_type(tags: any) {

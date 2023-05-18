@@ -183,7 +183,7 @@
       </section>
 
       <!-- FILTRES CLUBS -->
-      <section v-if="clubs">
+      <section v-if="clubs.length">
         <div id="club_filters" class="filter-container flex flex-col">
           <span class="filter-modal-title">Fréquentation</span>
           <div class="filter-container-inner flex flex-col justify-between gap-2">

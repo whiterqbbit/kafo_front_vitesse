@@ -3,22 +3,8 @@
     <RouterLink class="icon-btn" to="/">
       <img :src="logo" alt="logo" class="h-12 pl-4">
     </RouterLink>
-    <!-- remplacer hidden par flex pour faire apparaitre le menu -->
-    <nav class="hidden gap-5 font-black text-white">
-      <button @click="display.cookie_modal = !display.cookie_modal">
-        Cookies
-      </button>
-      <RouterLink to="/FAQ">
-        FAQ
-      </RouterLink>
-      <RouterLink to="/contact">
-        Contact
-      </RouterLink>
-      <RouterLink to="/a-propos">
-        A Propos
-      </RouterLink>
-    </nav>
-    <div v-if="!user.is_auth" class="m-2 font-bold btn-grass" @click="display.login_modal = !display.login_modal">
+    <SvgSpinnersRingResize v-if="user.is_loading" class="mr-4 h-10 w-10" />
+    <div v-else-if="!user.is_auth" class="m-2 font-bold btn-grass" @click="display.login_modal = !display.login_modal">
       Se connecter
     </div>
     <img v-else :src="user.pic_xsmall ? user.pic_xsmall : default_user_pic" alt="avatar" class="mr-4 h-10 w-10 border border-cafe-100 rounded-full" @click="display.burger_menu = !display.burger_menu">
