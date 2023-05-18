@@ -1,16 +1,21 @@
 <template>
-  <div v-if="events_of_the_day" class="w-full flex flex-col gap-1">
-    <div
-      v-for="event in events_of_the_day"
-      :key="event.id || 'Fallback'"
-      class="w-full flex justify-between rounded-xl bg-cafe-400 p-1"
-    >
-      <div class="w-1/4 flex flex-col p-3 text-xl font-bold text-cafe-50">
-        {{ get_day_from_date(event?.jour) }} {{ get_month_name_from_date(event?.jour) }}
-      </div>
-      <div class="w-3/4 rounded-xl bg-cafe-100 p-3">
-        <div class="text-xl font-bold uppercase">
-          {{ event.relative_to_now }}
+  <div class="w-full flex rounded-xl bg-cafe-400 p-1">
+    <div class="w-1/4 flex flex-col p-3 text-cafe-50">
+      <span class="text-xl font-bold">
+        {{ get_day_from_date(day) }} {{ get_month_name_from_date(day) }}
+      </span>
+      <span class="text-sm font-bold">
+        {{ get_relative_date_from_date(day) }}
+      </span>
+    </div>
+    <div v-if="events_of_the_day" class="w-3/4 flex flex-col gap-1">
+      <div
+        v-for="event in events_of_the_day"
+        :key="event.id || 'Fallback'"
+        class="w-full flex flex-col gap-1 rounded-xl bg-cafe-100 p-3"
+      >
+        <div v-if="event.in_current_slot" class="text-xl font-bold uppercase">
+          En ce moment
         </div>
         <div>
           {{ convert_to_hour_format(event.start) }} - {{ convert_to_hour_format(event.end) }}
@@ -37,23 +42,9 @@
         </button>
       </div>
     </div>
-  </div>
-  <div v-else class="w-full">
-    <div
-      class="w-full flex justify-between rounded-xl bg-cafe-400 p-1"
-    >
-      <div class="text-cafe- w-1/4 flex flex-col p-3 font-bold text-cafe-50">
-        <div class="text-xl">
-          {{ get_day_from_date(day) }} {{ get_month_name_from_date(day) }}
-        </div>
-      </div>
-      <div class="w-3/4 rounded-xl bg-cafe-600 p-3">
-        <div class="mb-5 text-xl font-bold uppercase text-cafe-25">
-          {{ get_relative_date_from_date(day) }}
-        </div>
-        <div class="font-bold uppercase text-cafe-100">
-          Indisponible
-        </div>
+    <div v-else class="flex-co w-3/4 flex place-items-center justify-center rounded-xl bg-cafe-600 p-3">
+      <div class="font-bold uppercase text-cafe-100">
+        Indisponible
       </div>
     </div>
   </div>
