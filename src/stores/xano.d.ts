@@ -185,6 +185,19 @@ interface User {
 	open_to_lunch: boolean
 	open_to_pause: boolean
 }
+interface UserInfos {
+	id?: number
+	user_id?: number
+	first_name?: string
+	job_title?: string
+	bio?: string
+	incognito?: boolean
+	pic_xsmall?: string
+	pic_small?: string
+	open_to_afterwork?: boolean
+	open_to_lunch?: boolean
+	open_to_pause?: boolean
+}
 
 interface Attendance {
 	attendance: number

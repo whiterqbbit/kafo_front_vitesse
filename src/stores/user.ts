@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import { useCookies } from '@vueuse/integrations/useCookies'
-import type { Club, User } from './xano.d'
+import type { Club, User, UserInfos } from './xano.d'
 
 const cookies = useCookies(['user'])
 
 export const use_user_store = defineStore('user', () => {
   const is_auth = ref(false)
   const user_coords = ref<{ lat: number; lng: number } | null>(null)
-  const bio = ref<string | null>(null)
+  const bio = ref('')
   const clubs = ref<Array<Club>>([])
   const domaine = ref('')
   const email = ref('')
@@ -29,6 +29,60 @@ export const use_user_store = defineStore('user', () => {
   const type = ref('')
   const is_loading = ref(false)
 
+  const computed_open_to_afterwork = computed({
+    get: () => {
+      return !!open_to_afterwork.value
+    },
+    set: (value: boolean) => {
+      edit_user({ open_to_afterwork: value })
+    },
+  })
+
+  const computed_open_to_lunch = computed({
+    get: () => {
+      return !!open_to_lunch.value
+    },
+    set: (value: boolean) => {
+      edit_user({ open_to_lunch: value })
+    },
+  })
+
+  const computed_open_to_pause = computed({
+    get: () => {
+      return !!open_to_pause.value
+    },
+    set: (value: boolean) => {
+      edit_user({ open_to_pause: value })
+    },
+  })
+
+  async function edit_user(user_infos: UserInfos) {
+    try {
+      const xano_edit_user_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/self/edit_details`
+      const response = await fetch(xano_edit_user_url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${cookies.get('token')}`,
+        },
+        body: JSON.stringify(
+          {
+            ...user_infos,
+          },
+        ),
+      })
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.message)
+      }
+      const data = await response.json()
+      console.log('data', data)
+      updateUser(data)
+    } catch (error) {
+      console.error('Error during edit_user:', error)
+      throw error
+    }
+  }
   async function suggestion(form: { email: string; message: string; category: { name: string } }): Promise<void> {
     try {
       const xano_suggestion_url = `${import.meta.env.VITE_XANO_API_URL}/api:5e9BgwVw/suggestion`
@@ -155,6 +209,63 @@ export const use_user_store = defineStore('user', () => {
     }
   }
 
+  async function remove_club(club: Club) {
+    clubs.value = clubs.value.filter(club_to_parse => club_to_parse.uuid !== club.uuid)
+    try {
+      const xano_sub_club_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/self/edit_details`
+      const response = await fetch(xano_sub_club_url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${cookies.get('token')}`,
+        },
+        body: JSON.stringify(
+          {
+            uuid: club.uuid,
+            subscribe: false,
+          },
+        ),
+      })
+      const data = await response.json()
+      if (!response.ok) {
+        throw new Error(data.message)
+      }
+
+      console.log('data', data)
+    } catch (error) {
+      console.error('Error during edit_user:', error)
+      throw error
+    }
+  }
+  async function add_club(club: Club) {
+    clubs.value.push(club)
+    try {
+      const xano_sub_club_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/self/edit_details`
+      const response = await fetch(xano_sub_club_url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${cookies.get('token')}`,
+        },
+        body: JSON.stringify(
+          {
+            uuid: club.uuid,
+            subscribe: true,
+          },
+        ),
+      })
+      const data = await response.json()
+      if (!response.ok) {
+        throw new Error(data.message)
+      }
+
+      console.log('data', data)
+    } catch (error) {
+      console.error('Error during edit_user:', error)
+      throw error
+    }
+  }
+
   const env = import.meta.env.VITE_ENV
 
   let redirect_uri: string
@@ -213,7 +324,7 @@ export const use_user_store = defineStore('user', () => {
   }
 
   function logout(): void {
-    updateUser(null)
+    resetUser()
     cookies.set('token', '')
   }
 
@@ -242,31 +353,61 @@ export const use_user_store = defineStore('user', () => {
     is_loading.value = false
   }
 
+  function resetUser() {
+    is_auth.value = false
+    bio.value = ''
+    clubs.value = []
+    domaine.value = ''
+    email.value = ''
+    family_name.value = ''
+    first_name.value = ''
+    highlighted_pins.value = []
+    highlighted_users.value = []
+    id.value = null
+    incognito.value = false
+    is_inboarded.value = false
+    job_title.value = ''
+    open_to_afterwork.value = false
+    open_to_lunch.value = false
+    open_to_pause.value = false
+    pic_medium.value = ''
+    pic_small.value = ''
+    pic_xsmall.value = ''
+    role.value = ''
+    type.value = ''
+  }
+
   function updateUser(data: User | null) {
+    if (data === null) {
+      resetUser()
+      return
+    }
     is_auth.value = data !== null
-    bio.value = data?.bio ?? ''
-    clubs.value = data?.clubs ?? []
-    domaine.value = data?.domaine ?? ''
-    email.value = data?.email ?? ''
-    family_name.value = data?.family_name ?? ''
-    first_name.value = data?.first_name ?? ''
-    highlighted_pins.value = data?.highlighted_pins ?? []
-    highlighted_users.value = data?.highlighted_users ?? []
-    id.value = data?.id ?? null
-    incognito.value = data?.incognito ?? false
-    is_inboarded.value = data?.is_inboarded ?? false
-    job_title.value = data?.job_title ?? ''
-    open_to_afterwork.value = data?.open_to_afterwork ?? false
-    open_to_lunch.value = data?.open_to_lunch ?? false
-    open_to_pause.value = data?.open_to_pause ?? false
-    pic_medium.value = data?.pic_medium ?? ''
-    pic_small.value = data?.pic_small ?? ''
-    pic_xsmall.value = data?.pic_xsmall ?? ''
-    role.value = data?.role ?? ''
-    type.value = data?.type ?? ''
+    bio.value = data?.bio ?? bio.value
+    clubs.value = data?.clubs ?? clubs.value
+    domaine.value = data?.domaine ?? domaine.value
+    email.value = data?.email ?? email.value
+    family_name.value = data?.family_name ?? family_name.value
+    first_name.value = data?.first_name ?? first_name.value
+    highlighted_pins.value = data?.highlighted_pins ?? highlighted_pins.value
+    highlighted_users.value = data?.highlighted_users ?? highlighted_users.value
+    id.value = data?.id ?? id.value
+    incognito.value = data?.incognito ?? incognito.value
+    is_inboarded.value = data?.is_inboarded ?? is_inboarded.value
+    job_title.value = data?.job_title ?? job_title.value
+    open_to_afterwork.value = data?.open_to_afterwork ?? open_to_afterwork.value
+    open_to_lunch.value = data?.open_to_lunch ?? open_to_lunch.value
+    open_to_pause.value = data?.open_to_pause ?? open_to_pause.value
+    pic_medium.value = data?.pic_medium ?? pic_medium.value
+    pic_small.value = data?.pic_small ?? pic_small.value
+    pic_xsmall.value = data?.pic_xsmall ?? pic_xsmall.value
+    role.value = data?.role ?? role.value
+    type.value = data?.type ?? type.value
   }
 
   return {
+    add_club,
+    remove_club,
     is_auth,
     is_loading,
     bio,
@@ -274,6 +415,7 @@ export const use_user_store = defineStore('user', () => {
     user_coords,
     domaine,
     email,
+    edit_user,
     family_name,
     first_name,
     highlighted_pins,
@@ -285,6 +427,9 @@ export const use_user_store = defineStore('user', () => {
     open_to_afterwork,
     open_to_lunch,
     open_to_pause,
+    computed_open_to_afterwork,
+    computed_open_to_lunch,
+    computed_open_to_pause,
     pic_medium,
     pic_small,
     pic_xsmall,
