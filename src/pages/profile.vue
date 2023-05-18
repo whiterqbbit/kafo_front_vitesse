@@ -29,10 +29,10 @@
               name="club.uuid"
               @click="remove_tag(club)"
             >
-              {{ club.nom }}
               <div v-if="edit_tags_mode">
                 X
               </div>
+              {{ club.nom }}
             </div>
           </div>
           <div v-if="edit_tags_mode" class="filter-container-inner flex flex-col animate-fade-in animate-duration-120 justify-between gap-2">
@@ -51,7 +51,7 @@
             <div class="flex place-items-center gap-3">
               <InputSwitch v-model="user_store.computed_open_to_pause" :class="user_store.computed_open_to_pause ? '' : 'text-cafe-100'" />
               <BxBxsCoffee class="h-7 w-7" />
-              Un kawa
+              Prendre un café
             </div>
             <div class="flex place-items-center gap-3">
               <InputSwitch v-model="user_store.computed_open_to_lunch" :class="user_store.computed_open_to_lunch ? '' : 'text-cafe-100'" />
