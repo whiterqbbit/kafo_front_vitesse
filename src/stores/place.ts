@@ -5,10 +5,13 @@ import { use_user_store } from './user'
 
 export const use_place_store = defineStore('place', () => {
   const db: Ref<Place[] | null> = ref(null)
+  const db_full: Ref<Place[] | null> = ref(null)
+  const db_full_computed = computed(() => db_full.value ?? [])
   const selected_id = ref<number | null>(null)
   const distance_is_calculated = ref(false)
 
   const selected = computed(() => db.value?.find(cafe => cafe.id === selected_id.value) ?? null)
+  const selected_full = computed(() => db_full.value?.find(cafe => cafe.id === selected_id.value) ?? null)
 
   const db_filtered = computed(() => {
     const selected_price_types: CafeTag[] = []
@@ -139,6 +142,20 @@ export const use_place_store = defineStore('place', () => {
     db.value = db_decoded_to_json as Place[]
   }
 
+  async function fetch_all_places_full() {
+    try {
+      const password = import.meta.env.VITE_XANO_PASSWORD
+      const url = `${import.meta.env.VITE_XANO_GET_ALL_URL}?password=${password}`
+      const all_places: Place[] = await fetch(url, {
+      })
+        .then(res => res.json())
+        .then(arr => arr.splice(0, 5))
+      db_full.value = all_places
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   function sort_places() {
     db.value?.sort((a, b) => {
       const attendanceDiff = (b.attendance || 0) - (a.attendance || 0)
@@ -173,12 +190,15 @@ export const use_place_store = defineStore('place', () => {
     fetch_db,
     db,
     db_filtered,
+    db_full_computed,
     selected,
+    selected_full,
     selected_id,
     establishment_type,
     sort_places,
     update_open_status,
     get_previous_place_id,
     get_next_place_id,
+    fetch_all_places_full,
   }
 })

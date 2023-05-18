@@ -20,8 +20,8 @@ dependencies:
     specifier: ^1.1.26
     version: 1.1.26(vue@3.2.47)
   '@vueuse/integrations':
-    specifier: ^9.13.0
-    version: 9.13.0(fuse.js@6.6.2)(nprogress@0.2.0)(universal-cookie@4.0.4)(vue@3.2.47)
+    specifier: ^v10.0.0-beta.5
+    version: 10.1.0(fuse.js@6.6.2)(nprogress@0.2.0)(sortablejs@1.15.0)(universal-cookie@4.0.4)(vue@3.2.47)
   '@vueuse/motion':
     specifier: 2.0.0-beta.22
     version: 2.0.0-beta.22(@nuxt/kit@3.4.3)(vue@3.2.47)
@@ -61,6 +61,9 @@ dependencies:
   primevue:
     specifier: ^3.26.1
     version: 3.26.1(primeicons@6.0.1)(vue@3.2.47)
+  sortablejs:
+    specifier: ^1.15.0
+    version: 1.15.0
   universal-cookie:
     specifier: ^4.0.4
     version: 4.0.4
@@ -3525,6 +3528,18 @@ packages:
       - '@vue/composition-api'
       - vue
 
+  /@vueuse/core@10.1.0(vue@3.2.47):
+    resolution: {integrity: sha512-3Znoa5m5RO+z4/C9w6DRaKTR3wCVJvD5rav8HTDGsr+7rOZRHtcgFJ8NcCs0ZvIpmev2kExTa311ns5j2RbzDQ==}
+    dependencies:
+      '@types/web-bluetooth': 0.0.16
+      '@vueuse/metadata': 10.1.0
+      '@vueuse/shared': 10.1.0(vue@3.2.47)
+      vue-demi: 0.14.0(vue@3.2.47)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
+
   /@vueuse/core@9.13.0(vue@3.2.47):
     resolution: {integrity: sha512-pujnclbeHWxxPRqXWmdkKV5OX4Wk4YeK7wusHqRwU0Q7EFusHoqNA/aPhB6KCh9hEqJkLAJo7bb0Lh9b+OIVzw==}
     dependencies:
@@ -3548,8 +3563,8 @@ packages:
       '@unhead/vue': 1.1.26(vue@3.2.47)
       vue: 3.2.47
 
-  /@vueuse/integrations@9.13.0(fuse.js@6.6.2)(nprogress@0.2.0)(universal-cookie@4.0.4)(vue@3.2.47):
-    resolution: {integrity: sha512-I1kX/tsfcvWWLZD7HZaP0LsSfchK13YxReLfharXhk72SFXp87doLbRaTfIF5w8m/gr/vPtcNyQPAXW7Ubpuww==}
+  /@vueuse/integrations@10.1.0(fuse.js@6.6.2)(nprogress@0.2.0)(sortablejs@1.15.0)(universal-cookie@4.0.4)(vue@3.2.47):
+    resolution: {integrity: sha512-eSGdRYSFIspSYQIC0hzivi95Jv/BEH9Z47BrpNNKZi6k/LcHDAANmiNeiPN1BxlmO2PovG8dN9Et/AZC4WZ2YQ==}
     peerDependencies:
       async-validator: '*'
       axios: '*'
@@ -3561,6 +3576,7 @@ packages:
       jwt-decode: '*'
       nprogress: '*'
       qrcode: '*'
+      sortablejs: '*'
       universal-cookie: '*'
     peerDependenciesMeta:
       async-validator:
@@ -3583,13 +3599,16 @@ packages:
         optional: true
       qrcode:
         optional: true
+      sortablejs:
+        optional: true
       universal-cookie:
         optional: true
     dependencies:
-      '@vueuse/core': 9.13.0(vue@3.2.47)
-      '@vueuse/shared': 9.13.0(vue@3.2.47)
+      '@vueuse/core': 10.1.0(vue@3.2.47)
+      '@vueuse/shared': 10.1.0(vue@3.2.47)
       fuse.js: 6.6.2
       nprogress: 0.2.0
+      sortablejs: 1.15.0
       universal-cookie: 4.0.4
       vue-demi: 0.14.0(vue@3.2.47)
     transitivePeerDependencies:
@@ -3599,6 +3618,10 @@ packages:
 
   /@vueuse/metadata@10.0.2:
     resolution: {integrity: sha512-APSjlABrV+Q74c+FR0kFETvcN9W2pAaT3XF3WwqWUuk4srmVxv7DY4WshZxK2KYk1+MVY0Fus6J1Hk/JXVm6Aw==}
+
+  /@vueuse/metadata@10.1.0:
+    resolution: {integrity: sha512-cM28HjDEw5FIrPE9rgSPFZvQ0ZYnOLAOr8hl1XM6tFl80U3WAR5ROdnAqiYybniwP5gt9MKKAJAqd/ab2aHkqg==}
+    dev: false
 
   /@vueuse/metadata@9.13.0:
     resolution: {integrity: sha512-gdU7TKNAUVlXXLbaF+ZCfte8BjRJQWPCa2J55+7/h+yDtzw3vOoGQDRXzI6pyKyo6bXFT5/QoPE4hAknExjRLQ==}
@@ -3628,6 +3651,15 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
+
+  /@vueuse/shared@10.1.0(vue@3.2.47):
+    resolution: {integrity: sha512-2X52ogu12i9DkKOQ01yeb/BKg9UO87RNnpm5sXkQvyORlbq8ONS5l39MYkjkeVWWjdT0teJru7a2S41dmHmqjQ==}
+    dependencies:
+      vue-demi: 0.14.0(vue@3.2.47)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
 
   /@vueuse/shared@9.13.0(vue@3.2.47):
     resolution: {integrity: sha512-UrnhU+Cnufu4S6JLCPZnkWh0WwZGUp72ktOF2DFptMlOs3TOdVv8xJN53zhHGARmVOsz5KqOls09+J1NR6sBKw==}
@@ -8837,6 +8869,10 @@ packages:
       ip: 2.0.0
       smart-buffer: 4.2.0
     dev: true
+
+  /sortablejs@1.15.0:
+    resolution: {integrity: sha512-bv9qgVMjUMf89wAvM6AxVvS/4MX3sPeN0+agqShejLU5z5GX4C75ow1O2e5k4L6XItUyAK3gH6AxSbXrOM5e8w==}
+    dev: false
 
   /source-map-js@1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
