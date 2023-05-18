@@ -76,7 +76,6 @@ export const use_user_store = defineStore('user', () => {
         throw new Error(data.message)
       }
       const data = await response.json()
-      console.log('data', data)
       updateUser(data)
     } catch (error) {
       console.error('Error during edit_user:', error)
@@ -230,8 +229,6 @@ export const use_user_store = defineStore('user', () => {
       if (!response.ok) {
         throw new Error(data.message)
       }
-
-      console.log('data', data)
     } catch (error) {
       console.error('Error during edit_user:', error)
       throw error
@@ -258,8 +255,6 @@ export const use_user_store = defineStore('user', () => {
       if (!response.ok) {
         throw new Error(data.message)
       }
-
-      console.log('data', data)
     } catch (error) {
       console.error('Error during edit_user:', error)
       throw error
