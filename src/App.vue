@@ -31,7 +31,23 @@ onBeforeMount(() => {
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the html results with vite-ssg
 const environnement = import.meta.env.VITE_ENV
-const env_string = environnement === 'production' ? '' : environnement === 'staging' ? '[Beta] ' : '[dev] '
+let env_string = ''
+switch (environnement) {
+  case 'dev':
+    env_string = '[dev] '
+    break
+  case 'staging':
+    env_string = '[Beta] '
+    break
+  case 'admin':
+    env_string = '[admin] '
+    break
+  case 'production':
+  default:
+    env_string = ''
+    break
+}
+
 const favicon = environnement === 'production' ? '/favicon.png' : environnement === 'staging' ? '/favicon_beta.png' : '/favicon_dev.png'
 
 useHead({
