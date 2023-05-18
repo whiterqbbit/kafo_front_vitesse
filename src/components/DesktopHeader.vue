@@ -9,10 +9,10 @@
     </div>
     <img v-else :src="user.pic_xsmall ? user.pic_xsmall : default_user_pic" alt="avatar" class="mr-4 h-10 w-10 border border-cafe-100 rounded-full" @click="display.burger_menu = !display.burger_menu">
     <div v-if="display.burger_menu" class="absolute right-0 top-[50px] flex flex-col rounded-bl-xl bg-cafe-600 p-4 font-semibold text-white">
-      <!-- <div class="menu-item">
+      <RouterLink class="menu-item" to="/profile">
         Mon profil
-      </div>
-      <div class="menu-item">
+      </RouterLink>
+      <!-- <div class="menu-item">
         Placeholder
       </div> -->
       <div class="menu-item" @click="logout">
