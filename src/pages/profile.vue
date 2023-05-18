@@ -85,6 +85,6 @@ function edit_job_title_and_bio() {
 }
 
 function remove_tag(club: Club) {
-  if (edit_tags_mode) user_store.remove_club(club)
+  if (edit_tags_mode.value) user_store.remove_club(club)
 }
 </script>
