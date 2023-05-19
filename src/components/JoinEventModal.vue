@@ -5,7 +5,7 @@
       {{ !display_more_events ? "Plus d'évènements" : "Moins d'évènements" }}
       <img>
     </div>
-    <div v-if="display_more_events" class="w-full flex flex-col gap-3">
+    <div v-if="display_more_events" class="w-full flex flex-col animate-fade-in animate-duration-130 gap-3">
       <EventCard v-for="i in 5" :key="i" :day="new Date(today.getTime() + i * 24 * 60 * 60 * 1000)" />
     </div>
   </div>

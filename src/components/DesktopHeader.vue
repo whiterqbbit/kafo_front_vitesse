@@ -9,10 +9,10 @@
     </div>
     <img v-else :src="user.pic_xsmall ? user.pic_xsmall : default_user_pic" alt="avatar" class="mr-4 h-10 w-10 border border-cafe-100 rounded-full" @click="display.burger_menu = !display.burger_menu">
     <div v-if="display.burger_menu" class="absolute right-0 top-[50px] flex flex-col rounded-bl-xl bg-cafe-600 p-4 font-semibold text-white">
-      <!-- <div class="menu-item">
+      <div class="menu-item cursor-pointer" @click="display_modal('profile')">
         Mon profil
       </div>
-      <div class="menu-item">
+      <!-- <div class="menu-item">
         Placeholder
       </div> -->
       <div class="menu-item" @click="logout">
@@ -20,6 +20,7 @@
       </div>
     </div>
   </header>
+  <ProfileModal v-if="display.profile_modal" />
   <LoginModal v-if="display.login_modal" />
 </template>
 
@@ -29,7 +30,15 @@ import { use_user_store } from '@/stores/user'
 import default_user_pic from '@/assets/img/default_user_pic.png'
 
 const user = use_user_store()
-
+function display_modal(modal_name: string) {
+  switch (modal_name) {
+    case 'profile':
+      reset_display()
+      display.profile_modal = true
+      break
+  }
+  display.burger_menu = false
+}
 function logout() {
   user.logout()
   display.burger_menu = false
