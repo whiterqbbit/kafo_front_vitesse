@@ -1,6 +1,9 @@
 <template>
-  <div class="flex flex-col place-items-center gap-5 p-0 container sm:p-3">
-    <div class="max-w-full w-120 flex flex-col gap-4 rounded-xl bg-cafe-200 p-2 shadow-md sm:p-3">
+  <div class="fixed top-0 z-30 h-screen--50px w-full flex flex-col place-content-center place-items-center bg-opacity-0 backdrop-blur">
+    <div class="relative max-w-full w-120 flex flex-col gap-4 rounded-xl bg-cafe-200 p-2 shadow-md sm:p-3">
+      <button class="absolute right-5 top-5 z-90 rounded-3xl hover:scale-105" icon="pi pi-times" @click="display.profile_modal = false">
+        <img :src="svg_close">
+      </button>
       <img :src="user_store.pic_small ? user_store.pic_small : default_user_pic" class="mx-auto h-40 w-40 border border-3 border-cafe-50 rounded-full shadow-md">
 
       <div class="relative w-full flex flex-col place-items-center gap-4 rounded-xl p-3">
@@ -72,6 +75,7 @@
 
 <script setup lang="ts">
 import default_user_pic from '@/assets/img/default_user_pic.png'
+import svg_close from '@/assets/svg/icon/MingcuteCloseFill.svg'
 import type { Club } from '@/stores/xano.d.ts'
 
 const edit_text_mode = ref(false)

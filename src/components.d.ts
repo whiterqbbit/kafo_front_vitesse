@@ -45,6 +45,8 @@ declare module '@vue/runtime-core' {
     MobileHeader: typeof import('./components/MobileHeader.vue')['default']
     MobileList: typeof import('./components/MobileList.vue')['default']
     PlaceCard: typeof import('./components/PlaceCard.vue')['default']
+    Profile: typeof import('./components/profile.vue')['default']
+    ProfileModal: typeof import('./components/ProfileModal.vue')['default']
     RadioButton: typeof import('primevue/radiobutton')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

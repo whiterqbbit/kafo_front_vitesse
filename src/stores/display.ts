@@ -4,7 +4,17 @@ export const display = reactive({
   cookie_modal: true,
   filter_modal: false,
   burger_menu: false,
+  profile_modal: false,
 })
+
+export function reset_display() {
+  display.selected_modal = false
+  display.login_modal = false
+  display.cookie_modal = false
+  display.filter_modal = false
+  display.burger_menu = false
+  display.profile_modal = false
+}
 
 export const stored_display = useStorage('stored_display', {
   welcome_modal: true,
