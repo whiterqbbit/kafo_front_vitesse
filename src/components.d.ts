@@ -14,6 +14,8 @@ declare module '@vue/runtime-core' {
     Checkbox: typeof import('primevue/checkbox')['default']
     ClubBrowserUser: typeof import('./components/ClubBrowserUser.vue')['default']
     ClubList: typeof import('./components/ClubList.vue')['default']
+    CoffeeCard: typeof import('./components/CoffeeCard.vue')['default']
+    DebugModal: typeof import('./components/DebugModal.vue')['default']
     DesktopHeader: typeof import('./components/DesktopHeader.vue')['default']
     DesktopList: typeof import('./components/DesktopList.vue')['default']
     DesktopSidebar: typeof import('./components/DesktopSidebar.vue')['default']

@@ -9,9 +9,9 @@
 <br>
 
 <p align='center'>
-<a href="https://master.d211pvmqy38ejk.amplifyapp.com/">Alpha preview</a>
+<a href="https://www.kafo.work/">Website</a>
 <br>
-<a href="https://www.kafo.work/">Live version (nocode)</a>
+<a href="https://beta.kafo.work/">Staging branch</a>
 </p>
 
 <br>
@@ -31,9 +31,15 @@
 
 - 🎨 [UnoCSS](https://github.com/antfu/unocss)
 
+- 🍃 [Leaflet](https://leafletjs.com/)
+
+- 🤹‍♂️ [VueUse](https://vueuse.org/)
+
+- 🤖 [PrimeUI](https://primevue.org/)
+
 - 🖨 Static-site generation (SSG) via [vite-ssg](https://github.com/antfu/vite-ssg)
 
-- 🦾 TypeScript
+- 🦾 TypeScript, EsLint
 
 - ⚙️ Unit Testing with [Vitest](https://github.com/vitest-dev/vitest), E2E Testing with [Cypress](https://cypress.io/) on [GitHub Actions](https://github.com/features/actions)
 

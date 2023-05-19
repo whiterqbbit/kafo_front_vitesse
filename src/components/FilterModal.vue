@@ -100,31 +100,6 @@
         </div>
       </section>
 
-      <!-- FILTRE FRÉQUENTATION -->
-      <!-- <section>
-        <div class="filter-container flex">
-          Fréquentation
-          <div class="filter-container-inner flex-col">
-            <div class="bullet">
-              <Checkbox v-model="filters.not_empty" class="mt-1px" :binary="true" />
-              <label for="filter_not_empty">N'est pas vide</label>
-            </div>
-            <MultiSelect
-              v-model="filters.clubs_domain" :options="club_db_domain" filter display="chip" option-label="nom" placeholder="Filtrer par domaine"
-              class="w-full md:w-20rem"
-            />
-            <MultiSelect
-              v-model="filters.clubs_roles" :options="club_db_roles" filter display="chip" option-label="nom" placeholder="Filtrer par rôle"
-              class="w-full md:w-20rem"
-            />
-            <MultiSelect
-              v-model="filters.clubs_tech" :options="club_db_tech" filter display="chip" option-label="nom" placeholder="Filtrer par techno"
-              class="w-full md:w-20rem"
-            />
-          </div>
-        </div>
-      </section> -->
-
       <!-- FILTRE DISTANCE -->
       <section>
         <div id="distance_filter" class="filter-container">
