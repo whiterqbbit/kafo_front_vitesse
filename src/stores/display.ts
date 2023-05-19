@@ -14,6 +14,7 @@ export function reset_display() {
   display.filter_modal = false
   display.burger_menu = false
   display.profile_modal = false
+  display.burger_menu = false
 }
 
 export const stored_display = useStorage('stored_display', {
