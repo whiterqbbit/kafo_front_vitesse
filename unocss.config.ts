@@ -25,6 +25,7 @@ export default defineConfig({
   theme: {
     height: {
       'screen--35px': 'calc(100vh - 35px)',
+      'screen--45px': 'calc(100vh - 45px)',
       'screen--50px': 'calc(100vh - 50px)',
     },
     maxHeight: {
