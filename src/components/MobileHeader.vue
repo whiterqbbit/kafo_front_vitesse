@@ -88,7 +88,6 @@ watch (selected_result, (new_value) => {
     click_suggestion(new_value)
   }
 })
-
 const display_menu = ref(false)
 const parentMenuContainer = ref(null)
 onClickOutside(toRef(parentMenuContainer, 'value'), () => display_menu.value = false)
