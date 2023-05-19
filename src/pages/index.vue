@@ -88,7 +88,7 @@
       <div class="card">
         <img :src="notes" class="h-15" alt="Des notes de musique">
         <div>Calme ou animé</div>
-        <div>Choisissez l'ambiance que vous préférez. Finies les mauvaises surprises.</div>
+        <div>Choisissez l'ambiance que vous préférez. Fini les mauvaises surprises.</div>
       </div>
     </div>
     <LandingCTA class="mx-auto mt-6 text-lg md:mt-12 lg:text-3xl md:text-2xl sm:text-xl" />
@@ -124,7 +124,7 @@
       </div>
       <div>
         Vous construisez le réseau grâce à vos partages.
-        Contactez-nous pour ajouter de nouveaux lieux, suggérer des idées ou simplement nous faire part de vos coups de coeur!
+        Contactez-nous pour ajouter de nouveaux lieux, suggérer des idées ou simplement nous faire part de vos coups de coeur !
       </div>
       <form class="mt-7 flex flex-col gap-2" @submit.prevent="contact(contact_form)">
         <div class="flex gap-2">
@@ -165,8 +165,8 @@ const subject = ref([
   { name: 'Suggestion de lieu' },
   { name: 'Question' },
   { name: 'Partenariat' },
-  { name: 'Autre' },
   { name: 'Lettre d\'amour' },
+  { name: 'Autre' },
 ])
 
 const contact_form = reactive ({

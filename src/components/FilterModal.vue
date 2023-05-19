@@ -15,12 +15,16 @@
       <!-- FILTRE NOS COUPS DE COEUR -->
       <section>
         <div class="filter-container">
-          <span class="filter-modal-title">Nos coups de coeurs</span>
+          <span class="filter-modal-title">Essentiels</span>
           <div class="filter-container-inner">
             <Checkbox v-model="filters.our_picks" name="filter-our-picks" :binary="true" />
             <label for="filter-our-picks" class="cursor-pointer" @click="filters.our_picks = !filters.our_picks">
-              Le meilleur de Kafo !
+              Coups de coeurs
             </label>
+            <div class="bullet">
+              <Checkbox v-model="filters.open_now" class="filter-modal-checkbox" :binary="true" />
+              <label class="cursor-pointer" for="filter_open" @click="filters.open_now = !filters.open_now">Ouvert actuellement</label>
+            </div>
           </div>
         </div>
       </section>
@@ -92,7 +96,7 @@
               <div class="flex flex-col">
                 <label for="filter-coworking" class="cursor-pointer" @click="filters.noise_level_lively = !filters.noise_level_lively">Animé</label>
                 <div class="description">
-                  Tout ce qui est plus fort yo
+                  Tout ce qui est plus fort !
                 </div>
               </div>
             </div>
@@ -134,14 +138,10 @@
           <span class="filter-modal-title">Autres</span>
           <div class="filter-container-inner justify-start gap-8">
             <div class="flex flex-col gap-1">
-              <div class="bullet">
-                <Checkbox v-model="filters.open_now" class="filter-modal-checkbox" :binary="true" />
-                <label class="cursor-pointer" for="filter_open" @click="filters.open_now = !filters.open_now">Ouvert actuellement</label>
-              </div>
-              <div class="bullet">
+              <!-- <div class="bullet">
                 <Checkbox v-model="filters.limit_to_map" class="filter-modal-checkbox" :binary="true" />
                 <label class="cursor-pointer" for="filter_limit_to_map" @click="filters.limit_to_map = !filters.limit_to_map">Limiter à la carte</label>
-              </div>
+              </div> -->
             </div>
             <div class="flex flex-col gap-1">
               <div class="bullet">
