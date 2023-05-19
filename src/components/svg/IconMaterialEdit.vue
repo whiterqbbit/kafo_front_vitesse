@@ -4,6 +4,6 @@
 
 <script>
 export default {
-  name: 'MaterialSymbolsEditRounded',
+  name: 'IconMaterialEdit',
 }
 </script>

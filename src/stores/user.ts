@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useCookies } from '@vueuse/integrations/useCookies'
-import type { Club, User, UserInfos } from './xano.d'
+import type { Club, User } from './xano.d'
 
 const cookies = useCookies(['user'])
 
@@ -30,33 +30,30 @@ export const use_user_store = defineStore('user', () => {
   const is_loading = ref(false)
 
   const computed_open_to_afterwork = computed({
-    get: () => {
-      return !!open_to_afterwork.value
-    },
+    get: () => !!open_to_afterwork.value,
     set: (value: boolean) => {
+      open_to_afterwork.value = value
       edit_user({ open_to_afterwork: value })
     },
   })
 
   const computed_open_to_lunch = computed({
-    get: () => {
-      return !!open_to_lunch.value
-    },
+    get: () => !!open_to_lunch.value,
     set: (value: boolean) => {
+      open_to_lunch.value = value
       edit_user({ open_to_lunch: value })
     },
   })
 
   const computed_open_to_pause = computed({
-    get: () => {
-      return !!open_to_pause.value
-    },
+    get: () => !!open_to_pause.value,
     set: (value: boolean) => {
+      open_to_pause.value = value
       edit_user({ open_to_pause: value })
     },
   })
 
-  async function edit_user(user_infos: UserInfos) {
+  async function edit_user(user_infos: User) {
     try {
       const xano_edit_user_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/self/edit_details`
       const response = await fetch(xano_edit_user_url, {
@@ -65,23 +62,19 @@ export const use_user_store = defineStore('user', () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${cookies.get('token')}`,
         },
-        body: JSON.stringify(
-          {
-            ...user_infos,
-          },
-        ),
+        body: JSON.stringify({ ...user_infos }),
       })
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.message)
-      }
       const data = await response.json()
+
+      if (!response.ok) throw new Error(data.message)
+
       updateUser(data)
     } catch (error) {
       console.error('Error during edit_user:', error)
       throw error
     }
   }
+
   async function suggestion(form: { email: string; message: string; category: { name: string } }): Promise<void> {
     try {
       const xano_suggestion_url = `${import.meta.env.VITE_XANO_API_URL}/api:5e9BgwVw/suggestion`
@@ -234,6 +227,7 @@ export const use_user_store = defineStore('user', () => {
       throw error
     }
   }
+
   async function add_club(club: Club) {
     clubs.value.push(club)
     try {

@@ -3,7 +3,7 @@
     <div
       v-for="club in filtered_clubs"
       :key="club.uuid || 'fallback'"
-      class="cursor-pointer rounded-full bg-cafe-400 px-2 py-0.5 text-sm text-white hover:bg-grass-500 hover:font-bold"
+      class="pastille cursor-pointer bg-cafe-400 text-white hover:bg-grass-500 hover:font-bold"
       @click="toggle_selected_club(club)"
     >
       {{ club.nom }}
@@ -40,19 +40,14 @@ const filtered_clubs = computed(() => {
     return !user_store.clubs.some(selected => selected.uuid === club.uuid)
   }
 
-  // Filters available clubs that are not selected
   if (!clubs.value) return []
   const available_clubs = clubs.value.filter(club => is_not_selected(club))
 
-  // If there is a search input, filter the results based on the search
   if (props.search_input) {
-    // Map the search results to an array of items
     const filtered_results = searchResults.value?.map(result => result.item)
 
-    // Return the filtered results if the club is not selected
     return filtered_results?.filter(club => is_not_selected(club))
   } else {
-    // Return available clubs if there is no search input
     return available_clubs
   }
 })

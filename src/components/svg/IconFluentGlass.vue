@@ -4,6 +4,6 @@
 
 <script>
 export default {
-  name: 'FluentDrinkWine16Filled',
+  name: 'IconFluentGlass',
 }
 </script>

@@ -73,6 +73,7 @@ const events_of_the_day = computed(() => {
   if (!event_store.selected_place_events) {
     return null
   }
+
   let events = event_store.selected_place_events?.filter((event) => {
     if (!event.jour) return false
     const event_date = new Date(event.jour)
@@ -92,10 +93,8 @@ const events_of_the_day = computed(() => {
     }
     return false
   })
-  events = events.sort((a, b) => {
-    if (a.start < b.start) return -1
-    return 1
-  })
+
+  events = events.sort((a, b) => a.start.getTime() - b.start.getTime())
   if (events?.length) return events
   return null
 })

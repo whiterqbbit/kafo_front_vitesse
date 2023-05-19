@@ -4,6 +4,6 @@
 
 <script>
 export default {
-  name: 'BxBxsCoffee',
+  name: 'IconBxbxsCoffee',
 }
 </script>

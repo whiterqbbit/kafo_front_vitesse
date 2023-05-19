@@ -4,6 +4,6 @@
 
 <script>
 export default {
-  name: 'FluentEmojiHighContrastForkAndKnife',
+  name: 'IconFluentFork',
 }
 </script>
