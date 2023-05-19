@@ -89,7 +89,7 @@ watch (selected_result, (new_value) => {
   }
 })
 const parentMenuContainer = ref(null)
-onClickOutside(toRef(parentMenuContainer, 'value'), () => display.burger_menu.value = false)
+onClickOutside(toRef(parentMenuContainer, 'value'), () => display.burger_menu = false)
 
 function display_modal(modal_name: string) {
   switch (modal_name) {
@@ -98,7 +98,7 @@ function display_modal(modal_name: string) {
       display.profile_modal = true
       break
   }
-  display.burger_menu.value = false
+  display.burger_menu = false
 }
 
 async function click_suggestion(suggestion: Suggestion) {
