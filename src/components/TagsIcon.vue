@@ -71,7 +71,7 @@
     <div v-if="props.tags.includes('Top rated')" class="tag_group">
       <img class="tag_img" :src="svg_fav">
       <div class="tag_text">
-        Nos coup de coeur
+        Nos coups de coeur
       </div>
     </div>
 

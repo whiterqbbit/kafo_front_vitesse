@@ -9,7 +9,7 @@
       {{ club.nom }}
     </div>
   </div>
-  <div class="max-h-30 flex flex-wrap justify-between gap-2 overflow-auto border border-1 border-cafe-400 rounded-lg px-1 py-2">
+  <div class="max-h-30 flex flex-wrap justify-between gap-2 overflow-auto rounded-lg px-1 py-2">
     <div
       v-for="club in filtered_clubs"
       :key="club.uuid || 'fallback'"

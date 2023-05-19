@@ -20,10 +20,12 @@ export default defineConfig({
     ['font-title', 'text-3xl font-bold text-center text-cafe-700'],
     ['container', 'bg-cafe-50 mx-auto px-9 py-4 md:py-8 max-w-7xl'],
     ['input-field', 'border border-cafe-400 rounded-lg p-2 placeholder-gray-400 focus:ring-1 focus:ring-cafe-400 focus:outline-none'],
+    ['pastille', 'inline-block rounded-full px-2 py-0.5 text-sm'],
   ],
   theme: {
     height: {
       'screen--35px': 'calc(100vh - 35px)',
+      'screen--45px': 'calc(100vh - 45px)',
       'screen--50px': 'calc(100vh - 50px)',
     },
     maxHeight: {
