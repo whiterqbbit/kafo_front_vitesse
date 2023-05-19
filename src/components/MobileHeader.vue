@@ -46,12 +46,19 @@
             >
               Logout
             </button>
+            <button
+              class="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              role="menuitem" tabindex="-1" @click="display_modal('profile')"
+            >
+              Profile
+            </button>
           </div>
         </div>
       </div>
     </div>
   </header>
   <LoginModal v-if="display.login_modal" />
+  <ProfileModal v-if="display.profile_modal" />
 </template>
 
 <script setup lang="ts">
@@ -85,6 +92,16 @@ watch (selected_result, (new_value) => {
 const display_menu = ref(false)
 const parentMenuContainer = ref(null)
 onClickOutside(toRef(parentMenuContainer, 'value'), () => display_menu.value = false)
+
+function display_modal(modal_name: string) {
+  switch (modal_name) {
+    case 'profile':
+      reset_display()
+      display.profile_modal = true
+      break
+  }
+  display_menu.value = false
+}
 
 async function click_suggestion(suggestion: Suggestion) {
   search_string.value = ''
