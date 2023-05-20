@@ -94,7 +94,7 @@ const events_of_the_day = computed(() => {
     return false
   })
 
-  events = events.sort((a, b) => a.start.getTime() - b.start.getTime())
+  events = events.sort((a, b) => a.start < b.start ? -1 : 1)
   if (events?.length) return events
   return null
 })
