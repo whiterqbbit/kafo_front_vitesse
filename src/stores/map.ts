@@ -4,6 +4,7 @@ import type { Router } from 'vue-router'
 import type { Place } from '@/stores/xano.d'
 import marker_icon from '@/assets/img/geoloc/marker_6.png'
 import { use_user_store } from '@/stores/user'
+import { preferences } from '@/stores/preferences'
 
 type simple_coords = [number, number]
 
@@ -52,7 +53,7 @@ export const use_map_store = defineStore('use_map_store', () => {
     if (!leaflet) return
     const L = await leaflet
 
-    map_leaf.value = L.map(id)
+    map_leaf.value = L.map(id, { zoomControl: false })
       .on('load', () => {
         map_is_loaded.value = true
       })
@@ -64,7 +65,7 @@ export const use_map_store = defineStore('use_map_store', () => {
       })
       .setView(viewLngLat, zoom)
 
-    L.control.zoom({ position: 'bottomright' }).addTo(map_leaf.value)
+    if (!preferences.is_mobile) L.control.zoom({ position: 'bottomright' }).addTo(map_leaf.value)
 
     L.control.locate({
       position: 'topright',
