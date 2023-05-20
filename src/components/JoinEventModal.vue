@@ -15,7 +15,14 @@
 const props = defineProps({
   place_id: String,
 })
+
+const route = useRoute()
+
 const display_more_events = ref(false)
+if (route.query.display_more_events) {
+  display_more_events.value = true
+}
+
 const today = new Date()
 
 // Get the selected place from the store
