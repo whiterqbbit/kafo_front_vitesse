@@ -16,14 +16,20 @@
       <section>
         <div class="filter-container">
           <span class="filter-modal-title">Essentiels</span>
-          <div class="filter-container-inner">
-            <ACheckbox v-model="filters.our_picks" name="filter-our-picks" />
-            <label for="filter-our-picks" class="cursor-pointer" @click="filters.our_picks = !filters.our_picks">
-              Coups de coeurs
-            </label>
-            <div class="bullet">
-              <ACheckbox v-model="filters.open_now" class="filter-modal-checkbox" />
-              <label class="cursor-pointer" for="filter_open" @click="filters.open_now = !filters.open_now">Ouvert actuellement</label>
+          <div class="filter-container-inner text-sm">
+            <div class="w-1/2 flex gap-2">
+              <ACheckbox v-model="filters.our_picks" class="filter-modal-checkbox" />
+              <label for="filter-our-picks" class="cursor-pointer place-self-center" @click="filters.our_picks = !filters.our_picks">
+                Coups de coeurs
+              </label>
+            </div>
+            <div class="w-1/2 flex gap-2">
+              <div class="bullet">
+                <ACheckbox v-model="filters.open_now" class="filter-modal-checkbox" />
+                <label for="filter_open" class="cursor-pointer place-self-center" @click="filters.open_now = !filters.open_now">
+                  Ouvert actuellement
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -47,7 +53,7 @@
               </div>
             </div> -->
             <div class="w-1/2 flex gap-2">
-              <ACheckbox v-model="filters.pricing_place" class="mt-2px" />
+              <ACheckbox v-model="filters.pricing_place" class="filter-modal-checkbox" />
               <div class="flex flex-col">
                 <label for="filter-coworking" class="cursor-pointer" @click="filters.pricing_place = !filters.pricing_place">A la conso</label>
                 <div class="description">
@@ -56,7 +62,7 @@
               </div>
             </div>
             <div class="w-1/2 flex gap-2">
-              <ACheckbox v-model="filters.pricing_hourly" class="mt-2px" />
+              <ACheckbox v-model="filters.pricing_hourly" class="filter-modal-checkbox" />
               <div class="flex flex-col">
                 <label for="filter-coworking" class="cursor-pointer" @click="filters.pricing_hourly = !filters.pricing_hourly">A l'heure</label>
                 <div class="description">
@@ -204,6 +210,6 @@ watch(() => filters.value.our_picks, () => {
   }
 
   .filter-modal-checkbox{
-    @apply mt-3px
+    @apply mt-3px place-self-start
   }
 </style>
