@@ -9,6 +9,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ABtn: typeof import('anu-vue')['ABtn']
+    ARadio: typeof import('anu-vue')['ARadio']
     AvatarStack: typeof import('./components/AvatarStack.vue')['default']
     BxBxsCoffee: typeof import('./components/svg/BxBxsCoffee.vue')['default']
     Checkbox: typeof import('primevue/checkbox')['default']

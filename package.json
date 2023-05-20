@@ -3,7 +3,7 @@
   "private": true,
   "packageManager": "pnpm@8.2.0",
   "scripts": {
-    "prebuild": "node src/prebuild.js",
+    "prebuild": "node src/prebuild.ts",
     "build": "vite-ssg build",
     "dev": "vite --port 3333",
     "lint": "eslint .",
@@ -21,14 +21,16 @@
     "decrypt": "node -e 'require(\"./src/utils/encryption.cjs\").decryptJSONFile()'"
   },
   "dependencies": {
+    "@anu-vue/preset-theme-default": "^0.14.0",
     "@egjs/vue3-flicking": "^4.10.7",
     "@unocss/eslint-config": "^0.51.4",
-    "@unocss/reset": "^0.51.4",
+    "@unocss/reset": "^0.51.13",
     "@vue-macros/reactivity-transform": "^0.3.4",
     "@vueuse/core": "^10.0.2",
     "@vueuse/head": "^1.1.26",
     "@vueuse/integrations": "^9.13.0",
     "@vueuse/motion": "2.0.0-beta.22",
+    "anu-vue": "^0.14.0",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
     "fs": "0.0.1-security",
@@ -49,6 +51,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.5",
+    "@iconify-json/bx": "^1.1.6",
     "@iconify-json/ci": "^1.1.9",
     "@iconify-json/fa6-solid": "^1.1.13",
     "@iconify-json/ic": "^1.1.13",

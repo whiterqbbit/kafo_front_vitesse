@@ -21,6 +21,7 @@
       "vue/ref-macros",
       "vite-plugin-pages/client",
       "vite-plugin-pwa/client",
+      "anu-vue/volar",
       "unplugin-vue-macros/macros-global"
     ],
     "paths": {
