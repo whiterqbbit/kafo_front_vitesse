@@ -10,11 +10,16 @@
       <i class="pi pi-search" />
       <InputText v-model="search_string" placeholder="Rechercher un lieu ou une adresse" class="w-full" />
     </span>
-    <Listbox
-      v-if="search_results"
-      v-model="selected_result" :options="search_results" option-label="name"
-      class="absolute top-full z-20 mt-1 w-full"
-    />
+    <div v-if="search_results" class="absolute top-full z-20 mt-1 w-full">
+      <ACard>
+        <AList
+          v-model="selected_result"
+          :items="search_results.length ? search_results : [{ title: 'Aucun résultat' }]"
+          class="text-cafe-600"
+          @click="click_suggestion"
+        />
+      </ACard>
+    </div>
   </div>
 </template>
 
@@ -34,7 +39,14 @@ watch(debounced_search, async (new_value) => {
     search_results.value = null
     return
   }
-  search_results.value = await utils_store.mapbox_search_suggest(new_value)
+
+  search_results.value = (await utils_store.mapbox_search_suggest(new_value)).map((result) => {
+    return {
+      ...result,
+      title: result.name,
+      subtitle: result.address,
+    }
+  })
 })
 
 watch (selected_result, (new_value) => {
