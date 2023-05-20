@@ -184,6 +184,20 @@ const place_store = use_place_store()
 place_store.selected_id = selected_place_id
 const selected_place = computed(() => place_store.selected)
 
+const router = useRouter()
+
+const swipe_target = ref<HTMLElement | null>(null)
+useSwipe(swipe_target, {
+  passive: false,
+  onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection) {
+    if (direction === 'left') {
+      go_to_next_place()
+    } else if (direction === 'right') {
+      go_to_previous_place()
+    }
+  },
+})
+
 async function initialize_gallery() {
   if (selected_place.value?.aws_pics) {
     const lightbox = new PhotoSwipeLightbox({
@@ -199,7 +213,6 @@ onMounted(() => {
   initialize_gallery()
 })
 
-const router = useRouter()
 function go_to_previous_place() {
   const previous_place = place_store.get_previous_place_id(selected_place_id)
   if (previous_place) router.push(`${previous_place}`)
@@ -220,18 +233,6 @@ onKeyStroke('ArrowLeft', () => {
 
 onKeyStroke('ArrowRight', () => {
   go_to_next_place()
-})
-
-const swipe_target = ref<HTMLElement | null>(null)
-useSwipe(swipe_target, {
-  passive: false,
-  onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection) {
-    if (direction === 'left') {
-      go_to_next_place()
-    } else if (direction === 'right') {
-      go_to_previous_place()
-    }
-  },
 })
 </script>
 
