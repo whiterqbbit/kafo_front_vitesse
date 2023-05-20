@@ -80,7 +80,9 @@ export default defineConfig({
       },
     }),
     presetAnu(),
-    presetThemeDefault(),
+    presetThemeDefault({
+      shortcutOverrides: { 'a-tooltip': 'bg-[#694b42] em:px-2 em:py-1 em:rounded-lg' },
+    }),
   ],
   transformers: [
     transformerDirectives(),
