@@ -7,14 +7,24 @@
     <!-- Barre de recherche -->
     <div class="relative">
       <div class="flex items-center">
-        <i class="pi pi-search" />
-        <InputText v-model="search_string" placeholder="Rechercher" />
+        <AInput
+          v-model="search_string"
+          input-wrapper-classes="text-xs text-cafe-600 fill-cafe-600 rounded-xl bg-cafe-100"
+          type="text"
+          placeholder="Rechercher"
+          prepend-inner-icon="i-bx-search"
+        />
       </div>
-      <Listbox
-        v-if="search_results"
-        v-model="selected_result" :options="search_results" option-label="name"
-        class="absolute top-full z-20 mt-1 w-full"
-      />
+      <div v-if="search_results" class="absolute top-full z-20 mt-1 w-full rounded-xl bg-cafe-100">
+        <ACard>
+          <AList
+            v-model="selected_result"
+            :items="search_results"
+            class="text-cafe-600"
+            @click="click_suggestion"
+          />
+        </ACard>
+      </div>
     </div>
 
     <!-- Bouton filtre -->
@@ -80,7 +90,13 @@ watch(debounced_search, async (new_value) => {
     search_results.value = null
     return
   }
-  search_results.value = await utils_store.mapbox_search_suggest(new_value)
+  search_results.value = (await utils_store.mapbox_search_suggest(new_value)).map((result) => {
+    return {
+      ...result,
+      title: result.name,
+      subtitle: result.address,
+    }
+  })
 })
 
 watch (selected_result, (new_value) => {
