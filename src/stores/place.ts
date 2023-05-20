@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import CryptoJS from 'crypto-js'
-import type { CafeTag, Place } from './xano'
+import type { CafeTag, Place, PlacePicture } from './xano'
 import { use_user_store } from './user'
 
 export const use_place_store = defineStore('place', () => {
@@ -149,30 +149,29 @@ export const use_place_store = defineStore('place', () => {
       const all_places: Place[] = await fetch(url, {
       })
         .then(res => res.json())
-        .then(arr => arr.splice(0, 25))
+        // .then(arr => arr.splice(0, 25))
       db_full.value = all_places
     } catch (error) {
       console.error(error)
     }
   }
 
-  async function update_place(place: Place) {
+  async function update_place_pics(id: number, place_pics: PlacePicture[]): Promise<number> {
     try {
-      const id = place.id
-      const password = import.meta.env.VITE_XANO_PASSWORD
-      const url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/coffee/${id}`
-      console.log('url', url)
-      console.log('place', place)
-      const response = await fetch(url, {
+      console.log('update_place_pics DEDANS', id, place_pics)
+      const url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/coffee/pics/${id}?password=${import.meta.env.VITE_XANO_PASSWORD}`
+      console.log('update_place_pics URL', url)
+      const res = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...place, password }),
+        body: JSON.stringify({ id, pictures: place_pics }),
       })
-      console.log(response)
-    } catch (error) {
-      console.error(error)
+
+      return res.status
+    } catch (error: any) {
+      throw new Error(error.response.data)
     }
   }
 
@@ -220,6 +219,6 @@ export const use_place_store = defineStore('place', () => {
     get_previous_place_id,
     get_next_place_id,
     fetch_all_places_full,
-    update_place,
+    update_place_pics,
   }
 })

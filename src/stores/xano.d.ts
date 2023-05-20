@@ -56,6 +56,24 @@ export interface AwsPics {
 	}
 }
 
+export interface PlacePicture {
+	full: {
+		url: string
+		width: number
+		height: number
+	}
+	medium: {
+		url: string
+		width: number
+		height: number
+	}
+	thumbnail: {
+		url: string
+		width: number
+		height: number
+	}
+}
+
 export interface Place {
 	id: number
 	nom: string
@@ -117,6 +135,7 @@ export interface Place {
 	attendance?: number
 	attendees?: User[]
 	our_fav: boolean
+	pictures: PlacePicture[]
 }
 
 export interface Club {
