@@ -10,7 +10,7 @@ async function write_places_db() {
   const response = await fetch(xano_url)
   const data = await response.json()
 
-  const key = process.env.VITE_ENCRYPTION_KEY || ''
+  const key = process.env.VITE_ENCRYPTION_KEY
   const encrypted_db = CryptoJS.AES.encrypt(JSON.stringify(data), key, {
     mode: CryptoJS.mode.ECB,
     padding: CryptoJS.pad.Pkcs7,
