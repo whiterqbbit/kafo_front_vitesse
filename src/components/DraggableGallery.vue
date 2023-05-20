@@ -17,12 +17,6 @@
       </div>
       <hr>
     </div>
-    <div v-for="url, index in place_pictures_full" :key="index" class="flex flex-col">
-      {{ get_file_name(url.url) }}
-    </div>
-    <div v-for="url, index in place_pictures_thumbnail" :key="index" class="flex flex-col">
-      {{ get_file_name(url.url) }}
-    </div>
   </div>
 </template>
 
@@ -41,10 +35,6 @@ const place_pictures_medium = ref(props.place.pictures.map(p => p.medium))
 const place_pictures_thumbnail = ref(props.place.pictures.map(p => p.thumbnail))
 
 const sortable_container = ref<HTMLElement | null>(null)
-
-function get_file_name(url: string) {
-  return url.split('/').pop()
-}
 
 useSortable(
   sortable_container as MaybeRefOrGetter<HTMLElement | null | undefined>,
