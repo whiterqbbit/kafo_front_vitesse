@@ -4,7 +4,7 @@
       Ouvert
     </div>
     <Galleria
-      :value="place.aws_miniatures"
+      :value="place_thumbnails"
       :num-visible="3"
       :circular="true"
       container-style="overflow: hidden;"
@@ -15,8 +15,8 @@
       <template #item="slotProps">
         <RouterLink :to="`place/${place.id}`" class="h-full w-full">
           <img
-            :src="slotProps.item.url"
-            class="block h-40 w-full rounded-xl object-cover object-cover"
+            :src="slotProps.item"
+            class="block h-50 w-full rounded-xl object-cover object-cover"
             :alt="place.nom"
           >
         </RouterLink>
@@ -57,4 +57,8 @@ const props = defineProps<{
 
 const place_store = use_place_store()
 const place = ref(props.place)
+
+const place_thumbnails = computed(() => {
+  return place.value.pictures.map(picture => picture.thumbnail.url)
+})
 </script>
