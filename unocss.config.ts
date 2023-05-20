@@ -1,12 +1,8 @@
-import {
-  defineConfig,
-  presetAttributify,
-  presetIcons,
-  presetUno,
-  presetWebFonts,
-  transformerDirectives,
-  transformerVariantGroup,
-} from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetUno, presetWebFonts, transformerDirectives, transformerVariantGroup } from 'unocss'
+import { presetThemeDefault } from '@anu-vue/preset-theme-default'
+
+// @ts-expect-error failed to resolve types
+import { presetAnu, presetIconExtraProperties } from 'anu-vue'
 
 export default defineConfig({
   shortcuts: [
@@ -76,16 +72,20 @@ export default defineConfig({
     presetIcons({
       scale: 1.4,
       warn: true,
+      extraProperties: presetIconExtraProperties,
     }),
     presetWebFonts({
       fonts: {
         sans: 'Poppins',
       },
     }),
+    presetAnu(),
+    presetThemeDefault(),
   ],
   transformers: [
     transformerDirectives(),
     transformerVariantGroup(),
   ],
   safelist: 'prose prose-sm m-auto text-left'.split(' '),
+  include: [/.*\/anu-vue\.js(.*)?$/, './**/*.vue', './**/*.md'],
 })
