@@ -14,6 +14,7 @@ export const filters = useStorage('filters', {
   power: true,
   our_picks: false,
   not_empty: false,
+  floor: false,
   clubs_selected_uuids: [] as string[],
 }, typeof window !== 'undefined' ? localStorage : undefined, { mergeDefaults: true })
 
@@ -28,6 +29,7 @@ export function reset_filters() {
   filters.value.open_now = false
   filters.value.wifi = false
   filters.value.power = false
+  filters.value.floor = false
   // filters.value.our_picks = false
   filters.value.not_empty = false
   filters.value.clubs_selected_uuids = []
