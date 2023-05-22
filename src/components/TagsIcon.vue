@@ -112,7 +112,7 @@
     <div v-if="props.tags.includes('Etage isolé')" class="tag_group">
       <img class="tag_img" :src="svg_upstairs">
       <div class="tag_text">
-        Etage isolé
+        Étage isolé
       </div>
     </div>
 
