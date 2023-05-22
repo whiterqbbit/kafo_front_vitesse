@@ -82,9 +82,11 @@ export const use_event_store = defineStore('event', () => {
 
       get_place_events()
       populate_places()
+      return { ok: true, subscribe }
     } catch (error) {
       const typed_error = error as Error
       selected_place_events_error.value = typed_error.message
+      return { ok: false, subscribe }
     }
   }
 

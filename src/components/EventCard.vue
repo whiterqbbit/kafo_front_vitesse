@@ -1,5 +1,27 @@
 <template>
   <div class="w-full flex rounded-xl bg-cafe-400 p-1">
+    <ADialog
+      v-model="confirmation_modal.display"
+      :title="confirmation_modal.is_joining ? 'Vous avez rejoint la session !' : 'Vous avez quitté la session !'"
+      :subtitle="`${get_relative_date_from_date(day)} de ${confirmation_modal.start} à ${confirmation_modal.end}`"
+      :text="confirmation_modal.is_joining ? 'Wahou trop bien' : 'trop nul'"
+    >
+      <div class="m-4 flex flex-col gap-4">
+        <!-- <ACheckbox
+      v-model="confirmation_modal.is_joining"
+      class="text-sm"
+      label="Me notifier si quelqu'un rejoint la session"
+      /> -->
+        <div class="flex gap-4">
+          <ABtn @click="confirmation_modal.display = false">
+            Retour
+          </ABtn>
+          <ABtn variant="light" icon="i-bx-calendar">
+            Google Calendar
+          </ABtn>
+        </div>
+      </div>
+    </ADialog>
     <div class="w-1/4 flex flex-col p-3 text-cafe-50">
       <span class="text-xl font-bold">
         {{ get_day_from_date(day) }} {{ get_month_name_from_date(day) }}
@@ -34,7 +56,7 @@
             </div>
           </div>
         </div>
-        <button class="w-full p-2 font-bold" :class="event?.in_current_slot ? 'btn-grass' : 'btn-cafe  hover:bg-cafe-500'" @click="submit_to_event(event.id)">
+        <button class="w-full p-2 font-bold btn-grass" @click="submit_to_event(event)">
           <div v-if="!is_loading.get(event.id)">
             {{ event_store?.is_user_in_event(event.id) ? 'Quitter' : 'Rejoindre' }}
           </div>
@@ -53,6 +75,7 @@
 <script setup lang="ts">
 import { get_day_from_date, get_month_name_from_date, get_relative_date_from_date, is_slot_current } from '@/utils/date_utils'
 import default_user_pic from '@/assets/img/default_user_pic.png'
+import type { Event } from '@/stores/xano'
 
 const props = defineProps({
   day: {
@@ -67,6 +90,13 @@ const user_store = use_user_store()
 
 const day = ref(props.day ?? new Date())
 const is_loading = ref(new Map())
+const confirmation_modal = reactive({
+  id: 0,
+  is_joining: false,
+  display: false,
+  start: '',
+  end: '',
+})
 
 // Creates an array of the event of the day and add useful variables to each event
 const events_of_the_day = computed(() => {
@@ -105,18 +135,25 @@ function convert_to_hour_format(date_to_compute: Date) {
 
   return formattedTime
 }
-async function submit_to_event(event_id: number) {
+async function submit_to_event(event: Event) {
   if (!user_store.id) {
     display.login_modal = true
     return false
   }
-  is_loading.value.set(event_id, true)
+  is_loading.value.set(event.id, true)
   try {
-    await event_store.submit_events(event_id)
+    const res = await event_store.submit_events(event.id)
+    if (res.ok) {
+      confirmation_modal.id = event.id
+      confirmation_modal.is_joining = res.subscribe
+      confirmation_modal.display = true
+      confirmation_modal.start = convert_to_hour_format(event.start)
+      confirmation_modal.end = convert_to_hour_format(event.end)
+    }
   } catch (error) {
     console.error(error)
   } finally {
-    is_loading.value.set(event_id, false)
+    is_loading.value.set(event.id, false)
   }
 }
 </script>
