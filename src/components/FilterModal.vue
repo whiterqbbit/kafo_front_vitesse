@@ -141,7 +141,7 @@
       <!-- FILTRES AUTRES -->
       <section>
         <div id="misc_filters" class="filter-container flex flex-col">
-          <span class="filter-modal-title">Autres</span>
+          <span class="filter-modal-title">Equipements</span>
           <div class="filter-container-inner justify-start gap-8">
             <div class="flex flex-col gap-1">
               <!-- <div class="bullet">
@@ -157,6 +157,10 @@
               <div class="bullet">
                 <ACheckbox v-model="filters.power" class="filter-modal-checkbox" />
                 <label for="filter_power">Prises</label>
+              </div>
+              <div class="bullet">
+                <ACheckbox v-model="filters.floor" class="filter-modal-checkbox" />
+                <label for="filter_power">Etage isolé</label>
               </div>
             </div>
           </div>

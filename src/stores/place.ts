@@ -29,6 +29,7 @@ export const use_place_store = defineStore('place', () => {
     // Misc filters
     if (filters.value.wifi) selected_misc.push('Wifi')
     if (filters.value.power) selected_misc.push('Prises')
+    if (filters.value.floor) selected_misc.push('Etage isolé')
 
     function calculate_distance_from_places() {
       // Calculate the distance between two coordinates
