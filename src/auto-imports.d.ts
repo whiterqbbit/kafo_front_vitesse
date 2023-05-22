@@ -278,6 +278,7 @@ declare global {
   const useWindowFocus: typeof import('@vueuse/core')['useWindowFocus']
   const useWindowScroll: typeof import('@vueuse/core')['useWindowScroll']
   const useWindowSize: typeof import('@vueuse/core')['useWindowSize']
+  const use_chat_store: typeof import('./stores/chat')['use_chat_store']
   const use_club_store: typeof import('./stores/clubs')['use_club_store']
   const use_event_store: typeof import('./stores/event')['use_event_store']
   const use_map_store: typeof import('./stores/map')['use_map_store']
@@ -584,6 +585,7 @@ declare module 'vue' {
     readonly useWindowFocus: UnwrapRef<typeof import('@vueuse/core')['useWindowFocus']>
     readonly useWindowScroll: UnwrapRef<typeof import('@vueuse/core')['useWindowScroll']>
     readonly useWindowSize: UnwrapRef<typeof import('@vueuse/core')['useWindowSize']>
+    readonly use_chat_store: UnwrapRef<typeof import('./stores/chat')['use_chat_store']>
     readonly use_club_store: UnwrapRef<typeof import('./stores/clubs')['use_club_store']>
     readonly use_event_store: UnwrapRef<typeof import('./stores/event')['use_event_store']>
     readonly use_map_store: UnwrapRef<typeof import('./stores/map')['use_map_store']>

@@ -7,9 +7,14 @@ export const use_chat_store = defineStore('chat', () => {
   const channel_id = ref<string | null>(null)
   const ably: Ref<Ably.Realtime | null> = ref(null)
   const channel: Ref<Ably.Types.RealtimeChannelCallbacks | null> = ref(null)
-  connect_to_ably()
+  const messages: Ref<Ably.Types.Message[] | null> = ref(null)
 
-  wait_for_greetings()
+  watchEffect(async () => {
+    if (!channel_id.value || !ably.value) return
+    channel.value = ably.value.channels.get(channel_id.value)
+    listen_to_messages()
+    messages.value = await fetch_messages_from_server()
+  })
 
   async function initialize_ably() {
     try {
@@ -17,12 +22,33 @@ export const use_chat_store = defineStore('chat', () => {
 
       ably.value = new Ably.Realtime(token)
       await connect_to_ably()
-
-      if (!channel_id.value) throw new Error('Channel ID is not available.')
-      channel.value = ably.value.channels.get(channel_id.value)
-      await wait_for_greetings()
-      connect_to_ably()
     } catch (error) {
+      const typed_error = error as Error
+      console.error(typed_error.message)
+    }
+  }
+
+  async function fetch_messages_from_server() {
+    const xano_ably_get_messages_url = `${import.meta.env.VITE_XANO_API_URL}/api:YkBUDKvR/ably/chat/place`
+    const cookies = useCookies(['user'])
+    const user_auth_cookie = cookies.get('token')
+    try {
+      const response = await fetch(xano_ably_get_messages_url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user_auth_cookie}`,
+        },
+        body: JSON.stringify(
+          {
+            place_id: channel_id.value,
+          },
+        ),
+      })
+      const data = await response.json()
+      if (!response.ok) throw new Error(data.message)
+      return data
+    } catch (error: any) {
       const typed_error = error as Error
       console.error(typed_error.message)
     }
@@ -60,11 +86,12 @@ export const use_chat_store = defineStore('chat', () => {
     }
   }
 
-  async function wait_for_greetings() {
+  async function listen_to_messages() {
     try {
       if (!channel.value) throw new Error('Channel is not available.')
       await channel.value.subscribe((message) => {
-        console.log(`Received a greeting message in realtime: ${message.data}`)
+        console.log(`Received a message in realtime: ${message.data}`)
+        messages.value?.push(message)
       })
     } catch (error) {
       const typed_error = error as Error
@@ -88,5 +115,6 @@ export const use_chat_store = defineStore('chat', () => {
   return {
     channel_id,
     send_message,
+    messages,
   }
 })

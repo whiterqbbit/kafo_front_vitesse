@@ -159,6 +159,7 @@
               </div>
             </div>
           </div>
+          {{ chat_store.messages }}
           <JoinEventModal :place_id="props.id" />
         </div>
       </div>
@@ -185,6 +186,9 @@ place_store.selected_id = selected_place_id
 const selected_place = computed(() => place_store.selected)
 
 const router = useRouter()
+
+const chat_store = use_chat_store()
+chat_store.channel_id = props.id || null
 
 const swipe_target = ref<HTMLElement | null>(null)
 useSwipe(swipe_target, {
