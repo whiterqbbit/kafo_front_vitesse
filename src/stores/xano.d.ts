@@ -79,7 +79,7 @@ export interface Place {
 	nom: string
 	tags: CafeTag[]
 	type?: PlaceType
-	events?: Event[]
+	events?: Session[]
 	website?: string
 	location: {
 		data: {
@@ -176,7 +176,7 @@ interface User {
 	clubs?: Club[]
 }
 
-export interface Event {
+export interface Session {
 	id: number
 	event_id: number
 	created_at: Date
@@ -195,5 +195,5 @@ export interface Attendance {
 	attendance: number
 	attendees: User[]
 	place_id: number
-	events: Event[]
+	events: Session[]
 }
