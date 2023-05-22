@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     ABtn: typeof import('anu-vue')['ABtn']
     ACard: typeof import('anu-vue')['ACard']
     ACheckbox: typeof import('anu-vue')['ACheckbox']
+    ADialog: typeof import('anu-vue')['ADialog']
     AInput: typeof import('anu-vue')['AInput']
     AList: typeof import('anu-vue')['AList']
     AListItem: typeof import('anu-vue')['AListItem']
