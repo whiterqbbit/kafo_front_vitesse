@@ -15,7 +15,7 @@
     <div v-else i-ci-wifi-off class="icon-btn">
       <ATooltip text="Pas de Wifi" />
     </div>
-    <div v-if="props.tags.includes('Prises')" i-ic-round-power-off class="icon-btn">
+    <div v-if="!props.tags.includes('Prises')" i-ic-round-power-off class="icon-btn">
       <ATooltip text="Pas de prises" />
     </div>
     <div v-else i-ic-round-power class="icon-btn">
