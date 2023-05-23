@@ -5,7 +5,7 @@
       v-model="confirmation_modal.display"
       :title="confirmation_modal.is_joining ? 'Vous avez rejoint la session !' : 'Vous avez quitté la session !'"
       :subtitle="`${get_relative_date_from_date(day)} de ${convert_to_hour_format(confirmation_modal?.session?.start)} à ${convert_to_hour_format(confirmation_modal.session.end)}`"
-      :text="confirmation_modal.is_joining ? 'Wahou trop bien' : 'trop nul'"
+      :text="confirmation_modal.is_joining ? 'Votre venue est notifié aux membres de Kafo, mais n\'est pas une réservation !' : ''"
     >
       <div class="m-4 flex flex-col gap-4">
         <!-- <ACheckbox
@@ -17,7 +17,7 @@
           <ABtn @click="confirmation_modal.display = false">
             Retour
           </ABtn>
-          <ABtn variant="light" icon="i-bx-calendar">
+          <ABtn v-if="confirmation_modal.is_joining" variant="light" icon="i-bx-calendar">
             <a :href="confirmation_modal.calendar_link" target="_blank">Google Calendar</a>
           </ABtn>
         </div>
