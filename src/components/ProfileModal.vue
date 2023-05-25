@@ -52,22 +52,25 @@
           </div>
           <div class="flex flex-col gap-2">
             <div class="flex place-items-center gap-3">
-              <InputSwitch v-model="user_store.computed_open_to_pause" />
+              <ASwitch v-model="user_store.computed_open_to_pause" />
               <IconBxbxsCoffee class="h-7 w-7" />
               Prendre un café
             </div>
             <div class="flex place-items-center gap-3">
-              <InputSwitch v-model="user_store.computed_open_to_lunch" />
+              <ASwitch v-model="user_store.computed_open_to_lunch" />
               <IconFluentFork class="h-7 w-7" />
               Manger un bout
             </div>
             <div class="flex place-items-center gap-3">
-              <InputSwitch v-model="user_store.computed_open_to_afterwork" />
+              <ASwitch v-model="user_store.computed_open_to_afterwork" />
               <IconFluentGlass class="h-7 w-7" />
               Un afterwork
             </div>
           </div>
         </div>
+        <button class="my-2 place-self-center py-2 text-gray-400 hover:(bg-cafe-100 text-cafe-500 shadow-md) btn" @click="logout">
+          Se déconnecter
+        </button>
       </div>
     </div>
   </div>
@@ -90,5 +93,10 @@ function edit_job_title_and_bio() {
 
 function remove_tag(club: Club) {
   if (edit_tags_mode.value) user_store.remove_club(club)
+}
+
+function logout() {
+  user_store.logout()
+  display.profile_modal = false
 }
 </script>
