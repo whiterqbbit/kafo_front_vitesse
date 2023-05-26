@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { useCookies } from '@vueuse/integrations/useCookies'
+import analytics from '../utils/segment'
 import type { Club, User } from './xano.d'
 
 const cookies = useCookies(['user'])
@@ -68,7 +69,7 @@ export const use_user_store = defineStore('user', () => {
 
       if (!response.ok) throw new Error(data.message)
 
-      updateUser(data)
+      update_user(data)
     } catch (error) {
       console.error('Error during edit_user:', error)
       throw error
@@ -313,7 +314,7 @@ export const use_user_store = defineStore('user', () => {
   }
 
   function logout(): void {
-    resetUser()
+    reset_user()
     cookies.set('token', '')
   }
 
@@ -335,14 +336,23 @@ export const use_user_store = defineStore('user', () => {
         },
       })
       const data: User = await response.json()
-      updateUser(data)
+      console.log('me:', data)
+      analytics.identify(data.id, {
+        description: data.bio,
+        email: data.email,
+        first_name: data.first_name,
+        id: data.id,
+        last_name: data.family_name,
+        title: data.job_title,
+      })
+      update_user(data)
     } catch (error) {
       console.error(error)
     }
     is_loading.value = false
   }
 
-  function resetUser() {
+  function reset_user() {
     is_auth.value = false
     bio.value = ''
     clubs.value = []
@@ -366,9 +376,9 @@ export const use_user_store = defineStore('user', () => {
     type.value = ''
   }
 
-  function updateUser(data: User | null) {
+  function update_user(data: User | null) {
     if (data === null) {
-      resetUser()
+      reset_user()
       return
     }
     is_auth.value = data !== null

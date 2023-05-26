@@ -23,6 +23,7 @@
   "dependencies": {
     "@anu-vue/preset-theme-default": "^0.14.0",
     "@egjs/vue3-flicking": "^4.10.7",
+    "@segment/analytics.js-core": "^4.1.11",
     "@unocss/eslint-config": "^0.51.4",
     "@unocss/reset": "^0.41.2",
     "@vue-macros/reactivity-transform": "^0.3.7",

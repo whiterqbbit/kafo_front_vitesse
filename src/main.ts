@@ -5,6 +5,7 @@ import PrimeVue from 'primevue/config'
 // @ts-expect-error failed to resolve types
 import { anu } from 'anu-vue'
 import App from './App.vue'
+import analytics from './utils/segment'
 import type { UserModule } from './types'
 import '@unocss/reset/tailwind.css'
 import './styles/main.css'
@@ -30,5 +31,10 @@ export const createApp = ViteSSG(
       registerComponents: false,
       themes: { light: { colors: { primary: '4, 23%, 34%' } } },
     })
+
+    if (typeof window !== 'undefined') {
+      analytics.load(import.meta.env.VITE_SEGMENT_WRITE_KEY)
+      analytics.page()
+    }
   },
 )
