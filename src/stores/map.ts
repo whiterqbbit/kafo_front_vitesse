@@ -2,7 +2,9 @@ import { defineStore } from 'pinia'
 import { useGeolocation } from '@vueuse/core'
 import type { Router } from 'vue-router'
 import type { Place } from '@/stores/xano.d'
-import marker_icon from '@/assets/img/geoloc/marker_6.png'
+import icon_normal from '@/assets/img/geoloc/marker_6.png'
+import icon_favourite from '@/assets/img/geoloc/marker_4.png'
+import icon_people from '@/assets/img/geoloc/marker_d.png'
 import { use_user_store } from '@/stores/user'
 import { preferences } from '@/stores/preferences'
 
@@ -95,17 +97,18 @@ export const use_map_store = defineStore('use_map_store', () => {
     map_leaf.value.flyTo(lngLat, zoom)
   }
 
-  async function add_marker(lngLat: simple_coords, popup_description: string, place_id: number, router: Router) {
+  async function add_marker(lngLat: simple_coords, popup_description: string, place_id: number, router: Router, icon_type: string) {
     if (!leaflet) return
     const { Icon, marker } = await leaflet
-    const customIcon = new Icon({
-      iconUrl: marker_icon,
+
+    const icon = new Icon({
+      iconUrl: icon_type,
       iconSize: [20, 32],
       iconAnchor: [20, 32],
       popupAnchor: [-10, -32],
     })
 
-    const marker_instance = marker(lngLat, { icon: customIcon })
+    const marker_instance = marker(lngLat, { icon })
       .addTo(map_leaf.value)
       // .bindPopup(popup_description)
       .on('click', () => {
@@ -135,7 +138,8 @@ export const use_map_store = defineStore('use_map_store', () => {
 
     // Add new markers for each filtered place
     place_db.value.forEach((place) => {
-      add_marker([place.location.data.lat, place.location.data.lng], place.desc || '', place.id, router)
+      const icon = place.attendance ? icon_people : place.our_fav ? icon_favourite : icon_normal
+      add_marker([place.location.data.lat, place.location.data.lng], place.desc || '', place.id, router, icon)
     })
   }
 
