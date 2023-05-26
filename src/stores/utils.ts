@@ -29,10 +29,8 @@ export const use_utils_store = defineStore('utils', () => {
         body: JSON.stringify({ query, session_id }),
       })
       const data: Suggestion[] = await response.json()
-      //   console.log('data mapbox_search_suggest', data)
 
       search_count += 1
-      //   console.log(`${query} is searched`, `search_count : ${search_count}`, `session_id : ${session_id}`)
       return data
     } catch (error) {
       console.error('Error in mapbox_search_suggest:', error)
