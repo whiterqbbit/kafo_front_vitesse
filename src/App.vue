@@ -36,7 +36,7 @@ const favicon = environnement === 'production' ? '/favicon.png' : environnement 
 useHead({
   title: `${env_string}Kafo | Coworking partout, solitude nulle part`,
   meta: [
-    { name: 'description', content: 'Ca va, ca vient' },
+    { name: 'description', content: 'Coworking partout, solitude nulle part' },
     {
       name: 'theme-color',
       content: '#815a4f',
@@ -63,12 +63,14 @@ if (environnement === 'production') {
   + '\n🤪                                            🤪'
   + '\n 🤪🤪🤪🤪🤪🤪🤪 Coucou petit cokinou 🤪🤪🤪🤪🤪🤪🤪')
 }
+
+const pages_with_landing_header = ['/', '/a-propos', '/confidentialite', '/mentions-legales']
 </script>
 
 <template>
   <main bg-cafe-50 text-cafe-600>
-    <DesktopHeader v-if="!($route.path === '/') && !preferences.is_mobile" />
-    <MobileHeader v-else-if="!($route.path === '/')" />
+    <DesktopHeader v-if="!(pages_with_landing_header.includes($route.path)) && !preferences.is_mobile" />
+    <MobileHeader v-else-if="!(pages_with_landing_header.includes($route.path))" />
     <RouterView v-slot="{ Component }" :key="$route.fullPath" class="h-screen">
       <KeepAlive include="map">
         <component :is="Component" />

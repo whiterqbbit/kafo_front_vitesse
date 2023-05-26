@@ -9,6 +9,18 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ABtn: typeof import('anu-vue')['ABtn']
+    AButton: typeof import('anu-vue')['AButton']
+    ACard: typeof import('anu-vue')['ACard']
+    ACheckbox: typeof import('anu-vue')['ACheckbox']
+    ADialog: typeof import('anu-vue')['ADialog']
+    AInput: typeof import('anu-vue')['AInput']
+    AInputSwitch: typeof import('anu-vue')['AInputSwitch']
+    AList: typeof import('anu-vue')['AList']
+    AListItem: typeof import('anu-vue')['AListItem']
+    ARadio: typeof import('anu-vue')['ARadio']
+    ASwitch: typeof import('anu-vue')['ASwitch']
+    ATooltip: typeof import('anu-vue')['ATooltip']
     AvatarStack: typeof import('./components/AvatarStack.vue')['default']
     BxBxsCoffee: typeof import('./components/svg/BxBxsCoffee.vue')['default']
     Checkbox: typeof import('primevue/checkbox')['default']

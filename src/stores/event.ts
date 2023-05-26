@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
 import { useCookies } from '@vueuse/integrations/useCookies'
-import type { Attendance, Event, Place } from './xano'
+import type { Attendance, Place, Session } from './xano'
 
 export const use_event_store = defineStore('event', () => {
   const selected_place_id = ref<number | null>(null)
-  const selected_place_events: Ref<Event[] | null> = ref(null)
+  const selected_place_events: Ref<Session[] | null> = ref(null)
   const selected_place_events_loading = ref(false)
   const selected_place_events_error = ref<string | null>(null)
   const is_populated = ref(false)
@@ -18,7 +18,7 @@ export const use_event_store = defineStore('event', () => {
       const url_with_query = `${xano_get_events_url}?coffee_id_req=${selected_place_id.value?.toString()}`
       const response = await fetch(url_with_query)
       if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}. Failed to fetch place events.`)
-      const data = await response.json() as Event[] | null
+      const data = await response.json() as Session[] | null
 
       selected_place_events.value = data
     } catch (error) {
@@ -82,9 +82,11 @@ export const use_event_store = defineStore('event', () => {
 
       get_place_events()
       populate_places()
+      return { ok: true, subscribe }
     } catch (error) {
       const typed_error = error as Error
       selected_place_events_error.value = typed_error.message
+      return { ok: false, subscribe }
     }
   }
 
