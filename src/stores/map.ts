@@ -65,6 +65,9 @@ export const use_map_store = defineStore('use_map_store', () => {
           if (markers.value.length) markers_on_map.value = markers.value.filter(marker => map_leaf.value.getBounds().contains(marker.coordinates))
         }
       })
+      .on('mouseover', () => {
+        display.place_tooltip = true
+      })
       .setView(viewLngLat, zoom)
 
     if (!preferences.is_mobile) L.control.zoom({ position: 'bottomright' }).addTo(map_leaf.value)
@@ -108,7 +111,7 @@ export const use_map_store = defineStore('use_map_store', () => {
       popupAnchor: [-10, -32],
     })
 
-    const marker_instance = marker(lngLat, { icon })
+    const marker_instance = marker(lngLat, { icon, riseOnHover: true })
       .addTo(map_leaf.value)
       // .bindPopup(popup_description)
       .on('click', () => {

@@ -5,6 +5,7 @@ export const display = reactive({
   filter_modal: false,
   burger_menu: false,
   profile_modal: false,
+  place_tooltip: false,
 })
 
 export function reset_display() {
