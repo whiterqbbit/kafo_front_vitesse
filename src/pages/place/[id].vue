@@ -187,7 +187,6 @@ let gallery_open = false
 const router = useRouter()
 
 const chat_store = use_chat_store()
-chat_store.channel_id = props.id || null
 
 const swipe_target = ref<HTMLElement | null>(null)
 useSwipe(swipe_target, {

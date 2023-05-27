@@ -197,3 +197,14 @@ export interface Attendance {
 	place_id: number
 	events: Session[]
 }
+
+export interface Chat {
+	id: number
+	created_at: Date
+	message: string
+	user_id: number
+	coffee_id: number
+	club_id: number
+	club_uuid: string
+	receiver_id: number
+}
