@@ -1,14 +1,14 @@
 import { defineStore } from 'pinia'
 import { useCookies } from '@vueuse/integrations/useCookies'
-import type { Chat, User } from './xano'
+import type { Chat, Conversation } from './xano'
 
 export const use_chat_store = defineStore('chat', () => {
   const user_store = use_user_store()
   const chat_loading = ref(false)
+  const send_message_loading = ref(false)
   const chat_error = ref<string | null>(null)
   const messages: Ref<Chat[] | null> = ref([])
-  interface Conversation { contact: User; messages: Chat[] }
-  const selected_conversation: Ref<Conversation[] | null> = ref(null)
+  const selected_conversation: Ref<Conversation | null> = ref(null)
 
   const conversations = computed(() => {
     if (!messages.value) return null
@@ -30,8 +30,8 @@ export const use_chat_store = defineStore('chat', () => {
     const cookies = useCookies(['user'])
     const user_auth_cookie = cookies.get('token')
     try {
-      const xano_get_chat_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/chat`
-      const response = await fetch(xano_get_chat_url, {
+      const xano_chat_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/chat`
+      const response = await fetch(xano_chat_url, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -52,22 +52,30 @@ export const use_chat_store = defineStore('chat', () => {
     }
   }
 
-  async function listen_to_messages() {
+  async function send_message(message: string, receiver_id: number) {
     try {
-
+      send_message_loading.value = true
+      const cookies = useCookies(['user'])
+      const user_auth_cookie = cookies.get('token')
+      const xano_chat_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/chat`
+      const response = await fetch(xano_chat_url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user_auth_cookie}`,
+        },
+        body: JSON.stringify({
+          message,
+          receiver_id,
+        }),
+      })
+      if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}. Failed to fetch all messages.`)
+      get_all_messages()
     } catch (error) {
       const typed_error = error as Error
       console.error(typed_error.message)
     }
-  }
-
-  async function send_message(message: string) {
-    try {
-
-    } catch (error) {
-      const typed_error = error as Error
-      console.error(typed_error.message)
-    }
+    send_message_loading.value = false
   }
 
   return {
@@ -77,6 +85,6 @@ export const use_chat_store = defineStore('chat', () => {
     chat_loading,
     chat_error,
     conversations,
-    selected_conversation
+    selected_conversation,
   }
 })

@@ -210,3 +210,8 @@ export interface Chat {
 	user: User
 	receiver: User
 }
+
+interface Conversation {
+  contact: User;
+  messages: Message[];
+}

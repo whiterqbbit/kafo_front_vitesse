@@ -20,6 +20,7 @@ declare module '@vue/runtime-core' {
     AListItem: typeof import('anu-vue')['AListItem']
     ARadio: typeof import('anu-vue')['ARadio']
     ASwitch: typeof import('anu-vue')['ASwitch']
+    ATextarea: typeof import('anu-vue')['ATextarea']
     ATooltip: typeof import('anu-vue')['ATooltip']
     AvatarStack: typeof import('./components/AvatarStack.vue')['default']
     BxBxsCoffee: typeof import('./components/svg/BxBxsCoffee.vue')['default']
