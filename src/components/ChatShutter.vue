@@ -7,10 +7,10 @@
       </div>
       <div>
         <div
-          v-for="conversation in conversations"
-          :key="conversation?.contact?.id"
+          v-for="(conversation, index) in conversations"
+          :key="index"
           class="flex place-items-center gap-3 rounded-xl p-2 font-bold"
-          :class="conversation === selected_conversation ? 'bg-cafe-600 text-cafe-50' : 'cursor-pointer'"
+          :class="conversation.contact?.id === selected_conversation?.contact?.id ? 'bg-cafe-600 text-cafe-50' : 'cursor-pointer'"
           @click="selected_conversation = conversation"
         >
           <img v-if="conversation?.contact" :src="conversation?.contact?.pic_xsmall ? conversation?.contact?.pic_xsmall : default_user_pic" class="h-10 w-10 rounded-full object-cover">
@@ -19,7 +19,7 @@
       </div>
     </div>
     <!-- messages -->
-    <div v-if="selected_conversation" class="relative w-70 flex flex-col animate-fade-in-right gap-3 border-l-2 border-cafe-400 p-2">
+    <div v-if="selected_conversation" class="relative w-70 flex flex-col animate-fade-in-right gap-2 border-l-2 border-cafe-400 p-2">
       <button class="absolute right-0 top-2 h-7 w-7 rounded-3xl hover:scale-105" icon="pi pi-times" @click="selected_conversation = null">
         <img :src="svg_close">
       </button>
@@ -27,16 +27,17 @@
         {{ selected_conversation.contact.first_name }}
       </div>
       <div
-        class="flex flex-col gap-2"
+        ref="message_container"
+        class="w-full flex flex-col place-self-end gap-2 overflow-auto"
       >
         <div
           v-for="message in selected_conversation.messages"
           :key="message.id"
-          class="flex flex-col"
+          class="w-full flex flex-col"
         >
           <div
-            class="w-fit flex rounded-xl p-2"
-            :class="message.user_id === user_store.id ? 'bg-grass-300 rounded-br-none' : 'bg-cafe-300 rounded-bl-none'"
+            class="w-max-4/5 w-fit flex rounded-xl p-2"
+            :class="message.user_id === user_store.id ? 'bg-grass-300 text-cafe-50 rounded-br-none place-self-end' : 'bg-cafe-300 rounded-bl-none'"
           >
             {{ message.message }}
           </div>
@@ -51,10 +52,10 @@
       <div>
         <ATextarea
           v-model="new_message"
-          class="w-full rounded-xl text-sm text-cafe-600 shadow-inner placeholder-cafe-400"
+          class="bottom-0 w-full rounded-xl text-sm text-cafe-600 shadow-inner placeholder-cafe-400"
           placeholder="Votre message..."
           auto-size
-          :loading="use_chat_store().chat_is_loading"
+          :loading="use_chat_store().send_message_loading"
           @keyup.enter="send_message()"
         />
       </div>
@@ -68,9 +69,12 @@ import svg_close from '@/assets/svg/icon/MingcuteCloseFill.svg'
 import type { Conversation } from '@/stores/xano.d.ts'
 
 const user_store = use_user_store()
-const conversations = use_chat_store().conversations
+const conversations = computed(() => use_chat_store().conversations)
 const selected_conversation = ref<Conversation | null>(null)
 const new_message = ref('')
+const message_container = ref<HTMLElement | null>(null)
+
+onMounted(() => scroll_to_bottom)
 
 function format_timestamp(timestamp: Date) {
   const message_date = new Date(timestamp)
@@ -97,8 +101,27 @@ function format_timestamp(timestamp: Date) {
   }
 }
 
-function send_message() {
-  use_chat_store().send_message(new_message.value, selected_conversation?.value?.contact.id)
+watch(conversations, () => {
+  if (!selected_conversation?.value?.contact?.id) return
+  const selected_conversation_id = selected_conversation.value.contact.id
+  selected_conversation.value = conversations?.value?.find(c => c.contact.id === selected_conversation_id) || null
+}, { immediate: true })
+
+watch(selected_conversation, () => nextTick(scroll_to_bottom), { immediate: true })
+
+async function send_message() {
+  use_chat_store().send_message_loading = true
+  if (!selected_conversation?.value?.contact.id) return
+  await use_chat_store().send_message(new_message.value, selected_conversation?.value?.contact.id)
+  const selected_conversation_id = selected_conversation.value.contact.id
+  selected_conversation.value = conversations?.value?.find(c => c.contact.id === selected_conversation_id) || null
   new_message.value = ''
+  use_chat_store().send_message_loading = false
+  nextTick(scroll_to_bottom)
+}
+
+function scroll_to_bottom() {
+  if (!message_container.value) return
+  message_container.value.scrollTop = message_container.value.scrollHeight
 }
 </script>

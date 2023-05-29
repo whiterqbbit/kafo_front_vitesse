@@ -12,13 +12,13 @@ export const use_chat_store = defineStore('chat', () => {
 
   const conversations = computed(() => {
     if (!messages.value) return null
-    const dms: Ref<Conversation[]> = ref([])
+    const dms: Conversation[] = []
     messages.value.forEach((message: Chat) => {
       if (!message) return
       const friend = message.user_id === user_store.id ? message.receiver : message.user
       if (!friend) return
-      if (!dms.value.some(dm => dm.contact.id === friend.id)) dms.value.push({ contact: friend, messages: [message] })
-      else dms.value.find(dm => dm.contact.id === friend.id)?.messages.push(message)
+      if (!dms.some(dm => dm.contact.id === friend.id)) dms.push({ contact: friend, messages: [message] })
+      else dms.find(dm => dm.contact.id === friend.id)?.messages.push(message)
     })
     return dms
   })
@@ -54,7 +54,6 @@ export const use_chat_store = defineStore('chat', () => {
 
   async function send_message(message: string, receiver_id: number) {
     try {
-      send_message_loading.value = true
       const cookies = useCookies(['user'])
       const user_auth_cookie = cookies.get('token')
       const xano_chat_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/chat`
@@ -75,7 +74,6 @@ export const use_chat_store = defineStore('chat', () => {
       const typed_error = error as Error
       console.error(typed_error.message)
     }
-    send_message_loading.value = false
   }
 
   return {
@@ -86,5 +84,6 @@ export const use_chat_store = defineStore('chat', () => {
     chat_error,
     conversations,
     selected_conversation,
+    send_message_loading,
   }
 })
