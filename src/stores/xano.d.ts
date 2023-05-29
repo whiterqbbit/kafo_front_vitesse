@@ -207,4 +207,6 @@ export interface Chat {
 	club_id: number
 	club_uuid: string
 	receiver_id: number
+	user: User
+	receiver: User
 }
