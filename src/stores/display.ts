@@ -32,8 +32,12 @@ export const stored_display = useStorage('stored_display', {
 })
 
 export function toggle_hover_profile(attendee: User) {
+  console.log('bebe')
+  console.log(display.hover_profile)
+  console.log(display.hover_profile_attendee)
   if (!(display.hover_profile === true && display.hover_profile_attendee?.id === attendee.id)) {
     display.hover_profile_attendee = attendee
     display.hover_profile = true
   }
+  console.log('bobo')
 }

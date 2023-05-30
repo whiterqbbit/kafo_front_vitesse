@@ -49,7 +49,7 @@
         <div v-else-if="session.user_id?.length">
           <div
             v-for="user in session.user_id" :key="user.id || 'fallback-key'"
-            class="flex items-center gap-3 rounded-xl p-1.5"
+            class="flex cursor-pointer items-center gap-3 rounded-xl p-1.5"
             :class="user_store.id === user.id ? 'bg-cafe-300' : '' "
             @click="toggle_hover_profile(user)"
           >

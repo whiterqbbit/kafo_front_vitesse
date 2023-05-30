@@ -1,11 +1,11 @@
 <template lang="">
-  <div class="fixed right-0 top-50px z-40 h-screen--50px max-w-full w-full flex flex-col animate-duration-100 overflow-auto border-cafe-400 bg-cafe-100 p-3 shadow-md sm:flex-row sm:animate-fade-in-right sm:border-l-2 sm:rounded-l-xl">
+  <div class="fixed right-0 top-50px z-40 h-screen--50px max-w-full w-full flex animate-duration-100 overflow-auto border-cafe-400 bg-cafe-100 p-3 shadow-md sm:w-fit sm:animate-fade-in-right sm:border-l-2 sm:rounded-l-xl">
     <!-- liste des chatrooms -->
     <div v-if="conversations" class="flex flex-col gap-5 p-2">
       <button class="absolute right-0 top-2 z-20 h-7 w-7 rounded-3xl hover:scale-105" icon="pi pi-times" @click="display.chat_shutter = false">
         <img :src="svg_close">
       </button>
-      <div class="text-center text-lg font-bold">
+      <div v-if="!preferences.is_mobile || selected_conversation === null" class="text-center text-lg font-bold">
         Vos conversations
       </div>
       <div>
@@ -18,9 +18,9 @@
         >
           <img
             v-if="conversation?.contact" :src="conversation?.contact?.pic_xsmall ? conversation?.contact?.pic_xsmall : default_user_pic"
-            class="h-10 w-10 rounded-full object-cover"
+            class="aspect-square h-10 w-10 rounded-full object-cover"
           >
-          <span v-if="conversation?.contact?.first_name">{{ conversation?.contact?.first_name }}</span>
+          <span v-if="conversation?.contact?.first_name && !preferences.is_mobile || selected_conversation === null">{{ conversation?.contact?.first_name }}</span>
         </div>
       </div>
     </div>
