@@ -16,10 +16,56 @@ describe('place', () => {
     expect(place_store.db).toMatchSnapshot()
   })
 
-  it('filters free places', () => {
+  it('filters according to pricing', () => {
     reset_filters()
-    filters.value.pricing_free = true
-    expect(place_store.db_filtered).toMatchSnapshot()
+    const unfiltered_db = place_store.db_filtered.length
+
+    filters.value.pricing_hourly = true
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db)
+    expect(place_store.db_filtered.length).toBeGreaterThan(0)
+
+    reset_filters()
+    filters.value.pricing_place = true
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db)
+    expect(place_store.db_filtered.length).toBeGreaterThan(0)
+  })
+
+  it('filters according to noise', () => {
+    reset_filters()
+    const unfiltered_db = place_store.db_filtered.length
+
+    filters.value.noise_level_silent = true
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db)
+    expect(place_store.db_filtered.length).toBeGreaterThan(0)
+
+    reset_filters()
+    filters.value.noise_level_calm = true
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db)
+    expect(place_store.db_filtered.length).toBeGreaterThan(0)
+
+    reset_filters()
+    filters.value.noise_level_lively = true
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db)
+    expect(place_store.db_filtered.length).toBeGreaterThan(0)
+  })
+
+  it('filters according to misc', () => {
+    reset_filters()
+    const unfiltered_db = place_store.db_filtered.length
+
+    filters.value.wifi = true
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db)
+    expect(place_store.db_filtered.length).toBeGreaterThan(0)
+
+    reset_filters()
+    filters.value.power = true
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db)
+    expect(place_store.db_filtered.length).toBeGreaterThan(0)
+
+    reset_filters()
+    filters.value.floor = true
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db)
+    expect(place_store.db_filtered.length).toBeGreaterThan(0)
   })
 
   it('sorts the db by attendance', () => {
