@@ -20028,9 +20028,7 @@ Attention, il peut y avoir beaucoup de queue.",
 ]
 `;
 
-exports[`place > filters free places 1`] = `[]`;
-
-exports[`place > sorts the db 1`] = `
+exports[`place > filters free places 1`] = `
 [
   {
     "acces_wifi": "",
