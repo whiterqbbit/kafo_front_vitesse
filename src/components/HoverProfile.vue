@@ -81,7 +81,6 @@ function get_position_style() {
 }
 
 function open_conversation() {
-  console.log('hover_profile_attendee', display.hover_profile_attendee)
   if (!display.hover_profile_attendee) return
   if (!use_chat_store().conversations?.find(c => c.contact.id === display.hover_profile_attendee?.id)) {
     use_chat_store().conversations?.push({
@@ -96,7 +95,6 @@ function open_conversation() {
     use_chat_store().selected_conversation = use_chat_store().conversations?.[-1] ?? null
   } else {
     use_chat_store().selected_conversation = use_chat_store().conversations?.find(c => c.contact.id === display.hover_profile_attendee?.id) ?? null
-    console.log('selected_conversation', use_chat_store().selected_conversation)
   }
 
   display.hover_profile = false

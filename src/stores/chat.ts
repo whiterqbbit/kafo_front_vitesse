@@ -23,7 +23,6 @@ export const use_chat_store = defineStore('chat', () => {
     })
 
     const selected_conversation_id = selected_conversation?.value?.contact.id
-    console.log('selected_conversation_id', selected_conversation_id)
     selected_conversation.value = dms?.find(c => c.contact.id === selected_conversation_id) || null
     return dms
   })
@@ -57,11 +56,10 @@ export const use_chat_store = defineStore('chat', () => {
     }
   }
 
-  watch(() => display.chat_shutter, (newVal, oldVal) => {
+  watch(() => display.chat_shutter, (newVal) => {
     if (newVal === true) {
       // Start fetching messages every second when display.chat_shutter becomes true
       intervalId.value = setInterval(() => {
-        get_all_messages()
       }, 5000)
     } else if (newVal === false && intervalId.value !== undefined) {
       // Stop fetching messages when display.chat_shutter becomes false

@@ -22,12 +22,11 @@
           >
           <span v-if="conversation?.contact?.first_name">{{ conversation?.contact?.first_name }}</span>
         </div>
-        {{ use_chat_store().selected_conversation.contact.first_name }}
       </div>
     </div>
     <!-- messages -->
     <div v-if="selected_conversation" class="relative w-70 flex flex-col animate-slide-in-right animate-duration-130 gap-2 border-l-2 border-cafe-400 p-2">
-      <button class="absolute left-2 top-2 rounded-3xl p-0 p-x-1 text-xl font-bold btn-cafe-light" icon="pi pi-times" @click="selected_conversation = null">
+      <button class="absolute left-2 top-2 rounded-3xl p-0 p-x-1 text-xl font-bold btn-cafe-light" icon="pi pi-times" @click="use_chat_store().selected_conversation = null">
         &lt;&lt;
       </button>
       <div class="text-center text-lg font-bold">
