@@ -1,3 +1,5 @@
+import type { User } from './xano'
+
 type DisplayKey = 'login_modal' | 'cookie_modal' | 'filter_modal' | 'burger_menu' | 'profile_modal'
 
 export const display = reactive({
@@ -7,6 +9,8 @@ export const display = reactive({
   burger_menu: false,
   profile_modal: false,
   chat_shutter: false,
+  hover_profile: false,
+  hover_profile_attendee: null as User | null,
 })
 
 export function reset_display() {
@@ -26,3 +30,10 @@ export function toggle_modal(modal: DisplayKey) {
 export const stored_display = useStorage('stored_display', {
   welcome_modal: true,
 })
+
+export function toggle_hover_profile(attendee: User) {
+  if (!(display.hover_profile === true && display.hover_profile_attendee?.id === attendee.id)) {
+    display.hover_profile_attendee = attendee
+    display.hover_profile = true
+  }
+}

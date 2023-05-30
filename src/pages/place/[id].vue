@@ -156,7 +156,6 @@
               </div>
             </div>
           </div>
-          {{ chat_store.messages }}
           <JoinEventModal :place_id="props.id" />
         </div>
       </div>

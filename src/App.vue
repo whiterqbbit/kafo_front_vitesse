@@ -68,10 +68,11 @@ const pages_with_landing_header = ['/', '/a-propos', '/confidentialite', '/menti
 </script>
 
 <template>
-  <main bg-cafe-50 text-cafe-600>
+  <main relative bg-cafe-50 text-cafe-600>
+    <ChatShutter v-if="display.chat_shutter" />
     <DesktopHeader v-if="!(pages_with_landing_header.includes($route.path)) && !preferences.is_mobile" />
     <MobileHeader v-else-if="!(pages_with_landing_header.includes($route.path))" />
-    <RouterView v-slot="{ Component }" :key="$route.fullPath" class="h-screen">
+    <RouterView v-slot="{ Component }" :key="$route.fullPath" class="h--50-screen">
       <KeepAlive include="map">
         <component :is="Component" />
       </KeepAlive>

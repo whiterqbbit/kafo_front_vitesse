@@ -213,5 +213,18 @@ export interface Chat {
 
 interface Conversation {
   contact: User;
-  messages: Message[];
+  messages: Message[]
+}
+
+interface Message {
+	id?: number
+	created_at?: Date
+	message?: string
+	user_id?: number
+	coffee_id?: number
+	club_id?: number
+	club_uuid?: string
+	receiver_id?: number
+	user?: User
+	receiver?: User
 }

@@ -20,7 +20,6 @@
         <DesktopList />
       </div>
     </div>
-    <ChatShutter v-if="display.chat_shutter" />
   </div>
 </template>
 
