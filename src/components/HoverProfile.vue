@@ -4,7 +4,7 @@
       <div class="flex flex-col items-center gap-1">
         <img
           :src="display.hover_profile_attendee?.pic_xsmall ? display.hover_profile_attendee?.pic_small : default_user_pic"
-          class="h-25 w-25 rounded-full object-cover"
+          class="aspect-square h-25 w-25 rounded-full object-cover"
         >
         <div
           v-if="display.hover_profile_attendee.id !== use_user_store().id"
@@ -81,6 +81,7 @@ function get_position_style() {
 }
 
 function open_conversation() {
+  console.log('hover_profile_attendee', display.hover_profile_attendee)
   if (!display.hover_profile_attendee) return
   if (!use_chat_store().conversations?.find(c => c.contact.id === display.hover_profile_attendee?.id)) {
     use_chat_store().conversations?.push({
@@ -89,14 +90,15 @@ function open_conversation() {
         {
           message: 'Brisez la glace !',
           user_id: 0,
-          created_at: new Date(),
         },
       ],
     })
     use_chat_store().selected_conversation = use_chat_store().conversations?.[-1] ?? null
   } else {
     use_chat_store().selected_conversation = use_chat_store().conversations?.find(c => c.contact.id === display.hover_profile_attendee?.id) ?? null
+    console.log('selected_conversation', use_chat_store().selected_conversation)
   }
+
   display.hover_profile = false
   display.chat_shutter = true
 }

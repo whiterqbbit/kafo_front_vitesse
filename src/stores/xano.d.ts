@@ -162,6 +162,7 @@ interface User {
 	highlighted_pins?: Array<number>
 	highlighted_users?: Array<number>
 	id?: number | null
+	user_id?: number | null
 	incognito?: boolean | null
 	is_inboarded?: boolean | null
 	job_title?: string

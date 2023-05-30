@@ -14,19 +14,23 @@
           :key="index"
           class="flex place-items-center gap-3 rounded-xl p-2 font-bold"
           :class="conversation.contact?.id === selected_conversation?.contact?.id ? 'bg-cafe-600 text-cafe-50' : 'cursor-pointer'"
-          @click="selected_conversation = conversation"
+          @click="use_chat_store().selected_conversation = conversation"
         >
-          <img v-if="conversation?.contact" :src="conversation?.contact?.pic_xsmall ? conversation?.contact?.pic_xsmall : default_user_pic" class="h-10 w-10 rounded-full object-cover">
+          <img
+            v-if="conversation?.contact" :src="conversation?.contact?.pic_xsmall ? conversation?.contact?.pic_xsmall : default_user_pic"
+            class="h-10 w-10 rounded-full object-cover"
+          >
           <span v-if="conversation?.contact?.first_name">{{ conversation?.contact?.first_name }}</span>
         </div>
+        {{ use_chat_store().selected_conversation.contact.first_name }}
       </div>
     </div>
     <!-- messages -->
-    <div v-if="selected_conversation" class="relative w-70 flex flex-col animate-fade-in-right gap-2 border-l-2 border-cafe-400 p-2">
-      <button class="absolute right-0 top-2 h-7 w-7 rounded-3xl hover:scale-105" icon="pi pi-times" @click="selected_conversation = null">
-        <img :src="svg_close">
+    <div v-if="selected_conversation" class="relative w-70 flex flex-col animate-slide-in-right animate-duration-130 gap-2 border-l-2 border-cafe-400 p-2">
+      <button class="absolute left-2 top-2 rounded-3xl p-0 p-x-1 text-xl font-bold btn-cafe-light" icon="pi pi-times" @click="selected_conversation = null">
+        &lt;&lt;
       </button>
-      <div class="text-lg font-bold">
+      <div class="text-center text-lg font-bold">
         {{ selected_conversation.contact.first_name }}
       </div>
       <div
@@ -69,17 +73,17 @@
 <script setup lang="ts">
 import default_user_pic from '@/assets/img/default_user_pic.png'
 import svg_close from '@/assets/svg/icon/MingcuteCloseFill.svg'
-import type { Conversation } from '@/stores/xano.d.ts'
 
 const user_store = use_user_store()
 const conversations = computed(() => use_chat_store().conversations)
-const selected_conversation = ref<Conversation | null>(null)
+const selected_conversation = computed(() => use_chat_store().selected_conversation)
 const new_message = ref('')
 const message_container = ref<HTMLElement | null>(null)
 
 onMounted(() => scroll_to_bottom)
 
 function format_timestamp(timestamp: Date) {
+  if (!timestamp) return ''
   const message_date = new Date(timestamp)
   const current_date = new Date()
 
@@ -104,20 +108,12 @@ function format_timestamp(timestamp: Date) {
   }
 }
 
-watch(conversations, () => {
-  if (!selected_conversation?.value?.contact?.id) return
-  const selected_conversation_id = selected_conversation.value.contact.id
-  selected_conversation.value = conversations?.value?.find(c => c.contact.id === selected_conversation_id) || null
-}, { immediate: true })
-
 watch(selected_conversation, () => nextTick(scroll_to_bottom), { immediate: true })
 
 async function send_message() {
   use_chat_store().send_message_loading = true
   if (!selected_conversation?.value?.contact.id) return
   await use_chat_store().send_message(new_message.value, selected_conversation?.value?.contact.id)
-  const selected_conversation_id = selected_conversation.value.contact.id
-  selected_conversation.value = conversations?.value?.find(c => c.contact.id === selected_conversation_id) || null
   new_message.value = ''
   use_chat_store().send_message_loading = false
   nextTick(scroll_to_bottom)
