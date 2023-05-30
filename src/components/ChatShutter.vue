@@ -1,11 +1,11 @@
 <template lang="">
-  <div class="fixed right-0 top-50px z-40 h-screen--50px max-w-full flex animate-fade-in-right animate-duration-100 overflow-auto border-l-2 border-cafe-400 rounded-l-xl bg-cafe-100 p-3 shadow-md">
+  <div class="fixed right-0 top-50px z-40 h-screen--50px max-w-full w-full flex flex-col animate-duration-100 overflow-auto border-cafe-400 bg-cafe-100 p-3 shadow-md sm:flex-row sm:animate-fade-in-right sm:border-l-2 sm:rounded-l-xl">
     <!-- liste des chatrooms -->
     <div v-if="conversations" class="flex flex-col gap-5 p-2">
       <button class="absolute right-0 top-2 z-20 h-7 w-7 rounded-3xl hover:scale-105" icon="pi pi-times" @click="display.chat_shutter = false">
         <img :src="svg_close">
       </button>
-      <div class="text-lg font-bold">
+      <div class="text-center text-lg font-bold">
         Vos conversations
       </div>
       <div>
@@ -25,11 +25,11 @@
       </div>
     </div>
     <!-- messages -->
-    <div v-if="selected_conversation" class="relative w-70 flex flex-col animate-slide-in-right animate-duration-130 gap-2 border-l-2 border-cafe-400 p-2">
+    <div v-if="selected_conversation" class="relative w-full flex flex-col animate-slide-in-right animate-duration-130 gap-2 border-cafe-400 p-2 sm:w-70 sm:border-l-2">
       <button class="absolute left-2 top-2 rounded-3xl p-0 p-x-1 text-xl font-bold btn-cafe-light" icon="pi pi-times" @click="use_chat_store().selected_conversation = null">
         &lt;&lt;
       </button>
-      <div class="text-center text-lg font-bold">
+      <div class="sm:pt:0 border-t-2 border-color-cafe-400 pt-5 text-center text-lg font-bold sm:border-t-0">
         {{ selected_conversation.contact.first_name }}
       </div>
       <div
