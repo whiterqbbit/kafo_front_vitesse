@@ -2,7 +2,7 @@
   <div class="fixed right-0 top-50px z-40 h-screen--50px max-w-full flex animate-fade-in-right animate-duration-100 overflow-auto border-l-2 border-cafe-400 rounded-l-xl bg-cafe-100 p-3 shadow-md">
     <!-- liste des chatrooms -->
     <div v-if="conversations" class="flex flex-col gap-5 p-2">
-      <button class="absolute right-0 top-2 h-7 w-7 rounded-3xl hover:scale-105" icon="pi pi-times" @click="display.chat_shutter = false">
+      <button class="absolute right-0 top-2 z-20 h-7 w-7 rounded-3xl hover:scale-105" icon="pi pi-times" @click="display.chat_shutter = false">
         <img :src="svg_close">
       </button>
       <div class="text-lg font-bold">
