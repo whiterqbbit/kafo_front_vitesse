@@ -43,3 +43,28 @@ export function is_slot_current(start: Date, end: Date) {
     return false
   }
 }
+
+export function convert_date(unixTimestamp: Date) {
+  // Create a new date object from the Unix timestamp
+  const dateObj = new Date(unixTimestamp)
+
+  // Get the year, month, day, hour, minute, and second components of the date
+  const year = dateObj.getUTCFullYear()
+  const month = (dateObj.getUTCMonth() + 1).toString().padStart(2, '0')
+  const day = dateObj.getUTCDate().toString().padStart(2, '0')
+  const hour = dateObj.getUTCHours().toString().padStart(2, '0')
+  const minute = dateObj.getUTCMinutes().toString().padStart(2, '0')
+  const second = dateObj.getUTCSeconds().toString().padStart(2, '0')
+
+  // Combine the components into the desired format
+  const formattedDate = `${year}${month}${day}T${hour}${minute}${second}Z`
+
+  return formattedDate
+}
+
+export function convert_to_hour_format(date_to_compute: Date) {
+  const date = new Date(date_to_compute)
+  const formattedTime = date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' }).replace(':', 'h')
+
+  return formattedTime
+}
