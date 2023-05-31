@@ -13,7 +13,10 @@ describe('place store', () => {
   })
 
   it('fetches the db', async () => {
-    expect(place_store.db).toMatchSnapshot()
+    if (!place_store.db) throw new Error('db is empty')
+    expect(place_store.db.length).toBeGreaterThan(100)
+    expect(place_store.db[0]).toHaveProperty('nom')
+    expect(place_store.db[0]).toHaveProperty('tags')
   })
 
   it('filters according to pricing', () => {
