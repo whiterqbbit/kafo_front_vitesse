@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`place > fetches the db 1`] = `
+exports[`place store > fetches the db 1`] = `
 [
   {
     "acces_wifi": "",

@@ -3,7 +3,7 @@ import { beforeAll, describe, expect, it } from 'vitest'
 import { use_place_store } from '@/stores/place'
 import { filters, reset_filters } from '@/stores/filters'
 
-describe('place', () => {
+describe('place store', () => {
   let place_store: ReturnType<typeof use_place_store>
 
   beforeAll(async () => {
@@ -18,54 +18,65 @@ describe('place', () => {
 
   it('filters according to pricing', () => {
     reset_filters()
-    const unfiltered_db = place_store.db_filtered.length
+    const unfiltered_db = place_store.db_filtered
 
     filters.value.pricing_hourly = true
-    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db)
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db.length)
     expect(place_store.db_filtered.length).toBeGreaterThan(0)
 
     reset_filters()
     filters.value.pricing_place = true
-    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db)
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db.length)
     expect(place_store.db_filtered.length).toBeGreaterThan(0)
   })
 
   it('filters according to noise', () => {
     reset_filters()
-    const unfiltered_db = place_store.db_filtered.length
+    const unfiltered_db = place_store.db_filtered
 
     filters.value.noise_level_silent = true
-    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db)
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db.length)
     expect(place_store.db_filtered.length).toBeGreaterThan(0)
 
     reset_filters()
     filters.value.noise_level_calm = true
-    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db)
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db.length)
     expect(place_store.db_filtered.length).toBeGreaterThan(0)
 
     reset_filters()
     filters.value.noise_level_lively = true
-    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db)
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db.length)
     expect(place_store.db_filtered.length).toBeGreaterThan(0)
   })
 
   it('filters according to misc', () => {
     reset_filters()
-    const unfiltered_db = place_store.db_filtered.length
+    const unfiltered_db = place_store.db_filtered
 
     filters.value.wifi = true
-    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db)
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db.length)
     expect(place_store.db_filtered.length).toBeGreaterThan(0)
+    expect(place_store.db_filtered[0].tags).toContain('Wifi')
 
     reset_filters()
     filters.value.power = true
-    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db)
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db.length)
     expect(place_store.db_filtered.length).toBeGreaterThan(0)
 
     reset_filters()
     filters.value.floor = true
-    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db)
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db.length)
     expect(place_store.db_filtered.length).toBeGreaterThan(0)
+  })
+
+  it('filters according to open', () => {
+    reset_filters()
+    const unfiltered_db = place_store.db_filtered
+
+    unfiltered_db[0].is_open = unfiltered_db[1].is_open = true
+    filters.value.open_now = true
+    expect(place_store.db_filtered.length).toBeLessThan(unfiltered_db.length)
+    expect(place_store.db_filtered.length).toBe(2)
   })
 
   it('sorts the db by attendance', () => {
