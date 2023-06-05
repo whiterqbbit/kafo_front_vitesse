@@ -1,14 +1,12 @@
 import type { User } from './xano'
 
-type DisplayKey = 'login_modal' | 'cookie_modal' | 'filter_modal' | 'burger_menu' | 'profile_modal'
-
 export const display = reactive({
   login_modal: false,
   cookie_modal: true,
   filter_modal: false,
   burger_menu: false,
   profile_modal: false,
-  chat_shutter: false,
+  chat_drawer: false,
   hover_profile: false,
   hover_profile_attendee: null as User | null,
 })
@@ -22,7 +20,9 @@ export function reset_display() {
   display.burger_menu = false
 }
 
-export function toggle_modal(modal: DisplayKey) {
+type DisplayKey = 'login_modal' | 'cookie_modal' | 'filter_modal' | 'burger_menu' | 'profile_modal'
+
+export function display_only_modal(modal: DisplayKey) {
   reset_display()
   display[modal] = true
 }

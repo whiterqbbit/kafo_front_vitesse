@@ -9,7 +9,7 @@ export const use_chat_store = defineStore('chat', () => {
   const chat_error = ref<string | null>(null)
   const messages: Ref<Chat[] | null> = ref([])
   const selected_conversation: Ref<Conversation | null> = ref(null)
-  const intervalId: Ref<NodeJS.Timeout | null> = ref(null)
+  const interval_id: Ref<NodeJS.Timeout | null> = ref(null)
 
   const conversations = computed(() => {
     if (!messages.value) return null
@@ -28,9 +28,7 @@ export const use_chat_store = defineStore('chat', () => {
   })
 
   async function get_all_messages() {
-    if (!user_store.is_auth) {
-      return
-    }
+    if (!user_store.is_auth) return
     const cookies = useCookies(['user'])
     const user_auth_cookie = cookies.get('token')
     try {
@@ -56,14 +54,14 @@ export const use_chat_store = defineStore('chat', () => {
     }
   }
 
-  watch(() => display.chat_shutter, (newVal) => {
-    if (newVal === true) {
-      // Start fetching messages every second when display.chat_shutter becomes true
-      intervalId.value = setInterval(() => {
-      }, 5000)
-    } else if (newVal === false && intervalId.value !== undefined) {
-      // Stop fetching messages when display.chat_shutter becomes false
-      clearInterval(intervalId.value!)
+  watch(() => display.chat_drawer, (new_val) => {
+    if (new_val === true) {
+      // Start fetching messages every second when display.chat_drawer becomes true
+      interval_id.value = setInterval(() => {
+      }, 1000)
+    } else if (new_val === false && interval_id.value !== undefined) {
+      // Stop fetching messages when display.chat_drawer becomes false
+      clearInterval(interval_id.value!)
     }
   }, { immediate: true })
 
