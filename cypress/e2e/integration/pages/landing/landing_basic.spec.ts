@@ -1,4 +1,4 @@
-const sizes = ['iphone-6', 'ipad-2', [1024, 768]]
+import { sizes } from '../../../fixtures/sizes'
 
 sizes.forEach((size) => {
   context(`Basic_${size}`, () => {
