@@ -48,6 +48,7 @@
             {{ message.message }}
           </div>
           <div
+            v-if="message.created_at"
             class="text-xs text-cafe-400"
             :class="message.user_id === user_store.id ? 'text-right' : 'text-left'"
           >

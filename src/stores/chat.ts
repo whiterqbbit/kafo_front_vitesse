@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import { useCookies } from '@vueuse/integrations/useCookies'
-import type { Chat, Conversation } from './xano'
+import type { Conversation, Message } from './xano'
 
 export const use_chat_store = defineStore('chat', () => {
   const user_store = use_user_store()
   const chat_loading = ref(false)
   const send_message_loading = ref(false)
   const chat_error = ref<string | null>(null)
-  const messages: Ref<Chat[] | null> = ref([])
+  const messages: Ref<Message[] | null> = ref([])
   const selected_conversation: Ref<Conversation | null> = ref(null)
   const interval_id: Ref<NodeJS.Timeout | null> = ref(null)
   const xano_chat_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/chat`
@@ -15,7 +15,7 @@ export const use_chat_store = defineStore('chat', () => {
   const conversations = computed(() => {
     if (!messages.value) return null
     const dms: Conversation[] = []
-    messages.value.forEach((message: Chat) => {
+    messages.value.forEach((message: Message) => {
       if (!message) return
       const friend = message.user_id === user_store.id ? message.receiver : message.user
       if (!friend) return
@@ -41,11 +41,11 @@ export const use_chat_store = defineStore('chat', () => {
         },
       })
       if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}. Failed to fetch all messages.`)
-      const data = await response.json() as Chat[] | null
+      const data = await response.json() as Message[] | null
 
       messages.value = data
       messages.value?.sort((a, b) => {
-        if (!a || !b) return 0
+        if (!a || !b || !a.created_at || !b.created_at) return 0
         return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
       })
     } catch (error) {

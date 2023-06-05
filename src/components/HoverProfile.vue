@@ -86,10 +86,7 @@ function open_conversation() {
     use_chat_store().conversations?.push({
       contact: display.hover_profile_attendee,
       messages: [
-        {
-          message: 'Brisez la glace !',
-          user_id: 0,
-        },
+        { message: 'Brisez la glace !', id: 0, user_id: 0 },
       ],
     })
     use_chat_store().selected_conversation = use_chat_store().conversations?.[-1] ?? null

@@ -199,28 +199,11 @@ export interface Attendance {
 	events: Session[]
 }
 
-export interface Chat {
+export interface Message {
 	id: number
-	created_at: Date
 	message: string
 	user_id: number
-	coffee_id: number
-	club_id: number
-	club_uuid: string
-	receiver_id: number
-	user: User
-	receiver: User
-}
-
-interface Conversation {
-  contact: User;
-  messages: Message[]
-}
-
-interface Message {
-	id?: number
 	created_at?: Date
-	message?: string
 	user_id?: number
 	coffee_id?: number
 	club_id?: number
@@ -228,4 +211,9 @@ interface Message {
 	receiver_id?: number
 	user?: User
 	receiver?: User
+}
+
+export interface Conversation {
+	contact: User
+	messages: (Message )[]
 }
