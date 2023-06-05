@@ -75,7 +75,7 @@
     "eslint-plugin-cypress": "^2.13.2",
     "https-localhost": "^4.7.1",
     "lint-staged": "^13.2.1",
-    "pnpm": "^8.3.0",
+    "pnpm": "^8.6.0",
     "shiki": "^0.14.1",
     "simple-git-hooks": "^2.8.1",
     "taze": "^0.9.1",
