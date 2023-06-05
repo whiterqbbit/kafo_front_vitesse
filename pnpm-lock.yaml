@@ -164,8 +164,8 @@ devDependencies:
     specifier: ^13.2.1
     version: 13.2.1
   pnpm:
-    specifier: ^8.3.0
-    version: 8.3.0
+    specifier: ^8.6.0
+    version: 8.6.0
   shiki:
     specifier: ^0.14.1
     version: 0.14.1
@@ -8156,8 +8156,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /pnpm@8.3.0:
-    resolution: {integrity: sha512-wRS8ap/SPxBqbUMzcUNkoA0suLqk9BqMlvi8dM2FRuhwUDgqVGYLc5jQ6Ww3uqVc+84zJvN2GYmTWCubaoWPtQ==}
+  /pnpm@8.6.0:
+    resolution: {integrity: sha512-uMaWGXlvG+m5NIJaR4JEEenChbg+1AP4zVpqs4PEcZg4uH+lXMTd/X/lirKZA+TC0w0d+++y3btINcwyKsuwAA==}
     engines: {node: '>=16.14'}
     hasBin: true
     dev: true
