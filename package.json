@@ -25,7 +25,7 @@
     "@egjs/vue3-flicking": "^4.10.7",
     "@unocss/eslint-config": "^0.51.4",
     "@unocss/reset": "^0.41.2",
-    "@vue-macros/reactivity-transform": "^0.3.7",
+    "@vue-macros/reactivity-transform": "^0.3.9",
     "@vueuse/core": "^10.0.2",
     "@vueuse/head": "^1.1.26",
     "@vueuse/integrations": "^9.13.0",
