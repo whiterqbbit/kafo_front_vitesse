@@ -25,7 +25,6 @@ declare module '@vue/runtime-core' {
     AvatarStack: typeof import('./components/AvatarStack.vue')['default']
     BxBxsCoffee: typeof import('./components/svg/BxBxsCoffee.vue')['default']
     ChatDrawer: typeof import('./components/ChatDrawer.vue')['default']
-    ChatShutter: typeof import('./components/ChatShutter.vue')['default']
     Checkbox: typeof import('primevue/checkbox')['default']
     ClubBrowserUser: typeof import('./components/ClubBrowserUser.vue')['default']
     ClubList: typeof import('./components/ClubList.vue')['default']
