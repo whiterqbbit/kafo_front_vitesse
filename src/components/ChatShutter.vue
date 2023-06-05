@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="fixed right-0 top-50px z-40 h-screen--50px max-w-full w-full flex animate-duration-100 overflow-auto border-cafe-400 bg-cafe-100 p-3 shadow-md sm:w-fit sm:animate-fade-in-right sm:border-l-2 sm:rounded-l-xl">
+  <div class="fixed right-0 top-50px z-40 h-screen--50px max-w-full w-full flex overflow-auto border-cafe-400 bg-cafe-50 p-3 shadow-md sm:w-fit sm:animate-fade-in-right sm:animate-duration-130">
     <!-- liste des chatrooms -->
     <div v-if="conversations" class="flex flex-col gap-5 p-2">
       <button class="absolute right-0 top-2 z-20 h-7 w-7 rounded-3xl hover:scale-105" icon="pi pi-times" @click="display.chat_shutter = false">
