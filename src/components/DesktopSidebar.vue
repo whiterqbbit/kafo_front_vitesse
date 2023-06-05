@@ -26,8 +26,8 @@
     <span class="name">Découvrir</span> -->
     <div
       class="sidebar-group-button"
-      :class="[display.chat_shutter ? 'activated' : 'desactivated']"
-      @click="display.chat_shutter = !display.chat_shutter"
+      :class="[display.chat_drawer ? 'activated' : 'desactivated']"
+      @click="display.chat_drawer = !display.chat_drawer"
     >
       <button i-fa6-solid-comment class="sidebar-button" />
     </div>

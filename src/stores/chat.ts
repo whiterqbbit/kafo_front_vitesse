@@ -10,6 +10,7 @@ export const use_chat_store = defineStore('chat', () => {
   const messages: Ref<Chat[] | null> = ref([])
   const selected_conversation: Ref<Conversation | null> = ref(null)
   const interval_id: Ref<NodeJS.Timeout | null> = ref(null)
+  const xano_chat_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/chat`
 
   const conversations = computed(() => {
     if (!messages.value) return null
@@ -29,10 +30,9 @@ export const use_chat_store = defineStore('chat', () => {
 
   async function get_all_messages() {
     if (!user_store.is_auth) return
-    const cookies = useCookies(['user'])
-    const user_auth_cookie = cookies.get('token')
+    const user_auth_cookie = useCookies(['user']).get('token')
+
     try {
-      const xano_chat_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/chat`
       const response = await fetch(xano_chat_url, {
         method: 'GET',
         headers: {
@@ -56,20 +56,17 @@ export const use_chat_store = defineStore('chat', () => {
 
   watch(() => display.chat_drawer, (new_val) => {
     if (new_val === true) {
-      // Start fetching messages every second when display.chat_drawer becomes true
       interval_id.value = setInterval(() => {
       }, 1000)
     } else if (new_val === false && interval_id.value !== undefined) {
-      // Stop fetching messages when display.chat_drawer becomes false
       clearInterval(interval_id.value!)
     }
   }, { immediate: true })
 
   async function send_message(message: string, receiver_id: number) {
     try {
-      const cookies = useCookies(['user'])
-      const user_auth_cookie = cookies.get('token')
-      const xano_chat_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/chat`
+      const user_auth_cookie = useCookies(['user']).get('token')
+
       const response = await fetch(xano_chat_url, {
         method: 'POST',
         headers: {

@@ -1,8 +1,8 @@
-<template lang="">
+<template>
   <div class="fixed right-0 top-50px z-40 h-screen--50px max-w-full w-full flex overflow-auto border-cafe-400 bg-cafe-50 p-3 shadow-md sm:w-fit sm:animate-fade-in-right sm:animate-duration-130">
     <!-- liste des chatrooms -->
     <div v-if="conversations" class="flex flex-col gap-5 p-2">
-      <button class="absolute right-0 top-5 z-20 h-7 w-7 rounded-3xl hover:scale-105" icon="pi pi-times" @click="display.chat_shutter = false">
+      <button class="absolute right-0 top-5 z-20 h-7 w-7 rounded-3xl hover:scale-105" icon="pi pi-times" @click="display.chat_drawer = false">
         <img :src="svg_close">
       </button>
       <div v-if="!preferences.is_mobile || selected_conversation === null" class="pr-4 text-center text-lg font-bold">
@@ -84,21 +84,21 @@ onMounted(() => scroll_to_bottom)
 function format_timestamp(timestamp: Date) {
   if (!timestamp) return ''
   const message_date = new Date(timestamp)
-  const current_date = new Date()
 
-  const same_day = message_date.getDate() === current_date.getDate()
-                     && message_date.getMonth() === current_date.getMonth()
-                     && message_date.getFullYear() === current_date.getFullYear()
+  const today = new Date()
+  const is_today: Boolean = message_date.getDate() === today.getDate()
+                          && message_date.getMonth() === today.getMonth()
+                          && message_date.getFullYear() === today.getFullYear()
 
-  const yesterday = new Date(current_date)
-  yesterday.setDate(current_date.getDate() - 1)
-  const is_yesterday = message_date.getDate() === yesterday.getDate()
-                         && message_date.getMonth() === yesterday.getMonth()
-                         && message_date.getFullYear() === yesterday.getFullYear()
+  const yesterday = new Date(today)
+  yesterday.setDate(today.getDate() - 1)
+  const is_yesterday: Boolean = message_date.getDate() === yesterday.getDate()
+                            && message_date.getMonth() === yesterday.getMonth()
+                            && message_date.getFullYear() === yesterday.getFullYear()
 
   const time_string = message_date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })
 
-  if (same_day) {
+  if (is_today) {
     return time_string
   } else if (is_yesterday) {
     return `Hier à ${time_string}`

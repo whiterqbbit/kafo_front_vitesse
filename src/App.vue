@@ -69,7 +69,7 @@ const pages_with_landing_header = ['/', '/a-propos', '/confidentialite', '/menti
 
 <template>
   <main relative bg-cafe-50 text-cafe-600>
-    <ChatDrawer v-if="display.chat_shutter" />
+    <ChatDrawer v-if="display.chat_drawer" />
     <DesktopHeader v-if="!(pages_with_landing_header.includes($route.path)) && !preferences.is_mobile" />
     <MobileHeader v-else-if="!(pages_with_landing_header.includes($route.path))" />
     <RouterView v-slot="{ Component }" :key="$route.fullPath" class="h--50-screen">

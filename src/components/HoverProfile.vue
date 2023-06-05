@@ -98,7 +98,7 @@ function open_conversation() {
   }
 
   display.hover_profile = false
-  display.chat_shutter = true
+  display.chat_drawer = true
 }
 </script>
 
