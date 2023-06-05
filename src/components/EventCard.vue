@@ -79,7 +79,7 @@
 </template>
 
 <script setup lang="ts">
-import { get_day_from_date, get_month_name_from_date, get_relative_date_from_date, is_slot_current } from '@/utils/date_utils'
+import { convert_date, convert_to_hour_format, get_day_from_date, get_month_name_from_date, get_relative_date_from_date, is_slot_current } from '@/utils/date_utils'
 import default_user_pic from '@/assets/img/default_user_pic.png'
 import type { Session } from '@/stores/xano'
 
@@ -135,12 +135,6 @@ const events_of_the_day = computed(() => {
   return null
 })
 
-function convert_to_hour_format(date_to_compute: Date) {
-  const date = new Date(date_to_compute)
-  const formattedTime = date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' }).replace(':', 'h')
-
-  return formattedTime
-}
 async function submit_to_event(session: Session) {
   if (!user_store.id) {
     display.login_modal = true
@@ -153,8 +147,8 @@ async function submit_to_event(session: Session) {
       confirmation_modal.session = session
       confirmation_modal.is_joining = res.subscribe
       confirmation_modal.display = true
-      const converted_start = convertDate(session.start)
-      const converted_end = convertDate(session.end)
+      const converted_start = convert_date(session.start)
+      const converted_end = convert_date(session.end)
       const place_name = place_store?.db?.find(place => place.id === session.coffee_id)?.nom
       const place_adresse = place_store?.db?.find(place => place.id === session.coffee_id)?.adresse
       confirmation_modal.calendar_link = `https://calendar.google.com/calendar/u/0/r/eventedit?dates=${converted_start}/${converted_end}&text=${place_name}&location=${place_adresse}`
@@ -164,23 +158,5 @@ async function submit_to_event(session: Session) {
   } finally {
     is_loading.value.set(session.id, false)
   }
-}
-
-function convertDate(unixTimestamp: Date) {
-  // Create a new date object from the Unix timestamp
-  const dateObj = new Date(unixTimestamp)
-
-  // Get the year, month, day, hour, minute, and second components of the date
-  const year = dateObj.getUTCFullYear()
-  const month = (dateObj.getUTCMonth() + 1).toString().padStart(2, '0')
-  const day = dateObj.getUTCDate().toString().padStart(2, '0')
-  const hour = dateObj.getUTCHours().toString().padStart(2, '0')
-  const minute = dateObj.getUTCMinutes().toString().padStart(2, '0')
-  const second = dateObj.getUTCSeconds().toString().padStart(2, '0')
-
-  // Combine the components into the desired format
-  const formattedDate = `${year}${month}${day}T${hour}${minute}${second}Z`
-
-  return formattedDate
 }
 </script>

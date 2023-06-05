@@ -39,6 +39,13 @@ export default defineConfig({
     // https://github.com/hannoeru/vite-plugin-pages
     Pages({
       extensions: ['vue'],
+      extendRoute: (route) => {
+        if (route.path === '/fr') {
+          return { ...route, redirect: '/' }
+        }
+
+        return route
+      },
     }),
 
     // https://github.com/antfu/unplugin-auto-import

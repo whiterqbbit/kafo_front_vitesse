@@ -68,7 +68,7 @@ export const use_user_store = defineStore('user', () => {
 
       if (!response.ok) throw new Error(data.message)
 
-      updateUser(data)
+      update_user(data)
     } catch (error) {
       console.error('Error during edit_user:', error)
       throw error
@@ -313,7 +313,7 @@ export const use_user_store = defineStore('user', () => {
   }
 
   function logout(): void {
-    resetUser()
+    reset_user()
     cookies.set('token', '')
   }
 
@@ -336,7 +336,7 @@ export const use_user_store = defineStore('user', () => {
         },
       })
       const data: User = await response.json()
-      updateUser(data)
+      update_user(data)
     } catch (error) {
       console.error(error)
     }
@@ -344,7 +344,7 @@ export const use_user_store = defineStore('user', () => {
     is_loading.value = false
   }
 
-  function resetUser() {
+  function reset_user() {
     is_auth.value = false
     bio.value = ''
     clubs.value = []
@@ -368,9 +368,9 @@ export const use_user_store = defineStore('user', () => {
     type.value = ''
   }
 
-  function updateUser(data: User | null) {
+  function update_user(data: User | null) {
     if (data === null) {
-      resetUser()
+      reset_user()
       return
     }
     is_auth.value = data !== null
