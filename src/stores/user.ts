@@ -139,6 +139,9 @@ export const use_user_store = defineStore('user', () => {
         case 'Missing param: field_value':
           typed_error.message = 'Veuillez remplir tous les champs.'
           break
+        case 'Unexpected end of JSON input':
+          typed_error.message = 'Identifiants incorrects.'
+          break
       }
 
       throw typed_error
@@ -194,6 +197,9 @@ export const use_user_store = defineStore('user', () => {
           break
         case 'Weak password detected. Please use at least 1 numbers.':
           typed_error.message = 'Le mot de passe est trop faible, veuillez entrer au moins un chiffre.'
+          break
+        case 'Unexpected end of JSON input':
+          typed_error.message = 'Le mot de passe est trop faible, veuillez entrer 8 caracteres et au moins un chiffre.'
           break
       }
 

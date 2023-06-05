@@ -13,3 +13,4 @@ cypress/downloads
 .vim/
 .vim/coc-settings.json
 *.swp
+cypress.env.json
