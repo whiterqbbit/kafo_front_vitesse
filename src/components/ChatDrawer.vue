@@ -56,15 +56,23 @@
           </div>
         </div>
       </div>
-      <div>
+      <div class="max-w-55 flex gap-1">
         <ATextarea
           v-model="new_message"
-          class="bottom-0 w-full rounded-xl text-sm text-cafe-600 shadow-inner placeholder-cafe-400"
+          class="w-full flex grow--1 rounded-xl text-sm text-cafe-600 shadow-inner placeholder-cafe-400"
           placeholder="Votre message..."
           auto-size
           :loading="use_chat_store().send_message_loading"
           @keyup.enter="send_message()"
         />
+        <button
+          v-if="new_message"
+          class="w-full flex rounded-xl p-0 p-x-1 text-xl font-bold btn-grass"
+          :disabled="use_chat_store().send_message_loading"
+          @click="send_message()"
+        >
+          <MaterialSymbolsSend class="h10 w-10 p-1" />
+        </button>
       </div>
     </div>
   </div>

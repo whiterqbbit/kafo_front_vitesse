@@ -47,6 +47,7 @@ declare module '@vue/runtime-core' {
     MaterialLocation: typeof import('./components/svg/MaterialLocation.vue')['default']
     MaterialSymbolsChatRounded: typeof import('./components/svg/MaterialSymbolsChatRounded.vue')['default']
     MaterialSymbolsEditRounded: typeof import('./components/svg/MaterialSymbolsEditRounded.vue')['default']
+    MaterialSymbolsSend: typeof import('./components/svg/MaterialSymbolsSend.vue')['default']
     MobileFooter: typeof import('./components/MobileFooter.vue')['default']
     MobileHeader: typeof import('./components/MobileHeader.vue')['default']
     MobileList: typeof import('./components/MobileList.vue')['default']
