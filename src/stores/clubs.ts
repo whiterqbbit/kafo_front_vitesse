@@ -9,8 +9,6 @@ export const use_club_store = defineStore('club', () => {
   const db_loading = ref(false)
   const db_error = ref<string | null>(null)
   const selected_id = ref<number | null>(null)
-  const join_loading = ref(true)
-
   const selected = computed(() => db.value?.find(club => club.id === selected_id.value) ?? null)
 
   const db_filtered = computed(() => {
@@ -105,6 +103,5 @@ export const use_club_store = defineStore('club', () => {
     db_filtered,
     get_specific_club,
     join_club,
-    join_loading,
   }
 })
