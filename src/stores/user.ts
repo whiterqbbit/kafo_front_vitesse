@@ -224,6 +224,7 @@ export const use_user_store = defineStore('user', () => {
       }
     } catch (error) {
       console.error('Error during edit_user:', error)
+      clubs.value.push(club)
       throw error
     }
   }
@@ -251,6 +252,7 @@ export const use_user_store = defineStore('user', () => {
       }
     } catch (error) {
       console.error('Error during edit_user:', error)
+      clubs.value.pop()
       throw error
     }
   }
