@@ -16,6 +16,9 @@
             Plus tard
           </button>
         </div>
+        <div v-if="join_error">
+          {{ join_error }}
+        </div>
       </div>
       <div v-else class="flex flex-col place-items-center gap-2">
         <p>
@@ -38,6 +41,7 @@ const props = defineProps<{
 
 const club_to_join = ref<Club | null>(null)
 const club_joined = ref(false)
+const join_error = ref('')
 
 async function click_submit() {
   if (!use_user_store().is_auth) {
@@ -53,6 +57,7 @@ async function click_submit() {
       club_joined.value = true
     } catch (error) {
       console.error(error)
+      join_error.value = 'Une erreur est survenue lors de la tentative de rejoindre le club'
     }
   }
 }
