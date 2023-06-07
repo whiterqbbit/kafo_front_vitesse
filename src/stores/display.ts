@@ -5,6 +5,7 @@ export const display = reactive({
   filter_modal: false,
   burger_menu: false,
   profile_modal: false,
+  join_club_modal: false,
 })
 
 export function reset_display() {
@@ -15,6 +16,7 @@ export function reset_display() {
   display.burger_menu = false
   display.profile_modal = false
   display.burger_menu = false
+  display.join_club_modal = false
 }
 
 export const stored_display = useStorage('stored_display', {

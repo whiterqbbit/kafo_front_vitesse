@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useCookies } from '@vueuse/integrations/useCookies'
 import type { Club } from './xano.d'
 
 const xano_url = `${import.meta.env.VITE_XANO_API_URL}/api:EW8LvnML/club`
@@ -57,6 +58,43 @@ export const use_club_store = defineStore('club', () => {
     }
   }
 
+  async function get_specific_club(uuid: string) {
+    const url_with_query = `${xano_url}/${uuid}`
+    try {
+      const response = await fetch(url_with_query)
+      console.log('get_specific_club try response')
+      if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}`)
+
+      const data = await response.json()
+      return data
+    } catch (error: any) {
+      db_error.value = error.message
+    }
+  }
+
+  async function join_club(uuid: string) {
+    const url_with_query = `${xano_url}/sub/${uuid}`
+    const token = useCookies(['user']).get('token')
+
+    try {
+      const response = await fetch(url_with_query, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ subscribe: true }),
+      })
+
+      if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}`)
+
+      const data = await response.json()
+      return data
+    } catch (error: any) {
+      throw new Error(error.message)
+    }
+  }
+
   return {
     fetch_db,
     db,
@@ -65,5 +103,7 @@ export const use_club_store = defineStore('club', () => {
     selected,
     selected_id,
     db_filtered,
+    get_specific_club,
+    join_club,
   }
 })
