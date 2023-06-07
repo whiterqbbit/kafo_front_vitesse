@@ -45,7 +45,7 @@ const join_error = ref('')
 
 async function click_submit() {
   if (!use_user_store().is_auth) {
-    preferences.club_to_join.push(props.club_uuid)
+    preferences.club_to_join = props.club_uuid
     display.join_club_modal = false
     display.login_modal = true
     return

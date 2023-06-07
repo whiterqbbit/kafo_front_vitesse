@@ -62,7 +62,6 @@ export const use_club_store = defineStore('club', () => {
     const url_with_query = `${xano_url}/${uuid}`
     try {
       const response = await fetch(url_with_query)
-      console.log('get_specific_club try response')
       if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}`)
 
       const data = await response.json()
