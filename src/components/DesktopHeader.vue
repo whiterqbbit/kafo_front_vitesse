@@ -9,8 +9,6 @@
     </div>
     <img v-else :src="user.pic_xsmall ? user.pic_xsmall : default_user_pic" alt="avatar" class="mr-4 h-10 w-10 cursor-pointer border border-cafe-100 rounded-full" @click="display_modal('profile')">
   </header>
-  <ProfileModal v-if="display.profile_modal" />
-  <LoginModal v-if="display.login_modal" />
 </template>
 
 <script setup lang="ts">

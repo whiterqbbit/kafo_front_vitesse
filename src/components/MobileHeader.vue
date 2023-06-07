@@ -34,8 +34,6 @@
     <div v-else-if="!user.is_auth" i-ci-user-circle class="mr-2 h-8 w-8 bg-white" @click="display.login_modal = !display.login_modal" />
     <img v-else :src="user.pic_xsmall ? user.pic_xsmall : default_user_pic" alt="avatar" class="mr-4 h-10 w-10 cursor-pointer border border-cafe-100 rounded-full" @click="display_modal('profile')">
   </header>
-  <LoginModal v-if="display.login_modal" />
-  <ProfileModal v-if="display.profile_modal" />
 </template>
 
 <script setup lang="ts">

@@ -1,9 +1,10 @@
 <template>
-  <div class="fixed top-0 z-30 h-screen w-full flex flex-col place-content-center place-items-center bg-opacity-0 backdrop-blur">
-    <div class="relative max-w-full w-120 flex flex-col place-items-center gap-4 rounded-xl bg-cafe-200 p-4 shadow-md sm:p-3">
-      <div v-if="!club_joined" class="flex flex-col place-items-center gap-2">
+  <div class="fixed top-0 z-30 h-screen w-full flex place-content-center place-items-center bg-opacity-0 backdrop-blur">
+    <div class="w-fit rounded-xl bg-cafe-100 p-4 shadow-md sm:p-8">
+      <ThreeDotsSpinner v-if="use_club_store().join_loading" />
+      <div v-else-if="!club_joined" class="flex flex-col place-items-center gap-8">
         <p v-if="club_to_join">
-          Voulez vous rejoindre le club <b>{{ club_to_join.nom }}</b> ?
+          Voulez-vous rejoindre le club <b>{{ club_to_join.nom }}</b> ?
         </p>
         <p v-else>
           Le club que vous essayez de rejoindre semble ne pas exister.
@@ -20,7 +21,7 @@
           {{ join_error }}
         </div>
       </div>
-      <div v-else class="flex flex-col place-items-center gap-2">
+      <div v-else class="flex flex-col place-items-center gap-8">
         <p>
           Vous avez rejoint le club <b>{{ club_to_join?.nom ?? '' }}</b> !
         </p>
@@ -53,8 +54,10 @@ async function click_submit() {
 
   if (club_to_join.value) {
     try {
+      use_club_store().join_loading = true
       await use_club_store().join_club(props.club_uuid)
       club_joined.value = true
+      use_club_store().join_loading = false
     } catch (error) {
       console.error(error)
       join_error.value = 'Une erreur est survenue lors de la tentative de rejoindre le club'
@@ -63,6 +66,8 @@ async function click_submit() {
 }
 
 onMounted(async () => {
+  use_club_store().join_loading = true
   club_to_join.value = await use_club_store().get_specific_club(props.club_uuid)
+  use_club_store().join_loading = false
 })
 </script>
