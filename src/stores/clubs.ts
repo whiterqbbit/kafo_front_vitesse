@@ -9,7 +9,7 @@ export const use_club_store = defineStore('club', () => {
   const db_loading = ref(false)
   const db_error = ref<string | null>(null)
   const selected_id = ref<number | null>(null)
-  const join_loading = ref(false)
+  const join_loading = ref(true)
 
   const selected = computed(() => db.value?.find(club => club.id === selected_id.value) ?? null)
 
