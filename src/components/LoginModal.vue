@@ -82,7 +82,7 @@
               <input v-model="signup_form.email" type="email" placeholder="Email" class="w-full input-field">
               <input v-model="signup_form.password" type="password" placeholder="Mot de passe" class="w-full input-field">
             </div>
-            <button btn-cafe type="submit" class="mt-4 w-full font-bold">
+            <button type="submit" class="mt-4 w-full font-bold btn-cafe-light">
               S'inscrire
             </button>
             <div class="w-fit flex place-self-center text-sm">

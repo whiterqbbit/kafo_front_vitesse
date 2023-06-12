@@ -13,6 +13,9 @@ import Unocss from 'unocss/vite'
 
 // @ts-expect-error failed to resolve types
 import VueMacros from 'unplugin-vue-macros/vite'
+
+// @ts-expect-error failed to resolve types
+import { AnuComponentResolver } from 'anu-vue'
 import WebfontDownload from 'vite-plugin-webfont-dl'
 import { PrimeVueResolver } from 'unplugin-vue-components/resolvers'
 
@@ -36,6 +39,13 @@ export default defineConfig({
     // https://github.com/hannoeru/vite-plugin-pages
     Pages({
       extensions: ['vue'],
+      extendRoute: (route) => {
+        if (route.path === '/fr') {
+          return { ...route, redirect: '/' }
+        }
+
+        return route
+      },
     }),
 
     // https://github.com/antfu/unplugin-auto-import
@@ -63,6 +73,7 @@ export default defineConfig({
       dts: 'src/components.d.ts',
       resolvers: [
         PrimeVueResolver(),
+        AnuComponentResolver(),
       ],
     }),
 

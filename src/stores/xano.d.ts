@@ -56,12 +56,30 @@ export interface AwsPics {
 	}
 }
 
+export interface PlacePicture {
+	full: {
+		url: string
+		width: number
+		height: number
+	}
+	medium: {
+		url: string
+		width: number
+		height: number
+	}
+	thumbnail: {
+		url: string
+		width: number
+		height: number
+	}
+}
+
 export interface Place {
 	id: number
 	nom: string
 	tags: CafeTag[]
 	type?: PlaceType
-	events?: Event[]
+	events?: Session[]
 	website?: string
 	location: {
 		data: {
@@ -117,6 +135,7 @@ export interface Place {
 	attendance?: number
 	attendees?: User[]
 	our_fav: boolean
+	pictures: PlacePicture[]
 }
 
 export interface Club {
@@ -157,7 +176,7 @@ interface User {
 	clubs?: Club[]
 }
 
-export interface Event {
+export interface Session {
 	id: number
 	event_id: number
 	created_at: Date
@@ -176,5 +195,5 @@ export interface Attendance {
 	attendance: number
 	attendees: User[]
 	place_id: number
-	events: Event[]
+	events: Session[]
 }

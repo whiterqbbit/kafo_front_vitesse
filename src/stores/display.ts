@@ -18,5 +18,5 @@ export function reset_display() {
 }
 
 export const stored_display = useStorage('stored_display', {
-  welcome_modal: true,
+  welcome_modal: false,
 })

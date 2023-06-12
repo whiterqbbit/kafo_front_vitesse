@@ -21,26 +21,26 @@
 
 - ⚡️ [Vue 3](https://github.com/vuejs/core), [Vite](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/), [esbuild](https://github.com/evanw/esbuild) 
 
-- 🗂 [File based routing](./src/pages)
+- 🦾 TypeScript, EsLint
 
-- 📦 [Components auto importing](./src/components)
+- 🖨 Static-site generation (SSG) via [vite-ssg](https://github.com/antfu/vite-ssg)
+
+- 🎨 [UnoCSS](https://github.com/antfu/unocss)
 
 - 🍍 [Pinia](https://pinia.vuejs.org/)
 
 - 📲 [PWA](https://github.com/antfu/vite-plugin-pwa)
 
-- 🎨 [UnoCSS](https://github.com/antfu/unocss)
-
 - 🍃 [Leaflet](https://leafletjs.com/)
 
 - 🤹‍♂️ [VueUse](https://vueuse.org/)
 
-- 🤖 [PrimeUI](https://primevue.org/)
+- 🗂 [File based routing](./src/pages)
 
-- 🖨 Static-site generation (SSG) via [vite-ssg](https://github.com/antfu/vite-ssg)
-
-- 🦾 TypeScript, EsLint
+- 📦 [Components auto importing](./src/components)
 
 - ⚙️ Unit Testing with [Vitest](https://github.com/vitest-dev/vitest), E2E Testing with [Cypress](https://cypress.io/) on [GitHub Actions](https://github.com/features/actions)
 
-Basé sur [Vitesse](https://github.com/antfu/vitesse) !
+
+
+Started from [Vitesse](https://github.com/antfu/vitesse) !

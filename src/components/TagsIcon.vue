@@ -1,6 +1,6 @@
 <template>
   <div class="tag_container" :class="props.tags.length < 6 ? 'md:max-w-1/2' : ''">
-    <!-- prix -->
+    <!-- Prix -->
     <div v-if="props.tags.includes('Gratuit')" class="tag_group">
       <img class="tag_img" :src="svg_gratuit">
       <div class="tag_text">
@@ -16,11 +16,11 @@
     <div v-else class="tag_group">
       <img class="tag_img" :src="svg_coffee">
       <div class="tag_text">
-        Juste un café
+        À la conso
       </div>
     </div>
 
-    <!-- niveau de bruit  -->
+    <!-- Niveau de bruit  -->
     <div v-if="props.tags.includes('Studieux')" class="tag_group">
       <img class="tag_img" :src="svg_studieux">
       <div class="tag_text">
@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <!-- wifi  -->
+    <!-- Wifi  -->
     <div v-if="props.tags.includes('Wifi')" class="tag_group">
       <img class="tag_img" :src="svg_wifi">
       <div class="tag_text">
@@ -54,7 +54,7 @@
       </div>
     </div>
 
-    <!-- prises  -->
+    <!-- Prises  -->
     <div v-if="props.tags.includes('Prises')" class="tag_group">
       <img class="tag_img" :src="svg_plug">
       <div class="tag_text">
@@ -71,7 +71,7 @@
     <div v-if="props.tags.includes('Top rated')" class="tag_group">
       <img class="tag_img" :src="svg_fav">
       <div class="tag_text">
-        Nos coup de coeur
+        Coups de coeur !
       </div>
     </div>
 
@@ -112,7 +112,7 @@
     <div v-if="props.tags.includes('Etage isolé')" class="tag_group">
       <img class="tag_img" :src="svg_upstairs">
       <div class="tag_text">
-        Etage isolé
+        Étage isolé
       </div>
     </div>
 

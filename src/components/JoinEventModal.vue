@@ -1,10 +1,10 @@
 <template>
-  <div id="main_container" class="w-full flex flex-col place-content-center place-items-center rounded-3xl bg-cafe-200 p-6 text-cafe-600 shadow-md md:w-1/2">
+  <div id="main_container" class="w-full flex flex-col place-content-center place-items-center gap-3 rounded-3xl bg-cafe-200 p-6 text-cafe-600 shadow-md md:w-1/2">
     <EventCard :day="today" />
-    <div class="my-4 font-bold underline btn" @click="display_more_events = !display_more_events">
+    <!-- <div class="my-4 font-bold underline btn" @click="display_more_events = !display_more_events">
       {{ !display_more_events ? "Plus d'évènements" : "Moins d'évènements" }}
       <img>
-    </div>
+    </div> -->
     <div v-if="display_more_events" class="w-full flex flex-col animate-fade-in animate-duration-130 gap-3">
       <EventCard v-for="i in 5" :key="i" :day="new Date(today.getTime() + i * 24 * 60 * 60 * 1000)" />
     </div>
@@ -18,7 +18,7 @@ const props = defineProps({
 
 const route = useRoute()
 
-const display_more_events = ref(false)
+const display_more_events = ref(true)
 if (route.query.display_more_events) {
   display_more_events.value = true
 }
