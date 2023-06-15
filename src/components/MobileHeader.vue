@@ -36,7 +36,6 @@
   </header>
   <LoginModal v-if="display.login_modal" />
   <ProfileModal v-if="display.profile_modal" />
-  <HoverProfile v-if="display.hover_profile" :x="x" :y="y" class="z-100" />
 </template>
 
 <script setup lang="ts">
@@ -47,7 +46,6 @@ import default_user_pic from '@/assets/img/default_user_pic.png'
 const user = use_user_store()
 const utils_store = use_utils_store()
 const map_store = use_map_store()
-const { x, y } = useMouse({ type: 'page' })
 
 const search_string = ref('')
 const debounced_search = refDebounced(search_string, 400)

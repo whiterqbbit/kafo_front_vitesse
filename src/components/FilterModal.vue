@@ -183,7 +183,6 @@
 
 <script setup lang="ts">
 const search_input = ref('')
-const conversations = computed(() => use_chat_store().conversations)
 
 const clubs = computed(() => use_club_store().db_filtered)
 

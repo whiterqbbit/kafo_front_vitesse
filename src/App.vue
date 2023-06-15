@@ -5,6 +5,8 @@ use_user_store().me()
 use_event_store().populate_places()
 use_club_store().fetch_db()
 
+const { x, y } = useMouse({ type: 'page' })
+
 onBeforeMount(() => {
   const urlParams = new URLSearchParams(window.location.search)
   if (urlParams.get('code') !== null) {
@@ -72,6 +74,7 @@ const pages_with_landing_header = ['/', '/a-propos', '/confidentialite', '/menti
     <ChatDrawer v-if="display.chat_drawer" />
     <DesktopHeader v-if="!(pages_with_landing_header.includes($route.path)) && !preferences.is_mobile" />
     <MobileHeader v-else-if="!(pages_with_landing_header.includes($route.path))" />
+    <HoverProfile v-if="display.hover_profile" :x="x" :y="y" class="z-100" />
     <RouterView v-slot="{ Component }" :key="$route.fullPath" class="h--50-screen">
       <KeepAlive include="map">
         <component :is="Component" />

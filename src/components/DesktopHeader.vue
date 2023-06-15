@@ -11,7 +11,6 @@
   </header>
   <ProfileModal v-if="display.profile_modal" />
   <LoginModal v-if="display.login_modal" />
-  <HoverProfile v-if="display.hover_profile" :x="x" :y="y" class="z-100" />
 </template>
 
 <script setup lang="ts">
@@ -19,9 +18,7 @@ import logo from '@/assets/img/logo/kafo_logo_white.png'
 import { use_user_store } from '@/stores/user'
 import default_user_pic from '@/assets/img/default_user_pic.png'
 
-const is_mounted = ref(false)
 const user = use_user_store()
-const { x, y } = useMouse({ type: 'page' })
 
 function display_modal(modal_name: string) {
   switch (modal_name) {
@@ -31,11 +28,6 @@ function display_modal(modal_name: string) {
       break
   }
 }
-
-onMounted(() => {
-  // for SSG
-  is_mounted.value = true
-})
 </script>
 
 <style scoped>

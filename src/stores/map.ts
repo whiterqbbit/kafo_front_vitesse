@@ -160,7 +160,7 @@ export const use_map_store = defineStore('use_map_store', () => {
     // use Place Autocomplete
     // Define the URL and API key
     const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${query}&types=geocode&language=fr&key=${import.meta.env.VITE_GOOGLE_API_KEY}`
-    // Function to fetch data from Google Places APIw
+    // Function to fetch data from Google Places API
     async function fetch_google_places_autocomplete() {
       try {
         const response = await fetch(url)
