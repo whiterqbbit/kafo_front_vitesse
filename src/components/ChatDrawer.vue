@@ -20,7 +20,9 @@
             v-if="conversation?.contact" :src="conversation?.contact?.pic_xsmall ? conversation?.contact?.pic_xsmall : default_user_pic"
             class="aspect-square h-10 w-10 rounded-full object-cover"
           >
-          <span v-if="conversation?.contact?.first_name && !preferences.is_mobile || selected_conversation === null">{{ conversation?.contact?.first_name }}</span>
+          <span v-if="conversation?.contact?.first_name && !preferences.is_mobile || selected_conversation === null">
+            {{ conversation?.contact?.first_name }}
+          </span>
         </div>
       </div>
     </div>
@@ -43,7 +45,7 @@
         >
           <div
             class="w-max-4/5 w-fit flex rounded-xl p-2"
-            :class="message.user_id === user_store.id ? 'bg-grass-300 text-cafe-50 rounded-br-none place-self-end' : 'bg-cafe-300 rounded-bl-none'"
+            :class="message.user_id === user_store.id ? 'bg-grass-500 text-cafe-50 rounded-br-none place-self-end' : 'bg-cafe-300 rounded-bl-none'"
           >
             {{ message.message }}
           </div>

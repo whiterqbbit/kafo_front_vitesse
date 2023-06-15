@@ -185,8 +185,6 @@ let gallery_open = false
 
 const router = useRouter()
 
-const chat_store = use_chat_store()
-
 const swipe_target = ref<HTMLElement | null>(null)
 useSwipe(swipe_target, {
   passive: false,
