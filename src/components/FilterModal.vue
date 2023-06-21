@@ -118,22 +118,22 @@
             <input id="init" value="Se localiser" type="button" class="btn-light" @click="use_map_store().locate_user()">
           </div>
           <div class="filter-container-inner justify-between">
-            <div class="bullet" @click="filters.max_distance = -1">
+            <label class="bullet cursor-pointer" @click="filters.max_distance = -1">
               <ARadio ref="filter-distance-none" v-model="filters.max_distance" :value="-1" />
               <label for="filter-distance-none" class="cursor-pointer">Partout</label>
-            </div>
-            <div class="bullet" @click="filters.max_distance = 1">
+            </label>
+            <label class="bullet cursor-pointer" @click="filters.max_distance = 1">
               <ARadio ref="filter-distance-1km" v-model="filters.max_distance" :value="1" />
               <label for="filter-distance-1km" class="cursor-pointer">1km</label>
-            </div>
-            <div class="bullet" @click="filters.max_distance = 2">
+            </label>
+            <label class="bullet cursor-pointer" @click="filters.max_distance = 2">
               <ARadio ref="filter-distance-2km" v-model="filters.max_distance" :value="2" />
               <label for="filter-distance-2km" class="cursor-pointer">2km</label>
-            </div>
-            <div class="bullet" @click="filters.max_distance = 5">
+            </label>
+            <label class="bullet cursor-pointer" @click="filters.max_distance = 5">
               <ARadio ref="filter-distance-5km" v-model="filters.max_distance" :value="5" />
               <label for="filter-distance-5km" class="cursor-pointer">5km</label>
-            </div>
+            </label>
           </div>
         </div>
       </section>
