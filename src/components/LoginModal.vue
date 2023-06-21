@@ -124,6 +124,9 @@ async function signup_user(form: { name: string; first_name: string; job_title: 
 async function login_user(email: string, password: string) {
   try {
     await user.login(email, password)
+    if (preferences.club_to_join) {
+      display.join_club_modal = true
+    }
   } catch (error) {
     const typed_error = error as Error
     display_error.value = typed_error.message

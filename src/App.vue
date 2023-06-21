@@ -51,6 +51,13 @@ useHead({
   ],
 })
 
+const route = useRoute()
+const club_uuid = route.query.club_uuid as string
+
+if (club_uuid || preferences.club_to_join) {
+  display.join_club_modal = true
+}
+
 if (environnement === 'production') {
   // eslint-disable-next-line no-console
   console.log(' 🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪🤪'
@@ -71,6 +78,9 @@ const pages_with_landing_header = ['/', '/a-propos', '/confidentialite', '/menti
   <main bg-cafe-50 text-cafe-600>
     <DesktopHeader v-if="!(pages_with_landing_header.includes($route.path)) && !preferences.is_mobile" />
     <MobileHeader v-else-if="!(pages_with_landing_header.includes($route.path))" />
+    <JoinClubModal v-if="display.join_club_modal" :club_uuid="club_uuid || preferences.club_to_join" />
+    <ProfileModal v-if="display.profile_modal" />
+    <LoginModal v-if="display.login_modal" />
     <RouterView v-slot="{ Component }" :key="$route.fullPath" class="h-screen">
       <KeepAlive include="map">
         <component :is="Component" />
