@@ -5,7 +5,11 @@
     <div md="w-full" class="h-full flex items-center justify-center">
       <div class="relative h-full w-full">
         <FilterModal v-if="display.filter_modal" />
-        <TheMap class="z-10" />
+        <TheMap
+          :map_provider="map_url"
+          map_txt="Kafo"
+          class="z-10"
+        />
         <div class="relative z-10">
           <SearchBar v-if="!preferences.is_mobile && !display.filter_modal" class="fixed left-9/20 top-1/10 max-w-500px w-3/7" />
         </div>
@@ -25,6 +29,10 @@
 
 <script setup lang="ts">
 // import { useCookies } from '@vueuse/integrations/useCookies'
+
+const token: string = import.meta.env.VITE_MAPBOX_TOKEN
+const map_provider: string = import.meta.env.VITE_MAPBOX_PROVIDER
+const map_url = `${map_provider}?access_token=${token}`
 
 // const cookies = useCookies()
 const router = useRouter()
