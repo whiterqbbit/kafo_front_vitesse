@@ -1,4 +1,4 @@
-w<template>
+<template>
   <footer class="mt-20 h-full w-full bg-cafe-600 py-8 font-semibold">
     <div class="mx-auto max-w-7xl flex flex-row place-items-center justify-around">
       <nav class="col">

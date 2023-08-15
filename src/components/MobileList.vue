@@ -1,10 +1,13 @@
 <template>
   <div>
     <Flicking :options="{ renderOnlyVisible: true, resizeOnContentsReady: true }" class="flicking-container">
-      <div v-for="place in place_store.db_filtered" :key="place.id" class="flicking-panel relative mx-4 overflow-hidden rounded-2xl bg-cafe-50 shadow-md">
-        <PlaceCard :place="place" />
-      </div>
-    </flicking>
+      <PlaceCard
+        v-for="place in place_store_filtrer"
+        :key="place.id"
+        :place="place"
+        class="flicking-panel relative mx-4 overflow-hidden rounded-2xl bg-cafe-50 shadow-md"
+      />
+    </Flicking>
   </div>
 </template>
 
@@ -12,6 +15,20 @@
 import Flicking from '@egjs/vue3-flicking'
 
 const place_store = use_place_store()
+const map_store = use_map_store()
+
+const place_store_filtrer = computed(() => {
+  if (map_store.map_has_moved) {
+    return place_store.db_filtered
+  } else {
+    return place_store.db_filtered.filter(place =>
+      map_store.markers_on_map.some(marker =>
+        place.id === marker.id,
+      ),
+    )
+  }
+},
+)
 </script>
 
 <style>

@@ -8,6 +8,13 @@ import { preferences } from '@/stores/preferences'
 
 type simple_coords = [number, number]
 
+interface MarkerData {
+  coordinates: simple_coords
+  popup_description: string
+  id: number
+  instance: any
+}
+
 interface Leaflet {
   map: typeof import('leaflet')['map']
   tileLayer: typeof import('leaflet')['tileLayer']
@@ -16,26 +23,21 @@ interface Leaflet {
   control: typeof import('leaflet')['control']
 }
 
-interface MarkerData {
-  coordinates: simple_coords
-  popup_description: string
-  id: number
-  instance: any
-}
-
 let leaflet: Promise<Leaflet> | undefined
-
 // for SSG
 if (typeof window !== 'undefined') {
+  // .then(module => module) to delete ?
   leaflet = import('leaflet').then(module => module)
   import('leaflet.locatecontrol')
 }
+
 export const use_map_store = defineStore('use_map_store', () => {
   const map_leaf: any = ref({})
   const markers: Ref<MarkerData[]> = ref([])
   const bounds: any = ref({})
   const markers_on_map: Ref<MarkerData[]> = ref([])
   const map_is_loaded = ref(false)
+  const map_has_moved = ref(false)
   const tile_layer_is_loaded = ref(false)
   const marker_is_loaded = ref(false)
   const marker_is_click = ref(false)
@@ -45,19 +47,37 @@ export const use_map_store = defineStore('use_map_store', () => {
     if (bounds.value) return markers.value.filter(marker => bounds.value.contains(marker.coordinates))
   })
 
+  /*
+  // when it works, try this more robust version of get_pins_on_map
+  const get_pins_on_map = computed(() => {
+    if (map_has_moved.value || !markers_on_map.value.length) {
+      if (bounds.value) {
+        return markers.value.filter(marker =>
+          bounds.value.contains(marker.coordinates),
+        )
+      } else {
+        return []
+      }
+    } else {
+      return markers_on_map.value
+    }
+  })
+ */
   async function add_map(id: string, viewLngLat: simple_coords, zoom: number) {
-    // for SSG
+    // for SSG ; 3 next lines are useless no ?
     if (typeof window !== 'undefined') {
       import('leaflet.locatecontrol')
     }
     if (!leaflet) return
-    const L = await leaflet
+    const { map, control } = await leaflet
 
-    map_leaf.value = L.map(id, { zoomControl: false })
+    map_leaf.value = map(id, { zoomControl: false })
       .on('load', () => {
         map_is_loaded.value = true
       })
       .on('move', () => {
+        map_has_moved.value = true
+        console.log('the map has moved!')
         if (marker_is_loaded.value === true) {
           bounds.value = map_leaf.value.getBounds()
           if (markers.value.length) markers_on_map.value = markers.value.filter(marker => map_leaf.value.getBounds().contains(marker.coordinates))
@@ -65,9 +85,9 @@ export const use_map_store = defineStore('use_map_store', () => {
       })
       .setView(viewLngLat, zoom)
 
-    if (!preferences.is_mobile) L.control.zoom({ position: 'bottomright' }).addTo(map_leaf.value)
+    if (!preferences.is_mobile) control.zoom({ position: 'bottomright' }).addTo(map_leaf.value)
 
-    L.control.locate({
+    control.locate({
       position: 'topright',
       strings: {
         title: 'Me localiser!',
@@ -81,11 +101,11 @@ export const use_map_store = defineStore('use_map_store', () => {
   async function add_tile_layer(mapUrl: string, maxZoom: number, attribution: string) {
     if (!leaflet) return
     const { tileLayer } = await leaflet
+
     tileLayer(mapUrl, {
       maxZoom,
       attribution,
-    })
-      .addTo(map_leaf.value)
+    }).addTo(map_leaf.value)
       .on('load', () => {
         tile_layer_is_loaded.value = true
       })
@@ -97,7 +117,8 @@ export const use_map_store = defineStore('use_map_store', () => {
 
   async function add_marker(lngLat: simple_coords, popup_description: string, place_id: number, router: Router) {
     if (!leaflet) return
-    const { Icon, marker } = await leaflet
+    const { marker, Icon } = await leaflet
+
     const customIcon = new Icon({
       iconUrl: marker_icon,
       iconSize: [20, 32],
@@ -174,5 +195,5 @@ export const use_map_store = defineStore('use_map_store', () => {
     fetch_google_places_autocomplete()
   }
 
-  return { map_leaf, markers, bounds, markers_on_map, map_is_loaded, tile_layer_is_loaded, marker_is_loaded, marker_is_click, remove_all_markers, get_pins_on_map, add_map, add_tile_layer, add_marker, update_markers, locate_user, search, user_coords, move_map_to }
+  return { map_leaf, markers, bounds, markers_on_map, map_is_loaded, map_has_moved, tile_layer_is_loaded, marker_is_loaded, marker_is_click, remove_all_markers, get_pins_on_map, add_map, add_tile_layer, add_marker, update_markers, locate_user, search, user_coords, move_map_to }
 })
